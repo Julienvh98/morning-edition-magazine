@@ -26,9 +26,32 @@ tldr-magazines/YYYY-MM-DD.html
 
 Both `data/tldr-ai/raw/` and `tldr-magazines/` are gitignored. This keeps the subscribed newsletter content out of the public GitHub Pages repo.
 
+## Telegram Notification
+
+Copy the example env file:
+
+```bash
+cp .env.example .env.local
+```
+
+Then edit `.env.local` in the project root:
+
+```text
+TELEGRAM_BOT_TOKEN=1234567890:AAExampleTokenLettersNumbers
+TELEGRAM_CHAT_ID=123456789
+```
+
+Then run:
+
+```bash
+npm run notify:tldr-ai
+```
+
+The notifier sends the generated HTML issue as a Telegram document. It reads `.env.local` locally only; the file is gitignored and should not be committed.
+
 ## Daily Automation
 
-The Codex automation named `TLDR AI Reader` fetches the latest inbox email from `dan@tldrnewsletter.com`, writes its body to `data/tldr-ai/raw/latest.md`, and runs `npm run generate:tldr-ai`.
+The Codex automation named `TLDR AI Reader` fetches the latest inbox email from `dan@tldrnewsletter.com`, writes its body to `data/tldr-ai/raw/latest.md`, runs `npm run generate:tldr-ai`, then runs `npm run notify:tldr-ai`.
 
 ## Publishing Note
 
