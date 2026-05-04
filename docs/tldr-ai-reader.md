@@ -37,8 +37,8 @@ cp .env.example .env.local
 Then edit `.env.local` in the project root:
 
 ```text
-TELEGRAM_BOT_TOKEN=1234567890:AAExampleTokenLettersNumbers
-TELEGRAM_CHAT_ID=123456789
+TELEGRAM_BOT_TOKEN=8761404112:AAHaPnSMm28eMD3FVBT-byCQZC_xcebBjbc
+TELEGRAM_CHAT_ID=8513496799
 ```
 
 Then run:
@@ -48,6 +48,12 @@ npm run notify:tldr-ai
 ```
 
 The notifier sends the generated HTML issue as a Telegram document. It reads `.env.local` locally only; the file is gitignored and should not be committed.
+
+To test Telegram without a generated issue:
+
+```bash
+npm run notify:tldr-ai:test
+```
 
 ## Daily Automation
 
