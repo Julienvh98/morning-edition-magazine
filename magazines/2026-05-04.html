@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Morning Edition | 2026-05-04</title>
+  <meta name="description" content="A front-page Hacker News briefing tuned for AI tools, health, finance, weird science, and useful things you can act on today.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..900,80,1&family=Inter:wght@500;650;800;900&display=swap" rel="stylesheet">
+  <style>
+
+:root {
+  color-scheme: light;
+  --ink: #17120c;
+  --paper: #f5ecd8;
+  --muted: rgba(23, 18, 12, 0.72);
+  --rule: rgba(23, 18, 12, 0.2);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(22px, 2vw, 30px);
+  line-height: 1.22;
+}
+
+a { color: inherit; text-decoration-thickness: 0.12em; text-underline-offset: 0.18em; }
+
+.cover,
+.spread {
+  min-height: 100vh;
+  display: grid;
+  gap: clamp(24px, 4vw, 56px);
+  padding: clamp(28px, 6vw, 86px);
+  overflow: hidden;
+}
+
+.cover {
+  align-content: space-between;
+  background:
+    linear-gradient(90deg, rgba(23,18,12,0.08) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(23,18,12,0.08) 1px, transparent 1px),
+    #f4ecd8;
+  background-size: 80px 80px;
+}
+
+.kicker,
+.story-topline,
+.stat-label,
+.tags,
+.applies,
+.cover-meta {
+  font-size: clamp(20px, 1.8vw, 28px);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.kicker,
+.story-topline,
+.stat-label {
+  color: var(--muted);
+}
+
+h1,
+h2,
+.number,
+.stat {
+  font-family: "Fraunces", Georgia, serif;
+  letter-spacing: 0;
+}
+
+h1 {
+  max-width: 10ch;
+  margin: 0;
+  font-size: clamp(82px, 16vw, 230px);
+  line-height: 0.82;
+}
+
+.dek {
+  max-width: 980px;
+  margin: 0;
+  font-size: clamp(30px, 5vw, 72px);
+  font-weight: 800;
+  line-height: 1.02;
+}
+
+.cover-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  border-top: 5px solid currentColor;
+  padding-top: 22px;
+}
+
+.cover-meta span {
+  border: 3px solid currentColor;
+  padding: 10px 14px;
+}
+
+.spread {
+  position: relative;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.55fr);
+  align-items: center;
+  border-top: 8px solid rgba(0, 0, 0, 0.18);
+}
+
+.number {
+  position: absolute;
+  line-height: 0.76;
+  pointer-events: none;
+  user-select: none;
+}
+
+.story-main {
+  position: relative;
+  z-index: 1;
+}
+
+.story-topline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+h2 {
+  max-width: 12ch;
+  margin: 0;
+  font-size: clamp(54px, 9vw, 140px);
+  line-height: 0.88;
+}
+
+.why {
+  max-width: 900px;
+  margin: 30px 0 0;
+  font-size: clamp(28px, 3vw, 48px);
+  font-weight: 800;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.tags span,
+.applies {
+  border: 4px solid currentColor;
+  padding: 10px 14px;
+}
+
+.applies {
+  display: inline-block;
+  margin-top: 18px;
+  background: #ffef5a;
+  color: #17120c;
+  transform: rotate(-2deg);
+}
+
+.story-aside {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 16px;
+  align-content: center;
+  border-left: 5px solid currentColor;
+  padding-left: clamp(22px, 3vw, 44px);
+  font-weight: 900;
+}
+
+.story-aside p {
+  margin: 0;
+  font-size: clamp(24px, 2.2vw, 38px);
+}
+
+.story-aside a {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 8px;
+  font-size: clamp(24px, 2.4vw, 40px);
+}
+
+.stat {
+  margin: 0;
+  font-size: clamp(84px, 11vw, 190px);
+  line-height: 0.78;
+}
+
+.hero {
+  background: #f6c744;
+}
+
+.hero .number {
+  right: -2vw;
+  top: -3vw;
+  font-size: clamp(180px, 36vw, 520px);
+  opacity: 0.28;
+}
+
+.midnight {
+  --ink: #f3efe1;
+  --muted: rgba(243, 239, 225, 0.72);
+  background: #101624;
+  color: var(--ink);
+}
+
+.midnight .number {
+  left: 3vw;
+  bottom: -4vw;
+  font-size: clamp(160px, 32vw, 460px);
+  color: #66e0c2;
+}
+
+.rose-alert-stamp {
+  background: #ffd5dc;
+}
+
+.rose-alert-stamp .number {
+  right: 6vw;
+  top: 8vw;
+  border: 8px solid currentColor;
+  border-radius: 50%;
+  padding: 0.16em;
+  font-size: clamp(110px, 18vw, 260px);
+  transform: rotate(12deg);
+}
+
+.terminal {
+  --ink: #d8ffd1;
+  --muted: rgba(216, 255, 209, 0.75);
+  background: #062015;
+  color: var(--ink);
+  font-family: "Inter", ui-monospace, monospace;
+}
+
+.terminal h2::before {
+  content: "> ";
+  color: #4cff7f;
+}
+
+.terminal .number {
+  right: 4vw;
+  bottom: 4vw;
+  font-size: clamp(120px, 24vw, 350px);
+  color: rgba(76, 255, 127, 0.28);
+}
+
+.academic-drop-cap {
+  background: #efe7d6;
+}
+
+.academic-drop-cap h2::first-letter {
+  float: left;
+  font-size: 1.9em;
+  line-height: 0.68;
+  padding-right: 0.08em;
+}
+
+.academic-drop-cap .number {
+  left: 4vw;
+  top: 3vw;
+  font-size: clamp(130px, 25vw, 360px);
+  opacity: 0.12;
+}
+
+.blueprint {
+  --ink: #f7f0dc;
+  --muted: rgba(247, 240, 220, 0.74);
+  color: var(--ink);
+  background:
+    linear-gradient(rgba(247,240,220,0.12) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(247,240,220,0.12) 2px, transparent 2px),
+    #173d6f;
+  background-size: 48px 48px;
+}
+
+.blueprint .number {
+  right: -1vw;
+  top: 5vw;
+  font-size: clamp(150px, 27vw, 390px);
+  -webkit-text-stroke: 4px currentColor;
+  color: transparent;
+}
+
+.health-note {
+  background: #cbe9d8;
+}
+
+.health-note .number {
+  left: 50%;
+  top: 50%;
+  font-size: clamp(180px, 35vw, 500px);
+  transform: translate(-50%, -50%) rotate(-8deg);
+  color: rgba(23, 18, 12, 0.11);
+}
+
+.finance-ledger {
+  background: #d9e7ff;
+}
+
+.finance-ledger .number {
+  left: 2vw;
+  bottom: -2vw;
+  font-size: clamp(150px, 30vw, 430px);
+  font-variant-numeric: tabular-nums;
+}
+
+.finance-ledger .story-aside {
+  border-left-style: double;
+  border-left-width: 12px;
+}
+
+.weird-lab {
+  background: #e7ddff;
+}
+
+.weird-lab .number {
+  right: 3vw;
+  top: 3vw;
+  font-size: clamp(110px, 20vw, 300px);
+  filter: blur(0.3px);
+  transform: skew(-8deg);
+}
+
+.big-stat-finish {
+  background: #ff7f50;
+}
+
+.big-stat-finish .number {
+  inset: auto 0 -4vw auto;
+  font-size: clamp(210px, 40vw, 560px);
+  opacity: 0.2;
+}
+
+.big-stat-finish .stat {
+  font-size: clamp(110px, 16vw, 240px);
+}
+
+@media (max-width: 860px) {
+  .cover,
+  .spread {
+    min-height: auto;
+    padding: 30px 22px 42px;
+  }
+
+  .cover {
+    min-height: 100svh;
+  }
+
+  .spread {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .story-aside {
+    border-left: 0;
+    border-top: 5px solid currentColor;
+    padding-left: 0;
+    padding-top: 22px;
+  }
+
+  h2 {
+    max-width: 11ch;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header class="cover">
+    <p class="kicker">Hacker News Front Page / 2026-05-04</p>
+    <h1>Morning Edition</h1>
+    <p class="dek">A front-page Hacker News briefing tuned for AI tools, health, finance, weird science, and useful things you can act on today.</p>
+    <div class="cover-meta">
+      <span>Top 10</span>
+      <span>Curated for Julien</span>
+      <span>Monday, 4 May 2026 at 16:45</span>
+    </div>
+  </header>
+
+  <main>
+    <article class="spread hero">
+    <div class="number" aria-label="Story 01">01</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>engadget.com</span>
+        <span>Rank 15</span>
+      </div>
+      <h2>Someone allegedly used a hairdryer to rig Polymarket weather bets</h2>
+      <p class="why">AI Tools + Finance; matched on ai, market; 82 HN points; 35 comments. Worth a quick editorial pass.</p>
+      <div class="tags"><span>AI Tools</span><span>Finance</span></div>
+      
+    </div>
+    <aside class="story-aside">
+      <p class="stat">82</p>
+      <p class="stat-label">HN points</p>
+      <p>35 comments</p>
+      <p>2 hours ago by cdrnsf</p>
+      <a href="https://www.engadget.com/big-tech/someone-allegedly-used-a-hairdryer-to-rig-polymarket-weather-bets-155312411.html">Read story</a>
+      <a href="https://news.ycombinator.com/item?id=48008326">HN thread</a>
+    </aside>
+  </article>
+<article class="spread midnight">
+    <div class="number" aria-label="Story 02">02</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>github.com/aattaran</span>
+        <span>Rank 16</span>
+      </div>
+      <h2>DeepClaude – Claude Code agent loop with DeepSeek V4 Pro</h2>
+      <p class="why">AI Tools; matched on agent, claude; 580 HN points; 243 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <div class="tags"><span>AI Tools</span></div>
+      <div class="applies">Directly applies to you</div>
+    </div>
+    <aside class="story-aside">
+      <p class="stat">580</p>
+      <p class="stat-label">HN points</p>
+      <p>243 comments</p>
+      <p>17 hours ago by alattaran</p>
+      <a href="https://github.com/aattaran/deepclaude">Read story</a>
+      <a href="https://news.ycombinator.com/item?id=48002136">HN thread</a>
+    </aside>
+  </article>
+<article class="spread rose-alert-stamp">
+    <div class="number" aria-label="Story 03">03</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>theguardian.com</span>
+        <span>Rank 24</span>
+      </div>
+      <h2>OpenAI’s o1 correctly diagnosed 67% of ER patients vs. 50-55% by triage doctors</h2>
+      <p class="why">AI Tools; matched on ai, openai; 459 HN points; 406 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <div class="tags"><span>AI Tools</span></div>
+      <div class="applies">Directly applies to you</div>
+    </div>
+    <aside class="story-aside">
+      <p class="stat">459</p>
+      <p class="stat-label">HN points</p>
+      <p>406 comments</p>
+      <p>1 day ago by donsupreme</p>
+      <a href="https://www.theguardian.com/technology/2026/apr/30/ai-outperforms-doctors-in-harvard-trial-of-emergency-triage-diagnoses">Read story</a>
+      <a href="https://news.ycombinator.com/item?id=47991981">HN thread</a>
+    </aside>
+  </article>
+<article class="spread terminal">
+    <div class="number" aria-label="Story 04">04</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>letsbuyspiritair.com</span>
+        <span>Rank 22</span>
+      </div>
+      <h2>Let&#39;s Buy Spirit Air</h2>
+      <p class="why">AI Tools; matched on ai; 481 HN points; 462 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <div class="tags"><span>AI Tools</span></div>
+      <div class="applies">Directly applies to you</div>
+    </div>
+    <aside class="story-aside">
+      <p class="stat">481</p>
+      <p class="stat-label">HN points</p>
+      <p>462 comments</p>
+      <p>16 hours ago by bjhess</p>
+      <a href="https://letsbuyspiritair.com/">Read story</a>
+      <a href="https://news.ycombinator.com/item?id=48002777">HN thread</a>
+    </aside>
+  </article>
+<article class="spread academic-drop-cap">
+    <div class="number" aria-label="Story 05">05</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>samcollins.blog</span>
+        <span>Rank 10</span>
+      </div>
+      <h2>Using “underdrawings” for accurate text and numbers</h2>
+      <p class="why">Finance; matched on rate; 314 HN points; 110 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <div class="tags"><span>Finance</span></div>
+      <div class="applies">Directly applies to you</div>
+    </div>
+    <aside class="story-aside">
+      <p class="stat">314</p>
+      <p class="stat-label">HN points</p>
+      <p>110 comments</p>
+      <p>16 hours ago by samcollins</p>
+      <a href="https://samcollins.blog/underdrawings/">Read story</a>
+      <a href="https://news.ycombinator.com/item?id=47977990">HN thread</a>
+    </aside>
+  </article>
+<article class="spread blueprint">
+    <div class="number" aria-label="Story 06">06</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>reiner.org</span>
+        <span>Rank 9</span>
+      </div>
+      <h2>Why are neural networks and cryptographic ciphers so similar? (2025)</h2>
+      <p class="why">Finance; matched on crypto; 68 HN points; 23 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <div class="tags"><span>Finance</span></div>
+      <div class="applies">Directly applies to you</div>
+    </div>
+    <aside class="story-aside">
+      <p class="stat">68</p>
+      <p class="stat-label">HN points</p>
+      <p>23 comments</p>
+      <p>6 hours ago by jxmorris12</p>
+      <a href="https://reiner.org/neural-net-ciphers">Read story</a>
+      <a href="https://news.ycombinator.com/item?id=47983467">HN thread</a>
+    </aside>
+  </article>
+<article class="spread health-note">
+    <div class="number" aria-label="Story 07">07</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>github.com/vivekg13186</span>
+        <span>Rank 14</span>
+      </div>
+      <h2>DAG Workflow Engine</h2>
+      <p class="why">AI Tools; matched on workflow; 11 HN points; 5 comments. Worth a quick editorial pass.</p>
+      <div class="tags"><span>AI Tools</span></div>
+      
+    </div>
+    <aside class="story-aside">
+      <p class="stat">11</p>
+      <p class="stat-label">HN points</p>
+      <p>5 comments</p>
+      <p>3 hours ago by blobmty</p>
+      <a href="https://github.com/vivekg13186/Daisy-DAG">Read story</a>
+      <a href="https://news.ycombinator.com/item?id=48007880">HN thread</a>
+    </aside>
+  </article>
+<article class="spread finance-ledger">
+    <div class="number" aria-label="Story 08">08</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>science.org</span>
+        <span>Rank 7</span>
+      </div>
+      <h2>Newton&#39;s law of gravity passes its biggest test</h2>
+      <p class="why">Weird Science; matched on science; 64 HN points; 26 comments. Worth a quick editorial pass.</p>
+      <div class="tags"><span>Weird Science</span></div>
+      
+    </div>
+    <aside class="story-aside">
+      <p class="stat">64</p>
+      <p class="stat-label">HN points</p>
+      <p>26 comments</p>
+      <p>2 hours ago by pseudolus</p>
+      <a href="https://www.science.org/content/article/newton-s-law-gravity-passes-its-biggest-test-ever">Read story</a>
+      <a href="https://news.ycombinator.com/item?id=48008074">HN thread</a>
+    </aside>
+  </article>
+<article class="spread weird-lab">
+    <div class="number" aria-label="Story 09">09</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>nhk.or.jp</span>
+        <span>Rank 12</span>
+      </div>
+      <h2>Texico: Learn the principles of programming without even touching a computer</h2>
+      <p class="why">Actionable; matched on learn; 128 HN points; 9 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <div class="tags"><span>Actionable</span></div>
+      <div class="applies">Directly applies to you</div>
+    </div>
+    <aside class="story-aside">
+      <p class="stat">128</p>
+      <p class="stat-label">HN points</p>
+      <p>9 comments</p>
+      <p>10 hours ago by o4c</p>
+      <a href="https://www3.nhk.or.jp/nhkworld/en/shows/texico/">Read story</a>
+      <a href="https://news.ycombinator.com/item?id=47983333">HN thread</a>
+    </aside>
+  </article>
+<article class="spread big-stat-finish">
+    <div class="number" aria-label="Story 10">10</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>thienantran.com</span>
+        <span>Rank 2</span>
+      </div>
+      <h2>Talking to 35 Strangers at the Gym</h2>
+      <p class="why">500 HN points; 226 comments. Worth a quick editorial pass.</p>
+      <div class="tags"><span>HN Signal</span></div>
+      
+    </div>
+    <aside class="story-aside">
+      <p class="stat">500</p>
+      <p class="stat-label">HN points</p>
+      <p>226 comments</p>
+      <p>4 hours ago by thitran</p>
+      <a href="https://thienantran.com/talking-to-35-strangers-at-the-gym/">Read story</a>
+      <a href="https://news.ycombinator.com/item?id=48007438">HN thread</a>
+    </aside>
+  </article>
+  </main>
+</body>
+</html>

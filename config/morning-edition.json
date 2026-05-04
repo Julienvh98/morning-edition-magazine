@@ -1,0 +1,136 @@
+{
+  "publicationName": "Morning Edition",
+  "dek": "A front-page Hacker News briefing tuned for AI tools, health, finance, weird science, and useful things you can act on today.",
+  "timezone": "Europe/London",
+  "readerName": "Julien",
+  "tasteProfile": [
+    {
+      "label": "AI Tools",
+      "weight": 40,
+      "keywords": [
+        "ai",
+        "agent",
+        "agents",
+        "automation",
+        "claude",
+        "copilot",
+        "diffusion",
+        "embedding",
+        "eval",
+        "gpt",
+        "inference",
+        "llama",
+        "llm",
+        "machine learning",
+        "model",
+        "openai",
+        "prompt",
+        "rag",
+        "robot",
+        "transformer",
+        "workflow"
+      ]
+    },
+    {
+      "label": "Health",
+      "weight": 30,
+      "keywords": [
+        "aging",
+        "brain",
+        "cancer",
+        "clinical",
+        "drug",
+        "exercise",
+        "fitness",
+        "food",
+        "health",
+        "heart",
+        "longevity",
+        "medicine",
+        "mental",
+        "nutrition",
+        "sleep",
+        "therapy",
+        "vaccine"
+      ]
+    },
+    {
+      "label": "Finance",
+      "weight": 28,
+      "keywords": [
+        "bank",
+        "bitcoin",
+        "bond",
+        "crypto",
+        "debt",
+        "economy",
+        "equity",
+        "finance",
+        "fund",
+        "housing",
+        "inflation",
+        "investing",
+        "market",
+        "mortgage",
+        "portfolio",
+        "rate",
+        "stock",
+        "tax",
+        "treasury"
+      ]
+    },
+    {
+      "label": "Weird Science",
+      "weight": 24,
+      "keywords": [
+        "archaeology",
+        "astronomy",
+        "biology",
+        "chemistry",
+        "climate",
+        "experiment",
+        "fossil",
+        "genome",
+        "lab",
+        "mars",
+        "math",
+        "neuroscience",
+        "physics",
+        "quantum",
+        "researchers",
+        "science",
+        "space",
+        "study"
+      ]
+    },
+    {
+      "label": "Actionable",
+      "weight": 26,
+      "keywords": [
+        "build",
+        "checklist",
+        "course",
+        "debug",
+        "guide",
+        "how to",
+        "learn",
+        "lessons",
+        "open source",
+        "playbook",
+        "practical",
+        "release",
+        "roadmap",
+        "security",
+        "self-host",
+        "tool",
+        "tutorial"
+      ]
+    }
+  ],
+  "directApplyTags": [
+    "AI Tools",
+    "Actionable",
+    "Finance",
+    "Health"
+  ]
+}

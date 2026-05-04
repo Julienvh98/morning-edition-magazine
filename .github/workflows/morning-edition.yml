@@ -1,0 +1,112 @@
+name: Daily Morning Edition
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * *"
+    - cron: "0 7 * * *"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: morning-edition-pages
+  cancel-in-progress: false
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check London schedule window
+        id: schedule
+        shell: bash
+        run: |
+          london_hour="$(TZ=Europe/London date +%H)"
+          issue_date="$(TZ=Europe/London date +%F)"
+          should_run="true"
+          if [[ "${{ github.event_name }}" == "schedule" && "$london_hour" != "07" ]]; then
+            should_run="false"
+          fi
+          echo "issue_date=$issue_date" >> "$GITHUB_OUTPUT"
+          echo "should_run=$should_run" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v4
+        if: steps.schedule.outputs.should_run == 'true'
+
+      - uses: actions/setup-node@v4
+        if: steps.schedule.outputs.should_run == 'true'
+        with:
+          node-version: "22"
+
+      - name: Generate magazine issue
+        if: steps.schedule.outputs.should_run == 'true'
+        run: npm run generate
+        env:
+          ISSUE_DATE: ${{ steps.schedule.outputs.issue_date }}
+
+      - name: Commit generated issue
+        if: steps.schedule.outputs.should_run == 'true'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add magazines
+          git commit -m "Publish Morning Edition ${{ steps.schedule.outputs.issue_date }}" || echo "No magazine changes to commit"
+          git push
+
+      - name: Prepare Pages artifact
+        if: steps.schedule.outputs.should_run == 'true'
+        shell: bash
+        run: |
+          mkdir -p _site
+          cp -R magazines _site/
+          cat > _site/index.html <<'HTML'
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta http-equiv="refresh" content="0; url=./magazines/">
+            <title>Morning Edition</title>
+          </head>
+          <body>
+            <a href="./magazines/">Open Morning Edition</a>
+          </body>
+          </html>
+          HTML
+
+      - uses: actions/configure-pages@v5
+        if: steps.schedule.outputs.should_run == 'true'
+
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.schedule.outputs.should_run == 'true'
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        if: steps.schedule.outputs.should_run == 'true'
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Send Telegram link
+        if: steps.schedule.outputs.should_run == 'true'
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          ISSUE_DATE: ${{ steps.schedule.outputs.issue_date }}
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        shell: bash
+        run: |
+          if [[ -z "$TELEGRAM_BOT_TOKEN" || -z "$TELEGRAM_CHAT_ID" ]]; then
+            echo "Telegram secrets are not configured; skipping notification."
+            exit 0
+          fi
+          issue_url="${PAGE_URL%/}/magazines/${ISSUE_DATE}.html"
+          curl -fsS "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+            --data-urlencode "text=Morning Edition is ready: ${issue_url}"
