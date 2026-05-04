@@ -7,7 +7,8 @@
     "generate": "node scripts/generate-morning-edition.mjs",
     "generate:tldr-ai": "node scripts/generate-tldr-ai-edition.mjs",
     "notify:tldr-ai": "node scripts/send-tldr-ai-telegram.mjs",
-    "notify:tldr-ai:test": "node scripts/send-tldr-ai-telegram.mjs --test"
+    "notify:tldr-ai:test": "node scripts/send-tldr-ai-telegram.mjs --test",
+    "send:tldr-ai": "npm run generate:tldr-ai && npm run notify:tldr-ai"
   },
   "engines": {
     "node": ">=20"

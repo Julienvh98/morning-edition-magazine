@@ -49,6 +49,12 @@ npm run notify:tldr-ai
 
 The notifier sends the generated HTML issue as a Telegram document. It reads `.env.local` locally only; the file is gitignored and should not be committed.
 
+To generate and notify in one command after `data/tldr-ai/raw/latest.md` exists:
+
+```bash
+npm run send:tldr-ai
+```
+
 To test Telegram without a generated issue:
 
 ```bash
