@@ -1,0 +1,22 @@
+{
+  "publicationName": "TLDR AI Reader",
+  "sender": "dan@tldrnewsletter.com",
+  "timezone": "Europe/London",
+  "outputDir": "tldr-magazines",
+  "sourcePath": "data/tldr-ai/raw/latest.md",
+  "sectionOrder": [
+    "Headlines & Launches",
+    "Deep Dives & Analysis",
+    "Engineering & Research",
+    "Miscellaneous",
+    "Quick Links"
+  ],
+  "footerStopPhrases": [
+    "Love TLDR?",
+    "Want to advertise in TLDR?",
+    "Want to work at TLDR?",
+    "If you have any comments or feedback",
+    "Thanks for reading,",
+    "Manage your subscriptions"
+  ]
+}

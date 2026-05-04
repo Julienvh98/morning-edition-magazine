@@ -41,3 +41,9 @@ The workflow skips the Telegram step until both secrets exist.
 ## Taste Tuning
 
 Edit `config/morning-edition.json` to adjust what counts as your taste, how strongly each category is weighted, and which categories should be flagged as directly applying to you.
+
+## TLDR AI Reader
+
+There is also a private Financial Times-inspired renderer for the daily TLDR AI email. It preserves TLDR's sections, removes `(Sponsor)` articles, and writes local-only output under `tldr-magazines/`.
+
+See [docs/tldr-ai-reader.md](docs/tldr-ai-reader.md).

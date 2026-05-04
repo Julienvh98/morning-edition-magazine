@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "generate": "node scripts/generate-morning-edition.mjs"
+    "generate": "node scripts/generate-morning-edition.mjs",
+    "generate:tldr-ai": "node scripts/generate-tldr-ai-edition.mjs"
   },
   "engines": {
     "node": ">=20"

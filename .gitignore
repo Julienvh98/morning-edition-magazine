@@ -1,2 +1,4 @@
 node_modules/
 .DS_Store
+data/tldr-ai/raw/
+tldr-magazines/
