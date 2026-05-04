@@ -12,11 +12,11 @@
     },
     {
       "id": "markets",
-      "label": "Markets Grid"
+      "label": "Terminal"
     },
     {
       "id": "review",
-      "label": "Review"
+      "label": "Mobile Cards"
     }
   ],
   "sectionOrder": [

@@ -37,8 +37,8 @@ The default `YYYY-MM-DD.html` uses the Broadsheet version. Each issue includes a
 The three layouts are intentionally different:
 
 - `broadsheet`: classic FT-pink lead-story layout with large section openers.
-- `markets`: green-tinted dashboard grid with boxed cards and denser scanning.
-- `review`: warmer rose editorial-review layout with centered masthead and feature-style article breaks.
+- `markets`: dark terminal/grid layout for dense laptop scanning.
+- `review`: mobile-first card stack with larger touch-friendly article blocks.
 
 Both `data/tldr-ai/raw/` and `tldr-magazines/` are gitignored. This keeps the subscribed newsletter content out of the public GitHub Pages repo.
 

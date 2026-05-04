@@ -426,159 +426,221 @@ h4 {
 }
 
 .variant-markets {
-  --ft-paper: #eef2e5;
-  --ft-paper-deep: #d5e2cc;
-  --ink: #13251f;
-  --muted: #4f675f;
-  --rule: #13251f;
-  --accent: #006b5d;
+  --ft-paper: #07110f;
+  --ft-paper-deep: #0d1d1a;
+  --ink: #e8fff5;
+  --muted: #86a99c;
+  --rule: #9fffd0;
+  --accent: #f5d547;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(159, 255, 208, 0.15), transparent 28rem),
+    linear-gradient(180deg, #07110f 0%, #0d1715 100%);
+  color: var(--ink);
 }
 
 .variant-markets .masthead {
-  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 0.5fr);
-  min-height: 54vh;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.38fr);
+  min-height: 48vh;
   align-content: space-between;
   background:
-    linear-gradient(90deg, rgba(19, 37, 31, 0.16) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(19, 37, 31, 0.16) 1px, transparent 1px),
-    var(--ft-paper);
-  background-size: 36px 36px;
-  border-bottom: 6px solid var(--rule);
+    linear-gradient(90deg, rgba(159, 255, 208, 0.12) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(159, 255, 208, 0.12) 1px, transparent 1px),
+    #07110f;
+  background-size: 34px 34px;
+  border-bottom: 4px solid var(--rule);
 }
 
 .variant-markets h1 {
-  max-width: 9ch;
-  font-size: 7.2rem;
+  max-width: 10ch;
+  font-family: var(--font-sans);
+  font-size: 5.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
 .variant-markets .issue-meta {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   justify-items: stretch;
   text-align: left;
 }
 
+.variant-markets .issue-meta span {
+  border: 1px solid rgba(159, 255, 208, 0.5);
+  padding: 12px;
+  width: 100%;
+  color: var(--rule);
+  background: rgba(159, 255, 208, 0.06);
+}
+
+.variant-markets .variant-nav {
+  background: rgba(7, 17, 15, 0.96);
+  border-bottom-color: var(--rule);
+}
+
+.variant-markets .variant-nav a {
+  border-color: rgba(159, 255, 208, 0.55);
+}
+
+.variant-markets .variant-nav a[aria-current="page"] {
+  background: var(--accent);
+  color: #07110f;
+}
+
 .variant-markets .section {
-  padding-top: clamp(24px, 4vw, 58px);
-  border-bottom: 2px solid var(--rule);
+  padding-block: 30px;
+  border-bottom: 1px solid rgba(159, 255, 208, 0.36);
+  background: transparent;
 }
 
 .variant-markets .section-rule {
-  grid-template-columns: minmax(64px, 100px) 1fr;
-  gap: 8px;
-  border-bottom: 2px solid var(--rule);
+  grid-template-columns: minmax(72px, 100px) 1fr;
+  gap: 14px;
+  border-bottom: 1px solid rgba(159, 255, 208, 0.55);
 }
 
 .variant-markets h2 {
-  font-size: 3.7rem;
+  font-family: var(--font-sans);
+  font-size: 2.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
 .variant-markets .lead-story {
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.3fr);
-  padding: clamp(18px, 3vw, 34px);
-  border: 3px solid var(--rule);
-  background: #f8fbf1;
-  box-shadow: 10px 10px 0 var(--accent);
+  grid-template-columns: minmax(220px, 0.62fr) 1fr;
+  padding: 22px;
+  border: 1px solid var(--rule);
+  background: rgba(159, 255, 208, 0.07);
+  box-shadow: inset 0 0 0 1px rgba(245, 213, 71, 0.22);
 }
 
 .variant-markets .lead-number {
   border: 0;
-  font-size: 6rem;
+  font-family: var(--font-sans);
+  font-size: 4.8rem;
+  font-weight: 900;
   color: var(--accent);
 }
 
 .variant-markets .article-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
 }
 
 .variant-markets .section-3 .article-grid,
 .variant-markets .section-5 .article-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .variant-markets h3 {
-  max-width: 16ch;
-  font-size: 3.6rem;
+  max-width: 18ch;
+  font-family: var(--font-sans);
+  font-size: 3rem;
+  font-weight: 900;
 }
 
 .variant-markets h4 {
-  font-size: 2rem;
+  font-family: var(--font-sans);
+  font-size: 1.72rem;
+  font-weight: 900;
+  line-height: 1.02;
 }
 
 .variant-markets .article-card {
   min-height: 100%;
-  padding: 18px;
-  border: 2px solid var(--rule);
-  background: rgba(248, 251, 241, 0.72);
+  padding: 16px;
+  border: 1px solid rgba(159, 255, 208, 0.45);
+  background: rgba(7, 17, 15, 0.86);
+}
+
+.variant-markets .lead-story p,
+.variant-markets .article-card p {
+  font-family: var(--font-sans);
+  color: #d6f6ea;
+  font-weight: 650;
 }
 
 .variant-review {
-  --ft-paper: #f8eee6;
-  --ft-paper-deep: #ead5ca;
-  --ink: #241918;
-  --muted: #765d58;
-  --rule: #3a2220;
-  --accent: #a3292f;
+  --ft-paper: #f6f4ed;
+  --ft-paper-deep: #e7edf7;
+  --ink: #171c2a;
+  --muted: #697186;
+  --rule: #3157d5;
+  --accent: #ff6b4a;
+  background: #f6f4ed;
 }
 
 .variant-review .masthead {
-  display: block;
-  text-align: center;
-  padding-inline: clamp(24px, 10vw, 150px);
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(280px, 0.44fr);
+  text-align: left;
+  padding: 28px;
   background:
-    linear-gradient(180deg, rgba(163, 41, 47, 0.1), transparent 48%),
+    linear-gradient(135deg, rgba(49, 87, 213, 0.14), transparent 44%),
     var(--ft-paper);
+  border-bottom: 0;
 }
 
 .variant-review h1 {
-  margin-inline: auto;
-  max-width: 11ch;
-  font-size: 7.8rem;
+  margin-inline: 0;
+  max-width: 12ch;
+  font-size: 5.4rem;
 }
 
 .variant-review .issue-meta {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: clamp(24px, 4vw, 48px);
-  text-align: center;
+  display: grid;
+  gap: 10px;
+  justify-content: stretch;
+  margin-top: 0;
+  text-align: left;
 }
 
 .variant-review .issue-meta span {
-  width: auto;
-  border: 3px solid var(--rule);
-  padding: 10px 14px;
+  width: 100%;
+  border: 2px solid rgba(49, 87, 213, 0.3);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.55);
 }
 
 .variant-review .section {
-  max-width: 1280px;
+  max-width: 980px;
   margin: 0 auto;
-  border-bottom: 1px solid rgba(38, 32, 25, 0.35);
+  padding: 20px 18px;
+  border-bottom: 0;
   background: transparent;
 }
 
 .variant-review .section-rule {
-  grid-template-columns: 1fr;
-  text-align: center;
-  border-bottom: 2px solid var(--rule);
+  grid-template-columns: 56px 1fr;
+  gap: 12px;
+  text-align: left;
+  border-bottom: 0;
+  margin-bottom: 14px;
+  padding-bottom: 0;
 }
 
 .variant-review .lead-story {
-  grid-template-columns: minmax(120px, 220px) 1fr;
+  grid-template-columns: 1fr;
   text-align: left;
-  max-width: 1080px;
+  max-width: 100%;
   margin-inline: auto;
+  padding: 20px;
+  border: 2px solid rgba(49, 87, 213, 0.22);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 8px 0 rgba(49, 87, 213, 0.16);
 }
 
 .variant-review .lead-number {
   margin: 0;
-  border: 4px solid var(--rule);
-  border-radius: 50%;
-  width: clamp(120px, 17vw, 220px);
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-  font-size: 5.2rem;
+  width: fit-content;
+  aspect-ratio: auto;
+  display: inline-block;
+  border: 0;
+  border-radius: 0;
+  font-family: var(--font-sans);
+  font-size: 2.4rem;
+  color: var(--accent);
 }
 
 .variant-review h3 {
@@ -591,25 +653,44 @@ h4 {
 }
 
 .variant-review .article-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
+  gap: 14px;
 }
 
 .variant-review .article-card {
-  padding: clamp(18px, 3vw, 34px) 0 0;
-  border-top: 1px solid rgba(58, 34, 32, 0.45);
+  padding: 18px;
+  border: 2px solid rgba(49, 87, 213, 0.18);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 4px 0 rgba(23, 28, 42, 0.08);
 }
 
 .variant-review .article-card:nth-child(3n + 1) {
-  grid-column: span 2;
-  display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-  gap: 28px;
-  align-items: start;
+  grid-column: auto;
+  display: block;
 }
 
 .variant-review .article-card:nth-child(3n + 1) h4 {
   margin-top: 0;
-  font-size: 3.6rem;
+  font-size: 2.25rem;
+}
+
+.variant-review h2 {
+  font-size: 2.8rem;
+}
+
+.variant-review h3 {
+  font-size: 3.4rem;
+}
+
+.variant-review h4 {
+  font-size: 2.05rem;
+}
+
+.variant-review .lead-story p,
+.variant-review .article-card p {
+  font-family: var(--font-text);
+  font-weight: 650;
 }
 
 @media (max-width: 920px) {
@@ -623,6 +704,7 @@ h4 {
   .variant-markets .article-grid,
   .variant-markets .section-3 .article-grid,
   .variant-markets .section-5 .article-grid,
+  .variant-markets .lead-story,
   .variant-review .article-grid,
   .variant-review .lead-story,
   .variant-review .article-card:nth-child(3n + 1) {
@@ -671,6 +753,10 @@ h4 {
   .variant-markets .section-5 .article-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .variant-review .article-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 640px) {
@@ -708,6 +794,10 @@ h4 {
     font-size: 1.7rem;
   }
 
+  .variant-review h4 {
+    font-size: 1.65rem;
+  }
+
   .lead-number,
   .variant-markets .lead-number,
   .variant-review .lead-number {
@@ -728,7 +818,13 @@ h4 {
   }
 
   .variant-markets .lead-story {
-    box-shadow: 5px 5px 0 var(--accent);
+    box-shadow: none;
+  }
+}
+
+@media (min-width: 1000px) {
+  .variant-review .article-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 `;
