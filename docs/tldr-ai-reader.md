@@ -34,6 +34,12 @@ tldr-magazines/YYYY-MM-DD-review.html
 
 The default `YYYY-MM-DD.html` uses the Broadsheet version. Each issue includes a small version switcher at the top.
 
+The three layouts are intentionally different:
+
+- `broadsheet`: classic FT-pink lead-story layout with large section openers.
+- `markets`: green-tinted dashboard grid with boxed cards and denser scanning.
+- `review`: warmer rose editorial-review layout with centered masthead and feature-style article breaks.
+
 Both `data/tldr-ai/raw/` and `tldr-magazines/` are gitignored. This keeps the subscribed newsletter content out of the public GitHub Pages repo.
 
 ## Typography

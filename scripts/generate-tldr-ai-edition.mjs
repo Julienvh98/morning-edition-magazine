@@ -247,7 +247,7 @@ body {
   background: var(--ft-paper);
   color: var(--ink);
   font-family: var(--font-sans);
-  font-size: clamp(20px, 1.8vw, 28px);
+  font-size: 1.35rem;
   line-height: 1.32;
 }
 
@@ -274,7 +274,7 @@ a {
 .section-rule span {
   margin: 0;
   color: var(--muted);
-  font-size: clamp(18px, 1.4vw, 24px);
+  font-size: 1.05rem;
   font-weight: 900;
   text-transform: uppercase;
 }
@@ -290,7 +290,7 @@ h4,
 
 h1 {
   margin: 10px 0 0;
-  font-size: clamp(64px, 12vw, 190px);
+  font-size: 8.4rem;
   line-height: 0.84;
 }
 
@@ -318,7 +318,7 @@ h1 {
   border-bottom: 2px solid var(--rule);
   background: rgba(255, 241, 218, 0.96);
   font-family: var(--font-sans);
-  font-size: clamp(18px, 1.3vw, 22px);
+  font-size: 1rem;
   font-weight: 900;
   text-transform: uppercase;
 }
@@ -355,7 +355,7 @@ h1 {
 
 h2 {
   margin: 0;
-  font-size: clamp(42px, 7vw, 108px);
+  font-size: 5.2rem;
   line-height: 0.9;
 }
 
@@ -369,7 +369,7 @@ h2 {
 
 .lead-number {
   color: var(--accent);
-  font-size: clamp(92px, 17vw, 250px);
+  font-size: 10rem;
   line-height: 0.78;
   border-right: 4px solid var(--rule);
 }
@@ -382,11 +382,11 @@ h4 {
 
 h3 {
   max-width: 13ch;
-  font-size: clamp(48px, 7vw, 118px);
+  font-size: 5.6rem;
 }
 
 h4 {
-  font-size: clamp(32px, 3.5vw, 58px);
+  font-size: 2.7rem;
 }
 
 .lead-story p,
@@ -409,7 +409,7 @@ h4 {
 }
 
 .article-card p:last-child {
-  font-size: clamp(20px, 1.7vw, 28px);
+  font-size: 1.22rem;
 }
 
 .section-1 .lead-story {
@@ -426,25 +426,29 @@ h4 {
 }
 
 .variant-markets {
-  --ft-paper: #f7e6c6;
-  --ft-paper-deep: #ecd2a4;
-  --accent: #0d5b52;
+  --ft-paper: #eef2e5;
+  --ft-paper-deep: #d5e2cc;
+  --ink: #13251f;
+  --muted: #4f675f;
+  --rule: #13251f;
+  --accent: #006b5d;
 }
 
 .variant-markets .masthead {
-  grid-template-columns: 1fr;
-  min-height: 58vh;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 0.5fr);
+  min-height: 54vh;
   align-content: space-between;
   background:
-    linear-gradient(90deg, rgba(38, 32, 25, 0.14) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(38, 32, 25, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(19, 37, 31, 0.16) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(19, 37, 31, 0.16) 1px, transparent 1px),
     var(--ft-paper);
-  background-size: 42px 42px;
+  background-size: 36px 36px;
+  border-bottom: 6px solid var(--rule);
 }
 
 .variant-markets h1 {
-  max-width: 8ch;
-  font-size: clamp(76px, 15vw, 210px);
+  max-width: 9ch;
+  font-size: 7.2rem;
 }
 
 .variant-markets .issue-meta {
@@ -455,31 +459,36 @@ h4 {
 
 .variant-markets .section {
   padding-top: clamp(24px, 4vw, 58px);
+  border-bottom: 2px solid var(--rule);
 }
 
 .variant-markets .section-rule {
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(64px, 100px) 1fr;
   gap: 8px;
+  border-bottom: 2px solid var(--rule);
 }
 
 .variant-markets h2 {
-  font-size: clamp(46px, 6vw, 92px);
+  font-size: 3.7rem;
 }
 
 .variant-markets .lead-story {
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.3fr);
   padding: clamp(18px, 3vw, 34px);
-  border: 5px solid var(--rule);
-  background: rgba(255, 241, 218, 0.42);
+  border: 3px solid var(--rule);
+  background: #f8fbf1;
+  box-shadow: 10px 10px 0 var(--accent);
 }
 
 .variant-markets .lead-number {
   border: 0;
-  font-size: clamp(56px, 9vw, 140px);
+  font-size: 6rem;
+  color: var(--accent);
 }
 
 .variant-markets .article-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
 }
 
 .variant-markets .section-3 .article-grid,
@@ -489,29 +498,42 @@ h4 {
 
 .variant-markets h3 {
   max-width: 16ch;
-  font-size: clamp(42px, 5vw, 84px);
+  font-size: 3.6rem;
 }
 
 .variant-markets h4 {
-  font-size: clamp(28px, 2.7vw, 42px);
+  font-size: 2rem;
+}
+
+.variant-markets .article-card {
+  min-height: 100%;
+  padding: 18px;
+  border: 2px solid var(--rule);
+  background: rgba(248, 251, 241, 0.72);
 }
 
 .variant-review {
-  --ft-paper: #fff7e8;
-  --ft-paper-deep: #f6e3bf;
-  --accent: #7a1d1d;
+  --ft-paper: #f8eee6;
+  --ft-paper-deep: #ead5ca;
+  --ink: #241918;
+  --muted: #765d58;
+  --rule: #3a2220;
+  --accent: #a3292f;
 }
 
 .variant-review .masthead {
   display: block;
   text-align: center;
   padding-inline: clamp(24px, 10vw, 150px);
+  background:
+    linear-gradient(180deg, rgba(163, 41, 47, 0.1), transparent 48%),
+    var(--ft-paper);
 }
 
 .variant-review h1 {
   margin-inline: auto;
   max-width: 11ch;
-  font-size: clamp(72px, 13vw, 180px);
+  font-size: 7.8rem;
 }
 
 .variant-review .issue-meta {
@@ -532,6 +554,7 @@ h4 {
   max-width: 1280px;
   margin: 0 auto;
   border-bottom: 1px solid rgba(38, 32, 25, 0.35);
+  background: transparent;
 }
 
 .variant-review .section-rule {
@@ -541,28 +564,30 @@ h4 {
 }
 
 .variant-review .lead-story {
-  grid-template-columns: 1fr;
-  text-align: center;
+  grid-template-columns: minmax(120px, 220px) 1fr;
+  text-align: left;
+  max-width: 1080px;
+  margin-inline: auto;
 }
 
 .variant-review .lead-number {
-  margin: 0 auto;
+  margin: 0;
   border: 4px solid var(--rule);
   border-radius: 50%;
   width: clamp(120px, 17vw, 220px);
   aspect-ratio: 1;
   display: grid;
   place-items: center;
-  font-size: clamp(58px, 9vw, 118px);
+  font-size: 5.2rem;
 }
 
 .variant-review h3 {
-  margin-inline: auto;
+  margin-inline: 0;
   max-width: 15ch;
 }
 
 .variant-review .lead-story p {
-  margin-inline: auto;
+  margin-inline: 0;
 }
 
 .variant-review .article-grid {
@@ -571,6 +596,20 @@ h4 {
 
 .variant-review .article-card {
   padding: clamp(18px, 3vw, 34px) 0 0;
+  border-top: 1px solid rgba(58, 34, 32, 0.45);
+}
+
+.variant-review .article-card:nth-child(3n + 1) {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.variant-review .article-card:nth-child(3n + 1) h4 {
+  margin-top: 0;
+  font-size: 3.6rem;
 }
 
 @media (max-width: 920px) {
@@ -584,7 +623,9 @@ h4 {
   .variant-markets .article-grid,
   .variant-markets .section-3 .article-grid,
   .variant-markets .section-5 .article-grid,
-  .variant-review .article-grid {
+  .variant-review .article-grid,
+  .variant-review .lead-story,
+  .variant-review .article-card:nth-child(3n + 1) {
     grid-template-columns: 1fr;
   }
 
@@ -597,6 +638,97 @@ h4 {
     border-right: 0;
     border-bottom: 4px solid var(--rule);
     padding-bottom: 12px;
+  }
+}
+
+@media (max-width: 1100px) and (min-width: 921px) {
+  body {
+    font-size: 1.2rem;
+  }
+
+  h1 {
+    font-size: 6.4rem;
+  }
+
+  h2 {
+    font-size: 4.2rem;
+  }
+
+  h3 {
+    font-size: 4.2rem;
+  }
+
+  h4 {
+    font-size: 2.1rem;
+  }
+
+  .lead-number {
+    font-size: 7.6rem;
+  }
+
+  .variant-markets .article-grid,
+  .variant-markets .section-3 .article-grid,
+  .variant-markets .section-5 .article-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 1.08rem;
+    line-height: 1.38;
+  }
+
+  .masthead,
+  .section {
+    padding-inline: 18px;
+  }
+
+  h1,
+  .variant-markets h1,
+  .variant-review h1 {
+    font-size: 4.1rem;
+  }
+
+  h2,
+  .variant-markets h2 {
+    font-size: 2.6rem;
+  }
+
+  h3,
+  .variant-markets h3,
+  .variant-review h3 {
+    max-width: 100%;
+    font-size: 2.65rem;
+  }
+
+  h4,
+  .variant-markets h4,
+  .variant-review .article-card:nth-child(3n + 1) h4 {
+    font-size: 1.7rem;
+  }
+
+  .lead-number,
+  .variant-markets .lead-number,
+  .variant-review .lead-number {
+    width: auto;
+    aspect-ratio: auto;
+    border-radius: 0;
+    font-size: 3.5rem;
+  }
+
+  .variant-nav {
+    position: static;
+    padding-inline: 18px;
+  }
+
+  .variant-nav a {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+
+  .variant-markets .lead-story {
+    box-shadow: 5px 5px 0 var(--accent);
   }
 }
 `;
