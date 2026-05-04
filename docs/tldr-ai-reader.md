@@ -24,7 +24,29 @@ The output is written to:
 tldr-magazines/YYYY-MM-DD.html
 ```
 
+It also writes three UI variants:
+
+```text
+tldr-magazines/YYYY-MM-DD-broadsheet.html
+tldr-magazines/YYYY-MM-DD-markets.html
+tldr-magazines/YYYY-MM-DD-review.html
+```
+
+The default `YYYY-MM-DD.html` uses the Broadsheet version. Each issue includes a small version switcher at the top.
+
 Both `data/tldr-ai/raw/` and `tldr-magazines/` are gitignored. This keeps the subscribed newsletter content out of the public GitHub Pages repo.
+
+## Typography
+
+The CSS uses FT-style font-family names first:
+
+```css
+"FinancierDisplayWeb", "Financier Display", "Financier", Georgia, serif
+"FinancierTextWeb", "Financier Text", Georgia, serif
+"MetricWeb", "Metric", Arial, sans-serif
+```
+
+The actual Financial Times fonts are proprietary, so the page falls back to local/system fonts unless you have licensed FT/Klim fonts installed locally.
 
 ## Telegram Notification
 
@@ -37,8 +59,8 @@ cp .env.example .env.local
 Then edit `.env.local` in the project root:
 
 ```text
-TELEGRAM_BOT_TOKEN=8761404112:AAHaPnSMm28eMD3FVBT-byCQZC_xcebBjbc
-TELEGRAM_CHAT_ID=8513496799
+TELEGRAM_BOT_TOKEN=1234567890:AAExampleTokenLettersNumbers
+TELEGRAM_CHAT_ID=123456789
 ```
 
 Then run:

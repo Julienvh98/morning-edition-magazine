@@ -4,6 +4,21 @@
   "timezone": "Europe/London",
   "outputDir": "tldr-magazines",
   "sourcePath": "data/tldr-ai/raw/latest.md",
+  "defaultVariant": "broadsheet",
+  "variants": [
+    {
+      "id": "broadsheet",
+      "label": "Broadsheet"
+    },
+    {
+      "id": "markets",
+      "label": "Markets Grid"
+    },
+    {
+      "id": "review",
+      "label": "Review"
+    }
+  ],
   "sectionOrder": [
     "Headlines & Launches",
     "Deep Dives & Analysis",

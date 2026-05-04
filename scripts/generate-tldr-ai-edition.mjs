@@ -15,7 +15,14 @@ await mkdir(outputDir, { recursive: true });
 
 const fileName = `${issue.date}.html`;
 const outputPath = path.join(outputDir, fileName);
-await writeFile(outputPath, renderIssue(issue, config), "utf8");
+const variants = config.variants?.length ? config.variants : [{ id: "broadsheet", label: "Broadsheet" }];
+const defaultVariant = variants.find((variant) => variant.id === config.defaultVariant) || variants[0];
+
+for (const variant of variants) {
+  await writeFile(path.join(outputDir, `${issue.date}-${variant.id}.html`), renderIssue(issue, config, variant), "utf8");
+}
+
+await writeFile(outputPath, renderIssue(issue, config, defaultVariant), "utf8");
 await writeFile(path.join(outputDir, "index.html"), renderIndex(issue, config), "utf8");
 
 console.log(`Wrote ${path.relative(root, outputPath)}`);
@@ -133,24 +140,21 @@ function firstNonEmpty(lines) {
   return lines.find((line) => line && !line.startsWith("[") && line !== "TLDR") || "";
 }
 
-function renderIssue(issue, cfg) {
+function renderIssue(issue, cfg, variant) {
   return `<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${escapeHtml(cfg.publicationName)} | ${escapeHtml(issue.date)}</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600..900&family=Inter:wght@500;650;800;900&display=swap" rel="stylesheet">
+  <title>${escapeHtml(cfg.publicationName)} | ${escapeHtml(issue.date)} | ${escapeHtml(variant.label)}</title>
   <style>
 ${css()}
   </style>
 </head>
-<body>
+<body class="variant-${escapeAttribute(variant.id)}">
   <header class="masthead">
     <div>
-      <p class="eyebrow">Personal edition / sponsors removed</p>
+      <p class="eyebrow">Personal edition / sponsors removed / ${escapeHtml(variant.label)}</p>
       <h1>${escapeHtml(cfg.publicationName)}</h1>
     </div>
     <div class="issue-meta">
@@ -159,6 +163,10 @@ ${css()}
       <span>Source: TLDR AI email</span>
     </div>
   </header>
+
+  <nav class="variant-nav" aria-label="Reader versions">
+    ${cfg.variants.map((item) => `<a ${item.id === variant.id ? "aria-current=\"page\"" : ""} href="./${escapeAttribute(issue.date)}-${escapeAttribute(item.id)}.html">${escapeHtml(item.label)}</a>`).join("\n    ")}
+  </nav>
 
   <main>
     ${issue.sections.map((section, index) => renderSection(section, index)).join("\n")}
@@ -201,16 +209,18 @@ function renderArticle(article) {
 }
 
 function renderIndex(issue, cfg) {
+  const defaultVariant = cfg.variants?.find((variant) => variant.id === cfg.defaultVariant) || cfg.variants?.[0];
+  const target = defaultVariant ? `${issue.date}-${defaultVariant.id}.html` : `${issue.date}.html`;
   return `<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="refresh" content="0; url=./${escapeAttribute(issue.date)}.html">
+  <meta http-equiv="refresh" content="0; url=./${escapeAttribute(target)}">
   <title>${escapeHtml(cfg.publicationName)}</title>
 </head>
 <body>
-  <a href="./${escapeAttribute(issue.date)}.html">Open ${escapeHtml(cfg.publicationName)} for ${escapeHtml(issue.date)}</a>
+  <a href="./${escapeAttribute(target)}">Open ${escapeHtml(cfg.publicationName)} for ${escapeHtml(issue.date)}</a>
 </body>
 </html>
 `;
@@ -225,6 +235,9 @@ function css() {
   --muted: #6b5c4a;
   --rule: #262019;
   --accent: #b1282e;
+  --font-display: "FinancierDisplayWeb", "Financier Display", "Financier", Georgia, serif;
+  --font-text: "FinancierTextWeb", "Financier Text", Georgia, serif;
+  --font-sans: "MetricWeb", "Metric", Arial, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -233,7 +246,7 @@ body {
   margin: 0;
   background: var(--ft-paper);
   color: var(--ink);
-  font-family: "Inter", Arial, sans-serif;
+  font-family: var(--font-sans);
   font-size: clamp(20px, 1.8vw, 28px);
   line-height: 1.32;
 }
@@ -271,7 +284,7 @@ h2,
 h3,
 h4,
 .lead-number {
-  font-family: "Fraunces", Georgia, serif;
+  font-family: var(--font-display);
   letter-spacing: 0;
 }
 
@@ -292,6 +305,33 @@ h1 {
   border-top: 3px solid var(--rule);
   padding-top: 10px;
   width: min(100%, 360px);
+}
+
+.variant-nav {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px clamp(22px, 6vw, 84px);
+  border-bottom: 2px solid var(--rule);
+  background: rgba(255, 241, 218, 0.96);
+  font-family: var(--font-sans);
+  font-size: clamp(18px, 1.3vw, 22px);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.variant-nav a {
+  border: 2px solid var(--rule);
+  padding: 7px 10px;
+  text-decoration: none;
+}
+
+.variant-nav a[aria-current="page"] {
+  background: var(--rule);
+  color: var(--ft-paper);
 }
 
 .section {
@@ -353,6 +393,7 @@ h4 {
 .article-card p {
   max-width: 980px;
   margin: 0;
+  font-family: var(--font-text);
   font-weight: 650;
 }
 
@@ -384,13 +425,166 @@ h4 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.variant-markets {
+  --ft-paper: #f7e6c6;
+  --ft-paper-deep: #ecd2a4;
+  --accent: #0d5b52;
+}
+
+.variant-markets .masthead {
+  grid-template-columns: 1fr;
+  min-height: 58vh;
+  align-content: space-between;
+  background:
+    linear-gradient(90deg, rgba(38, 32, 25, 0.14) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(38, 32, 25, 0.14) 1px, transparent 1px),
+    var(--ft-paper);
+  background-size: 42px 42px;
+}
+
+.variant-markets h1 {
+  max-width: 8ch;
+  font-size: clamp(76px, 15vw, 210px);
+}
+
+.variant-markets .issue-meta {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  justify-items: stretch;
+  text-align: left;
+}
+
+.variant-markets .section {
+  padding-top: clamp(24px, 4vw, 58px);
+}
+
+.variant-markets .section-rule {
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.variant-markets h2 {
+  font-size: clamp(46px, 6vw, 92px);
+}
+
+.variant-markets .lead-story {
+  grid-template-columns: 1fr;
+  padding: clamp(18px, 3vw, 34px);
+  border: 5px solid var(--rule);
+  background: rgba(255, 241, 218, 0.42);
+}
+
+.variant-markets .lead-number {
+  border: 0;
+  font-size: clamp(56px, 9vw, 140px);
+}
+
+.variant-markets .article-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.variant-markets .section-3 .article-grid,
+.variant-markets .section-5 .article-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.variant-markets h3 {
+  max-width: 16ch;
+  font-size: clamp(42px, 5vw, 84px);
+}
+
+.variant-markets h4 {
+  font-size: clamp(28px, 2.7vw, 42px);
+}
+
+.variant-review {
+  --ft-paper: #fff7e8;
+  --ft-paper-deep: #f6e3bf;
+  --accent: #7a1d1d;
+}
+
+.variant-review .masthead {
+  display: block;
+  text-align: center;
+  padding-inline: clamp(24px, 10vw, 150px);
+}
+
+.variant-review h1 {
+  margin-inline: auto;
+  max-width: 11ch;
+  font-size: clamp(72px, 13vw, 180px);
+}
+
+.variant-review .issue-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: clamp(24px, 4vw, 48px);
+  text-align: center;
+}
+
+.variant-review .issue-meta span {
+  width: auto;
+  border: 3px solid var(--rule);
+  padding: 10px 14px;
+}
+
+.variant-review .section {
+  max-width: 1280px;
+  margin: 0 auto;
+  border-bottom: 1px solid rgba(38, 32, 25, 0.35);
+}
+
+.variant-review .section-rule {
+  grid-template-columns: 1fr;
+  text-align: center;
+  border-bottom: 2px solid var(--rule);
+}
+
+.variant-review .lead-story {
+  grid-template-columns: 1fr;
+  text-align: center;
+}
+
+.variant-review .lead-number {
+  margin: 0 auto;
+  border: 4px solid var(--rule);
+  border-radius: 50%;
+  width: clamp(120px, 17vw, 220px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  font-size: clamp(58px, 9vw, 118px);
+}
+
+.variant-review h3 {
+  margin-inline: auto;
+  max-width: 15ch;
+}
+
+.variant-review .lead-story p {
+  margin-inline: auto;
+}
+
+.variant-review .article-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.variant-review .article-card {
+  padding: clamp(18px, 3vw, 34px) 0 0;
+}
+
 @media (max-width: 920px) {
   .masthead,
   .lead-story,
   .article-grid,
   .section-1 .lead-story,
   .section-3 .article-grid,
-  .section-5 .article-grid {
+  .section-5 .article-grid,
+  .variant-markets .issue-meta,
+  .variant-markets .article-grid,
+  .variant-markets .section-3 .article-grid,
+  .variant-markets .section-5 .article-grid,
+  .variant-review .article-grid {
     grid-template-columns: 1fr;
   }
 
