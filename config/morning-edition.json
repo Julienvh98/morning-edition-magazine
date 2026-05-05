@@ -3,6 +3,8 @@
   "dek": "A front-page Hacker News briefing tuned for AI tools, health, finance, weird science, and useful things you can act on today.",
   "timezone": "Europe/London",
   "readerName": "Julien",
+  "summaryWordTarget": 200,
+  "summaryModel": "gpt-5-mini",
   "tasteProfile": [
     {
       "label": "AI Tools",

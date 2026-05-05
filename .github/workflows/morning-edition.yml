@@ -46,6 +46,8 @@ jobs:
         run: npm run generate
         env:
           ISSUE_DATE: ${{ steps.schedule.outputs.issue_date }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_SUMMARY_MODEL: ${{ secrets.OPENAI_SUMMARY_MODEL }}
 
       - name: Commit generated issue
         if: steps.schedule.outputs.should_run == 'true'

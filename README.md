@@ -17,7 +17,20 @@ The issue is written to `magazines/YYYY-MM-DD.html`, and `magazines/index.html` 
 3. Under `Build and deployment`, set `Source` to `GitHub Actions`.
 4. Open `Actions -> Daily Morning Edition` and run it once manually.
 
-The workflow runs at 7am Europe/London every day. It schedules both 06:00 UTC and 07:00 UTC, then only proceeds when London local time is actually 07:00, so daylight saving time is handled.
+The workflow is scheduled around the 7am Europe/London window. GitHub may start scheduled jobs late, so the workflow publishes on the first scheduled run of the day and skips later scheduled runs once that day's issue exists.
+
+## Article Summaries
+
+Each Hacker News story includes a roughly 200-word brief. If you add an `OPENAI_API_KEY` repository secret, the workflow uses the OpenAI Responses API to summarize the fetched article text. Without that secret, it still produces a local fallback brief from readable article text, metadata, and Hacker News context.
+
+Optional repository secrets:
+
+```text
+OPENAI_API_KEY
+OPENAI_SUMMARY_MODEL
+```
+
+`OPENAI_SUMMARY_MODEL` is optional; the default is configured in `config/morning-edition.json`.
 
 ## Telegram Setup
 
