@@ -7,7 +7,7 @@
   <meta name="description" content="A front-page Hacker News briefing tuned for AI tools, health, finance, weird science, and useful things you can act on today.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..900,80,1&family=Inter:wght@500;650;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..900,80,1&family=IBM+Plex+Serif:wght@400;500&family=Inter:wght@500;650;800;900&display=swap" rel="stylesheet">
   <style>
 
 :root {
@@ -147,7 +147,7 @@ h2 {
 .brief {
   max-width: 980px;
   margin-top: 28px;
-  border-top: 5px solid currentColor;
+  border-top: 2px solid rgba(23, 18, 12, 0.28);
   padding-top: 18px;
 }
 
@@ -156,15 +156,17 @@ h2 {
 }
 
 .brief p:last-child {
-  font-size: clamp(24px, 2.4vw, 36px);
-  font-weight: 800;
-  line-height: 1.18;
+  color: rgba(23, 18, 12, 0.82);
+  font-family: "IBM Plex Serif", Georgia, serif;
+  font-size: clamp(19px, 1.55vw, 25px);
+  font-weight: 400;
+  line-height: 1.36;
 }
 
 .brief-label {
   margin-bottom: 10px !important;
   color: var(--muted);
-  font-size: clamp(18px, 1.5vw, 24px);
+  font-size: clamp(15px, 1.15vw, 19px);
   font-weight: 900;
   text-transform: uppercase;
 }
@@ -172,21 +174,27 @@ h2 {
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 28px;
+  gap: 8px;
+  margin-top: 18px;
 }
 
-.tags span,
-.applies {
-  border: 4px solid currentColor;
-  padding: 10px 14px;
+.tags span {
+  color: rgba(23, 18, 12, 0.58);
+  border: 1px solid rgba(23, 18, 12, 0.28);
+  padding: 4px 7px;
+  font-size: clamp(13px, 1vw, 15px);
+  font-weight: 800;
 }
 
 .applies {
   display: inline-block;
   margin-top: 18px;
+  border: 2px solid currentColor;
+  padding: 7px 10px;
   background: #ffef5a;
   color: #17120c;
+  font-size: clamp(14px, 1.1vw, 17px);
+  font-weight: 900;
   transform: rotate(-2deg);
 }
 
@@ -194,29 +202,34 @@ h2 {
   position: relative;
   z-index: 1;
   display: grid;
-  gap: 16px;
+  gap: 6px;
   align-content: center;
-  border-left: 5px solid currentColor;
+  border-left: 1px solid rgba(23, 18, 12, 0.28);
   padding-left: clamp(22px, 3vw, 44px);
-  font-weight: 900;
 }
 
 .story-aside p {
+  color: rgba(23, 18, 12, 0.62);
   margin: 0;
-  font-size: clamp(24px, 2.2vw, 38px);
+  font-size: clamp(14px, 1.1vw, 17px);
+  font-weight: 800;
 }
 
 .story-aside a {
   display: inline-block;
   width: fit-content;
   margin-top: 8px;
-  font-size: clamp(24px, 2.4vw, 40px);
+  color: rgba(23, 18, 12, 0.78);
+  font-size: clamp(15px, 1.2vw, 18px);
+  font-weight: 900;
 }
 
 .stat {
   margin: 0;
-  font-size: clamp(84px, 11vw, 190px);
-  line-height: 0.78;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(22px, 1.8vw, 28px);
+  font-weight: 900;
+  line-height: 1.05;
 }
 
 .hero {
@@ -407,7 +420,7 @@ h2 {
     <div class="cover-meta">
       <span>Top 10</span>
       <span>Curated for Julien</span>
-      <span>Tuesday, 5 May 2026 at 19:03</span>
+      <span>Tuesday, 5 May 2026 at 19:18</span>
     </div>
   </header>
 
@@ -420,7 +433,7 @@ h2 {
         <span>Rank 19</span>
       </div>
       <h2>When everyone has AI and the company still learns nothing</h2>
-      <p class="why">AI Tools + Actionable; matched on ai, learn; 210 HN points; 143 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <p class="why">AI Tools + Actionable; matched on ai, learn; 216 HN points; 148 comments. Directly useful for your AI-forward, practical morning scan.</p>
       <section class="brief">
         <p class="brief-label">200-word brief / 200 words</p>
         <p>Are people using AI, or is the organization learning from it? What changed because we spent those tokens? And who moves discoveries from individuals to teams to organizational capabilities? Are people using AI, or is the organization learning from it? What changed because we spent those tokens? And who moves discoveries from individuals to teams to organizational capabilities? Ethan Mollick has been writing about AI adoption in organizations for a while now. In Making AI Work: Leadership, Lab, and Crowd , he makes the point that individual productivity gains from AI do not automatically become organizational gains. People may get faster, write better, analyze more, automate more, or quietly become cyborg versions of themselves. The company may still learn almost nothing. A lot of companies are now entering the phase where GitHub Copilot licenses are provisioned, ChatGPT Enterprise exists somewhere in the stack, Claude or Gemini or Cursor show up in pockets, and every team has at least one person who is much further along than the official enablement material assumes. Some of this is visible, yet much of it is not. Management sees license usage (“Where is the ROI for the 2 mio € we paid Anthropic last year?”),.</p>
@@ -429,9 +442,9 @@ h2 {
       <div class="applies">Directly applies to you</div>
     </div>
     <aside class="story-aside">
-      <p class="stat">210</p>
+      <p class="stat">216</p>
       <p class="stat-label">HN points</p>
-      <p>143 comments</p>
+      <p>148 comments</p>
       <p>8 hours ago by youngbrioche</p>
       <a href="https://www.robert-glaser.de/when-everyone-has-ai-and-the-company-still-learns-nothing/">Read story</a>
       <a href="https://news.ycombinator.com/item?id=48020063">HN thread</a>
@@ -441,36 +454,11 @@ h2 {
     <div class="number" aria-label="Story 02">02</div>
     <div class="story-main">
       <div class="story-topline">
-        <span>tooldirectory.ai</span>
-        <span>Rank 23</span>
-      </div>
-      <h2>AI Product Graveyard</h2>
-      <p class="why">AI Tools + Actionable; matched on ai, tool; 215 HN points; 80 comments. Directly useful for your AI-forward, practical morning scan.</p>
-      <section class="brief">
-        <p class="brief-label">200-word brief / 200 words</p>
-        <p>AI Product Graveyard appears on the Hacker News front page from tooldirectory.ai. The item is ranked 23, has 215 points and 80 comments, and was selected because AI Tools + Actionable; matched on ai, tool; 215 HN points; 80 comments. Directly useful for your AI-forward, practical morning scan. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief combines the readable source material with Hacker News context. For the morning scan, treat it as a pointer to inspect the original source, then use the HN thread to test the idea against objections, implementation details, and practical edge cases. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, how strong the HN signal is, and what to check next before acting on it. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, how strong the HN signal is, and what to check next before acting on it. This additional context is intentionally conservative: it does not add outside claims,.</p>
-      </section>
-      <div class="tags"><span>AI Tools</span><span>Actionable</span></div>
-      <div class="applies">Directly applies to you</div>
-    </div>
-    <aside class="story-aside">
-      <p class="stat">215</p>
-      <p class="stat-label">HN points</p>
-      <p>80 comments</p>
-      <p>5 hours ago by StriverGuy</p>
-      <a href="https://tooldirectory.ai/ai-graveyard">Read story</a>
-      <a href="https://news.ycombinator.com/item?id=48021968">HN thread</a>
-    </aside>
-  </article>
-<article class="spread rose-alert-stamp">
-    <div class="number" aria-label="Story 03">03</div>
-    <div class="story-main">
-      <div class="story-topline">
         <span>susam.net</span>
         <span>Rank 2</span>
       </div>
       <h2>Three Inverse Laws of AI</h2>
-      <p class="why">AI Tools; matched on ai; 200 HN points; 112 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <p class="why">AI Tools; matched on ai; 212 HN points; 124 comments. Directly useful for your AI-forward, practical morning scan.</p>
       <section class="brief">
         <p class="brief-label">200-word brief / 200 words</p>
         <p>Since the launch of ChatGPT in November 2022, generative artificial intelligence (AI) chatbot services have become increasingly sophisticated and popular. These systems are now embedded in search engines, software development tools as well as office software. For many people, they have quickly become part of everyday computing. These services have turned out to be quite useful, especially for exploring unfamiliar topics and as a general productivity aid. However, I also think that the way these services are advertised and consumed can pose a danger to society, especially if we get into the habit of trusting their output without further scrutiny. Certain design choices in modern AI systems can encourage uncritical acceptance of their output. For example, many popular search engines are already highlighting answers generated by AI at the very top of the page. When this happens, it is easy to stop scrolling, accept the generated answer and move on. Over time, this could inadvertently train users to treat AI as the default authority rather than as a starting point for further investigation. I wish that each such generative AI service came with a brief but conspicuous warning explaining that these systems can sometimes produce output that is factually incorrect,.</p>
@@ -479,23 +467,23 @@ h2 {
       <div class="applies">Directly applies to you</div>
     </div>
     <aside class="story-aside">
-      <p class="stat">200</p>
+      <p class="stat">212</p>
       <p class="stat-label">HN points</p>
-      <p>112 comments</p>
+      <p>124 comments</p>
       <p>2 hours ago by blenderob</p>
       <a href="https://susam.net/inverse-laws-of-robotics.html">Read story</a>
       <a href="https://news.ycombinator.com/item?id=48023861">HN thread</a>
     </aside>
   </article>
-<article class="spread terminal">
-    <div class="number" aria-label="Story 04">04</div>
+<article class="spread rose-alert-stamp">
+    <div class="number" aria-label="Story 03">03</div>
     <div class="story-main">
       <div class="story-topline">
         <span>dbreunig.com</span>
         <span>Rank 26</span>
       </div>
       <h2>Lessons for Agentic Coding: What should we do when code is cheap?</h2>
-      <p class="why">AI Tools + Actionable; matched on agent, lessons; 184 HN points; 191 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <p class="why">AI Tools + Actionable; matched on agent, lessons; 185 HN points; 192 comments. Directly useful for your AI-forward, practical morning scan.</p>
       <section class="brief">
         <p class="brief-label">200-word brief / 200 words</p>
         <p>Guidelines for programming when code is cheap. Lately, this blog has featured a lot of writing about agentic coding. Frontier models are really good at coding these days, much better than they are at other tasks . Coding with agents feels like a preview of the future, a playground for seeing how far we can push agent capabilities. It’s invigorating, rewarding, and deeply weird . I’ve been keeping a running list of tips for agentic coding: guidelines or rules one might give to someone just getting started with Codex, Claude Code, Pi, or any other agent. Ideally each tip is generalizable guidance, relevant to any agentic programming. I’m also looking for durable lessons that will stick around as models and harnesses improve. Below is my current list: 10 Lessons for Agentic Coding . Ten’s a nice round number; a good time to put this out there. To be clear: I take credit only for honing and compiling these guidelines. As Kshetrajna Raghavan said to me today, “It’s crazy how we’re all converging on similar lessons.” (If you think I’ve missed anything below, please reach out !) I&#39;m testing out using LLMs to rewrite articles for different contexts and audiences. The.</p>
@@ -504,23 +492,23 @@ h2 {
       <div class="applies">Directly applies to you</div>
     </div>
     <aside class="story-aside">
-      <p class="stat">184</p>
+      <p class="stat">185</p>
       <p class="stat-label">HN points</p>
-      <p>191 comments</p>
-      <p>10 hours ago by ingve</p>
+      <p>192 comments</p>
+      <p>11 hours ago by ingve</p>
       <a href="https://www.dbreunig.com/2026/05/04/10-lessons-for-agentic-coding.html">Read story</a>
       <a href="https://news.ycombinator.com/item?id=48019025">HN thread</a>
     </aside>
   </article>
-<article class="spread academic-drop-cap">
-    <div class="number" aria-label="Story 05">05</div>
+<article class="spread terminal">
+    <div class="number" aria-label="Story 04">04</div>
     <div class="story-main">
       <div class="story-topline">
         <span>blog.google</span>
         <span>Rank 3</span>
       </div>
       <h2>Accelerating Gemma 4: faster inference with multi-token prediction drafters</h2>
-      <p class="why">AI Tools; matched on inference; 124 HN points; 38 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <p class="why">AI Tools; matched on inference; 136 HN points; 45 comments. Directly useful for your AI-forward, practical morning scan.</p>
       <section class="brief">
         <p class="brief-label">200-word brief / 200 words</p>
         <p>An overview of how Multi-Token Prediction (MTP) drafters are making Gemma 4 models up to 3x faster at inference. By using Multi-Token Prediction (MTP) drafters, Gemma 4 models reduce latency bottlenecks and achieve improved responsiveness for developers. Your browser does not support the audio element. Just a few weeks ago, we introduced Gemma 4 , our most capable open models to date. With over 60 million downloads in just the first few weeks, Gemma 4 is delivering unprecedented intelligence-per-parameter to developer workstations, mobile devices and the cloud. Today, we are pushing efficiency even further. We’re releasing Multi-Token Prediction (MTP) drafters for the Gemma 4 family. By using a specialized speculative decoding architecture, these drafters deliver up to a 3x speedup without any degradation in output quality or reasoning logic. Tokens-per-second speed increases, tested on hardware using LiteRT-LM , MLX, Hugging Face Transformers, and vLLM. The technical reality is that standard LLM inference is memory-bandwidth bound, creating a significant latency bottleneck. The processor spends the majority of its time moving billions of parameters from VRAM to the compute units just to generate a single token. This leads to under-utilized compute and high latency, especially on consumer-grade hardware. Speculative decoding decouples token.</p>
@@ -529,23 +517,23 @@ h2 {
       <div class="applies">Directly applies to you</div>
     </div>
     <aside class="story-aside">
-      <p class="stat">124</p>
+      <p class="stat">136</p>
       <p class="stat-label">HN points</p>
-      <p>38 comments</p>
-      <p>1 hour ago by amrrs</p>
+      <p>45 comments</p>
+      <p>2 hours ago by amrrs</p>
       <a href="https://blog.google/innovation-and-ai/technology/developers-tools/multi-token-prediction-gemma-4/">Read story</a>
       <a href="https://news.ycombinator.com/item?id=48024540">HN thread</a>
     </aside>
   </article>
-<article class="spread blueprint">
-    <div class="number" aria-label="Story 06">06</div>
+<article class="spread academic-drop-cap">
+    <div class="number" aria-label="Story 05">05</div>
     <div class="story-main">
       <div class="story-topline">
         <span>distr.sh</span>
         <span>Rank 10</span>
       </div>
       <h2>Should I Run Plain Docker Compose in Production in 2026?</h2>
-      <p class="why">AI Tools; matched on ai; 262 HN points; 196 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <p class="why">AI Tools; matched on ai; 265 HN points; 201 comments. Directly useful for your AI-forward, practical morning scan.</p>
       <section class="brief">
         <p class="brief-label">200-word brief / 200 words</p>
         <p>Yes, plain Docker Compose can still run production workloads in 2026—if you close the operational gaps it leaves: cleanup, healing, image pinning, socket security, and updates. Blog Should I Run Plain Docker Compose in Production in 2026? Philip Miglinci • Co-Founder Yes, plain Docker Compose can still run production workloads in 2026—if you close the operational gaps it leaves: cleanup, healing, image pinning, socket security, and updates. 5 minute read Copy URL April 30, 2026 I am Philip—an engineer working at Distr, which helps software and AI companies distribute their applications to self-managed environments. Our Open Source Software Distribution platform is available on GitHub ( github.com/distr-sh/distr ) and orchestrates both Docker Compose and Docker Swarm deployments on customer hosts every day. Most of the production incidents I have seen on Docker Compose hosts come from the same handful of quirks: an old container that should have been removed, a disk that filled up overnight, a health check that detected a problem and then did nothing about it, a :latest tag that pointed somewhere new, or a socket mount nobody thought twice about. None of these are bugs in Docker. They are deliberate trade-offs in a tool that started as internal.</p>
@@ -554,12 +542,37 @@ h2 {
       <div class="applies">Directly applies to you</div>
     </div>
     <aside class="story-aside">
-      <p class="stat">262</p>
+      <p class="stat">265</p>
       <p class="stat-label">HN points</p>
-      <p>196 comments</p>
+      <p>201 comments</p>
       <p>9 hours ago by pmig</p>
       <a href="https://distr.sh/blog/running-docker-in-production/">Read story</a>
       <a href="https://news.ycombinator.com/item?id=47962032">HN thread</a>
+    </aside>
+  </article>
+<article class="spread blueprint">
+    <div class="number" aria-label="Story 06">06</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>tooldirectory.ai</span>
+        <span>Rank 30</span>
+      </div>
+      <h2>AI Product Graveyard</h2>
+      <p class="why">AI Tools + Actionable; matched on ai, tool; 221 HN points; 82 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <section class="brief">
+        <p class="brief-label">200-word brief / 200 words</p>
+        <p>Curated list of AI tools and AI startups that have shut down, been acquired and folded, or had their domains lapse. Updated as our editorial team confirms each death. ‌ ‌ The AI Graveyard 100 AI tools that have shut down or been acquired and folded into other products. Maintained as part of our editorial review — every entry was a real product listed on ToolDirectory.AI before its lights went out. Found a tool that should be here? Email editorial@tooldirectory.ai . AI tools have died — 88 in 2026 alone . Document collaboration platform for the modern workplace. The site is no longer reachable as of our last health check; we&#39;ve marked the tool as discontinued. AI-powered tool for efficient marketing content research and repurposing. The site is no longer reachable as of our last health check; we&#39;ve marked the tool as discontinued. Generative Conversational AI platform for customer engagement and support. The site is no longer reachable as of our last health check; we&#39;ve marked the tool as discontinued. AI-driven conversational platform for e-commerce sales optimization. The site is no longer reachable as of our last health check; we&#39;ve marked the tool as discontinued. Generate high-quality ad creatives and.</p>
+      </section>
+      <div class="tags"><span>AI Tools</span><span>Actionable</span></div>
+      <div class="applies">Directly applies to you</div>
+    </div>
+    <aside class="story-aside">
+      <p class="stat">221</p>
+      <p class="stat-label">HN points</p>
+      <p>82 comments</p>
+      <p>5 hours ago by StriverGuy</p>
+      <a href="https://tooldirectory.ai/ai-graveyard">Read story</a>
+      <a href="https://news.ycombinator.com/item?id=48021968">HN thread</a>
     </aside>
   </article>
 <article class="spread health-note">
@@ -567,10 +580,10 @@ h2 {
     <div class="story-main">
       <div class="story-topline">
         <span>arxiv.org</span>
-        <span>Rank 7</span>
+        <span>Rank 6</span>
       </div>
       <h2>GLM-5V-Turbo: Toward a Native Foundation Model for Multimodal Agents</h2>
-      <p class="why">AI Tools; matched on agent, agents, model; 12 HN points; 1 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <p class="why">AI Tools; matched on agent, agents, model; 16 HN points; 2 comments. Directly useful for your AI-forward, practical morning scan.</p>
       <section class="brief">
         <p class="brief-label">200-word brief / 200 words</p>
         <p>Abstract page for arXiv paper 2604.26752: GLM-5V-Turbo: Toward a Native Foundation Model for Multimodal Agents GO quick links Login Help Pages About --&gt; Computer Science &gt; Computer Vision and Pattern Recognition arXiv:2604.26752 (cs) [Submitted on 29 Apr 2026] Title: GLM-5V-Turbo: Toward a Native Foundation Model for Multimodal Agents Authors: GLM-V Team : Wenyi Hong , Xiaotao Gu , Ziyang Pan , Zhen Yang , Yuting Wang , Yue Wang , Yuanchang Yue , Yu Wang , Yanling Wang , Yan Wang , Xijun Liu , Wenmeng Yu , Weihan Wang , Wei Li , Shuaiqi Duan , Sheng Yang , Ruiliang Lv , Mingdao Liu , Lihang Pan , Ke Ning , Junhui Ji , Jinjiang Wang , Jing Chen , Jiazheng Xu , Jiale Zhu , Jiale Cheng , Ji Qi , Guobing Gan , Guo Wang , Cong Yao , Zijun Dou , Zihao Zhou , Zihan Wang , Zhiqi Ge , Zhijie Li , Zhenyu Hou , Zhao Xue , Zehui Wang , Zehai He , Yusen Liu , Yukuo Cen , Yuchen Li , Yuan Wang , Yijian Lu , Yanzi Wang , Yadong Xue , Xinyu Zhang , Xinyu Liu , Wenkai Li , Tianyu.</p>
@@ -579,10 +592,10 @@ h2 {
       <div class="applies">Directly applies to you</div>
     </div>
     <aside class="story-aside">
-      <p class="stat">12</p>
+      <p class="stat">16</p>
       <p class="stat-label">HN points</p>
-      <p>1 comments</p>
-      <p>9 minutes ago by gmays</p>
+      <p>2 comments</p>
+      <p>23 minutes ago by gmays</p>
       <a href="https://arxiv.org/abs/2604.26752">Read story</a>
       <a href="https://news.ycombinator.com/item?id=48026021">HN thread</a>
     </aside>
@@ -591,36 +604,11 @@ h2 {
     <div class="number" aria-label="Story 08">08</div>
     <div class="story-main">
       <div class="story-topline">
-        <span>anthropic.com</span>
-        <span>Rank 14</span>
-      </div>
-      <h2>Agents for financial services and insurance</h2>
-      <p class="why">AI Tools; matched on agent, agents; 104 HN points; 76 comments. Directly useful for your AI-forward, practical morning scan.</p>
-      <section class="brief">
-        <p class="brief-label">200-word brief / 200 words</p>
-        <p>We&#39;re releasing ten new Cowork and Claude Code plugins, integrations with the Microsoft 365 suite, new connectors, and an MCP app for financial services and insurance organizations. We’re releasing ten ready-to-run agent templates for the most time-consuming work in financial services: building pitchbooks, screening KYC files, and closing the books at month-end. Each one ships as a plugin in Claude Cowork and Claude Code, and as a cookbook for Claude Managed Agents , so a team can put Claude on real financial work in days rather than months. Claude also now works across Microsoft Excel, PowerPoint, Word, and Outlook (coming soon) through the Claude add-ins for Microsoft 365. Once the add-ins are installed, context carries automatically between applications, so work that starts in a model can end in a deck without re-explaining anything in between. Finally, we’re continuing to expand our partner ecosystem with new connectors and an MCP app, so the agents draw on the data financial professionals already use. Connectors give Claude governed, real-time access to a provider’s data, and MCP apps go a step further by embedding the provider’s own tools directly inside Claude. These updates pair best with Claude Opus 4.7, which is state-of-the-art on financial.</p>
-      </section>
-      <div class="tags"><span>AI Tools</span></div>
-      <div class="applies">Directly applies to you</div>
-    </div>
-    <aside class="story-aside">
-      <p class="stat">104</p>
-      <p class="stat-label">HN points</p>
-      <p>76 comments</p>
-      <p>2 hours ago by louiereederson</p>
-      <a href="https://www.anthropic.com/news/finance-agents">Read story</a>
-      <a href="https://news.ycombinator.com/item?id=48023533">HN thread</a>
-    </aside>
-  </article>
-<article class="spread weird-lab">
-    <div class="number" aria-label="Story 09">09</div>
-    <div class="story-main">
-      <div class="story-topline">
         <span>thatprivacyguy.com</span>
-        <span>Rank 27</span>
+        <span>Rank 25</span>
       </div>
       <h2>Google Chrome silently installs a 4 GB AI model on your device without consent</h2>
-      <p class="why">AI Tools; matched on ai, model; 835 HN points; 577 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <p class="why">AI Tools; matched on ai, model; 848 HN points; 586 comments. Directly useful for your AI-forward, practical morning scan.</p>
       <section class="brief">
         <p class="brief-label">200-word brief / 200 words</p>
         <p>Google Chrome is downloading a 4 GB Gemini Nano model onto users A vast scorched cracked desert landscape, deep dry fissures splitting the orange-brown earth across the foreground, glowing embers visible deep in the cracks, hazy dark red sky thick with smoke and ash, blackened skeletal dead trees scattered on the horizon, broken silicon circuit boards motherboards and torn server racks half-buried in the cracked ground, low afternoon sun, photorealistic, shallow depth of field. (c) Hanff &amp; Co. AB - CC BY-NC-SA 4.0 · https://www.thatprivacyguy.com/ ~100k monthly readers — CPOs, DPOs, general counsel, CISOs, compliance teams. No tracking, no ad tech, no auction. Direct deal only. Two weeks ago I wrote about Anthropic silently registering a Native Messaging bridge in seven Chromium-based browsers on every machine where Claude Desktop was installed [1]. The pattern was: install on user launch of product A, write configuration into the user&#39;s installs of products B, C, D, E, F, G, H without asking. Reach across vendor trust boundaries. No consent dialog. No opt-out UI. Re-installs itself if the user removes it manually, every time Claude Desktop is launched. This week I discovered the same pattern, executed by Google. Google Chrome is reaching into users&#39;.</p>
@@ -629,12 +617,37 @@ h2 {
       <div class="applies">Directly applies to you</div>
     </div>
     <aside class="story-aside">
-      <p class="stat">835</p>
+      <p class="stat">848</p>
       <p class="stat-label">HN points</p>
-      <p>577 comments</p>
+      <p>586 comments</p>
       <p>10 hours ago by john-doe</p>
       <a href="https://www.thatprivacyguy.com/blog/chrome-silent-nano-install/">Read story</a>
       <a href="https://news.ycombinator.com/item?id=48019219">HN thread</a>
+    </aside>
+  </article>
+<article class="spread weird-lab">
+    <div class="number" aria-label="Story 09">09</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>anthropic.com</span>
+        <span>Rank 16</span>
+      </div>
+      <h2>Agents for financial services and insurance</h2>
+      <p class="why">AI Tools; matched on agent, agents; 106 HN points; 80 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <section class="brief">
+        <p class="brief-label">200-word brief / 200 words</p>
+        <p>We&#39;re releasing ten new Cowork and Claude Code plugins, integrations with the Microsoft 365 suite, new connectors, and an MCP app for financial services and insurance organizations. We’re releasing ten ready-to-run agent templates for the most time-consuming work in financial services: building pitchbooks, screening KYC files, and closing the books at month-end. Each one ships as a plugin in Claude Cowork and Claude Code, and as a cookbook for Claude Managed Agents , so a team can put Claude on real financial work in days rather than months. Claude also now works across Microsoft Excel, PowerPoint, Word, and Outlook (coming soon) through the Claude add-ins for Microsoft 365. Once the add-ins are installed, context carries automatically between applications, so work that starts in a model can end in a deck without re-explaining anything in between. Finally, we’re continuing to expand our partner ecosystem with new connectors and an MCP app, so the agents draw on the data financial professionals already use. Connectors give Claude governed, real-time access to a provider’s data, and MCP apps go a step further by embedding the provider’s own tools directly inside Claude. These updates pair best with Claude Opus 4.7, which is state-of-the-art on financial.</p>
+      </section>
+      <div class="tags"><span>AI Tools</span></div>
+      <div class="applies">Directly applies to you</div>
+    </div>
+    <aside class="story-aside">
+      <p class="stat">106</p>
+      <p class="stat-label">HN points</p>
+      <p>80 comments</p>
+      <p>3 hours ago by louiereederson</p>
+      <a href="https://www.anthropic.com/news/finance-agents">Read story</a>
+      <a href="https://news.ycombinator.com/item?id=48023533">HN thread</a>
     </aside>
   </article>
 <article class="spread big-stat-finish">
@@ -642,13 +655,13 @@ h2 {
     <div class="story-main">
       <div class="story-topline">
         <span>news.ycombinator.com</span>
-        <span>Rank 16</span>
+        <span>Rank 14</span>
       </div>
       <h2>Show HN: Airbyte Agents – context for agents across multiple data sources</h2>
       <p class="why">AI Tools; matched on ai, agent, agents; 44 HN points; 6 comments. Worth a quick editorial pass.</p>
       <section class="brief">
         <p class="brief-label">200-word brief / 200 words</p>
-        <p>Hacker News discussion for &quot;Show HN: Airbyte Agents – context for agents across multiple data sources&quot; with 44 points and 6 comments. AI Tools; matched on ai, agent, agents; 44 HN points; 6 comments. Worth a quick editorial pass. Show HN: Airbyte Agents – context for agents across multiple data sources appears on the Hacker News front page from news.ycombinator.com. The item is ranked 16, has 44 points and 6 comments, and was selected because AI Tools; matched on ai, agent, agents; 44 HN points; 6 comments. Worth a quick editorial pass. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief combines the readable source material with Hacker News context. For the morning scan, treat it as a pointer to inspect the original source, then use the HN thread to test the idea against objections, implementation details, and practical edge cases. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, how strong the HN signal is, and what to check next before acting on it. This additional context is intentionally conservative: it.</p>
+        <p>Hacker News discussion for &quot;Show HN: Airbyte Agents – context for agents across multiple data sources&quot; with 44 points and 6 comments. AI Tools; matched on ai, agent, agents; 44 HN points; 6 comments. Worth a quick editorial pass. Show HN: Airbyte Agents – context for agents across multiple data sources appears on the Hacker News front page from news.ycombinator.com. The item is ranked 14, has 44 points and 6 comments, and was selected because AI Tools; matched on ai, agent, agents; 44 HN points; 6 comments. Worth a quick editorial pass. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief combines the readable source material with Hacker News context. For the morning scan, treat it as a pointer to inspect the original source, then use the HN thread to test the idea against objections, implementation details, and practical edge cases. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, how strong the HN signal is, and what to check next before acting on it. This additional context is intentionally conservative: it.</p>
       </section>
       <div class="tags"><span>AI Tools</span></div>
       
@@ -657,7 +670,7 @@ h2 {
       <p class="stat">44</p>
       <p class="stat-label">HN points</p>
       <p>6 comments</p>
-      <p>2 hours ago by mtricot</p>
+      <p>3 hours ago by mtricot</p>
       <a href="https://news.ycombinator.com/item?id=48023496">Read story</a>
       <a href="https://news.ycombinator.com/item?id=48023496">HN thread</a>
     </aside>

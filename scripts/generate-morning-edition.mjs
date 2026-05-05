@@ -331,7 +331,7 @@ function renderIssue({ config: cfg, issueDate: date, stories }) {
   <meta name="description" content="${escapeHtml(cfg.dek)}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..900,80,1&family=Inter:wght@500;650;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..900,80,1&family=IBM+Plex+Serif:wght@400;500&family=Inter:wght@500;650;800;900&display=swap" rel="stylesheet">
   <style>
 ${css()}
   </style>
@@ -550,7 +550,7 @@ h2 {
 .brief {
   max-width: 980px;
   margin-top: 28px;
-  border-top: 5px solid currentColor;
+  border-top: 2px solid rgba(23, 18, 12, 0.28);
   padding-top: 18px;
 }
 
@@ -559,15 +559,17 @@ h2 {
 }
 
 .brief p:last-child {
-  font-size: clamp(24px, 2.4vw, 36px);
-  font-weight: 800;
-  line-height: 1.18;
+  color: rgba(23, 18, 12, 0.82);
+  font-family: "IBM Plex Serif", Georgia, serif;
+  font-size: clamp(19px, 1.55vw, 25px);
+  font-weight: 400;
+  line-height: 1.36;
 }
 
 .brief-label {
   margin-bottom: 10px !important;
   color: var(--muted);
-  font-size: clamp(18px, 1.5vw, 24px);
+  font-size: clamp(15px, 1.15vw, 19px);
   font-weight: 900;
   text-transform: uppercase;
 }
@@ -575,21 +577,27 @@ h2 {
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 28px;
+  gap: 8px;
+  margin-top: 18px;
 }
 
-.tags span,
-.applies {
-  border: 4px solid currentColor;
-  padding: 10px 14px;
+.tags span {
+  color: rgba(23, 18, 12, 0.58);
+  border: 1px solid rgba(23, 18, 12, 0.28);
+  padding: 4px 7px;
+  font-size: clamp(13px, 1vw, 15px);
+  font-weight: 800;
 }
 
 .applies {
   display: inline-block;
   margin-top: 18px;
+  border: 2px solid currentColor;
+  padding: 7px 10px;
   background: #ffef5a;
   color: #17120c;
+  font-size: clamp(14px, 1.1vw, 17px);
+  font-weight: 900;
   transform: rotate(-2deg);
 }
 
@@ -597,29 +605,34 @@ h2 {
   position: relative;
   z-index: 1;
   display: grid;
-  gap: 16px;
+  gap: 6px;
   align-content: center;
-  border-left: 5px solid currentColor;
+  border-left: 1px solid rgba(23, 18, 12, 0.28);
   padding-left: clamp(22px, 3vw, 44px);
-  font-weight: 900;
 }
 
 .story-aside p {
+  color: rgba(23, 18, 12, 0.62);
   margin: 0;
-  font-size: clamp(24px, 2.2vw, 38px);
+  font-size: clamp(14px, 1.1vw, 17px);
+  font-weight: 800;
 }
 
 .story-aside a {
   display: inline-block;
   width: fit-content;
   margin-top: 8px;
-  font-size: clamp(24px, 2.4vw, 40px);
+  color: rgba(23, 18, 12, 0.78);
+  font-size: clamp(15px, 1.2vw, 18px);
+  font-weight: 900;
 }
 
 .stat {
   margin: 0;
-  font-size: clamp(84px, 11vw, 190px);
-  line-height: 0.78;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(22px, 1.8vw, 28px);
+  font-weight: 900;
+  line-height: 1.05;
 }
 
 .hero {
