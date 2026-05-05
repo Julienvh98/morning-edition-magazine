@@ -106,7 +106,7 @@ jobs:
             echo "Telegram secrets are not configured; skipping notification."
             exit 0
           fi
-          issue_url="${PAGE_URL%/}/magazines/${ISSUE_DATE}.html"
+          issue_url="${PAGE_URL%/}/magazines/${ISSUE_DATE}.html?v=${GITHUB_RUN_ID}"
           curl -fsS "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
             --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
             --data-urlencode "text=Morning Edition is ready: ${issue_url}"
