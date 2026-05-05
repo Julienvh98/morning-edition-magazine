@@ -22,21 +22,19 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/checkout@v4
+
       - name: Check London schedule window
         id: schedule
         shell: bash
         run: |
-          london_hour="$(TZ=Europe/London date +%H)"
           issue_date="$(TZ=Europe/London date +%F)"
           should_run="true"
-          if [[ "${{ github.event_name }}" == "schedule" && "$london_hour" != "07" ]]; then
+          if [[ "${{ github.event_name }}" == "schedule" && -f "magazines/${issue_date}.html" ]]; then
             should_run="false"
           fi
           echo "issue_date=$issue_date" >> "$GITHUB_OUTPUT"
           echo "should_run=$should_run" >> "$GITHUB_OUTPUT"
-
-      - uses: actions/checkout@v4
-        if: steps.schedule.outputs.should_run == 'true'
 
       - uses: actions/setup-node@v4
         if: steps.schedule.outputs.should_run == 'true'
