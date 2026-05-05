@@ -55,7 +55,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add magazines
+          git add magazines data/official-news-seen.json
           git commit -m "Publish Morning Edition ${{ steps.schedule.outputs.issue_date }}" || echo "No magazine changes to commit"
           git push
 

@@ -6,9 +6,17 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
 const configPath = path.join(root, "config", "morning-edition.json");
 const outputDir = path.join(root, "magazines");
+const dataDir = path.join(root, "data");
+const officialNewsStatePath = path.join(dataDir, "official-news-seen.json");
 
 const HN_URL = "https://news.ycombinator.com/";
 const ITEM_URL = "https://news.ycombinator.com/item?id=";
+const BROWSER_HEADERS = {
+  accept: "text/html,application/xhtml+xml,application/xml;q=0.9,text/plain;q=0.8,*/*;q=0.7",
+  "accept-language": "en-US,en;q=0.9",
+  "user-agent":
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+};
 const THEMES = [
   "hero",
   "midnight",
@@ -26,6 +34,7 @@ const config = JSON.parse(await readFile(configPath, "utf8"));
 const issueDate = process.env.ISSUE_DATE || formatDateInZone(new Date(), config.timezone);
 
 await mkdir(outputDir, { recursive: true });
+await mkdir(dataDir, { recursive: true });
 
 const frontPage = await fetchHackerNewsFrontPage();
 const curated = curateStories(frontPage, config).slice(0, 10);
@@ -35,11 +44,15 @@ if (curated.length === 0) {
 }
 
 const stories = await enrichStoriesWithSummaries(curated, config);
+const officialNewsState = await loadOfficialNewsState();
+const officialNews = await fetchOfficialNews({ cfg: config, issueDate, state: officialNewsState });
 
-const html = renderIssue({ config, issueDate, stories });
+const html = stripTrailingWhitespace(renderIssue({ config, issueDate, stories, officialNews }));
 const outputPath = path.join(outputDir, `${issueDate}.html`);
 await writeFile(outputPath, html, "utf8");
-await writeFile(path.join(outputDir, "index.html"), renderIndex({ config, issueDate }), "utf8");
+await writeFile(path.join(outputDir, "index.html"), stripTrailingWhitespace(renderIndex({ config, issueDate })), "utf8");
+markOfficialNewsSeen({ state: officialNewsState, items: officialNews.items, issueDate });
+await writeFile(officialNewsStatePath, `${JSON.stringify(officialNewsState, null, 2)}\n`, "utf8");
 
 console.log(`Wrote ${path.relative(root, outputPath)}`);
 
@@ -159,6 +172,291 @@ async function enrichStoriesWithSummaries(stories, cfg) {
   return enriched;
 }
 
+async function loadOfficialNewsState() {
+  try {
+    const state = JSON.parse(await readFile(officialNewsStatePath, "utf8"));
+    return {
+      seen: state.seen && typeof state.seen === "object" ? state.seen : {},
+      lastRun: state.lastRun || null
+    };
+  } catch (error) {
+    if (error.code !== "ENOENT") {
+      console.warn(`Could not read official news state: ${error.message}`);
+    }
+    return { seen: {}, lastRun: null };
+  }
+}
+
+async function fetchOfficialNews({ cfg, issueDate, state }) {
+  const officialCfg = cfg.officialNews || {};
+  const lookbackDays = Number(officialCfg.lookbackDays || 2);
+  const sinceDate = subtractDays(issueDate, lookbackDays);
+  const sources = officialCfg.sources || defaultOfficialNewsSources();
+  const sourceErrors = [];
+  const candidates = [];
+
+  for (const source of sources) {
+    try {
+      const sourceItems = await fetchOfficialNewsSource(source);
+      candidates.push(
+        ...sourceItems.filter(
+          (item) =>
+            item.publishedDate >= sinceDate &&
+            item.publishedDate <= issueDate &&
+            (!state.seen[item.url] || state.seen[item.url].firstIncluded === issueDate)
+        )
+      );
+    } catch (error) {
+      sourceErrors.push(`${source.label || source.id}: ${error.message}`);
+      console.warn(`Could not fetch official news from ${source.label || source.id}: ${error.message}`);
+    }
+  }
+
+  const deduped = dedupeBy(candidates, (item) => item.url).sort((a, b) => {
+    if (a.publishedDate !== b.publishedDate) return b.publishedDate.localeCompare(a.publishedDate);
+    return a.sourceLabel.localeCompare(b.sourceLabel) || a.title.localeCompare(b.title);
+  });
+
+  const items = [];
+  for (const item of deduped) {
+    const sourceText = await fetchOfficialArticleText(item).catch((error) => {
+      console.warn(`Could not fetch official article text for ${item.url}: ${error.message}`);
+      return item.description || "";
+    });
+    const summary = await summarizeOfficialArticle({ article: item, sourceText, cfg }).catch((error) => {
+      console.warn(`Could not summarize official article ${item.url}: ${error.message}`);
+      return fallbackOfficialSummary({ article: item, sourceText, cfg });
+    });
+
+    items.push({
+      ...item,
+      sourceText,
+      summary,
+      summaryWordCount: countWords(summary)
+    });
+  }
+
+  return { items, sourceErrors, sinceDate };
+}
+
+function defaultOfficialNewsSources() {
+  return [
+    {
+      id: "anthropic",
+      label: "Anthropic",
+      listingUrl: "https://www.anthropic.com/news",
+      baseUrl: "https://www.anthropic.com"
+    },
+    {
+      id: "openai",
+      label: "OpenAI",
+      listingUrl: "https://openai.com/news/company-announcements/",
+      rssUrl: "https://openai.com/news/rss.xml",
+      baseUrl: "https://openai.com",
+      categories: ["Company", "Global Affairs"]
+    }
+  ];
+}
+
+async function fetchOfficialNewsSource(source) {
+  if (source.id === "anthropic") return fetchAnthropicNews(source);
+  if (source.id === "openai") return fetchOpenAINews(source);
+  return [];
+}
+
+async function fetchAnthropicNews(source) {
+  const html = await fetchText(source.listingUrl);
+  const items = [];
+
+  for (const match of html.matchAll(/<a[^>]+href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)) {
+    const href = decodeHtml(match[1]);
+    const text = normalizeWhitespace(htmlToText(match[2]));
+    const dateInfo = parseNewsDate(text);
+    if (!href || !dateInfo || !text) continue;
+
+    const url = new URL(href, source.baseUrl).href;
+    if (!new URL(url).hostname.endsWith("anthropic.com")) continue;
+
+    const category = parseNewsCategory(text, dateInfo.label) || "News";
+    const title = cleanNewsTitle(text, dateInfo.label, category);
+    if (!title || title.length < 4) continue;
+
+    items.push({
+      sourceId: source.id,
+      sourceLabel: source.label,
+      category,
+      title,
+      url,
+      publishedDate: dateInfo.iso,
+      description: ""
+    });
+  }
+
+  return dedupeBy(items, (item) => item.url);
+}
+
+async function fetchOpenAINews(source) {
+  const listingItems = await fetchOpenAIListingNews(source).catch((error) => {
+    console.warn(`Could not read OpenAI listing page, falling back to RSS: ${error.message}`);
+    return [];
+  });
+  const rssItems = await fetchOpenAINewsRss(source).catch((error) => {
+    if (!listingItems.length) throw error;
+    console.warn(`Could not read OpenAI RSS backup: ${error.message}`);
+    return [];
+  });
+
+  return dedupeBy([...listingItems, ...rssItems], (item) => item.url);
+}
+
+async function fetchOpenAIListingNews(source) {
+  const html = await fetchText(source.listingUrl);
+  const allowedCategories = new Set(source.categories || ["Company", "Global Affairs"]);
+  const items = [];
+
+  for (const match of html.matchAll(/<a[^>]+href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)) {
+    const href = decodeHtml(match[1]);
+    const text = normalizeWhitespace(htmlToText(match[2]));
+    const dateInfo = parseNewsDate(text);
+    if (!href || !dateInfo || !text) continue;
+
+    const category = parseNewsCategory(text, dateInfo.label);
+    if (allowedCategories.size && !allowedCategories.has(category)) continue;
+
+    const url = new URL(href, source.baseUrl).href;
+    if (!new URL(url).hostname.endsWith("openai.com")) continue;
+
+    const title = cleanNewsTitle(text, dateInfo.label, category);
+    if (!title || title.length < 4) continue;
+
+    items.push({
+      sourceId: source.id,
+      sourceLabel: source.label,
+      category: category || "Company",
+      title,
+      url,
+      publishedDate: dateInfo.iso,
+      description: ""
+    });
+  }
+
+  return dedupeBy(items, (item) => item.url);
+}
+
+async function fetchOpenAINewsRss(source) {
+  const xml = await fetchText(source.rssUrl || "https://openai.com/news/rss.xml", {
+    accept: "application/rss+xml,application/xml;q=0.9,*/*;q=0.8"
+  });
+  const allowedCategories = new Set(source.categories || ["Company", "Global Affairs"]);
+  const items = [];
+
+  for (const match of xml.matchAll(/<item>([\s\S]*?)<\/item>/gi)) {
+    const block = match[1];
+    const category = xmlTag(block, "category");
+    if (allowedCategories.size && !allowedCategories.has(category)) continue;
+
+    const pubDate = new Date(xmlTag(block, "pubDate"));
+    if (Number.isNaN(pubDate.getTime())) continue;
+
+    const title = xmlTag(block, "title");
+    const url = xmlTag(block, "link");
+    if (!title || !url) continue;
+
+    items.push({
+      sourceId: source.id,
+      sourceLabel: source.label,
+      category: category || "Company",
+      title,
+      url,
+      publishedDate: pubDate.toISOString().slice(0, 10),
+      description: xmlTag(block, "description")
+    });
+  }
+
+  return dedupeBy(items, (item) => item.url);
+}
+
+async function fetchOfficialArticleText(article) {
+  const text = await fetchStoryText({
+    title: article.title,
+    url: article.url,
+    site: article.sourceLabel,
+    rank: 0,
+    score: 0,
+    comments: 0,
+    why: `official ${article.sourceLabel} ${article.category} article published ${article.publishedDate}`
+  });
+
+  return normalizeWhitespace([article.description, text].filter(Boolean).join(" ")).slice(0, 12000);
+}
+
+async function summarizeOfficialArticle({ article, sourceText, cfg }) {
+  if (!process.env.OPENAI_API_KEY || !sourceText || countWords(sourceText) < 80) {
+    return fallbackOfficialSummary({ article, sourceText, cfg });
+  }
+
+  const wordTarget = Number(cfg.summaryWordTarget || 200);
+  const response = await fetch("https://api.openai.com/v1/responses", {
+    method: "POST",
+    headers: {
+      authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+      "content-type": "application/json"
+    },
+    body: JSON.stringify({
+      model: process.env.OPENAI_SUMMARY_MODEL || cfg.summaryModel || "gpt-5-mini",
+      instructions:
+        "You write concise editorial briefs for a personal morning edition. Use only the official article text and metadata provided. " +
+        "Do not invent facts, do not mention missing context, and do not say that text was provided. " +
+        `Write one self-contained summary of exactly ${wordTarget} words.`,
+      input:
+        `Title: ${article.title}\n` +
+        `Source: ${article.sourceLabel}\n` +
+        `Category: ${article.category}\n` +
+        `Published: ${article.publishedDate}\n` +
+        `Official link: ${article.url}\n\n` +
+        `Official article text:\n${sourceText.slice(0, 10000)}`
+    })
+  });
+
+  if (!response.ok) {
+    throw new Error(`OpenAI responded with ${response.status}: ${await response.text()}`);
+  }
+
+  const data = await response.json();
+  const text = extractResponseText(data);
+  if (!text) throw new Error("OpenAI response did not include output text");
+  return fitToWordCount(text, wordTarget);
+}
+
+function fallbackOfficialSummary({ article, sourceText, cfg }) {
+  const wordTarget = Number(cfg.summaryWordTarget || 200);
+  const text = normalizeWhitespace(sourceText || article.description || "");
+  const fallback = [
+    text,
+    `${article.title} is an official ${article.sourceLabel} ${article.category} update published on ${article.publishedDate}.`,
+    "The item is included at the top of the Morning Edition because it is a direct first-party update from a major AI lab.",
+    "Use the official link to read the complete announcement, then compare the claim against product documentation, customer examples, technical details, and timing before acting on it.",
+    "For your morning scan, the practical question is whether this changes tool choices, enterprise AI workflows, developer roadmaps, finance use cases, or the competitive picture around applied AI."
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  return fitToWordCount(fallback, wordTarget);
+}
+
+function markOfficialNewsSeen({ state, items, issueDate }) {
+  state.lastRun = issueDate;
+  for (const item of items) {
+    state.seen[item.url] = {
+      source: item.sourceLabel,
+      title: item.title,
+      category: item.category,
+      publishedDate: item.publishedDate,
+      firstIncluded: issueDate
+    };
+  }
+}
+
 async function fetchStoryText(story) {
   if (story.url.includes("news.ycombinator.com/item")) {
     return `Hacker News discussion for "${story.title}" with ${story.score} points and ${story.comments} comments. ${story.why}`;
@@ -171,8 +469,8 @@ async function fetchStoryText(story) {
     const response = await fetch(story.url, {
       signal: controller.signal,
       headers: {
-        accept: "text/html,application/xhtml+xml,text/plain;q=0.9,*/*;q=0.8",
-        "user-agent": "MorningEditionBot/1.0 (+https://github.com/Julienvh98/morning-edition-magazine)"
+        ...BROWSER_HEADERS,
+        accept: "text/html,application/xhtml+xml,text/plain;q=0.9,*/*;q=0.8"
       }
     });
 
@@ -310,12 +608,16 @@ function normalizeWhitespace(text = "") {
   return String(text).replace(/\s+/g, " ").trim();
 }
 
+function stripTrailingWhitespace(text = "") {
+  return String(text).replace(/[ \t]+$/gm, "");
+}
+
 function ensureSentenceEnd(text) {
   if (!text) return "";
   return /[.!?]$/.test(text) ? text : `${text}.`;
 }
 
-function renderIssue({ config: cfg, issueDate: date, stories }) {
+function renderIssue({ config: cfg, issueDate: date, stories, officialNews }) {
   const generatedAt = new Intl.DateTimeFormat("en-GB", {
     dateStyle: "full",
     timeStyle: "short",
@@ -348,12 +650,59 @@ ${css()}
     </div>
   </header>
 
+  ${renderOfficialNews(officialNews)}
+
   <main>
     ${stories.map((story, index) => renderSpread(story, index)).join("\n")}
   </main>
 </body>
 </html>
 `;
+}
+
+function renderOfficialNews(officialNews) {
+  const items = officialNews?.items || [];
+  const sourceErrors = officialNews?.sourceErrors || [];
+  const sinceDate = officialNews?.sinceDate || "";
+
+  if (!items.length) {
+    const errorNote = sourceErrors.length
+      ? ` Source check warnings: ${sourceErrors.join("; ")}.`
+      : " No new official Anthropic or OpenAI company updates were found for this issue.";
+    return `<section class="official-news">
+    <div class="official-news-header">
+      <p class="kicker">Official AI Lab News</p>
+      <h2>Anthropic + OpenAI</h2>
+      <p>Checked first-party news sources since ${escapeHtml(sinceDate)}.${escapeHtml(errorNote)}</p>
+    </div>
+  </section>`;
+  }
+
+  return `<section class="official-news">
+    <div class="official-news-header">
+      <p class="kicker">Official AI Lab News</p>
+      <h2>Anthropic + OpenAI</h2>
+      <p>New first-party updates since ${escapeHtml(sinceDate)}, including any missed articles from the previous run.</p>
+    </div>
+    <div class="official-news-grid">
+      ${items.map((item, index) => renderOfficialNewsCard(item, index)).join("\n")}
+    </div>
+  </section>`;
+}
+
+function renderOfficialNewsCard(item, index) {
+  const number = String(index + 1).padStart(2, "0");
+
+  return `<article class="official-news-card">
+    <div class="official-news-num">${number}</div>
+    <div>
+      <p class="official-news-meta">${escapeHtml(item.sourceLabel)} / ${escapeHtml(item.category)} / ${escapeHtml(item.publishedDate)}</p>
+      <h3>${escapeHtml(item.title)}</h3>
+      <p class="official-news-summary">${escapeHtml(item.summary)}</p>
+      <p class="official-news-count">200-word brief / ${item.summaryWordCount} words</p>
+      <a href="${escapeAttribute(item.url)}">Read official article</a>
+    </div>
+  </article>`;
 }
 
 function renderSpread(story, index) {
@@ -505,6 +854,95 @@ h1 {
 .cover-meta span {
   border: 3px solid currentColor;
   padding: 10px 14px;
+}
+
+.official-news {
+  min-height: 100vh;
+  display: grid;
+  align-content: start;
+  gap: clamp(28px, 4vw, 54px);
+  padding: clamp(28px, 6vw, 86px);
+  background: #f7f0df;
+  border-top: 8px solid rgba(23, 18, 12, 0.28);
+  border-bottom: 8px solid rgba(23, 18, 12, 0.18);
+}
+
+.official-news-header {
+  display: grid;
+  gap: 18px;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.35);
+  padding-bottom: 24px;
+}
+
+.official-news-header h2 {
+  max-width: 10ch;
+  margin: 0;
+  font-size: clamp(56px, 10vw, 152px);
+}
+
+.official-news-header p:last-child {
+  max-width: 960px;
+  margin: 0;
+  color: rgba(23, 18, 12, 0.72);
+  font-family: "IBM Plex Serif", Georgia, serif;
+  font-size: clamp(20px, 1.9vw, 30px);
+  font-weight: 400;
+  line-height: 1.32;
+}
+
+.official-news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: clamp(20px, 3vw, 36px);
+}
+
+.official-news-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 18px;
+  border-top: 2px solid rgba(23, 18, 12, 0.32);
+  padding-top: 18px;
+}
+
+.official-news-num {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(44px, 5vw, 74px);
+  font-weight: 800;
+  line-height: 0.9;
+}
+
+.official-news-meta,
+.official-news-count {
+  margin: 0;
+  color: rgba(23, 18, 12, 0.58);
+  font-size: clamp(14px, 1vw, 16px);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.official-news-card h3 {
+  margin: 8px 0 16px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 760;
+  line-height: 0.96;
+}
+
+.official-news-summary {
+  margin: 0 0 16px;
+  color: rgba(23, 18, 12, 0.82);
+  font-family: "IBM Plex Serif", Georgia, serif;
+  font-size: clamp(18px, 1.45vw, 23px);
+  font-weight: 400;
+  line-height: 1.36;
+}
+
+.official-news-card a {
+  display: inline-block;
+  margin-top: 14px;
+  color: rgba(23, 18, 12, 0.8);
+  font-size: clamp(15px, 1.1vw, 18px);
+  font-weight: 900;
 }
 
 .spread {
@@ -787,7 +1225,8 @@ h2 {
 
 @media (max-width: 860px) {
   .cover,
-  .spread {
+  .spread,
+  .official-news {
     min-height: auto;
     padding: 30px 22px 42px;
   }
@@ -811,8 +1250,81 @@ h2 {
   h2 {
     max-width: 11ch;
   }
+
+  .official-news-card {
+    grid-template-columns: 1fr;
+  }
 }
 `;
+}
+
+async function fetchText(url, headers = {}) {
+  const response = await fetch(url, {
+    headers: {
+      ...BROWSER_HEADERS,
+      ...headers
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error(`${url} responded with ${response.status}`);
+  }
+
+  return response.text();
+}
+
+function parseNewsDate(text) {
+  const label = firstMatch(
+    text,
+    /\b((?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Sept|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\.?\s+\d{1,2},\s+\d{4})\b/i
+  );
+  if (!label) return null;
+
+  const date = new Date(`${label} 00:00:00 UTC`);
+  if (Number.isNaN(date.getTime())) return null;
+
+  return {
+    label,
+    iso: date.toISOString().slice(0, 10)
+  };
+}
+
+function parseNewsCategory(text, dateLabel) {
+  const afterDate = normalizeWhitespace(text.replace(dateLabel, " "));
+  return (
+    firstMatch(afterDate, /^(Announcements|Product|Research|Company|Safety|Engineering|Security|Global Affairs|AI Adoption|Publication)\b/i) ||
+    firstMatch(afterDate, /\b(Announcements|Product|Research|Company|Safety|Engineering|Security|Global Affairs|AI Adoption|Publication)$/i)
+  );
+}
+
+function cleanNewsTitle(text, dateLabel, category) {
+  let title = normalizeWhitespace(text.replace(dateLabel, " "));
+  if (category) {
+    title = normalizeWhitespace(title.replace(new RegExp(`^${escapeRegExp(category)}\\b`, "i"), " "));
+    title = normalizeWhitespace(title.replace(new RegExp(`\\b${escapeRegExp(category)}\\b$`, "i"), " "));
+  }
+  return decodeHtml(title);
+}
+
+function xmlTag(block, tagName) {
+  const raw = firstMatch(block, new RegExp(`<${tagName}[^>]*>([\\s\\S]*?)<\\/${tagName}>`, "i"));
+  return decodeHtml(raw.replace(/^<!\[CDATA\[|\]\]>$/g, ""));
+}
+
+function dedupeBy(items, keyFn) {
+  const seen = new Set();
+  return items.filter((item) => {
+    const key = keyFn(item);
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function subtractDays(dateString, days) {
+  const date = new Date(`${dateString}T00:00:00Z`);
+  date.setUTCDate(date.getUTCDate() - days);
+  return date.toISOString().slice(0, 10);
 }
 
 function formatDateInZone(date, timezone) {
@@ -839,6 +1351,10 @@ function absolutizeUrl(rawUrl) {
 
 function firstMatch(text, pattern) {
   return text.match(pattern)?.[1] || "";
+}
+
+function escapeRegExp(value = "") {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function decodeHtml(value = "") {

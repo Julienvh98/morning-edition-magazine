@@ -5,6 +5,28 @@
   "readerName": "Julien",
   "summaryWordTarget": 200,
   "summaryModel": "gpt-5-mini",
+  "officialNews": {
+    "lookbackDays": 2,
+    "sources": [
+      {
+        "id": "anthropic",
+        "label": "Anthropic",
+        "listingUrl": "https://www.anthropic.com/news",
+        "baseUrl": "https://www.anthropic.com"
+      },
+      {
+        "id": "openai",
+        "label": "OpenAI",
+        "listingUrl": "https://openai.com/news/company-announcements/",
+        "rssUrl": "https://openai.com/news/rss.xml",
+        "baseUrl": "https://openai.com",
+        "categories": [
+          "Company",
+          "Global Affairs"
+        ]
+      }
+    ]
+  },
   "tasteProfile": [
     {
       "label": "AI Tools",

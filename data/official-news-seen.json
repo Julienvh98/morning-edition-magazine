@@ -1,0 +1,26 @@
+{
+  "seen": {
+    "https://www.anthropic.com/news/finance-agents": {
+      "source": "Anthropic",
+      "title": "Agents for financial services",
+      "category": "Announcements",
+      "publishedDate": "2026-05-05",
+      "firstIncluded": "2026-05-05"
+    },
+    "https://www.anthropic.com/news/enterprise-ai-services-company": {
+      "source": "Anthropic",
+      "title": "Building a new enterprise AI services company with Blackstone, Hellman & Friedman, and Goldman Sachs",
+      "category": "Announcements",
+      "publishedDate": "2026-05-04",
+      "firstIncluded": "2026-05-05"
+    },
+    "https://openai.com/index/openai-pwc-finance-collaboration": {
+      "source": "OpenAI",
+      "title": "OpenAI and PwC collaborate to reimagine the office of the CFO",
+      "category": "Global Affairs",
+      "publishedDate": "2026-05-04",
+      "firstIncluded": "2026-05-05"
+    }
+  },
+  "lastRun": "2026-05-05"
+}

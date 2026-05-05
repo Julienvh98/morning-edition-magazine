@@ -23,6 +23,10 @@ The workflow is scheduled around the 7am Europe/London window. GitHub may start 
 
 Each Hacker News story includes a roughly 200-word brief. If you add an `OPENAI_API_KEY` repository secret, the workflow uses the OpenAI Responses API to summarize the fetched article text. Without that secret, it still produces a local fallback brief from readable article text, metadata, and Hacker News context.
 
+## Official AI Lab News
+
+Each issue starts with new first-party updates from Anthropic News and OpenAI company/global announcements. The generator keeps `data/official-news-seen.json` so a missed previous-day article is included in the next issue, while already-published items are not repeated on later days.
+
 Optional repository secrets:
 
 ```text
