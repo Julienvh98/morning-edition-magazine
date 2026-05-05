@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Morning Edition | 2026-05-05</title>
+  <meta name="description" content="A front-page Hacker News briefing tuned for AI tools, health, finance, weird science, and useful things you can act on today.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..900,80,1&family=Inter:wght@500;650;800;900&display=swap" rel="stylesheet">
+  <style>
+
+:root {
+  color-scheme: light;
+  --ink: #17120c;
+  --paper: #f5ecd8;
+  --muted: rgba(23, 18, 12, 0.72);
+  --rule: rgba(23, 18, 12, 0.2);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(22px, 2vw, 30px);
+  line-height: 1.22;
+}
+
+a { color: inherit; text-decoration-thickness: 0.12em; text-underline-offset: 0.18em; }
+
+.cover,
+.spread {
+  min-height: 100vh;
+  display: grid;
+  gap: clamp(24px, 4vw, 56px);
+  padding: clamp(28px, 6vw, 86px);
+  overflow: hidden;
+}
+
+.cover {
+  align-content: space-between;
+  background:
+    linear-gradient(90deg, rgba(23,18,12,0.08) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(23,18,12,0.08) 1px, transparent 1px),
+    #f4ecd8;
+  background-size: 80px 80px;
+}
+
+.kicker,
+.story-topline,
+.stat-label,
+.tags,
+.applies,
+.cover-meta {
+  font-size: clamp(20px, 1.8vw, 28px);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.kicker,
+.story-topline,
+.stat-label {
+  color: var(--muted);
+}
+
+h1,
+h2,
+.number,
+.stat {
+  font-family: "Fraunces", Georgia, serif;
+  letter-spacing: 0;
+}
+
+h1 {
+  max-width: 10ch;
+  margin: 0;
+  font-size: clamp(82px, 16vw, 230px);
+  line-height: 0.82;
+}
+
+.dek {
+  max-width: 980px;
+  margin: 0;
+  font-size: clamp(30px, 5vw, 72px);
+  font-weight: 800;
+  line-height: 1.02;
+}
+
+.cover-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  border-top: 5px solid currentColor;
+  padding-top: 22px;
+}
+
+.cover-meta span {
+  border: 3px solid currentColor;
+  padding: 10px 14px;
+}
+
+.spread {
+  position: relative;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.55fr);
+  align-items: center;
+  border-top: 8px solid rgba(0, 0, 0, 0.18);
+}
+
+.number {
+  position: absolute;
+  line-height: 0.76;
+  pointer-events: none;
+  user-select: none;
+}
+
+.story-main {
+  position: relative;
+  z-index: 1;
+}
+
+.story-topline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+h2 {
+  max-width: 12ch;
+  margin: 0;
+  font-size: clamp(54px, 9vw, 140px);
+  line-height: 0.88;
+}
+
+.why {
+  max-width: 900px;
+  margin: 30px 0 0;
+  font-size: clamp(28px, 3vw, 48px);
+  font-weight: 800;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.tags span,
+.applies {
+  border: 4px solid currentColor;
+  padding: 10px 14px;
+}
+
+.applies {
+  display: inline-block;
+  margin-top: 18px;
+  background: #ffef5a;
+  color: #17120c;
+  transform: rotate(-2deg);
+}
+
+.story-aside {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 16px;
+  align-content: center;
+  border-left: 5px solid currentColor;
+  padding-left: clamp(22px, 3vw, 44px);
+  font-weight: 900;
+}
+
+.story-aside p {
+  margin: 0;
+  font-size: clamp(24px, 2.2vw, 38px);
+}
+
+.story-aside a {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 8px;
+  font-size: clamp(24px, 2.4vw, 40px);
+}
+
+.stat {
+  margin: 0;
+  font-size: clamp(84px, 11vw, 190px);
+  line-height: 0.78;
+}
+
+.hero {
+  background: #f6c744;
+}
+
+.hero .number {
+  right: -2vw;
+  top: -3vw;
+  font-size: clamp(180px, 36vw, 520px);
+  opacity: 0.28;
+}
+
+.midnight {
+  --ink: #f3efe1;
+  --muted: rgba(243, 239, 225, 0.72);
+  background: #101624;
+  color: var(--ink);
+}
+
+.midnight .number {
+  left: 3vw;
+  bottom: -4vw;
+  font-size: clamp(160px, 32vw, 460px);
+  color: #66e0c2;
+}
+
+.rose-alert-stamp {
+  background: #ffd5dc;
+}
+
+.rose-alert-stamp .number {
+  right: 6vw;
+  top: 8vw;
+  border: 8px solid currentColor;
+  border-radius: 50%;
+  padding: 0.16em;
+  font-size: clamp(110px, 18vw, 260px);
+  transform: rotate(12deg);
+}
+
+.terminal {
+  --ink: #d8ffd1;
+  --muted: rgba(216, 255, 209, 0.75);
+  background: #062015;
+  color: var(--ink);
+  font-family: "Inter", ui-monospace, monospace;
+}
+
+.terminal h2::before {
+  content: "> ";
+  color: #4cff7f;
+}
+
+.terminal .number {
+  right: 4vw;
+  bottom: 4vw;
+  font-size: clamp(120px, 24vw, 350px);
+  color: rgba(76, 255, 127, 0.28);
+}
+
+.academic-drop-cap {
+  background: #efe7d6;
+}
+
+.academic-drop-cap h2::first-letter {
+  float: left;
+  font-size: 1.9em;
+  line-height: 0.68;
+  padding-right: 0.08em;
+}
+
+.academic-drop-cap .number {
+  left: 4vw;
+  top: 3vw;
+  font-size: clamp(130px, 25vw, 360px);
+  opacity: 0.12;
+}
+
+.blueprint {
+  --ink: #f7f0dc;
+  --muted: rgba(247, 240, 220, 0.74);
+  color: var(--ink);
+  background:
+    linear-gradient(rgba(247,240,220,0.12) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(247,240,220,0.12) 2px, transparent 2px),
+    #173d6f;
+  background-size: 48px 48px;
+}
+
+.blueprint .number {
+  right: -1vw;
+  top: 5vw;
+  font-size: clamp(150px, 27vw, 390px);
+  -webkit-text-stroke: 4px currentColor;
+  color: transparent;
+}
+
+.health-note {
+  background: #cbe9d8;
+}
+
+.health-note .number {
+  left: 50%;
+  top: 50%;
+  font-size: clamp(180px, 35vw, 500px);
+  transform: translate(-50%, -50%) rotate(-8deg);
+  color: rgba(23, 18, 12, 0.11);
+}
+
+.finance-ledger {
+  background: #d9e7ff;
+}
+
+.finance-ledger .number {
+  left: 2vw;
+  bottom: -2vw;
+  font-size: clamp(150px, 30vw, 430px);
+  font-variant-numeric: tabular-nums;
+}
+
+.finance-ledger .story-aside {
+  border-left-style: double;
+  border-left-width: 12px;
+}
+
+.weird-lab {
+  background: #e7ddff;
+}
+
+.weird-lab .number {
+  right: 3vw;
+  top: 3vw;
+  font-size: clamp(110px, 20vw, 300px);
+  filter: blur(0.3px);
+  transform: skew(-8deg);
+}
+
+.big-stat-finish {
+  background: #ff7f50;
+}
+
+.big-stat-finish .number {
+  inset: auto 0 -4vw auto;
+  font-size: clamp(210px, 40vw, 560px);
+  opacity: 0.2;
+}
+
+.big-stat-finish .stat {
+  font-size: clamp(110px, 16vw, 240px);
+}
+
+@media (max-width: 860px) {
+  .cover,
+  .spread {
+    min-height: auto;
+    padding: 30px 22px 42px;
+  }
+
+  .cover {
+    min-height: 100svh;
+  }
+
+  .spread {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .story-aside {
+    border-left: 0;
+    border-top: 5px solid currentColor;
+    padding-left: 0;
+    padding-top: 22px;
+  }
+
+  h2 {
+    max-width: 11ch;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header class="cover">
+    <p class="kicker">Hacker News Front Page / 2026-05-05</p>
+    <h1>Morning Edition</h1>
+    <p class="dek">A front-page Hacker News briefing tuned for AI tools, health, finance, weird science, and useful things you can act on today.</p>
+    <div class="cover-meta">
+      <span>Top 10</span>
+      <span>Curated for Julien</span>
+      <span>Tuesday, 5 May 2026 at 18:56</span>
+    </div>
+  </header>
+
+  <main>
+    <article class="spread hero">
+    <div class="number" aria-label="Story 01">01</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>robert-glaser.de</span>
+        <span>Rank 19</span>
+      </div>
+      <h2>When everyone has AI and the company still learns nothing</h2>
+      <p class="why">AI Tools + Actionable; matched on ai, learn; 209 HN points; 142 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <div class="tags"><span>AI Tools</span><span>Actionable</span></div>
+      <div class="applies">Directly applies to you</div>
+    </div>
+    <aside class="story-aside">
+      <p class="stat">209</p>
+      <p class="stat-label">HN points</p>
+      <p>142 comments</p>
+      <p>8 hours ago by youngbrioche</p>
+      <a href="https://www.robert-glaser.de/when-everyone-has-ai-and-the-company-still-learns-nothing/">Read story</a>
+      <a href="https://news.ycombinator.com/item?id=48020063">HN thread</a>
+    </aside>
+  </article>
+<article class="spread midnight">
+    <div class="number" aria-label="Story 02">02</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>susam.net</span>
+        <span>Rank 2</span>
+      </div>
+      <h2>Three Inverse Laws of AI</h2>
+      <p class="why">AI Tools; matched on ai; 194 HN points; 110 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <div class="tags"><span>AI Tools</span></div>
+      <div class="applies">Directly applies to you</div>
+    </div>
+    <aside class="story-aside">
+      <p class="stat">194</p>
+      <p class="stat-label">HN points</p>
+      <p>110 comments</p>
+      <p>2 hours ago by blenderob</p>
+      <a href="https://susam.net/inverse-laws-of-robotics.html">Read story</a>
+      <a href="https://news.ycombinator.com/item?id=48023861">HN thread</a>
+    </aside>
+  </article>
+<article class="spread rose-alert-stamp">
+    <div class="number" aria-label="Story 03">03</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>tooldirectory.ai</span>
+        <span>Rank 24</span>
+      </div>
+      <h2>AI Product Graveyard</h2>
+      <p class="why">AI Tools + Actionable; matched on ai, tool; 213 HN points; 80 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <div class="tags"><span>AI Tools</span><span>Actionable</span></div>
+      <div class="applies">Directly applies to you</div>
+    </div>
+    <aside class="story-aside">
+      <p class="stat">213</p>
+      <p class="stat-label">HN points</p>
+      <p>80 comments</p>
+      <p>4 hours ago by StriverGuy</p>
+      <a href="https://tooldirectory.ai/ai-graveyard">Read story</a>
+      <a href="https://news.ycombinator.com/item?id=48021968">HN thread</a>
+    </aside>
+  </article>
+<article class="spread terminal">
+    <div class="number" aria-label="Story 04">04</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>dbreunig.com</span>
+        <span>Rank 27</span>
+      </div>
+      <h2>Lessons for Agentic Coding: What should we do when code is cheap?</h2>
+      <p class="why">AI Tools + Actionable; matched on agent, lessons; 181 HN points; 191 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <div class="tags"><span>AI Tools</span><span>Actionable</span></div>
+      <div class="applies">Directly applies to you</div>
+    </div>
+    <aside class="story-aside">
+      <p class="stat">181</p>
+      <p class="stat-label">HN points</p>
+      <p>191 comments</p>
+      <p>10 hours ago by ingve</p>
+      <a href="https://www.dbreunig.com/2026/05/04/10-lessons-for-agentic-coding.html">Read story</a>
+      <a href="https://news.ycombinator.com/item?id=48019025">HN thread</a>
+    </aside>
+  </article>
+<article class="spread academic-drop-cap">
+    <div class="number" aria-label="Story 05">05</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>blog.google</span>
+        <span>Rank 3</span>
+      </div>
+      <h2>Accelerating Gemma 4: faster inference with multi-token prediction drafters</h2>
+      <p class="why">AI Tools; matched on inference; 114 HN points; 36 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <div class="tags"><span>AI Tools</span></div>
+      <div class="applies">Directly applies to you</div>
+    </div>
+    <aside class="story-aside">
+      <p class="stat">114</p>
+      <p class="stat-label">HN points</p>
+      <p>36 comments</p>
+      <p>1 hour ago by amrrs</p>
+      <a href="https://blog.google/innovation-and-ai/technology/developers-tools/multi-token-prediction-gemma-4/">Read story</a>
+      <a href="https://news.ycombinator.com/item?id=48024540">HN thread</a>
+    </aside>
+  </article>
+<article class="spread blueprint">
+    <div class="number" aria-label="Story 06">06</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>distr.sh</span>
+        <span>Rank 9</span>
+      </div>
+      <h2>Should I Run Plain Docker Compose in Production in 2026?</h2>
+      <p class="why">AI Tools; matched on ai; 260 HN points; 195 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <div class="tags"><span>AI Tools</span></div>
+      <div class="applies">Directly applies to you</div>
+    </div>
+    <aside class="story-aside">
+      <p class="stat">260</p>
+      <p class="stat-label">HN points</p>
+      <p>195 comments</p>
+      <p>9 hours ago by pmig</p>
+      <a href="https://distr.sh/blog/running-docker-in-production/">Read story</a>
+      <a href="https://news.ycombinator.com/item?id=47962032">HN thread</a>
+    </aside>
+  </article>
+<article class="spread health-note">
+    <div class="number" aria-label="Story 07">07</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>anthropic.com</span>
+        <span>Rank 11</span>
+      </div>
+      <h2>Agents for financial services and insurance</h2>
+      <p class="why">AI Tools; matched on agent, agents; 103 HN points; 74 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <div class="tags"><span>AI Tools</span></div>
+      <div class="applies">Directly applies to you</div>
+    </div>
+    <aside class="story-aside">
+      <p class="stat">103</p>
+      <p class="stat-label">HN points</p>
+      <p>74 comments</p>
+      <p>2 hours ago by louiereederson</p>
+      <a href="https://www.anthropic.com/news/finance-agents">Read story</a>
+      <a href="https://news.ycombinator.com/item?id=48023533">HN thread</a>
+    </aside>
+  </article>
+<article class="spread finance-ledger">
+    <div class="number" aria-label="Story 08">08</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>thatprivacyguy.com</span>
+        <span>Rank 26</span>
+      </div>
+      <h2>Google Chrome silently installs a 4 GB AI model on your device without consent</h2>
+      <p class="why">AI Tools; matched on ai, model; 831 HN points; 576 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <div class="tags"><span>AI Tools</span></div>
+      <div class="applies">Directly applies to you</div>
+    </div>
+    <aside class="story-aside">
+      <p class="stat">831</p>
+      <p class="stat-label">HN points</p>
+      <p>576 comments</p>
+      <p>10 hours ago by john-doe</p>
+      <a href="https://www.thatprivacyguy.com/blog/chrome-silent-nano-install/">Read story</a>
+      <a href="https://news.ycombinator.com/item?id=48019219">HN thread</a>
+    </aside>
+  </article>
+<article class="spread weird-lab">
+    <div class="number" aria-label="Story 09">09</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>news.ycombinator.com</span>
+        <span>Rank 16</span>
+      </div>
+      <h2>Show HN: Airbyte Agents – context for agents across multiple data sources</h2>
+      <p class="why">AI Tools; matched on ai, agent, agents; 41 HN points; 6 comments. Worth a quick editorial pass.</p>
+      <div class="tags"><span>AI Tools</span></div>
+      
+    </div>
+    <aside class="story-aside">
+      <p class="stat">41</p>
+      <p class="stat-label">HN points</p>
+      <p>6 comments</p>
+      <p>2 hours ago by mtricot</p>
+      <a href="https://news.ycombinator.com/item?id=48023496">Read story</a>
+      <a href="https://news.ycombinator.com/item?id=48023496">HN thread</a>
+    </aside>
+  </article>
+<article class="spread big-stat-finish">
+    <div class="number" aria-label="Story 10">10</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>smmt.co.uk</span>
+        <span>Rank 6</span>
+      </div>
+      <h2>UK: Two millionth electric car registered as market rebounds strongly</h2>
+      <p class="why">Finance; matched on market; 104 HN points; 101 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <div class="tags"><span>Finance</span></div>
+      <div class="applies">Directly applies to you</div>
+    </div>
+    <aside class="story-aside">
+      <p class="stat">104</p>
+      <p class="stat-label">HN points</p>
+      <p>101 comments</p>
+      <p>1 hour ago by kieranmaine</p>
+      <a href="https://www.smmt.co.uk/two-millionth-electric-car-registered-as-market-rebounds-strongly-from-tax-changes/">Read story</a>
+      <a href="https://news.ycombinator.com/item?id=48024364">HN thread</a>
+    </aside>
+  </article>
+  </main>
+</body>
+</html>
