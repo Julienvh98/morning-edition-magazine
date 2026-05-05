@@ -17,19 +17,6 @@ const BROWSER_HEADERS = {
   "user-agent":
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 };
-const THEMES = [
-  "hero",
-  "midnight",
-  "rose-alert-stamp",
-  "terminal",
-  "academic-drop-cap",
-  "blueprint",
-  "health-note",
-  "finance-ledger",
-  "weird-lab",
-  "big-stat-finish"
-];
-
 const config = JSON.parse(await readFile(configPath, "utf8"));
 const issueDate = process.env.ISSUE_DATE || formatDateInZone(new Date(), config.timezone);
 
@@ -459,7 +446,7 @@ function markOfficialNewsSeen({ state, items, issueDate }) {
 
 async function fetchStoryText(story) {
   if (story.url.includes("news.ycombinator.com/item")) {
-    return `Hacker News discussion for "${story.title}" with ${story.score} points and ${story.comments} comments. ${story.why}`;
+    return `Hacker News discussion for "${story.title}". The original linked item is a discussion thread, so use it as context for what readers are debating, what practical details surfaced, and what caveats are worth checking.`;
   }
 
   const controller = new AbortController();
@@ -504,12 +491,11 @@ async function summarizeStory({ story, sourceText, cfg }) {
       instructions:
         "You write concise editorial magazine briefs for a personal Hacker News morning edition. " +
         "Use only the provided article text and metadata. Do not invent facts. Do not mention that text was provided. " +
+        "Do not mention Hacker News points, comments, rank, or selection rationale. " +
         `Write one self-contained summary of ${wordTarget - 10}-${wordTarget + 10} words.`,
       input:
         `Title: ${story.title}\n` +
         `Source: ${story.site}\n` +
-        `HN signal: ${story.score} points, ${story.comments} comments, rank ${story.rank}\n` +
-        `Why selected: ${story.why}\n\n` +
         `Article text:\n${sourceText.slice(0, 10000)}`
     })
   });
@@ -530,9 +516,8 @@ function fallbackSummary({ story, sourceText, cfg }) {
   const fallback = [
     text,
     `${story.title} appears on the Hacker News front page from ${story.site}.`,
-    `The item is ranked ${story.rank}, has ${story.score} points and ${story.comments} comments, and was selected because ${story.why}`,
-    "The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief combines the readable source material with Hacker News context.",
-    "For the morning scan, treat it as a pointer to inspect the original source, then use the HN thread to test the idea against objections, implementation details, and practical edge cases."
+    "The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly.",
+    "For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases."
   ]
     .filter(Boolean)
     .join(" ");
@@ -587,7 +572,7 @@ function fitToWordCount(text, wordTarget) {
   if (words.length >= wordTarget) return ensureSentenceEnd(words.slice(0, wordTarget).join(" "));
 
   const padding =
-    "This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, how strong the HN signal is, and what to check next before acting on it.";
+    "This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.";
   const padded = [...words];
   const paddingWords = padding.split(/\s+/).filter(Boolean);
   let index = 0;
@@ -612,18 +597,42 @@ function stripTrailingWhitespace(text = "") {
   return String(text).replace(/[ \t]+$/gm, "");
 }
 
+function splitSummaryParagraphs(text = "") {
+  const normalized = normalizeWhitespace(text);
+  if (!normalized) return [];
+
+  const sentences = normalized.match(/[^.!?]+[.!?]+(?:["'”’])?|[^.!?]+$/g) || [normalized];
+  const totalWords = countWords(normalized);
+  const paragraphCount = totalWords >= 150 ? 3 : 2;
+  const targetWords = Math.ceil(totalWords / paragraphCount);
+  const paragraphs = [];
+  let current = [];
+  let currentWords = 0;
+
+  for (const sentence of sentences) {
+    const cleanSentence = normalizeWhitespace(sentence);
+    if (!cleanSentence) continue;
+
+    current.push(cleanSentence);
+    currentWords += countWords(cleanSentence);
+
+    if (paragraphs.length < paragraphCount - 1 && currentWords >= targetWords) {
+      paragraphs.push(current.join(" "));
+      current = [];
+      currentWords = 0;
+    }
+  }
+
+  if (current.length) paragraphs.push(current.join(" "));
+  return paragraphs.length ? paragraphs : [normalized];
+}
+
 function ensureSentenceEnd(text) {
   if (!text) return "";
   return /[.!?]$/.test(text) ? text : `${text}.`;
 }
 
 function renderIssue({ config: cfg, issueDate: date, stories, officialNews }) {
-  const generatedAt = new Intl.DateTimeFormat("en-GB", {
-    dateStyle: "full",
-    timeStyle: "short",
-    timeZone: cfg.timezone
-  }).format(new Date());
-
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -640,14 +649,7 @@ ${css()}
 </head>
 <body>
   <header class="cover">
-    <p class="kicker">Hacker News Front Page / ${escapeHtml(date)}</p>
     <h1>${escapeHtml(cfg.publicationName)}</h1>
-    <p class="dek">${escapeHtml(cfg.dek)}</p>
-    <div class="cover-meta">
-      <span>Top ${stories.length}</span>
-      <span>Curated for ${escapeHtml(cfg.readerName)}</span>
-      <span>${escapeHtml(generatedAt)}</span>
-    </div>
   </header>
 
   ${renderOfficialNews(officialNews)}
@@ -670,50 +672,33 @@ function renderOfficialNews(officialNews) {
       ? ` Source check warnings: ${sourceErrors.join("; ")}.`
       : " No new official Anthropic or OpenAI company updates were found for this issue.";
     return `<section class="official-news">
-    <div class="official-news-header">
-      <p class="kicker">Official AI Lab News</p>
-      <h2>Anthropic + OpenAI</h2>
-      <p>Checked first-party news sources since ${escapeHtml(sinceDate)}.${escapeHtml(errorNote)}</p>
-    </div>
+    <p class="official-news-title">Official AI Lab News</p>
+    <p class="official-news-empty">Checked first-party news sources since ${escapeHtml(sinceDate)}.${escapeHtml(errorNote)}</p>
   </section>`;
   }
 
   return `<section class="official-news">
-    <div class="official-news-header">
-      <p class="kicker">Official AI Lab News</p>
-      <h2>Anthropic + OpenAI</h2>
-      <p>New first-party updates since ${escapeHtml(sinceDate)}, including any missed articles from the previous run.</p>
-    </div>
+    <p class="official-news-title">Official AI Lab News</p>
     <div class="official-news-grid">
-      ${items.map((item, index) => renderOfficialNewsCard(item, index)).join("\n")}
+      ${items.map((item) => renderOfficialNewsCard(item)).join("\n")}
     </div>
   </section>`;
 }
 
-function renderOfficialNewsCard(item, index) {
-  const number = String(index + 1).padStart(2, "0");
-
+function renderOfficialNewsCard(item) {
   return `<article class="official-news-card">
-    <div class="official-news-num">${number}</div>
-    <div>
-      <p class="official-news-meta">${escapeHtml(item.sourceLabel)} / ${escapeHtml(item.category)} / ${escapeHtml(item.publishedDate)}</p>
-      <h3>${escapeHtml(item.title)}</h3>
-      <p class="official-news-summary">${escapeHtml(item.summary)}</p>
-      <p class="official-news-count">200-word brief / ${item.summaryWordCount} words</p>
-      <a href="${escapeAttribute(item.url)}">Read official article</a>
+    <h2>${escapeHtml(item.title)}</h2>
+    <div class="summary-body official-news-summary">
+      ${renderSummaryParagraphs(item.summary)}
     </div>
+    <a href="${escapeAttribute(item.url)}">Read official article</a>
   </article>`;
 }
 
 function renderSpread(story, index) {
-  const theme = THEMES[index % THEMES.length];
   const number = String(index + 1).padStart(2, "0");
-  const stat = story.score ? story.score : story.rank;
-  const statLabel = story.score ? "HN points" : "front-page rank";
-  const tags = story.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("");
-  const applies = story.appliesToReader ? `<div class="applies">Directly applies to you</div>` : "";
 
-  return `<article class="spread ${theme}">
+  return `<article class="spread">
     <div class="number" aria-label="Story ${number}">${number}</div>
     <div class="story-main">
       <div class="story-topline">
@@ -721,23 +706,18 @@ function renderSpread(story, index) {
         <span>Rank ${story.rank}</span>
       </div>
       <h2>${escapeHtml(story.title)}</h2>
-      <p class="why">${escapeHtml(story.why)}</p>
       <section class="brief">
-        <p class="brief-label">200-word brief / ${story.summaryWordCount} words</p>
-        <p>${escapeHtml(story.summary)}</p>
+        <div class="summary-body">
+          ${renderSummaryParagraphs(story.summary)}
+        </div>
       </section>
-      <div class="tags">${tags}</div>
-      ${applies}
+      <a class="story-link" href="${escapeAttribute(story.url)}">Read story</a>
     </div>
-    <aside class="story-aside">
-      <p class="stat">${stat}</p>
-      <p class="stat-label">${escapeHtml(statLabel)}</p>
-      <p>${story.comments} comments</p>
-      <p>${escapeHtml(story.age || "fresh")} by ${escapeHtml(story.author || "HN")}</p>
-      <a href="${escapeAttribute(story.url)}">Read story</a>
-      <a href="${escapeAttribute(story.hnUrl)}">HN thread</a>
-    </aside>
   </article>`;
+}
+
+function renderSummaryParagraphs(summary) {
+  return splitSummaryParagraphs(summary).map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("\n");
 }
 
 function renderIndex({ config: cfg, issueDate: date }) {
@@ -779,177 +759,116 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: "Inter", system-ui, sans-serif;
-  font-size: clamp(22px, 2vw, 30px);
+  font-size: clamp(18px, 1.5vw, 24px);
   line-height: 1.22;
 }
 
 a { color: inherit; text-decoration-thickness: 0.12em; text-underline-offset: 0.18em; }
 
-.cover,
-.spread {
-  min-height: 100vh;
+.cover {
+  min-height: 18vh;
   display: grid;
-  gap: clamp(24px, 4vw, 56px);
-  padding: clamp(28px, 6vw, 86px);
+  align-content: center;
+  padding: clamp(16px, 3vw, 36px) clamp(22px, 5vw, 72px);
+  background: #f4ecd8;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.34);
   overflow: hidden;
 }
 
-.cover {
-  align-content: space-between;
-  background:
-    linear-gradient(90deg, rgba(23,18,12,0.08) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(23,18,12,0.08) 1px, transparent 1px),
-    #f4ecd8;
-  background-size: 80px 80px;
-}
-
-.kicker,
 .story-topline,
-.stat-label,
-.tags,
-.applies,
-.cover-meta {
-  font-size: clamp(20px, 1.8vw, 28px);
+.official-news-title {
+  font-size: clamp(14px, 1.3vw, 18px);
   font-weight: 900;
   text-transform: uppercase;
 }
 
-.kicker,
 .story-topline,
-.stat-label {
+.official-news-title {
   color: var(--muted);
 }
 
 h1,
 h2,
-.number,
-.stat {
+.number {
   font-family: "Fraunces", Georgia, serif;
   letter-spacing: 0;
 }
 
 h1 {
-  max-width: 10ch;
+  max-width: none;
   margin: 0;
-  font-size: clamp(82px, 16vw, 230px);
-  line-height: 0.82;
-}
-
-.dek {
-  max-width: 980px;
-  margin: 0;
-  font-size: clamp(30px, 5vw, 72px);
-  font-weight: 800;
-  line-height: 1.02;
-}
-
-.cover-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px;
-  border-top: 5px solid currentColor;
-  padding-top: 22px;
-}
-
-.cover-meta span {
-  border: 3px solid currentColor;
-  padding: 10px 14px;
+  font-size: clamp(42px, 8vw, 96px);
+  line-height: 0.86;
 }
 
 .official-news {
-  min-height: 100vh;
   display: grid;
-  align-content: start;
-  gap: clamp(28px, 4vw, 54px);
-  padding: clamp(28px, 6vw, 86px);
+  gap: 16px;
+  padding: clamp(22px, 4vw, 56px) clamp(22px, 5vw, 72px);
   background: #f7f0df;
-  border-top: 8px solid rgba(23, 18, 12, 0.28);
-  border-bottom: 8px solid rgba(23, 18, 12, 0.18);
-}
-
-.official-news-header {
-  display: grid;
-  gap: 18px;
-  border-bottom: 2px solid rgba(23, 18, 12, 0.35);
-  padding-bottom: 24px;
-}
-
-.official-news-header h2 {
-  max-width: 10ch;
-  margin: 0;
-  font-size: clamp(56px, 10vw, 152px);
-}
-
-.official-news-header p:last-child {
-  max-width: 960px;
-  margin: 0;
-  color: rgba(23, 18, 12, 0.72);
-  font-family: "IBM Plex Serif", Georgia, serif;
-  font-size: clamp(20px, 1.9vw, 30px);
-  font-weight: 400;
-  line-height: 1.32;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.3);
 }
 
 .official-news-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
-  gap: clamp(20px, 3vw, 36px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
 }
 
 .official-news-card {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 18px;
-  border-top: 2px solid rgba(23, 18, 12, 0.32);
-  padding-top: 18px;
+  border-top: 1px solid rgba(23, 18, 12, 0.34);
+  padding-top: 12px;
 }
 
-.official-news-num {
+.official-news-card h2,
+.story-main h2 {
+  max-width: 12ch;
+  margin: 0 0 10px;
   font-family: "Fraunces", Georgia, serif;
-  font-size: clamp(44px, 5vw, 74px);
-  font-weight: 800;
-  line-height: 0.9;
-}
-
-.official-news-meta,
-.official-news-count {
-  margin: 0;
-  color: rgba(23, 18, 12, 0.58);
-  font-size: clamp(14px, 1vw, 16px);
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.official-news-card h3 {
-  margin: 8px 0 16px;
-  font-family: "Fraunces", Georgia, serif;
-  font-size: clamp(32px, 4vw, 56px);
+  font-size: clamp(26px, 3vw, 42px);
   font-weight: 760;
-  line-height: 0.96;
+  line-height: 0.98;
 }
 
-.official-news-summary {
-  margin: 0 0 16px;
+.summary-body {
+  display: grid;
+  gap: 14px;
+}
+
+.summary-body p,
+.official-news-empty {
+  margin: 0;
   color: rgba(23, 18, 12, 0.82);
   font-family: "IBM Plex Serif", Georgia, serif;
-  font-size: clamp(18px, 1.45vw, 23px);
+  font-size: clamp(18px, 1.45vw, 22px);
   font-weight: 400;
   line-height: 1.36;
 }
 
-.official-news-card a {
+.official-news-card a,
+.story-link {
   display: inline-block;
+  width: fit-content;
   margin-top: 14px;
   color: rgba(23, 18, 12, 0.8);
-  font-size: clamp(15px, 1.1vw, 18px);
+  font-size: clamp(15px, 1.1vw, 17px);
   font-weight: 900;
 }
 
 .spread {
   position: relative;
-  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.55fr);
-  align-items: center;
-  border-top: 8px solid rgba(0, 0, 0, 0.18);
+  min-height: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  padding: clamp(28px, 5vw, 72px);
+  overflow: hidden;
+  border-top: 2px solid rgba(23, 18, 12, 0.2);
+  background:
+    linear-gradient(90deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    #f4ecd8;
+  background-size: 78px 78px;
 }
 
 .number {
@@ -968,259 +887,14 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  margin-bottom: 22px;
-}
-
-h2 {
-  max-width: 12ch;
-  margin: 0;
-  font-size: clamp(54px, 9vw, 140px);
-  line-height: 0.88;
-}
-
-.why {
-  max-width: 900px;
-  margin: 30px 0 0;
-  font-size: clamp(28px, 3vw, 48px);
-  font-weight: 800;
+  margin-bottom: 20px;
 }
 
 .brief {
-  max-width: 980px;
-  margin-top: 28px;
+  max-width: 850px;
+  margin-top: 22px;
   border-top: 2px solid rgba(23, 18, 12, 0.28);
   padding-top: 18px;
-}
-
-.brief p {
-  margin: 0;
-}
-
-.brief p:last-child {
-  color: rgba(23, 18, 12, 0.82);
-  font-family: "IBM Plex Serif", Georgia, serif;
-  font-size: clamp(19px, 1.55vw, 25px);
-  font-weight: 400;
-  line-height: 1.36;
-}
-
-.brief-label {
-  margin-bottom: 10px !important;
-  color: var(--muted);
-  font-size: clamp(15px, 1.15vw, 19px);
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 18px;
-}
-
-.tags span {
-  color: rgba(23, 18, 12, 0.58);
-  border: 1px solid rgba(23, 18, 12, 0.28);
-  padding: 4px 7px;
-  font-size: clamp(13px, 1vw, 15px);
-  font-weight: 800;
-}
-
-.applies {
-  display: inline-block;
-  margin-top: 18px;
-  border: 2px solid currentColor;
-  padding: 7px 10px;
-  background: #ffef5a;
-  color: #17120c;
-  font-size: clamp(14px, 1.1vw, 17px);
-  font-weight: 900;
-  transform: rotate(-2deg);
-}
-
-.story-aside {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  gap: 6px;
-  align-content: center;
-  border-left: 1px solid rgba(23, 18, 12, 0.28);
-  padding-left: clamp(22px, 3vw, 44px);
-}
-
-.story-aside p {
-  color: rgba(23, 18, 12, 0.62);
-  margin: 0;
-  font-size: clamp(14px, 1.1vw, 17px);
-  font-weight: 800;
-}
-
-.story-aside a {
-  display: inline-block;
-  width: fit-content;
-  margin-top: 8px;
-  color: rgba(23, 18, 12, 0.78);
-  font-size: clamp(15px, 1.2vw, 18px);
-  font-weight: 900;
-}
-
-.stat {
-  margin: 0;
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: clamp(22px, 1.8vw, 28px);
-  font-weight: 900;
-  line-height: 1.05;
-}
-
-.hero {
-  background: #f6c744;
-}
-
-.hero .number {
-  right: -2vw;
-  top: -3vw;
-  font-size: clamp(180px, 36vw, 520px);
-  opacity: 0.28;
-}
-
-.midnight {
-  --ink: #f3efe1;
-  --muted: rgba(243, 239, 225, 0.72);
-  background: #101624;
-  color: var(--ink);
-}
-
-.midnight .number {
-  left: 3vw;
-  bottom: -4vw;
-  font-size: clamp(160px, 32vw, 460px);
-  color: #66e0c2;
-}
-
-.rose-alert-stamp {
-  background: #ffd5dc;
-}
-
-.rose-alert-stamp .number {
-  right: 6vw;
-  top: 8vw;
-  border: 8px solid currentColor;
-  border-radius: 50%;
-  padding: 0.16em;
-  font-size: clamp(110px, 18vw, 260px);
-  transform: rotate(12deg);
-}
-
-.terminal {
-  --ink: #d8ffd1;
-  --muted: rgba(216, 255, 209, 0.75);
-  background: #062015;
-  color: var(--ink);
-  font-family: "Inter", ui-monospace, monospace;
-}
-
-.terminal h2::before {
-  content: "> ";
-  color: #4cff7f;
-}
-
-.terminal .number {
-  right: 4vw;
-  bottom: 4vw;
-  font-size: clamp(120px, 24vw, 350px);
-  color: rgba(76, 255, 127, 0.28);
-}
-
-.academic-drop-cap {
-  background: #efe7d6;
-}
-
-.academic-drop-cap h2::first-letter {
-  float: left;
-  font-size: 1.9em;
-  line-height: 0.68;
-  padding-right: 0.08em;
-}
-
-.academic-drop-cap .number {
-  left: 4vw;
-  top: 3vw;
-  font-size: clamp(130px, 25vw, 360px);
-  opacity: 0.12;
-}
-
-.blueprint {
-  --ink: #f7f0dc;
-  --muted: rgba(247, 240, 220, 0.74);
-  color: var(--ink);
-  background:
-    linear-gradient(rgba(247,240,220,0.12) 2px, transparent 2px),
-    linear-gradient(90deg, rgba(247,240,220,0.12) 2px, transparent 2px),
-    #173d6f;
-  background-size: 48px 48px;
-}
-
-.blueprint .number {
-  right: -1vw;
-  top: 5vw;
-  font-size: clamp(150px, 27vw, 390px);
-  -webkit-text-stroke: 4px currentColor;
-  color: transparent;
-}
-
-.health-note {
-  background: #cbe9d8;
-}
-
-.health-note .number {
-  left: 50%;
-  top: 50%;
-  font-size: clamp(180px, 35vw, 500px);
-  transform: translate(-50%, -50%) rotate(-8deg);
-  color: rgba(23, 18, 12, 0.11);
-}
-
-.finance-ledger {
-  background: #d9e7ff;
-}
-
-.finance-ledger .number {
-  left: 2vw;
-  bottom: -2vw;
-  font-size: clamp(150px, 30vw, 430px);
-  font-variant-numeric: tabular-nums;
-}
-
-.finance-ledger .story-aside {
-  border-left-style: double;
-  border-left-width: 12px;
-}
-
-.weird-lab {
-  background: #e7ddff;
-}
-
-.weird-lab .number {
-  right: 3vw;
-  top: 3vw;
-  font-size: clamp(110px, 20vw, 300px);
-  filter: blur(0.3px);
-  transform: skew(-8deg);
-}
-
-.big-stat-finish {
-  background: #ff7f50;
-}
-
-.big-stat-finish .number {
-  inset: auto 0 -4vw auto;
-  font-size: clamp(210px, 40vw, 560px);
-  opacity: 0.2;
-}
-
-.big-stat-finish .stat {
-  font-size: clamp(110px, 16vw, 240px);
 }
 
 @media (max-width: 860px) {
@@ -1228,31 +902,43 @@ h2 {
   .spread,
   .official-news {
     min-height: auto;
-    padding: 30px 22px 42px;
+    padding: 24px 22px 42px;
   }
 
   .cover {
-    min-height: 100svh;
+    min-height: 16svh;
+    padding: 14px 22px 12px;
   }
 
+  h1 {
+    font-size: clamp(38px, 12vw, 56px);
+  }
+
+  .official-news {
+    gap: 12px;
+    padding: 20px 22px 24px;
+  }
+
+  .official-news-grid,
   .spread {
     grid-template-columns: 1fr;
-    align-items: start;
+    gap: 18px;
   }
 
-  .story-aside {
-    border-left: 0;
-    border-top: 5px solid currentColor;
-    padding-left: 0;
-    padding-top: 22px;
+  .official-news-card h2,
+  .story-main h2 {
+    font-size: 30px;
   }
 
-  h2 {
-    max-width: 11ch;
+  .summary-body p,
+  .official-news-empty {
+    font-size: 18px;
+    line-height: 1.42;
   }
 
-  .official-news-card {
-    grid-template-columns: 1fr;
+  .story-link,
+  .official-news-card a {
+    font-size: 16px;
   }
 }
 `;

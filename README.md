@@ -17,7 +17,7 @@ The issue is written to `magazines/YYYY-MM-DD.html`, and `magazines/index.html` 
 3. Under `Build and deployment`, set `Source` to `GitHub Actions`.
 4. Open `Actions -> Daily Morning Edition` and run it once manually.
 
-The workflow is scheduled around the 7am Europe/London window. GitHub may start scheduled jobs late, so the workflow publishes on the first scheduled run of the day and skips later scheduled runs once that day's issue exists.
+The workflow is scheduled for the 8am Europe/London window. Two UTC cron entries cover daylight-saving changes, and the workflow only publishes when the London hour is 08, then skips later scheduled runs once that day's issue exists.
 
 ## Article Summaries
 

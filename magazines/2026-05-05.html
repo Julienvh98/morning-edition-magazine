@@ -27,177 +27,116 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: "Inter", system-ui, sans-serif;
-  font-size: clamp(22px, 2vw, 30px);
+  font-size: clamp(18px, 1.5vw, 24px);
   line-height: 1.22;
 }
 
 a { color: inherit; text-decoration-thickness: 0.12em; text-underline-offset: 0.18em; }
 
-.cover,
-.spread {
-  min-height: 100vh;
+.cover {
+  min-height: 18vh;
   display: grid;
-  gap: clamp(24px, 4vw, 56px);
-  padding: clamp(28px, 6vw, 86px);
+  align-content: center;
+  padding: clamp(16px, 3vw, 36px) clamp(22px, 5vw, 72px);
+  background: #f4ecd8;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.34);
   overflow: hidden;
 }
 
-.cover {
-  align-content: space-between;
-  background:
-    linear-gradient(90deg, rgba(23,18,12,0.08) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(23,18,12,0.08) 1px, transparent 1px),
-    #f4ecd8;
-  background-size: 80px 80px;
-}
-
-.kicker,
 .story-topline,
-.stat-label,
-.tags,
-.applies,
-.cover-meta {
-  font-size: clamp(20px, 1.8vw, 28px);
+.official-news-title {
+  font-size: clamp(14px, 1.3vw, 18px);
   font-weight: 900;
   text-transform: uppercase;
 }
 
-.kicker,
 .story-topline,
-.stat-label {
+.official-news-title {
   color: var(--muted);
 }
 
 h1,
 h2,
-.number,
-.stat {
+.number {
   font-family: "Fraunces", Georgia, serif;
   letter-spacing: 0;
 }
 
 h1 {
-  max-width: 10ch;
+  max-width: none;
   margin: 0;
-  font-size: clamp(82px, 16vw, 230px);
-  line-height: 0.82;
-}
-
-.dek {
-  max-width: 980px;
-  margin: 0;
-  font-size: clamp(30px, 5vw, 72px);
-  font-weight: 800;
-  line-height: 1.02;
-}
-
-.cover-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px;
-  border-top: 5px solid currentColor;
-  padding-top: 22px;
-}
-
-.cover-meta span {
-  border: 3px solid currentColor;
-  padding: 10px 14px;
+  font-size: clamp(42px, 8vw, 96px);
+  line-height: 0.86;
 }
 
 .official-news {
-  min-height: 100vh;
   display: grid;
-  align-content: start;
-  gap: clamp(28px, 4vw, 54px);
-  padding: clamp(28px, 6vw, 86px);
+  gap: 16px;
+  padding: clamp(22px, 4vw, 56px) clamp(22px, 5vw, 72px);
   background: #f7f0df;
-  border-top: 8px solid rgba(23, 18, 12, 0.28);
-  border-bottom: 8px solid rgba(23, 18, 12, 0.18);
-}
-
-.official-news-header {
-  display: grid;
-  gap: 18px;
-  border-bottom: 2px solid rgba(23, 18, 12, 0.35);
-  padding-bottom: 24px;
-}
-
-.official-news-header h2 {
-  max-width: 10ch;
-  margin: 0;
-  font-size: clamp(56px, 10vw, 152px);
-}
-
-.official-news-header p:last-child {
-  max-width: 960px;
-  margin: 0;
-  color: rgba(23, 18, 12, 0.72);
-  font-family: "IBM Plex Serif", Georgia, serif;
-  font-size: clamp(20px, 1.9vw, 30px);
-  font-weight: 400;
-  line-height: 1.32;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.3);
 }
 
 .official-news-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
-  gap: clamp(20px, 3vw, 36px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
 }
 
 .official-news-card {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 18px;
-  border-top: 2px solid rgba(23, 18, 12, 0.32);
-  padding-top: 18px;
+  border-top: 1px solid rgba(23, 18, 12, 0.34);
+  padding-top: 12px;
 }
 
-.official-news-num {
+.official-news-card h2,
+.story-main h2 {
+  max-width: 12ch;
+  margin: 0 0 10px;
   font-family: "Fraunces", Georgia, serif;
-  font-size: clamp(44px, 5vw, 74px);
-  font-weight: 800;
-  line-height: 0.9;
-}
-
-.official-news-meta,
-.official-news-count {
-  margin: 0;
-  color: rgba(23, 18, 12, 0.58);
-  font-size: clamp(14px, 1vw, 16px);
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.official-news-card h3 {
-  margin: 8px 0 16px;
-  font-family: "Fraunces", Georgia, serif;
-  font-size: clamp(32px, 4vw, 56px);
+  font-size: clamp(26px, 3vw, 42px);
   font-weight: 760;
-  line-height: 0.96;
+  line-height: 0.98;
 }
 
-.official-news-summary {
-  margin: 0 0 16px;
+.summary-body {
+  display: grid;
+  gap: 14px;
+}
+
+.summary-body p,
+.official-news-empty {
+  margin: 0;
   color: rgba(23, 18, 12, 0.82);
   font-family: "IBM Plex Serif", Georgia, serif;
-  font-size: clamp(18px, 1.45vw, 23px);
+  font-size: clamp(18px, 1.45vw, 22px);
   font-weight: 400;
   line-height: 1.36;
 }
 
-.official-news-card a {
+.official-news-card a,
+.story-link {
   display: inline-block;
+  width: fit-content;
   margin-top: 14px;
   color: rgba(23, 18, 12, 0.8);
-  font-size: clamp(15px, 1.1vw, 18px);
+  font-size: clamp(15px, 1.1vw, 17px);
   font-weight: 900;
 }
 
 .spread {
   position: relative;
-  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.55fr);
-  align-items: center;
-  border-top: 8px solid rgba(0, 0, 0, 0.18);
+  min-height: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  padding: clamp(28px, 5vw, 72px);
+  overflow: hidden;
+  border-top: 2px solid rgba(23, 18, 12, 0.2);
+  background:
+    linear-gradient(90deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    #f4ecd8;
+  background-size: 78px 78px;
 }
 
 .number {
@@ -216,259 +155,14 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  margin-bottom: 22px;
-}
-
-h2 {
-  max-width: 12ch;
-  margin: 0;
-  font-size: clamp(54px, 9vw, 140px);
-  line-height: 0.88;
-}
-
-.why {
-  max-width: 900px;
-  margin: 30px 0 0;
-  font-size: clamp(28px, 3vw, 48px);
-  font-weight: 800;
+  margin-bottom: 20px;
 }
 
 .brief {
-  max-width: 980px;
-  margin-top: 28px;
+  max-width: 850px;
+  margin-top: 22px;
   border-top: 2px solid rgba(23, 18, 12, 0.28);
   padding-top: 18px;
-}
-
-.brief p {
-  margin: 0;
-}
-
-.brief p:last-child {
-  color: rgba(23, 18, 12, 0.82);
-  font-family: "IBM Plex Serif", Georgia, serif;
-  font-size: clamp(19px, 1.55vw, 25px);
-  font-weight: 400;
-  line-height: 1.36;
-}
-
-.brief-label {
-  margin-bottom: 10px !important;
-  color: var(--muted);
-  font-size: clamp(15px, 1.15vw, 19px);
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 18px;
-}
-
-.tags span {
-  color: rgba(23, 18, 12, 0.58);
-  border: 1px solid rgba(23, 18, 12, 0.28);
-  padding: 4px 7px;
-  font-size: clamp(13px, 1vw, 15px);
-  font-weight: 800;
-}
-
-.applies {
-  display: inline-block;
-  margin-top: 18px;
-  border: 2px solid currentColor;
-  padding: 7px 10px;
-  background: #ffef5a;
-  color: #17120c;
-  font-size: clamp(14px, 1.1vw, 17px);
-  font-weight: 900;
-  transform: rotate(-2deg);
-}
-
-.story-aside {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  gap: 6px;
-  align-content: center;
-  border-left: 1px solid rgba(23, 18, 12, 0.28);
-  padding-left: clamp(22px, 3vw, 44px);
-}
-
-.story-aside p {
-  color: rgba(23, 18, 12, 0.62);
-  margin: 0;
-  font-size: clamp(14px, 1.1vw, 17px);
-  font-weight: 800;
-}
-
-.story-aside a {
-  display: inline-block;
-  width: fit-content;
-  margin-top: 8px;
-  color: rgba(23, 18, 12, 0.78);
-  font-size: clamp(15px, 1.2vw, 18px);
-  font-weight: 900;
-}
-
-.stat {
-  margin: 0;
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: clamp(22px, 1.8vw, 28px);
-  font-weight: 900;
-  line-height: 1.05;
-}
-
-.hero {
-  background: #f6c744;
-}
-
-.hero .number {
-  right: -2vw;
-  top: -3vw;
-  font-size: clamp(180px, 36vw, 520px);
-  opacity: 0.28;
-}
-
-.midnight {
-  --ink: #f3efe1;
-  --muted: rgba(243, 239, 225, 0.72);
-  background: #101624;
-  color: var(--ink);
-}
-
-.midnight .number {
-  left: 3vw;
-  bottom: -4vw;
-  font-size: clamp(160px, 32vw, 460px);
-  color: #66e0c2;
-}
-
-.rose-alert-stamp {
-  background: #ffd5dc;
-}
-
-.rose-alert-stamp .number {
-  right: 6vw;
-  top: 8vw;
-  border: 8px solid currentColor;
-  border-radius: 50%;
-  padding: 0.16em;
-  font-size: clamp(110px, 18vw, 260px);
-  transform: rotate(12deg);
-}
-
-.terminal {
-  --ink: #d8ffd1;
-  --muted: rgba(216, 255, 209, 0.75);
-  background: #062015;
-  color: var(--ink);
-  font-family: "Inter", ui-monospace, monospace;
-}
-
-.terminal h2::before {
-  content: "> ";
-  color: #4cff7f;
-}
-
-.terminal .number {
-  right: 4vw;
-  bottom: 4vw;
-  font-size: clamp(120px, 24vw, 350px);
-  color: rgba(76, 255, 127, 0.28);
-}
-
-.academic-drop-cap {
-  background: #efe7d6;
-}
-
-.academic-drop-cap h2::first-letter {
-  float: left;
-  font-size: 1.9em;
-  line-height: 0.68;
-  padding-right: 0.08em;
-}
-
-.academic-drop-cap .number {
-  left: 4vw;
-  top: 3vw;
-  font-size: clamp(130px, 25vw, 360px);
-  opacity: 0.12;
-}
-
-.blueprint {
-  --ink: #f7f0dc;
-  --muted: rgba(247, 240, 220, 0.74);
-  color: var(--ink);
-  background:
-    linear-gradient(rgba(247,240,220,0.12) 2px, transparent 2px),
-    linear-gradient(90deg, rgba(247,240,220,0.12) 2px, transparent 2px),
-    #173d6f;
-  background-size: 48px 48px;
-}
-
-.blueprint .number {
-  right: -1vw;
-  top: 5vw;
-  font-size: clamp(150px, 27vw, 390px);
-  -webkit-text-stroke: 4px currentColor;
-  color: transparent;
-}
-
-.health-note {
-  background: #cbe9d8;
-}
-
-.health-note .number {
-  left: 50%;
-  top: 50%;
-  font-size: clamp(180px, 35vw, 500px);
-  transform: translate(-50%, -50%) rotate(-8deg);
-  color: rgba(23, 18, 12, 0.11);
-}
-
-.finance-ledger {
-  background: #d9e7ff;
-}
-
-.finance-ledger .number {
-  left: 2vw;
-  bottom: -2vw;
-  font-size: clamp(150px, 30vw, 430px);
-  font-variant-numeric: tabular-nums;
-}
-
-.finance-ledger .story-aside {
-  border-left-style: double;
-  border-left-width: 12px;
-}
-
-.weird-lab {
-  background: #e7ddff;
-}
-
-.weird-lab .number {
-  right: 3vw;
-  top: 3vw;
-  font-size: clamp(110px, 20vw, 300px);
-  filter: blur(0.3px);
-  transform: skew(-8deg);
-}
-
-.big-stat-finish {
-  background: #ff7f50;
-}
-
-.big-stat-finish .number {
-  inset: auto 0 -4vw auto;
-  font-size: clamp(210px, 40vw, 560px);
-  opacity: 0.2;
-}
-
-.big-stat-finish .stat {
-  font-size: clamp(110px, 16vw, 240px);
 }
 
 @media (max-width: 860px) {
@@ -476,31 +170,43 @@ h2 {
   .spread,
   .official-news {
     min-height: auto;
-    padding: 30px 22px 42px;
+    padding: 24px 22px 42px;
   }
 
   .cover {
-    min-height: 100svh;
+    min-height: 16svh;
+    padding: 14px 22px 12px;
   }
 
+  h1 {
+    font-size: clamp(38px, 12vw, 56px);
+  }
+
+  .official-news {
+    gap: 12px;
+    padding: 20px 22px 24px;
+  }
+
+  .official-news-grid,
   .spread {
     grid-template-columns: 1fr;
-    align-items: start;
+    gap: 18px;
   }
 
-  .story-aside {
-    border-left: 0;
-    border-top: 5px solid currentColor;
-    padding-left: 0;
-    padding-top: 22px;
+  .official-news-card h2,
+  .story-main h2 {
+    font-size: 30px;
   }
 
-  h2 {
-    max-width: 11ch;
+  .summary-body p,
+  .official-news-empty {
+    font-size: 18px;
+    line-height: 1.42;
   }
 
-  .official-news-card {
-    grid-template-columns: 1fr;
+  .story-link,
+  .official-news-card a {
+    font-size: 16px;
   }
 }
 
@@ -508,83 +214,62 @@ h2 {
 </head>
 <body>
   <header class="cover">
-    <p class="kicker">Hacker News Front Page / 2026-05-05</p>
     <h1>Morning Edition</h1>
-    <p class="dek">A front-page Hacker News briefing tuned for AI tools, health, finance, weird science, and useful things you can act on today.</p>
-    <div class="cover-meta">
-      <span>Top 10</span>
-      <span>Curated for Julien</span>
-      <span>Tuesday, 5 May 2026 at 19:37</span>
-    </div>
   </header>
 
   <section class="official-news">
-    <div class="official-news-header">
-      <p class="kicker">Official AI Lab News</p>
-      <h2>Anthropic + OpenAI</h2>
-      <p>New first-party updates since 2026-05-03, including any missed articles from the previous run.</p>
-    </div>
+    <p class="official-news-title">Official AI Lab News</p>
     <div class="official-news-grid">
       <article class="official-news-card">
-    <div class="official-news-num">01</div>
-    <div>
-      <p class="official-news-meta">Anthropic / Announcements / 2026-05-05</p>
-      <h3>Agents for financial services</h3>
-      <p class="official-news-summary">We&#39;re releasing ten new Cowork and Claude Code plugins, integrations with the Microsoft 365 suite, new connectors, and an MCP app for financial services and insurance organizations. We’re releasing ten ready-to-run agent templates for the most time-consuming work in financial services: building pitchbooks, screening KYC files, and closing the books at month-end. Each one ships as a plugin in Claude Cowork and Claude Code, and as a cookbook for Claude Managed Agents , so a team can put Claude on real financial work in days rather than months. Claude also now works across Microsoft Excel, PowerPoint, Word, and Outlook (coming soon) through the Claude add-ins for Microsoft 365. Once the add-ins are installed, context carries automatically between applications, so work that starts in a model can end in a deck without re-explaining anything in between. Finally, we’re continuing to expand our partner ecosystem with new connectors and an MCP app, so the agents draw on the data financial professionals already use. Connectors give Claude governed, real-time access to a provider’s data, and MCP apps go a step further by embedding the provider’s own tools directly inside Claude. These updates pair best with Claude Opus 4.7, which is state-of-the-art on financial.</p>
-      <p class="official-news-count">200-word brief / 200 words</p>
-      <a href="https://www.anthropic.com/news/finance-agents">Read official article</a>
+    <h2>Agents for financial services</h2>
+    <div class="summary-body official-news-summary">
+      <p>We&#39;re releasing ten new Cowork and Claude Code plugins, integrations with the Microsoft 365 suite, new connectors, and an MCP app for financial services and insurance organizations. We’re releasing ten ready-to-run agent templates for the most time-consuming work in financial services: building pitchbooks, screening KYC files, and closing the books at month-end. Each one ships as a plugin in Claude Cowork and Claude Code, and as a cookbook for Claude Managed Agents , so a team can put Claude on real financial work in days rather than months.</p>
+<p>Claude also now works across Microsoft Excel, PowerPoint, Word, and Outlook (coming soon) through the Claude add-ins for Microsoft 365. Once the add-ins are installed, context carries automatically between applications, so work that starts in a model can end in a deck without re-explaining anything in between. Finally, we’re continuing to expand our partner ecosystem with new connectors and an MCP app, so the agents draw on the data financial professionals already use.</p>
+<p>Connectors give Claude governed, real-time access to a provider’s data, and MCP apps go a step further by embedding the provider’s own tools directly inside Claude. These updates pair best with Claude Opus 4. 7, which is state-of-the-art on financial.</p>
     </div>
+    <a href="https://www.anthropic.com/news/finance-agents">Read official article</a>
   </article>
 <article class="official-news-card">
-    <div class="official-news-num">02</div>
-    <div>
-      <p class="official-news-meta">Anthropic / Announcements / 2026-05-04</p>
-      <h3>Building a new enterprise AI services company with Blackstone, Hellman &amp; Friedman, and Goldman Sachs</h3>
-      <p class="official-news-summary">Anthropic is an AI safety and research company that&#39;s working to build reliable, interpretable, and steerable AI systems. Anthropic, Blackstone, Hellman &amp; Friedman, and Goldman Sachs announced the formation of a new AI services company. The organization will work with mid-sized companies across sectors to bring Claude into their most important operations. Applied AI engineers from Anthropic will work alongside the firm’s engineering team to identify where Claude can have the most impact, build custom solutions, and support customers over the long term. Alongside the founding partners, the new company is backed by a consortium of leading alternative asset managers including General Atlantic, Leonard Green, Apollo Global Management, GIC, and Sequoia Capital. Putting Claude to work in an organization’s core operations takes hands-on engineering and deep familiarity with how each business runs. Systems integrators in the Claude Partner Network lead that work for the world’s largest enterprises today, and we are continuing to invest deeply in those partnerships as Claude reaches more customers. This new firm extends that delivery capacity further. Companies from community banks to mid-sized manufacturers and regional health systems stand to gain from AI, but lack the in-house resources to build and run frontier deployments. “Enterprise demand.</p>
-      <p class="official-news-count">200-word brief / 200 words</p>
-      <a href="https://www.anthropic.com/news/enterprise-ai-services-company">Read official article</a>
+    <h2>Building a new enterprise AI services company with Blackstone, Hellman &amp; Friedman, and Goldman Sachs</h2>
+    <div class="summary-body official-news-summary">
+      <p>Anthropic is an AI safety and research company that&#39;s working to build reliable, interpretable, and steerable AI systems. Anthropic, Blackstone, Hellman &amp; Friedman, and Goldman Sachs announced the formation of a new AI services company. The organization will work with mid-sized companies across sectors to bring Claude into their most important operations. Applied AI engineers from Anthropic will work alongside the firm’s engineering team to identify where Claude can have the most impact, build custom solutions, and support customers over the long term.</p>
+<p>Alongside the founding partners, the new company is backed by a consortium of leading alternative asset managers including General Atlantic, Leonard Green, Apollo Global Management, GIC, and Sequoia Capital. Putting Claude to work in an organization’s core operations takes hands-on engineering and deep familiarity with how each business runs. Systems integrators in the Claude Partner Network lead that work for the world’s largest enterprises today, and we are continuing to invest deeply in those partnerships as Claude reaches more customers.</p>
+<p>This new firm extends that delivery capacity further. Companies from community banks to mid-sized manufacturers and regional health systems stand to gain from AI, but lack the in-house resources to build and run frontier deployments. “Enterprise demand.</p>
     </div>
+    <a href="https://www.anthropic.com/news/enterprise-ai-services-company">Read official article</a>
   </article>
 <article class="official-news-card">
-    <div class="official-news-num">03</div>
-    <div>
-      <p class="official-news-meta">OpenAI / Global Affairs / 2026-05-04</p>
-      <h3>OpenAI and PwC collaborate to reimagine the office of the CFO</h3>
-      <p class="official-news-summary">OpenAI and PwC are partnering to help enterprises use AI agents to automate finance workflows, improve forecasting, strengthen controls, and modernize the CFO function. OpenAI and PwC are partnering to help enterprises use AI agents to automate finance workflows, improve forecasting, strengthen controls, and modernize the CFO function. Loading… Share Finance teams sit at the center of how organizations plan, allocate capital, manage risk, and make decisions. To help them keep up with growing demands, PwC and OpenAI are collaborating to help enterprises reimagine the office of the CFO with AI agents that can automate workflows, coordinate across systems, surface risks and insights, and support better decisions with strong governance and human oversight. Together, PwC and OpenAI are building AI agents around the core operating rhythms of finance, from planning, forecasting, and reporting to procurement, payments, treasury, tax, and the accounting close. What sets this collaboration apart is its focus on building in the real world, not just designing in theory. For example, PwC and OpenAI are building a procurement agent inside the OpenAI finance organization, and are applying those learnings to additional agents across core finance workflows. OpenAI has already been applying AI agents across its own finance organization,.</p>
-      <p class="official-news-count">200-word brief / 200 words</p>
-      <a href="https://openai.com/index/openai-pwc-finance-collaboration">Read official article</a>
+    <h2>OpenAI and PwC collaborate to reimagine the office of the CFO</h2>
+    <div class="summary-body official-news-summary">
+      <p>OpenAI and PwC are partnering to help enterprises use AI agents to automate finance workflows, improve forecasting, strengthen controls, and modernize the CFO function. OpenAI and PwC are partnering to help enterprises use AI agents to automate finance workflows, improve forecasting, strengthen controls, and modernize the CFO function. Loading… Share Finance teams sit at the center of how organizations plan, allocate capital, manage risk, and make decisions.</p>
+<p>To help them keep up with growing demands, PwC and OpenAI are collaborating to help enterprises reimagine the office of the CFO with AI agents that can automate workflows, coordinate across systems, surface risks and insights, and support better decisions with strong governance and human oversight. Together, PwC and OpenAI are building AI agents around the core operating rhythms of finance, from planning, forecasting, and reporting to procurement, payments, treasury, tax, and the accounting close.</p>
+<p>What sets this collaboration apart is its focus on building in the real world, not just designing in theory. For example, PwC and OpenAI are building a procurement agent inside the OpenAI finance organization, and are applying those learnings to additional agents across core finance workflows. OpenAI has already been applying AI agents across its own finance organization,.</p>
     </div>
+    <a href="https://openai.com/index/openai-pwc-finance-collaboration">Read official article</a>
   </article>
     </div>
   </section>
 
   <main>
-    <article class="spread hero">
+    <article class="spread">
     <div class="number" aria-label="Story 01">01</div>
     <div class="story-main">
       <div class="story-topline">
         <span>robert-glaser.de</span>
-        <span>Rank 22</span>
+        <span>Rank 20</span>
       </div>
       <h2>When everyone has AI and the company still learns nothing</h2>
-      <p class="why">AI Tools + Actionable; matched on ai, learn; 222 HN points; 150 comments. Directly useful for your AI-forward, practical morning scan.</p>
       <section class="brief">
-        <p class="brief-label">200-word brief / 200 words</p>
-        <p>Are people using AI, or is the organization learning from it? What changed because we spent those tokens? And who moves discoveries from individuals to teams to organizational capabilities? Are people using AI, or is the organization learning from it? What changed because we spent those tokens? And who moves discoveries from individuals to teams to organizational capabilities? Ethan Mollick has been writing about AI adoption in organizations for a while now. In Making AI Work: Leadership, Lab, and Crowd , he makes the point that individual productivity gains from AI do not automatically become organizational gains. People may get faster, write better, analyze more, automate more, or quietly become cyborg versions of themselves. The company may still learn almost nothing. A lot of companies are now entering the phase where GitHub Copilot licenses are provisioned, ChatGPT Enterprise exists somewhere in the stack, Claude or Gemini or Cursor show up in pockets, and every team has at least one person who is much further along than the official enablement material assumes. Some of this is visible, yet much of it is not. Management sees license usage (“Where is the ROI for the 2 mio € we paid Anthropic last year?”),.</p>
+        <div class="summary-body">
+          <p>Are people using AI, or is the organization learning from it? What changed because we spent those tokens? And who moves discoveries from individuals to teams to organizational capabilities? Are people using AI, or is the organization learning from it? What changed because we spent those tokens? And who moves discoveries from individuals to teams to organizational capabilities? Ethan Mollick has been writing about AI adoption in organizations for a while now.</p>
+<p>In Making AI Work: Leadership, Lab, and Crowd , he makes the point that individual productivity gains from AI do not automatically become organizational gains. People may get faster, write better, analyze more, automate more, or quietly become cyborg versions of themselves. The company may still learn almost nothing. A lot of companies are now entering the phase where GitHub Copilot licenses are provisioned, ChatGPT Enterprise exists somewhere in the stack, Claude or Gemini or Cursor show up in pockets, and every team has at least one person who is much further along than the official enablement material assumes.</p>
+<p>Some of this is visible, yet much of it is not. Management sees license usage (“Where is the ROI for the 2 mio € we paid Anthropic last year?” ),.</p>
+        </div>
       </section>
-      <div class="tags"><span>AI Tools</span><span>Actionable</span></div>
-      <div class="applies">Directly applies to you</div>
+      <a class="story-link" href="https://www.robert-glaser.de/when-everyone-has-ai-and-the-company-still-learns-nothing/">Read story</a>
     </div>
-    <aside class="story-aside">
-      <p class="stat">222</p>
-      <p class="stat-label">HN points</p>
-      <p>150 comments</p>
-      <p>9 hours ago by youngbrioche</p>
-      <a href="https://www.robert-glaser.de/when-everyone-has-ai-and-the-company-still-learns-nothing/">Read story</a>
-      <a href="https://news.ycombinator.com/item?id=48020063">HN thread</a>
-    </aside>
   </article>
-<article class="spread midnight">
+<article class="spread">
     <div class="number" aria-label="Story 02">02</div>
     <div class="story-main">
       <div class="story-topline">
@@ -592,222 +277,156 @@ h2 {
         <span>Rank 2</span>
       </div>
       <h2>Three Inverse Laws of AI</h2>
-      <p class="why">AI Tools; matched on ai; 229 HN points; 141 comments. Directly useful for your AI-forward, practical morning scan.</p>
       <section class="brief">
-        <p class="brief-label">200-word brief / 200 words</p>
-        <p>Since the launch of ChatGPT in November 2022, generative artificial intelligence (AI) chatbot services have become increasingly sophisticated and popular. These systems are now embedded in search engines, software development tools as well as office software. For many people, they have quickly become part of everyday computing. These services have turned out to be quite useful, especially for exploring unfamiliar topics and as a general productivity aid. However, I also think that the way these services are advertised and consumed can pose a danger to society, especially if we get into the habit of trusting their output without further scrutiny. Certain design choices in modern AI systems can encourage uncritical acceptance of their output. For example, many popular search engines are already highlighting answers generated by AI at the very top of the page. When this happens, it is easy to stop scrolling, accept the generated answer and move on. Over time, this could inadvertently train users to treat AI as the default authority rather than as a starting point for further investigation. I wish that each such generative AI service came with a brief but conspicuous warning explaining that these systems can sometimes produce output that is factually incorrect,.</p>
+        <div class="summary-body">
+          <p>Since the launch of ChatGPT in November 2022, generative artificial intelligence (AI) chatbot services have become increasingly sophisticated and popular. These systems are now embedded in search engines, software development tools as well as office software. For many people, they have quickly become part of everyday computing. These services have turned out to be quite useful, especially for exploring unfamiliar topics and as a general productivity aid.</p>
+<p>However, I also think that the way these services are advertised and consumed can pose a danger to society, especially if we get into the habit of trusting their output without further scrutiny. Certain design choices in modern AI systems can encourage uncritical acceptance of their output. For example, many popular search engines are already highlighting answers generated by AI at the very top of the page.</p>
+<p>When this happens, it is easy to stop scrolling, accept the generated answer and move on. Over time, this could inadvertently train users to treat AI as the default authority rather than as a starting point for further investigation. I wish that each such generative AI service came with a brief but conspicuous warning explaining that these systems can sometimes produce output that is factually incorrect,.</p>
+        </div>
       </section>
-      <div class="tags"><span>AI Tools</span></div>
-      <div class="applies">Directly applies to you</div>
+      <a class="story-link" href="https://susam.net/inverse-laws-of-robotics.html">Read story</a>
     </div>
-    <aside class="story-aside">
-      <p class="stat">229</p>
-      <p class="stat-label">HN points</p>
-      <p>141 comments</p>
-      <p>3 hours ago by blenderob</p>
-      <a href="https://susam.net/inverse-laws-of-robotics.html">Read story</a>
-      <a href="https://news.ycombinator.com/item?id=48023861">HN thread</a>
-    </aside>
   </article>
-<article class="spread rose-alert-stamp">
+<article class="spread">
     <div class="number" aria-label="Story 03">03</div>
     <div class="story-main">
       <div class="story-topline">
         <span>blog.google</span>
-        <span>Rank 3</span>
+        <span>Rank 1</span>
       </div>
       <h2>Accelerating Gemma 4: faster inference with multi-token prediction drafters</h2>
-      <p class="why">AI Tools; matched on inference; 160 HN points; 56 comments. Directly useful for your AI-forward, practical morning scan.</p>
       <section class="brief">
-        <p class="brief-label">200-word brief / 200 words</p>
-        <p>An overview of how Multi-Token Prediction (MTP) drafters are making Gemma 4 models up to 3x faster at inference. By using Multi-Token Prediction (MTP) drafters, Gemma 4 models reduce latency bottlenecks and achieve improved responsiveness for developers. Your browser does not support the audio element. Just a few weeks ago, we introduced Gemma 4 , our most capable open models to date. With over 60 million downloads in just the first few weeks, Gemma 4 is delivering unprecedented intelligence-per-parameter to developer workstations, mobile devices and the cloud. Today, we are pushing efficiency even further. We’re releasing Multi-Token Prediction (MTP) drafters for the Gemma 4 family. By using a specialized speculative decoding architecture, these drafters deliver up to a 3x speedup without any degradation in output quality or reasoning logic. Tokens-per-second speed increases, tested on hardware using LiteRT-LM , MLX, Hugging Face Transformers, and vLLM. The technical reality is that standard LLM inference is memory-bandwidth bound, creating a significant latency bottleneck. The processor spends the majority of its time moving billions of parameters from VRAM to the compute units just to generate a single token. This leads to under-utilized compute and high latency, especially on consumer-grade hardware. Speculative decoding decouples token.</p>
+        <div class="summary-body">
+          <p>An overview of how Multi-Token Prediction (MTP) drafters are making Gemma 4 models up to 3x faster at inference. By using Multi-Token Prediction (MTP) drafters, Gemma 4 models reduce latency bottlenecks and achieve improved responsiveness for developers. Your browser does not support the audio element. Just a few weeks ago, we introduced Gemma 4 , our most capable open models to date. With over 60 million downloads in just the first few weeks, Gemma 4 is delivering unprecedented intelligence-per-parameter to developer workstations, mobile devices and the cloud.</p>
+<p>Today, we are pushing efficiency even further. We’re releasing Multi-Token Prediction (MTP) drafters for the Gemma 4 family. By using a specialized speculative decoding architecture, these drafters deliver up to a 3x speedup without any degradation in output quality or reasoning logic. Tokens-per-second speed increases, tested on hardware using LiteRT-LM , MLX, Hugging Face Transformers, and vLLM. The technical reality is that standard LLM inference is memory-bandwidth bound, creating a significant latency bottleneck.</p>
+<p>The processor spends the majority of its time moving billions of parameters from VRAM to the compute units just to generate a single token. This leads to under-utilized compute and high latency, especially on consumer-grade hardware. Speculative decoding decouples token.</p>
+        </div>
       </section>
-      <div class="tags"><span>AI Tools</span></div>
-      <div class="applies">Directly applies to you</div>
+      <a class="story-link" href="https://blog.google/innovation-and-ai/technology/developers-tools/multi-token-prediction-gemma-4/">Read story</a>
     </div>
-    <aside class="story-aside">
-      <p class="stat">160</p>
-      <p class="stat-label">HN points</p>
-      <p>56 comments</p>
-      <p>2 hours ago by amrrs</p>
-      <a href="https://blog.google/innovation-and-ai/technology/developers-tools/multi-token-prediction-gemma-4/">Read story</a>
-      <a href="https://news.ycombinator.com/item?id=48024540">HN thread</a>
-    </aside>
   </article>
-<article class="spread terminal">
+<article class="spread">
     <div class="number" aria-label="Story 04">04</div>
     <div class="story-main">
       <div class="story-topline">
         <span>dbreunig.com</span>
-        <span>Rank 28</span>
+        <span>Rank 27</span>
       </div>
       <h2>Lessons for Agentic Coding: What should we do when code is cheap?</h2>
-      <p class="why">AI Tools + Actionable; matched on agent, lessons; 188 HN points; 194 comments. Directly useful for your AI-forward, practical morning scan.</p>
       <section class="brief">
-        <p class="brief-label">200-word brief / 200 words</p>
-        <p>Guidelines for programming when code is cheap. Lately, this blog has featured a lot of writing about agentic coding. Frontier models are really good at coding these days, much better than they are at other tasks . Coding with agents feels like a preview of the future, a playground for seeing how far we can push agent capabilities. It’s invigorating, rewarding, and deeply weird . I’ve been keeping a running list of tips for agentic coding: guidelines or rules one might give to someone just getting started with Codex, Claude Code, Pi, or any other agent. Ideally each tip is generalizable guidance, relevant to any agentic programming. I’m also looking for durable lessons that will stick around as models and harnesses improve. Below is my current list: 10 Lessons for Agentic Coding . Ten’s a nice round number; a good time to put this out there. To be clear: I take credit only for honing and compiling these guidelines. As Kshetrajna Raghavan said to me today, “It’s crazy how we’re all converging on similar lessons.” (If you think I’ve missed anything below, please reach out !) I&#39;m testing out using LLMs to rewrite articles for different contexts and audiences. The.</p>
+        <div class="summary-body">
+          <p>Guidelines for programming when code is cheap. Lately, this blog has featured a lot of writing about agentic coding. Frontier models are really good at coding these days, much better than they are at other tasks . Coding with agents feels like a preview of the future, a playground for seeing how far we can push agent capabilities. It’s invigorating, rewarding, and deeply weird . I’ve been keeping a running list of tips for agentic coding: guidelines or rules one might give to someone just getting started with Codex, Claude Code, Pi, or any other agent.</p>
+<p>Ideally each tip is generalizable guidance, relevant to any agentic programming. I’m also looking for durable lessons that will stick around as models and harnesses improve. Below is my current list: 10 Lessons for Agentic Coding . Ten’s a nice round number; a good time to put this out there. To be clear: I take credit only for honing and compiling these guidelines. As Kshetrajna Raghavan said to me today, “It’s crazy how we’re all converging on similar lessons.”</p>
+<p>(If you think I’ve missed anything below, please reach out ! ) I&#39;m testing out using LLMs to rewrite articles for different contexts and audiences. The.</p>
+        </div>
       </section>
-      <div class="tags"><span>AI Tools</span><span>Actionable</span></div>
-      <div class="applies">Directly applies to you</div>
+      <a class="story-link" href="https://www.dbreunig.com/2026/05/04/10-lessons-for-agentic-coding.html">Read story</a>
     </div>
-    <aside class="story-aside">
-      <p class="stat">188</p>
-      <p class="stat-label">HN points</p>
-      <p>194 comments</p>
-      <p>11 hours ago by ingve</p>
-      <a href="https://www.dbreunig.com/2026/05/04/10-lessons-for-agentic-coding.html">Read story</a>
-      <a href="https://news.ycombinator.com/item?id=48019025">HN thread</a>
-    </aside>
   </article>
-<article class="spread academic-drop-cap">
+<article class="spread">
     <div class="number" aria-label="Story 05">05</div>
     <div class="story-main">
       <div class="story-topline">
-        <span>distr.sh</span>
-        <span>Rank 11</span>
+        <span>anthropic.com</span>
+        <span>Rank 8</span>
       </div>
-      <h2>Should I Run Plain Docker Compose in Production in 2026?</h2>
-      <p class="why">AI Tools; matched on ai; 269 HN points; 205 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <h2>Agents for financial services and insurance</h2>
       <section class="brief">
-        <p class="brief-label">200-word brief / 200 words</p>
-        <p>Yes, plain Docker Compose can still run production workloads in 2026—if you close the operational gaps it leaves: cleanup, healing, image pinning, socket security, and updates. Blog Should I Run Plain Docker Compose in Production in 2026? Philip Miglinci • Co-Founder Yes, plain Docker Compose can still run production workloads in 2026—if you close the operational gaps it leaves: cleanup, healing, image pinning, socket security, and updates. 5 minute read Copy URL April 30, 2026 I am Philip—an engineer working at Distr, which helps software and AI companies distribute their applications to self-managed environments. Our Open Source Software Distribution platform is available on GitHub ( github.com/distr-sh/distr ) and orchestrates both Docker Compose and Docker Swarm deployments on customer hosts every day. Most of the production incidents I have seen on Docker Compose hosts come from the same handful of quirks: an old container that should have been removed, a disk that filled up overnight, a health check that detected a problem and then did nothing about it, a :latest tag that pointed somewhere new, or a socket mount nobody thought twice about. None of these are bugs in Docker. They are deliberate trade-offs in a tool that started as internal.</p>
+        <div class="summary-body">
+          <p>We&#39;re releasing ten new Cowork and Claude Code plugins, integrations with the Microsoft 365 suite, new connectors, and an MCP app for financial services and insurance organizations. We’re releasing ten ready-to-run agent templates for the most time-consuming work in financial services: building pitchbooks, screening KYC files, and closing the books at month-end. Each one ships as a plugin in Claude Cowork and Claude Code, and as a cookbook for Claude Managed Agents , so a team can put Claude on real financial work in days rather than months.</p>
+<p>Claude also now works across Microsoft Excel, PowerPoint, Word, and Outlook (coming soon) through the Claude add-ins for Microsoft 365. Once the add-ins are installed, context carries automatically between applications, so work that starts in a model can end in a deck without re-explaining anything in between. Finally, we’re continuing to expand our partner ecosystem with new connectors and an MCP app, so the agents draw on the data financial professionals already use.</p>
+<p>Connectors give Claude governed, real-time access to a provider’s data, and MCP apps go a step further by embedding the provider’s own tools directly inside Claude. These updates pair best with Claude Opus 4. 7, which is state-of-the-art on financial.</p>
+        </div>
       </section>
-      <div class="tags"><span>AI Tools</span></div>
-      <div class="applies">Directly applies to you</div>
+      <a class="story-link" href="https://www.anthropic.com/news/finance-agents">Read story</a>
     </div>
-    <aside class="story-aside">
-      <p class="stat">269</p>
-      <p class="stat-label">HN points</p>
-      <p>205 comments</p>
-      <p>9 hours ago by pmig</p>
-      <a href="https://distr.sh/blog/running-docker-in-production/">Read story</a>
-      <a href="https://news.ycombinator.com/item?id=47962032">HN thread</a>
-    </aside>
   </article>
-<article class="spread blueprint">
+<article class="spread">
     <div class="number" aria-label="Story 06">06</div>
     <div class="story-main">
       <div class="story-topline">
         <span>arxiv.org</span>
-        <span>Rank 7</span>
+        <span>Rank 5</span>
       </div>
       <h2>GLM-5V-Turbo: Toward a Native Foundation Model for Multimodal Agents</h2>
-      <p class="why">AI Tools; matched on agent, agents, model; 25 HN points; 3 comments. Directly useful for your AI-forward, practical morning scan.</p>
       <section class="brief">
-        <p class="brief-label">200-word brief / 200 words</p>
-        <p>Abstract page for arXiv paper 2604.26752: GLM-5V-Turbo: Toward a Native Foundation Model for Multimodal Agents GO quick links Login Help Pages About --&gt; Computer Science &gt; Computer Vision and Pattern Recognition arXiv:2604.26752 (cs) [Submitted on 29 Apr 2026] Title: GLM-5V-Turbo: Toward a Native Foundation Model for Multimodal Agents Authors: GLM-V Team : Wenyi Hong , Xiaotao Gu , Ziyang Pan , Zhen Yang , Yuting Wang , Yue Wang , Yuanchang Yue , Yu Wang , Yanling Wang , Yan Wang , Xijun Liu , Wenmeng Yu , Weihan Wang , Wei Li , Shuaiqi Duan , Sheng Yang , Ruiliang Lv , Mingdao Liu , Lihang Pan , Ke Ning , Junhui Ji , Jinjiang Wang , Jing Chen , Jiazheng Xu , Jiale Zhu , Jiale Cheng , Ji Qi , Guobing Gan , Guo Wang , Cong Yao , Zijun Dou , Zihao Zhou , Zihan Wang , Zhiqi Ge , Zhijie Li , Zhenyu Hou , Zhao Xue , Zehui Wang , Zehai He , Yusen Liu , Yukuo Cen , Yuchen Li , Yuan Wang , Yijian Lu , Yanzi Wang , Yadong Xue , Xinyu Zhang , Xinyu Liu , Wenkai Li , Tianyu.</p>
+        <div class="summary-body">
+          <p>Abstract page for arXiv paper 2604. 26752: GLM-5V-Turbo: Toward a Native Foundation Model for Multimodal Agents GO quick links Login Help Pages About --&gt; Computer Science &gt; Computer Vision and Pattern Recognition arXiv:2604. 26752 (cs) [Submitted on 29 Apr 2026] Title: GLM-5V-Turbo: Toward a Native Foundation Model for Multimodal Agents Authors: GLM-V Team : Wenyi Hong , Xiaotao Gu , Ziyang Pan , Zhen Yang , Yuting Wang , Yue Wang , Yuanchang Yue , Yu Wang , Yanling Wang , Yan Wang , Xijun Liu , Wenmeng Yu , Weihan Wang , Wei Li , Shuaiqi Duan , Sheng Yang , Ruiliang Lv , Mingdao Liu , Lihang Pan , Ke Ning , Junhui Ji , Jinjiang Wang , Jing Chen , Jiazheng Xu , Jiale Zhu , Jiale Cheng , Ji Qi , Guobing Gan , Guo Wang , Cong Yao , Zijun Dou , Zihao Zhou , Zihan Wang , Zhiqi Ge , Zhijie Li , Zhenyu Hou , Zhao Xue , Zehui Wang , Zehai He , Yusen Liu , Yukuo Cen , Yuchen Li , Yuan Wang , Yijian Lu , Yanzi Wang , Yadong Xue , Xinyu Zhang , Xinyu Liu , Wenkai Li , Tianyu.</p>
+        </div>
       </section>
-      <div class="tags"><span>AI Tools</span></div>
-      <div class="applies">Directly applies to you</div>
+      <a class="story-link" href="https://arxiv.org/abs/2604.26752">Read story</a>
     </div>
-    <aside class="story-aside">
-      <p class="stat">25</p>
-      <p class="stat-label">HN points</p>
-      <p>3 comments</p>
-      <p>43 minutes ago by gmays</p>
-      <a href="https://arxiv.org/abs/2604.26752">Read story</a>
-      <a href="https://news.ycombinator.com/item?id=48026021">HN thread</a>
-    </aside>
   </article>
-<article class="spread health-note">
+<article class="spread">
     <div class="number" aria-label="Story 07">07</div>
     <div class="story-main">
       <div class="story-topline">
-        <span>thatprivacyguy.com</span>
-        <span>Rank 27</span>
+        <span>nsa.gov</span>
+        <span>Rank 9</span>
       </div>
-      <h2>Google Chrome silently installs a 4 GB AI model on your device without consent</h2>
-      <p class="why">AI Tools; matched on ai, model; 860 HN points; 590 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <h2>Quantum Key Distribution (QKD) and Quantum Cryptography (QC)</h2>
       <section class="brief">
-        <p class="brief-label">200-word brief / 200 words</p>
-        <p>Google Chrome is downloading a 4 GB Gemini Nano model onto users A vast scorched cracked desert landscape, deep dry fissures splitting the orange-brown earth across the foreground, glowing embers visible deep in the cracks, hazy dark red sky thick with smoke and ash, blackened skeletal dead trees scattered on the horizon, broken silicon circuit boards motherboards and torn server racks half-buried in the cracked ground, low afternoon sun, photorealistic, shallow depth of field. (c) Hanff &amp; Co. AB - CC BY-NC-SA 4.0 · https://www.thatprivacyguy.com/ ~100k monthly readers — CPOs, DPOs, general counsel, CISOs, compliance teams. No tracking, no ad tech, no auction. Direct deal only. Two weeks ago I wrote about Anthropic silently registering a Native Messaging bridge in seven Chromium-based browsers on every machine where Claude Desktop was installed [1]. The pattern was: install on user launch of product A, write configuration into the user&#39;s installs of products B, C, D, E, F, G, H without asking. Reach across vendor trust boundaries. No consent dialog. No opt-out UI. Re-installs itself if the user removes it manually, every time Claude Desktop is launched. This week I discovered the same pattern, executed by Google. Google Chrome is reaching into users&#39;.</p>
+        <div class="summary-body">
+          <p>The National Security Agency/Central Security Service leads the U. S. Government in cryptology that encompasses both signals intelligence insights and cybersecurity products and services that enables computer network operations to gain a decisive advantage for the nation and our allies. ) or https:// means you’ve safely connected to the . gov website. Share sensitive information only on official, secure websites. Skip to main content (Press Enter). Toggle navigation National Security Agency/Central Security Service NSA/CSS Search Search NSA: Search Search NSA: Search About Leadership Mission &amp; Combat Support Cybersecurity Signals Intelligence Central Security Service Locations Research Cybersecurity Collaboration Center Collaborative Partnerships DIB Cybersecurity Services Standards and Certifications Artificial Intelligence Security Center Press Room Press Releases &amp; Statements News &amp; Highlights Podcast Declassification &amp; Transparency Initiatives Cybersecurity Advisories &amp; Guidance Telework and Mobile Security Guidance DoD Microelectronics Guidance Research Publications Careers History National Cryptologic Museum Cryptologic History National Cryptologic Memorial NSA continues to evaluate the usage of cryptography solutions to secure the transmission of data in National Security Systems.</p>
+<p>NSA does not recommend the usage of quantum key distribution and quantum cryptography for securing the transmission of data in National Security Systems (NSS) unless the limitations below are overcome. Quantum key distribution utilizes the.</p>
+        </div>
       </section>
-      <div class="tags"><span>AI Tools</span></div>
-      <div class="applies">Directly applies to you</div>
+      <a class="story-link" href="https://www.nsa.gov/Cybersecurity/Quantum-Key-Distribution-QKD-and-Quantum-Cryptography-QC/">Read story</a>
     </div>
-    <aside class="story-aside">
-      <p class="stat">860</p>
-      <p class="stat-label">HN points</p>
-      <p>590 comments</p>
-      <p>11 hours ago by john-doe</p>
-      <a href="https://www.thatprivacyguy.com/blog/chrome-silent-nano-install/">Read story</a>
-      <a href="https://news.ycombinator.com/item?id=48019219">HN thread</a>
-    </aside>
   </article>
-<article class="spread finance-ledger">
+<article class="spread">
     <div class="number" aria-label="Story 08">08</div>
     <div class="story-main">
       <div class="story-topline">
-        <span>news.ycombinator.com</span>
-        <span>Rank 17</span>
+        <span>distr.sh</span>
+        <span>Rank 14</span>
       </div>
-      <h2>Show HN: Airbyte Agents – context for agents across multiple data sources</h2>
-      <p class="why">AI Tools; matched on ai, agent, agents; 46 HN points; 6 comments. Worth a quick editorial pass.</p>
+      <h2>Should I Run Plain Docker Compose in Production in 2026?</h2>
       <section class="brief">
-        <p class="brief-label">200-word brief / 200 words</p>
-        <p>Hacker News discussion for &quot;Show HN: Airbyte Agents – context for agents across multiple data sources&quot; with 46 points and 6 comments. AI Tools; matched on ai, agent, agents; 46 HN points; 6 comments. Worth a quick editorial pass. Show HN: Airbyte Agents – context for agents across multiple data sources appears on the Hacker News front page from news.ycombinator.com. The item is ranked 17, has 46 points and 6 comments, and was selected because AI Tools; matched on ai, agent, agents; 46 HN points; 6 comments. Worth a quick editorial pass. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief combines the readable source material with Hacker News context. For the morning scan, treat it as a pointer to inspect the original source, then use the HN thread to test the idea against objections, implementation details, and practical edge cases. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, how strong the HN signal is, and what to check next before acting on it. This additional context is intentionally conservative: it.</p>
+        <div class="summary-body">
+          <p>Yes, plain Docker Compose can still run production workloads in 2026—if you close the operational gaps it leaves: cleanup, healing, image pinning, socket security, and updates. Blog Should I Run Plain Docker Compose in Production in 2026? Philip Miglinci • Co-Founder Yes, plain Docker Compose can still run production workloads in 2026—if you close the operational gaps it leaves: cleanup, healing, image pinning, socket security, and updates.</p>
+<p>5 minute read Copy URL April 30, 2026 I am Philip—an engineer working at Distr, which helps software and AI companies distribute their applications to self-managed environments. Our Open Source Software Distribution platform is available on GitHub ( github. com/distr-sh/distr ) and orchestrates both Docker Compose and Docker Swarm deployments on customer hosts every day. Most of the production incidents I have seen on Docker Compose hosts come from the same handful of quirks: an old container that should have been removed, a disk that filled up overnight, a health check that detected a problem and then did nothing about it, a :latest tag that pointed somewhere new, or a socket mount nobody thought twice about.</p>
+<p>None of these are bugs in Docker. They are deliberate trade-offs in a tool that started as internal.</p>
+        </div>
       </section>
-      <div class="tags"><span>AI Tools</span></div>
-
+      <a class="story-link" href="https://distr.sh/blog/running-docker-in-production/">Read story</a>
     </div>
-    <aside class="story-aside">
-      <p class="stat">46</p>
-      <p class="stat-label">HN points</p>
-      <p>6 comments</p>
-      <p>3 hours ago by mtricot</p>
-      <a href="https://news.ycombinator.com/item?id=48023496">Read story</a>
-      <a href="https://news.ycombinator.com/item?id=48023496">HN thread</a>
-    </aside>
   </article>
-<article class="spread weird-lab">
+<article class="spread">
     <div class="number" aria-label="Story 09">09</div>
     <div class="story-main">
       <div class="story-topline">
-        <span>nsa.gov</span>
-        <span>Rank 16</span>
+        <span>news.ycombinator.com</span>
+        <span>Rank 13</span>
       </div>
-      <h2>Quantum Key Distribution (QKD) and Quantum Cryptography (QC)</h2>
-      <p class="why">Finance + Weird Science; matched on crypto, quantum; 13 HN points; 2 comments. Worth a quick editorial pass.</p>
+      <h2>Show HN: Airbyte Agents – context for agents across multiple data sources</h2>
       <section class="brief">
-        <p class="brief-label">200-word brief / 200 words</p>
-        <p>Quantum Key Distribution (QKD) and Quantum Cryptography (QC) appears on the Hacker News front page from nsa.gov. The item is ranked 16, has 13 points and 2 comments, and was selected because Finance + Weird Science; matched on crypto, quantum; 13 HN points; 2 comments. Worth a quick editorial pass. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief combines the readable source material with Hacker News context. For the morning scan, treat it as a pointer to inspect the original source, then use the HN thread to test the idea against objections, implementation details, and practical edge cases. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, how strong the HN signal is, and what to check next before acting on it. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, how strong the HN signal is, and what to check next before acting on it. This additional context is intentionally conservative: it does not add.</p>
+        <div class="summary-body">
+          <p>Hacker News discussion for &quot;Show HN: Airbyte Agents – context for agents across multiple data sources&quot;. The original linked item is a discussion thread, so use it as context for what readers are debating, what practical details surfaced, and what caveats are worth checking. Show HN: Airbyte Agents – context for agents across multiple data sources appears on the Hacker News front page from news. ycombinator. com.</p>
+<p>The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly. For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what.</p>
+        </div>
       </section>
-      <div class="tags"><span>Finance</span><span>Weird Science</span></div>
-
+      <a class="story-link" href="https://news.ycombinator.com/item?id=48023496">Read story</a>
     </div>
-    <aside class="story-aside">
-      <p class="stat">13</p>
-      <p class="stat-label">HN points</p>
-      <p>2 comments</p>
-      <p>58 minutes ago by mooreds</p>
-      <a href="https://www.nsa.gov/Cybersecurity/Quantum-Key-Distribution-QKD-and-Quantum-Cryptography-QC/">Read story</a>
-      <a href="https://news.ycombinator.com/item?id=48025828">HN thread</a>
-    </aside>
   </article>
-<article class="spread big-stat-finish">
+<article class="spread">
     <div class="number" aria-label="Story 10">10</div>
     <div class="story-main">
       <div class="story-topline">
-        <span>smmt.co.uk</span>
-        <span>Rank 10</span>
+        <span>thatprivacyguy.com</span>
+        <span>Rank 29</span>
       </div>
-      <h2>UK: Two millionth electric car registered as market rebounds strongly</h2>
-      <p class="why">Finance; matched on market; 120 HN points; 136 comments. Directly useful for your AI-forward, practical morning scan.</p>
+      <h2>Google Chrome silently installs a 4 GB AI model on your device without consent</h2>
       <section class="brief">
-        <p class="brief-label">200-word brief / 200 words</p>
-        <p>The UK new car market grew by 24.0% to reach 149,247 registrations last month, according to the latest figures published by the Society of Motor Manufacturers and Traders (SMMT). The increase reflects... News Car Car registrations Two millionth electric car registered as market rebounds strongly from tax changes 5 May 2026 SCROLL TO DISCOVER New car market rises 24.0% in April as market recovers from last year’s negative tax change impact. Two millionth electric car registered, with robust 26.2% market share during low-volume month. 2026 outlook upgraded to 2.093m registrations overall, but ZEV share revised down to 26.8% after underperforming Q1 demand. Data download New car registrations data April 2026 The UK new car market grew by 24.0% to reach 149,247 registrations last month, according to the latest figures published by the Society of Motor Manufacturers and Traders (SMMT). The increase reflects a rebound from an unusually weak April last year, when buyers pulled purchases forward to March to beat incoming vehicle tax increases, including the application of VED and the Expensive Car Supplement (ECS) on battery electric vehicles (BEVs). 1 While April remains a traditionally low volume month, magnifying year-on-year variation, this was the best outturn since 2019’s 161,064.</p>
+        <div class="summary-body">
+          <p>Google Chrome is downloading a 4 GB Gemini Nano model onto users A vast scorched cracked desert landscape, deep dry fissures splitting the orange-brown earth across the foreground, glowing embers visible deep in the cracks, hazy dark red sky thick with smoke and ash, blackened skeletal dead trees scattered on the horizon, broken silicon circuit boards motherboards and torn server racks half-buried in the cracked ground, low afternoon sun, photorealistic, shallow depth of field.</p>
+<p>(c) Hanff &amp; Co. AB - CC BY-NC-SA 4. 0 · https://www. thatprivacyguy. com/ ~100k monthly readers — CPOs, DPOs, general counsel, CISOs, compliance teams. No tracking, no ad tech, no auction. Direct deal only. Two weeks ago I wrote about Anthropic silently registering a Native Messaging bridge in seven Chromium-based browsers on every machine where Claude Desktop was installed [1]. The pattern was: install on user launch of product A, write configuration into the user&#39;s installs of products B, C, D, E, F, G, H without asking.</p>
+<p>Reach across vendor trust boundaries. No consent dialog. No opt-out UI. Re-installs itself if the user removes it manually, every time Claude Desktop is launched. This week I discovered the same pattern, executed by Google. Google Chrome is reaching into users&#39;.</p>
+        </div>
       </section>
-      <div class="tags"><span>Finance</span></div>
-      <div class="applies">Directly applies to you</div>
+      <a class="story-link" href="https://www.thatprivacyguy.com/blog/chrome-silent-nano-install/">Read story</a>
     </div>
-    <aside class="story-aside">
-      <p class="stat">120</p>
-      <p class="stat-label">HN points</p>
-      <p>136 comments</p>
-      <p>2 hours ago by kieranmaine</p>
-      <a href="https://www.smmt.co.uk/two-millionth-electric-car-registered-as-market-rebounds-strongly-from-tax-changes/">Read story</a>
-      <a href="https://news.ycombinator.com/item?id=48024364">HN thread</a>
-    </aside>
   </article>
   </main>
 </body>

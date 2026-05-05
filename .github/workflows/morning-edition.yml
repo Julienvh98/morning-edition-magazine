@@ -3,8 +3,8 @@ name: Daily Morning Edition
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 6 * * *"
     - cron: "0 7 * * *"
+    - cron: "0 8 * * *"
 
 permissions:
   contents: write
@@ -29,9 +29,12 @@ jobs:
         shell: bash
         run: |
           issue_date="$(TZ=Europe/London date +%F)"
+          london_hour="$(TZ=Europe/London date +%H)"
           should_run="true"
-          if [[ "${{ github.event_name }}" == "schedule" && -f "magazines/${issue_date}.html" ]]; then
-            should_run="false"
+          if [[ "${{ github.event_name }}" == "schedule" ]]; then
+            if [[ "$london_hour" != "08" || -f "magazines/${issue_date}.html" ]]; then
+              should_run="false"
+            fi
           fi
           echo "issue_date=$issue_date" >> "$GITHUB_OUTPUT"
           echo "should_run=$should_run" >> "$GITHUB_OUTPUT"
@@ -94,7 +97,7 @@ jobs:
         uses: actions/deploy-pages@v4
 
       - name: Send Telegram link
-        if: steps.schedule.outputs.should_run == 'true'
+        if: steps.schedule.outputs.should_run == 'true' && github.event_name == 'schedule'
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
