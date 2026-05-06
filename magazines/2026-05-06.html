@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Morning Edition | 2026-05-06</title>
+  <meta name="description" content="A front-page Hacker News briefing tuned for AI tools, health, finance, weird science, and useful things you can act on today.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..900,80,1&family=IBM+Plex+Serif:wght@400;500&family=Inter:wght@500;650;800;900&display=swap" rel="stylesheet">
+  <style>
+
+:root {
+  color-scheme: light;
+  --ink: #17120c;
+  --paper: #f5ecd8;
+  --muted: rgba(23, 18, 12, 0.72);
+  --rule: rgba(23, 18, 12, 0.2);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(18px, 1.5vw, 24px);
+  line-height: 1.22;
+}
+
+a { color: inherit; text-decoration-thickness: 0.12em; text-underline-offset: 0.18em; }
+
+.cover {
+  min-height: 18vh;
+  display: grid;
+  align-content: center;
+  padding: clamp(16px, 3vw, 36px) clamp(22px, 5vw, 72px);
+  background: #f4ecd8;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.34);
+  overflow: hidden;
+}
+
+.story-topline,
+.official-news-title {
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.story-topline,
+.official-news-title {
+  color: var(--muted);
+}
+
+h1,
+h2,
+.number {
+  font-family: "Fraunces", Georgia, serif;
+  letter-spacing: 0;
+}
+
+h1 {
+  max-width: none;
+  margin: 0;
+  font-size: clamp(42px, 8vw, 96px);
+  line-height: 0.86;
+}
+
+.official-news {
+  display: grid;
+  gap: 16px;
+  padding: clamp(22px, 4vw, 56px) clamp(22px, 5vw, 72px);
+  background: #f7f0df;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.3);
+}
+
+.official-news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.official-news-card {
+  border-top: 1px solid rgba(23, 18, 12, 0.34);
+  padding-top: 12px;
+}
+
+.official-news-card h2,
+.story-main h2 {
+  max-width: 12ch;
+  margin: 0 0 10px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 760;
+  line-height: 0.98;
+}
+
+.summary-body {
+  display: grid;
+  gap: 14px;
+}
+
+.summary-body p,
+.official-news-empty {
+  margin: 0;
+  color: rgba(23, 18, 12, 0.82);
+  font-family: "IBM Plex Serif", Georgia, serif;
+  font-size: clamp(18px, 1.45vw, 22px);
+  font-weight: 400;
+  line-height: 1.36;
+}
+
+.official-news-card a,
+.story-link {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 14px;
+  color: rgba(23, 18, 12, 0.8);
+  font-size: clamp(15px, 1.1vw, 17px);
+  font-weight: 900;
+}
+
+.spread {
+  position: relative;
+  min-height: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  padding: clamp(28px, 5vw, 72px);
+  overflow: hidden;
+  border-top: 2px solid rgba(23, 18, 12, 0.2);
+  background:
+    linear-gradient(90deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    #f4ecd8;
+  background-size: 78px 78px;
+}
+
+.number {
+  position: absolute;
+  line-height: 0.76;
+  pointer-events: none;
+  user-select: none;
+}
+
+.story-main {
+  position: relative;
+  z-index: 1;
+}
+
+.story-topline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.brief {
+  max-width: 850px;
+  margin-top: 22px;
+  border-top: 2px solid rgba(23, 18, 12, 0.28);
+  padding-top: 18px;
+}
+
+@media (max-width: 860px) {
+  .cover,
+  .spread,
+  .official-news {
+    min-height: auto;
+    padding: 24px 22px 42px;
+  }
+
+  .cover {
+    min-height: 16svh;
+    padding: 14px 22px 12px;
+  }
+
+  h1 {
+    font-size: clamp(38px, 12vw, 56px);
+  }
+
+  .official-news {
+    gap: 12px;
+    padding: 20px 22px 24px;
+  }
+
+  .official-news-grid,
+  .spread {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .official-news-card h2,
+  .story-main h2 {
+    font-size: 30px;
+  }
+
+  .summary-body p,
+  .official-news-empty {
+    font-size: 18px;
+    line-height: 1.42;
+  }
+
+  .story-link,
+  .official-news-card a {
+    font-size: 16px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header class="cover">
+    <h1>Morning Edition</h1>
+  </header>
+
+  <section class="official-news">
+    <p class="official-news-title">Official AI Lab News</p>
+    <div class="official-news-grid">
+      <article class="official-news-card">
+    <h2>Higher usage limits for Claude and a compute deal with SpaceX</h2>
+    <div class="summary-body official-news-summary">
+      <p>We’ve raised Claude&#39;s usage limits and agreed a new compute partnership with SpaceX that will substantially increase our capacity in the near term. We’ve agreed to a partnership with SpaceX that will substantially increase our compute capacity. This, along with our other recent compute deals, means that we’ve been able to increase our usage limits for Claude Code and the Claude API. Below, we describe these changes and the progress we’re making on compute.</p>
+<p>The following three changes—all effective today—are aimed at improving the experience of using Claude for our most dedicated customers. First, we’re doubling Claude Code’s five-hour rate limits for Pro, Max, Team, and seat-based Enterprise plans. Second, we’re removing the peak hours limit reduction on Claude Code for Pro and Max accounts. Third, we’re raising our API rate limits considerably for Claude Opus models , as shown in the table below: We’ve signed an agreement with SpaceX to use all of the compute capacity at their Colossus 1 data center.</p>
+<p>This gives us access to more than 300 megawatts of new capacity (over 220,000 NVIDIA GPUs) within the month. This additional capacity will directly improve capacity for Claude Pro and Claude Max subscribers. We train and run.</p>
+    </div>
+    <a href="https://www.anthropic.com/news/higher-limits-spacex">Read official article</a>
+  </article>
+<article class="official-news-card">
+    <h2>How frontier enterprises are building an AI advantage</h2>
+    <div class="summary-body official-news-summary">
+      <p>OpenAI’s B2B Signals research shows how frontier enterprises deepen AI adoption, scale Codex-powered agentic workflows, and build durable competitive advantage. B2B Signals shows how the AI advantage is beginning to compound for firms using AI more deeply, more broadly, and in more delegated workflows. For many enterprises, the first phase of AI adoption was about access: who had AI tools, how many seats had been deployed, and whether employees were experimenting.</p>
+<p>That still matters. But access is no longer the differentiator. Our latest research suggests the AI advantage is beginning to compound. Frontier firms are pulling ahead because they use more intelligence per worker, adopt advanced tools more intensively, and embed AI more deeply into workflows. Today, we’re introducing B2B Signals, a business extension of OpenAI Signals. It provides a recurring measure of how AI is diffusing across businesses, based on privacy-preserving, aggregated signals from enterprise use of OpenAI products, including: Note: All analyses in this report are based on de-identified, aggregated enterprise usage data.</p>
+<p>Message content was classified using automated systems, and no OpenAI employee reviewed individual enterprise, business, or API customer data as part of this analysis. The clearest signal is depth. Frontier firms now use 3. 5x as.</p>
+    </div>
+    <a href="https://openai.com/index/introducing-b2b-signals/">Read official article</a>
+  </article>
+<article class="official-news-card">
+    <h2>How frontier enterprises are building an AI advantage</h2>
+    <div class="summary-body official-news-summary">
+      <p>OpenAI’s B2B Signals research shows how frontier enterprises deepen AI adoption, scale Codex-powered agentic workflows, and build durable competitive advantage. OpenAI’s B2B Signals research shows how frontier enterprises deepen AI adoption, scale Codex-powered agentic workflows, and build durable competitive advantage. B2B Signals shows how the AI advantage is beginning to compound for firms using AI more deeply, more broadly, and in more delegated workflows. For many enterprises, the first phase of AI adoption was about access: who had AI tools, how many seats had been deployed, and whether employees were experimenting.</p>
+<p>That still matters. But access is no longer the differentiator. Our latest research suggests the AI advantage is beginning to compound. Frontier firms are pulling ahead because they use more intelligence per worker, adopt advanced tools more intensively, and embed AI more deeply into workflows. Today, we’re introducing B2B Signals, a business extension of OpenAI Signals. It provides a recurring measure of how AI is diffusing across businesses, based on privacy-preserving, aggregated signals from enterprise use of OpenAI products, including: Note: All analyses in this report are based on de-identified, aggregated enterprise usage data.</p>
+<p>Message content was classified using automated systems, and no OpenAI employee reviewed individual enterprise, business,.</p>
+    </div>
+    <a href="https://openai.com/index/introducing-b2b-signals">Read official article</a>
+  </article>
+<article class="official-news-card">
+    <h2>Introducing ChatGPT Futures: Class of 2026</h2>
+    <div class="summary-body official-news-summary">
+      <p>Meet the ChatGPT Futures Class of 2026—26 student innovators using AI to build, research, and drive real-world impact. Discover how this generation is redefining learning, creativity, and opportunity with ChatGPT. (opens in a new window) Loading… Share Today, we’re proud to introduce the inaugural ChatGPT Futures Class of 2026 ⁠ (opens in a new window) , recognizing 26 students and young builders using AI in thoughtful, ambitious, and deeply human ways.</p>
+<p>The class of 2026 is the first generation to start and finish college with ChatGPT. They arrived on campus in the fall of 2022 just as AI was beginning to reshape how people learn, create, and work. This generation was ChatGPT’s earliest adopters, sharing the tool with their parents and siblings, friends and teachers. Now, they’re graduating into a world where changes in technology are accelerating every day.</p>
+<p>Over the past few years, I’ve spent time visiting campuses, speaking with students and educators, and watching how young people are actually using AI in their daily lives. What I’ve seen has challenged many of the assumptions people make about this generation. Many students aren’t using AI to avoid work. They’re using it to attempt things they wouldn’t have thought possible.</p>
+    </div>
+    <a href="https://openai.com/index/introducing-chatgpt-futures-class-of-2026/">Read official article</a>
+  </article>
+<article class="official-news-card">
+    <h2>Introducing ChatGPT Futures: Class of 2026</h2>
+    <div class="summary-body official-news-summary">
+      <p>Meet the ChatGPT Futures Class of 2026—26 student innovators using AI to build, research, and drive real-world impact. Discover how this generation is redefining learning, creativity, and opportunity with ChatGPT. Meet the ChatGPT Futures Class of 2026—26 student innovators using AI to build, research, and drive real-world impact. Discover how this generation is redefining learning, creativity, and opportunity with ChatGPT. (opens in a new window) Loading… Share Today, we’re proud to introduce the inaugural ChatGPT Futures Class of 2026 ⁠ (opens in a new window) , recognizing 26 students and young builders using AI in thoughtful, ambitious, and deeply human ways.</p>
+<p>The class of 2026 is the first generation to start and finish college with ChatGPT. They arrived on campus in the fall of 2022 just as AI was beginning to reshape how people learn, create, and work. This generation was ChatGPT’s earliest adopters, sharing the tool with their parents and siblings, friends and teachers. Now, they’re graduating into a world where changes in technology are accelerating every day.</p>
+<p>Over the past few years, I’ve spent time visiting campuses, speaking with students and educators, and watching how young people are actually using AI in their daily lives. What I’ve seen.</p>
+    </div>
+    <a href="https://openai.com/index/introducing-chatgpt-futures-class-of-2026">Read official article</a>
+  </article>
+    </div>
+  </section>
+
+  <main>
+    <article class="spread">
+    <div class="number" aria-label="Story 01">01</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>sander.ai</span>
+        <span>Rank 6</span>
+      </div>
+      <h2>Learning the Integral of a Diffusion Model</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>A deep dive on flow maps. Sampling from a diffusion model is an iterative process: at each step, the denoiser estimates the tangent direction to a path through input space. We move along this path by repeatedly taking small steps in this direction, effectively calculating an integral across noise levels . This gradually transforms samples from a simple noise distribution into samples from a target distribution, and traces out the path that connects them.</p>
+<p>Can we train neural networks to directly predict this integral instead, in order to speed up sampling? Yes we can – welcome to the world of flow maps ! Ever since the rise of diffusion models, people have sought ways to make them faster and cheaper to sample from. About two years ago, I wrote a blog post about diffusion distillation , which is one of the main tools used to reduce the number of steps required to obtain high-quality samples.</p>
+<p>Although the core principles underlying various distillation methods have not changed, a lot of new variants have popped up since. In this blog post, I want to take a closer look at flow maps. While diffusion models describe paths between noise and data by predicting.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://sander.ai/2026/05/06/flow-maps.html">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 02">02</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>templatical.com</span>
+        <span>Rank 7</span>
+      </div>
+      <h2>Show HN: I built an open-source email builder, alternative to Beefree/Unlayer</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Try the Templatical drag-and-drop email editor in this interactive playground. Build, preview, and export email templates directly in your browser. Show HN: I built an open-source email builder, alternative to Beefree/Unlayer appears on the Hacker News front page from templatical. com. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly.</p>
+<p>For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://play.templatical.com/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 03">03</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>coveragecat.com</span>
+        <span>Rank 21</span>
+      </div>
+      <h2>Coverage Cat (YC S22) Seeks Fractional Engineer to Build AI Growth Toolkit</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Join our team at Coverage Cat Currently NOT accepting applicants from: CA, MA, NJ, OR, WA, CT, IL, RI, MD, MI, NH, HI. Role is to support the team with organic growth engineering implementation and operations. This can range from designing AI tools for growth to hiring folks to do in-person canvassing off Craigslist! Growing the world&#39;s AI-native insurance broker still takes some IRL effort. Anyone with a growth mindset and a willingness to overcome operational obstacles to ensure experiment success are encouraged to apply.</p>
+<p>Opportunities for additional incentive pay. Please, only apply via the YCombinator Work-at-a-Startup application button above. Emailed applications will be discarded. Copyright © 2026 Coverage Cat. All rights reserved. Coverage Cat, Inc. is a licensed insurance broker (or producer). In California Coverage Cat does business under the name Coverage Cat Insurance Services. Coverage Cat&#39;s license numbers are listed here. Coverage Cat places insurance with a number of insurance companies, each of which is not an affiliate of Coverage Cat.</p>
+<p>Coverage Cat (YC S22) Seeks Fractional Engineer to Build AI Growth Toolkit appears on the Hacker News front page from coveragecat. com. The available article text may be limited if the source is a dynamic page, repository, PDF,.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.coveragecat.com/careers/engineering/fractional-growth-engineer">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 04">04</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>aaedmusa.com</span>
+        <span>Rank 9</span>
+      </div>
+      <h2>CARA 2.0 – “I Built a Better Robot Dog”</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>On May 31st, 2024, I uploaded a video titled High Precision Speed Reducer Using Rope , where I built a niche speed reducer called a capstan drive . Little did I know that this video would go viral and brand me as the “capstan guy”. Roughly 2 years later, this is still my highest-viewed video, and I still get lots of emails and DMs about capstan drives.</p>
+<p>About a year after making that video, I created CARA , a quadrupedal robot that used capstan drives. Now, a year later after that, I’ve built CARA 2. 0, an upgraded version of CARA. This project is particularly special because CARA 2. 0 was my senior design project. Considering the fact that I’ve been obsessed with making quads since high school, it only seemed fitting that I end my college experience by building my best quad yet.</p>
+<p>My team and I set out to make a low-cost (&lt;$1000), low-weight (&lt;20lbs), and durable quad suited for hobbyists and researchers. If you’re interested in building your own CARA 2. 0, you can purchase the full build guide on my Patreon Shop or access it through my Patreon Builder Tier membership . Also, the BOM for CARA 2. 0 is.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.aaedmusa.com/projects/cara2">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 05">05</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>digitalfoundry.net</span>
+        <span>Rank 1</span>
+      </div>
+      <h2>Valve releases Steam Controller CAD files under Creative Commons license</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Modders, start your engines. With the rather excellent Steam Controller now on its way to the lucky few that managed to order one, Valve has released a full set of CAD files for their new hardware. The idea is to let enterprising modders create their own Steam Controller add-ons, like skins, charging stands, grip extenders or smartphone mounts. The Valve release includes files for the external shell (&quot;surface topology&quot;) of the Controller and Puck, with a .</p>
+<p>STP, . STL and engineering diagram of each device, with the latter showing areas that must remain uncovered to let the device maintain its signal strength and otherwise function as designed. Valve has previously released CAD files for its Steam Deck handheld, Valve Index VR suite and even the original Steam Controller a decade ago, so this release is welcomed but not unexpected. The release is under a fairly restrictive Creative Commons license which allows for non-commercial use and requires attribution and sharing of designs back to the community.</p>
+<p>However, the license also suggests that commercial entities interested in making accessories for the Steam Controller or its Puck can contact Valve directly to discuss terms. What is your ultimate Steam Controller or Steam Controller Puck.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.digitalfoundry.net/news/2026/05/valve-releases-steam-controller-cad-files-under-creative-commons-license">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 06">06</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>cloudflare.com</span>
+        <span>Rank 29</span>
+      </div>
+      <h2>Agents can now create Cloudflare accounts, buy domains, and deploy</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Starting today, agents can now be Cloudflare customers. They can create a Cloudflare account, start a paid subscription, register a domain, and get back an API token to deploy code right away. Humans can be in the loop to grant permission, but there’s no need to go to the dashboard, copy and paste API tokens, or enter credit card details. Coding agents are great at building software.</p>
+<p>But to deploy to production they need three things from the cloud they want to host their app — an account, a way to pay, and an API token. Until now these have been tasks that humans handle directly. Increasingly, agents handle them on the user’s behalf. The agent needs to perform all the tasks a human customer can. They’re given higher-order problems to solve and choose to use Cloudflare and call Cloudflare APIs.</p>
+<p>Starting today, agents can provision Cloudflare on behalf of their users. They can create a Cloudflare account, start a paid subscription, register a domain, and get back an API token to deploy code right away. Humans can be in the loop to grant permission and must accept Cloudflare&#39;s terms of service, but no human steps are otherwise required from.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://blog.cloudflare.com/agents-stripe-projects/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 07">07</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>electrek.co</span>
+        <span>Rank 8</span>
+      </div>
+      <h2>BYD overtakes Tesla and Kia as the best-selling EV brand in key overseas markets</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>With over 7% market share, BYD is now the top-selling EV brand in the UK so far in 2026, surpassing... BYD overtakes Tesla and Kia as the best-selling EV brand in key overseas markets appears on the Hacker News front page from electrek. co. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly.</p>
+<p>For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it. This additional context is intentionally conservative: it does not add outside claims, but it keeps.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://electrek.co/2026/05/05/byd-overtakes-tesla-kia-best-selling-ev-brand-key-overseas-markets/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 08">08</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>elonlit.com</span>
+        <span>Rank 4</span>
+      </div>
+      <h2>A Theory of Deep Learning</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>We finally know why deep learning works. Borges wrote a story about a man named Funes who, after a horseback accident, acquires the ability to perceive and remember everything. Every leaf on every tree. Every ripple on every stream at every moment. He is the perfect empiricist. Infinite data, infinite recall, infinite resolution. And he cannot think. Because thinking, as Borges understood, requires forgetting. Funes could reconstruct entire days from memory but could not understand why the dog at 3:14, seen from the side, should be called the same thing as the dog at 3:15, seen from the front.</p>
+<p>I suspect [that Funes] was not very good at thinking. To think is to ignore (or forget) differences, to generalize, to abstract. In the teeming world of Ireneo Funes there was nothing but particulars. Jorge Luis Borges, &quot;Funes the Memorious,&quot; in Ficciones (1944). Later in the story, Borges conjures Locke, who in the seventeenth century postulated an impossible language in which each individual thing, each stone, each bird and each branch, would have its own name.</p>
+<p>Funes projected an analogous language but discarded it because it seemed too general to him, too ambiguous. Deep learning theory has built Locke&#39;s language and.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://elonlit.com/scrivings/a-theory-of-deep-learning/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 09">09</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>latimes.com</span>
+        <span>Rank 13</span>
+      </div>
+      <h2>Colombia hosts talks on exiting fossil fuels as global energy crisis deepens</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>A gathering in Colombia reflects mounting impatience with the slow pace of global climate negotiations. Countries first agreed at COP28 in Dubai in 2023 to “transition away from fossil fuels,” but made little progress on it. 9 7 min Click here to listen to this article Share via Close extra sharing options Email Facebook X LinkedIn Threads Reddit WhatsApp Copy Link URL Copied! Print 0:00 0:00 1x This is read by an automated voice.</p>
+<p>Please report any issues or inconsistencies here . Just across the road from the site of the first international conference on transitioning away from fossil fuels, in Colombia, oil tankers routinely unload at the Pozos Colorados terminal, with its large tank farm. The tension between climate ambition and fossil-fuel dependency is at the heart of the meeting , which began Friday in the Caribbean city of Santa Marta.</p>
+<p>It has drawn more than 50 countries — from oil producers such as Nigeria to big consumers such as Germany, plus the European Union — in a bid to break the stalemate of United Nations climate talks. The gathering reflects mounting impatience with the slow pace of global negotiations. Countries first agreed at COP28 in Dubai in 2023.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.latimes.com/environment/story/2026-04-26/colombia-hosts-talks-on-exiting-fossil-fuels-as-global-energy-crisis-deepens">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 10">10</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>cardcatalogforlife.substack.com</span>
+        <span>Rank 12</span>
+      </div>
+      <h2>Google tools for customizing searches</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Google tools for customizing searches appears on the Hacker News front page from cardcatalogforlife. substack. com. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly. For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it. This additional context is intentionally.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://cardcatalogforlife.substack.com/p/google-has-a-secret-reference-desk">Read story</a>
+    </div>
+  </article>
+  </main>
+</body>
+</html>
