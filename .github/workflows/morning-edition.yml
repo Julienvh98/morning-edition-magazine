@@ -32,7 +32,7 @@ jobs:
           london_hour="$(TZ=Europe/London date +%H)"
           should_run="true"
           if [[ "${{ github.event_name }}" == "schedule" ]]; then
-            if [[ "$london_hour" != "08" || -f "magazines/${issue_date}.html" ]]; then
+            if (( 10#$london_hour < 8 )) || [[ -f "magazines/${issue_date}.html" ]]; then
               should_run="false"
             fi
           fi
