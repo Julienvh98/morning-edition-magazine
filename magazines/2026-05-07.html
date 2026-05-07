@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Morning Edition | 2026-05-07</title>
+  <meta name="description" content="A front-page Hacker News briefing tuned for AI tools, health, finance, weird science, and useful things you can act on today.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..900,80,1&family=IBM+Plex+Serif:wght@400;500&family=Inter:wght@500;650;800;900&display=swap" rel="stylesheet">
+  <style>
+
+:root {
+  color-scheme: light;
+  --ink: #17120c;
+  --paper: #f5ecd8;
+  --muted: rgba(23, 18, 12, 0.72);
+  --rule: rgba(23, 18, 12, 0.2);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(18px, 1.5vw, 24px);
+  line-height: 1.22;
+}
+
+a { color: inherit; text-decoration-thickness: 0.12em; text-underline-offset: 0.18em; }
+
+.cover {
+  min-height: 18vh;
+  display: grid;
+  align-content: center;
+  padding: clamp(16px, 3vw, 36px) clamp(22px, 5vw, 72px);
+  background: #f4ecd8;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.34);
+  overflow: hidden;
+}
+
+.story-topline,
+.official-news-title {
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.story-topline,
+.official-news-title {
+  color: var(--muted);
+}
+
+h1,
+h2,
+.number {
+  font-family: "Fraunces", Georgia, serif;
+  letter-spacing: 0;
+}
+
+h1 {
+  max-width: none;
+  margin: 0;
+  font-size: clamp(42px, 8vw, 96px);
+  line-height: 0.86;
+}
+
+.official-news {
+  display: grid;
+  gap: 16px;
+  padding: clamp(22px, 4vw, 56px) clamp(22px, 5vw, 72px);
+  background: #f7f0df;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.3);
+}
+
+.official-news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.official-news-card {
+  border-top: 1px solid rgba(23, 18, 12, 0.34);
+  padding-top: 12px;
+}
+
+.official-news-card h2,
+.story-main h2 {
+  max-width: 12ch;
+  margin: 0 0 10px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 760;
+  line-height: 0.98;
+}
+
+.summary-body {
+  display: grid;
+  gap: 14px;
+}
+
+.summary-body p,
+.official-news-empty {
+  margin: 0;
+  color: rgba(23, 18, 12, 0.82);
+  font-family: "IBM Plex Serif", Georgia, serif;
+  font-size: clamp(18px, 1.45vw, 22px);
+  font-weight: 400;
+  line-height: 1.36;
+}
+
+.official-news-card a,
+.story-link {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 14px;
+  color: rgba(23, 18, 12, 0.8);
+  font-size: clamp(15px, 1.1vw, 17px);
+  font-weight: 900;
+}
+
+.spread {
+  position: relative;
+  min-height: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  padding: clamp(28px, 5vw, 72px);
+  overflow: hidden;
+  border-top: 2px solid rgba(23, 18, 12, 0.2);
+  background:
+    linear-gradient(90deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    #f4ecd8;
+  background-size: 78px 78px;
+}
+
+.number {
+  position: absolute;
+  line-height: 0.76;
+  pointer-events: none;
+  user-select: none;
+}
+
+.story-main {
+  position: relative;
+  z-index: 1;
+}
+
+.story-topline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.brief {
+  max-width: 850px;
+  margin-top: 22px;
+  border-top: 2px solid rgba(23, 18, 12, 0.28);
+  padding-top: 18px;
+}
+
+@media (max-width: 860px) {
+  .cover,
+  .spread,
+  .official-news {
+    min-height: auto;
+    padding: 24px 22px 42px;
+  }
+
+  .cover {
+    min-height: 16svh;
+    padding: 14px 22px 12px;
+  }
+
+  h1 {
+    font-size: clamp(38px, 12vw, 56px);
+  }
+
+  .official-news {
+    gap: 12px;
+    padding: 20px 22px 24px;
+  }
+
+  .official-news-grid,
+  .spread {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .official-news-card h2,
+  .story-main h2 {
+    font-size: 30px;
+  }
+
+  .summary-body p,
+  .official-news-empty {
+    font-size: 18px;
+    line-height: 1.42;
+  }
+
+  .story-link,
+  .official-news-card a {
+    font-size: 16px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header class="cover">
+    <h1>Morning Edition</h1>
+  </header>
+
+  <section class="official-news">
+    <p class="official-news-title">Official AI Lab News</p>
+    <p class="official-news-empty">Checked first-party news sources since 2026-05-05. No new official Anthropic or OpenAI company updates were found for this issue.</p>
+  </section>
+
+  <main>
+    <article class="spread">
+    <div class="number" aria-label="Story 01">01</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>arxiv.org</span>
+        <span>Rank 13</span>
+      </div>
+      <h2>ProgramBench: Can Language Models Rebuild Programs from Scratch?</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Abstract page for arXiv paper 2605. 03546: ProgramBench: Can Language Models Rebuild Programs From Scratch? GO quick links Login Help Pages About --&gt; Computer Science &gt; Software Engineering arXiv:2605. 03546 (cs) [Submitted on 5 May 2026] Title: ProgramBench: Can Language Models Rebuild Programs From Scratch? Authors: John Yang , Kilian Lieret , Jeffrey Ma , Parth Thakkar , Dmitrii Pedchenko , Sten Sootla , Emily McMilin , Pengcheng Yin , Rui Hou , Gabriel Synnaeve , Diyi Yang , Ofir Press View a PDF of the paper titled ProgramBench: Can Language Models Rebuild Programs From Scratch?</p>
+<p>, by John Yang and 11 other authors View PDF HTML (experimental) Abstract: Turning ideas into full software projects from scratch has become a popular use case for language models. Agents are being deployed to seed, maintain, and grow codebases over extended periods with minimal human oversight. Such settings require models to make high-level software architecture decisions. However, existing benchmarks measure focused, limited tasks such as fixing a single bug or developing a single, specified feature.</p>
+<p>We therefore introduce ProgramBench to measure the ability of software engineering agents to develop software holisitically. In ProgramBench, given only a program and its documentation, agents must architect and implement a.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://arxiv.org/abs/2605.03546">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 02">02</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>sander.ai</span>
+        <span>Rank 27</span>
+      </div>
+      <h2>Learning the Integral of a Diffusion Model</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>A deep dive on flow maps. Sampling from a diffusion model is an iterative process: at each step, the denoiser estimates the tangent direction to a path through input space. We move along this path by repeatedly taking small steps in this direction, effectively calculating an integral across noise levels . This gradually transforms samples from a simple noise distribution into samples from a target distribution, and traces out the path that connects them.</p>
+<p>Can we train neural networks to directly predict this integral instead, in order to speed up sampling? Yes we can – welcome to the world of flow maps ! Ever since the rise of diffusion models, people have sought ways to make them faster and cheaper to sample from. About two years ago, I wrote a blog post about diffusion distillation , which is one of the main tools used to reduce the number of steps required to obtain high-quality samples.</p>
+<p>Although the core principles underlying various distillation methods have not changed, a lot of new variants have popped up since. In this blog post, I want to take a closer look at flow maps. While diffusion models describe paths between noise and data by predicting.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://sander.ai/2026/05/06/flow-maps.html">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 03">03</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>simonwillison.net</span>
+        <span>Rank 8</span>
+      </div>
+      <h2>Vibe coding and agentic engineering are getting closer than I&#39;d like</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>I recently talked with Joseph Ruscio about AI coding tools for Heavybit’s High Leverage podcast: Ep. #9, The AI Coding Paradigm Shift with Simon Willison. Here are some of my … I recently talked with Joseph Ruscio about AI coding tools for Heavybit’s High Leverage podcast: Ep. #9, The AI Coding Paradigm Shift with Simon Willison . Here are some of my highlights, including my disturbing realization that vibe coding and agentic engineering have started to converge in my own work.</p>
+<p>One thing I really enjoy about podcasts is that they sometimes push me to think out loud in a way that exposes an idea I’ve not previously been able to put into words. A few weeks after vibe coding was first coined I published Not all AI-assisted programming is vibe coding (but vibe coding rocks) , where I firmly staked out my belief that “vibe coding” is a very different beast from responsible use of AI to write code, which I’ve since started to call agentic engineering .</p>
+<p>When Joseph brought up the distinction between the two I had a sudden realization that they’re not nearly as distinct for me as they used to be: Weirdly though, those things.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://simonwillison.net/2026/May/6/vibe-coding-and-agentic-engineering/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 04">04</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>sqlite.org</span>
+        <span>Rank 5</span>
+      </div>
+      <h2>SQLite Is a Library of Congress Recommended Storage Format</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>SQLite is a Recommended Storage Format for datasets according to the US Library of Congress . Further information: As of this writing (2018-05-29) the only other recommended storage formats for datasets are XML, JSON, and CSV. Recommended storage formats are formats which, in the opinion of the preservationists at the Library of Congress, maximizes the chance of survival and continued accessibility of digital content. When selecting recommended storage formats, the following criteria are considered (quoting from the LOC website): Disclosure.</p>
+<p>Degree to which complete specifications and tools for validating technical integrity exist and are accessible to those creating and sustaining digital content. A spectrum of disclosure levels can be observed for digital formats. What is most significant is not approval by a recognized standards body, but the existence of complete documentation. Adoption. Degree to which the format is already used by the primary creators, disseminators, or users of information resources.</p>
+<p>This includes use as a master format, for delivery to end users, and as a means of interchange between systems. Transparency. Degree to which the digital representation is open to direct analysis with basic tools, such as human readability using a text-only editor. Self-documentation. Self-documenting digital objects contain basic descriptive,.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://sqlite.org/locrsf.html">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 05">05</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>digitalfoundry.net</span>
+        <span>Rank 2</span>
+      </div>
+      <h2>Valve releases Steam Controller CAD files under Creative Commons license</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Modders, start your engines. With the rather excellent Steam Controller now on its way to the lucky few that managed to order one, Valve has released a full set of CAD files for their new hardware. The idea is to let enterprising modders create their own Steam Controller add-ons, like skins, charging stands, grip extenders or smartphone mounts. The Valve release includes files for the external shell (&quot;surface topology&quot;) of the Controller and Puck, with a .</p>
+<p>STP, . STL and engineering diagram of each device, with the latter showing areas that must remain uncovered to let the device maintain its signal strength and otherwise function as designed. Valve has previously released CAD files for its Steam Deck handheld, Valve Index VR suite and even the original Steam Controller a decade ago, so this release is welcomed but not unexpected. The release is under a fairly restrictive Creative Commons license which allows for non-commercial use and requires attribution and sharing of designs back to the community.</p>
+<p>However, the license also suggests that commercial entities interested in making accessories for the Steam Controller or its Puck can contact Valve directly to discuss terms. What is your ultimate Steam Controller or Steam Controller Puck.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.digitalfoundry.net/news/2026/05/valve-releases-steam-controller-cad-files-under-creative-commons-license">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 06">06</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>unsloth.ai</span>
+        <span>Rank 1</span>
+      </div>
+      <h2>Making LLM Training Faster with Unsloth and NVIDIA</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Learn how NVIDIA helped Unsloth to make fine-tuning AI models 20% faster with explanations and diagrams. Blog How to Make LLM Training Faster with Unsloth and NVIDIA May 6, 2026 May 6, 2026 Authors: Daniel, Michael, Mathew and Datta, with help from NVIDIA Fine-tuning is one of today&#39;s most computationally intensive workloads, and it continues to push hardware to its limits. NVIDIA GPUs are purpose-built for these workloads: they break complex problems into pieces and process them in parallel.</p>
+<p>Unsloth works across the breadth of NVIDIA GPUs, from local RTX laptops to DGX Spark personal AI supercomputers. To help developers get the most out of their GPUs, Unsloth has teamed up with NVIDIA to eliminate hidden bottlenecks that slow down training. These newly implemented optimizations accelerate GPU training speeds by ~25% when combined. Here is exactly how we did it. When optimizing model training, developers often start with the usual high-impact kernels: matmuls, attention, fused ops, grouped GEMM, and so on.</p>
+<p>Although those kernels do most of the arithmetic, once the main components are optimized, a different class of bottlenecks emerges. The GPU stalls on metadata-dependent work. The runtime rebuilds identical data structures every iteration, and copy/compute streams execute in.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://unsloth.ai/blog/nvidia-collab">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 07">07</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>github.com/darkrishabh</span>
+        <span>Rank 12</span>
+      </div>
+      <h2>Show HN: Agent-skills-eval – Test whether Agent Skills improve outputs</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>A test runner for agentskills. io-style AI agent skills - darkrishabh/agent-skills-eval Write a SKILL. md , drop in some evals, and find out — empirically — whether your skill actually makes the model better at the task. Agent Skills — the open standard from Anthropic for giving agents domain knowledge — make it easy to ship a SKILL. md and assume your agent is now better at the task.</p>
+<p>The hard part is proving it. agent-skills-eval is the missing piece. It runs your skill against the same prompts twice — once with_skill loaded into context, once without_skill (baseline) — has a judge model grade both outputs, and gives you a side-by-side report. If the skill doesn&#39;t make a measurable difference, you&#39;ll see it. If it does, you have receipts. It&#39;s the test framework for the Agent Skills ecosystem, separated from any specific agent runtime so it works wherever your skills do.</p>
+<p>npx agent-skills-eval . /skills \ --target gpt-4o-mini \ --judge gpt-4o-mini \ --baseline \ --strict That&#39;s it. Point it at a folder of skills, give it a target model and a judge model, and it produces a workspace with full artifacts and a static HTML report. agent-skills-workspace/ └── iteration-1/ ├── meta. json # run metadata.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://github.com/darkrishabh/agent-skills-eval">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 08">08</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>tilde.run</span>
+        <span>Rank 24</span>
+      </div>
+      <h2>Show HN: Tilde.run – Agent sandbox with a transactional, versioned filesystem</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Tilde turns running AI agents and pipelines on real data into a transactional, auditable operation. Compose GitHub, S3, and Drive as one versioned filesystem. Roll back any run with one command. Every network call audited. Get Started &amp;rarr; ~ tilde . run Let AI agents loose on production. Without the risk. Tilde turns every agent run into a transaction you can roll back. Code from GitHub, data from S3, and documents from Drive show up as a single versioned filesystem.</p>
+<p>Every outbound call is checked and logged. Autonomous code, finally safe to use against real data. Free to start &amp;middot; Join the private preview Reversible by default Roll back any agent run with one command One filesystem, all your data GitHub, S3, and Drive as a single ~/sandbox Contained by default Isolated runs, every network call audited You stay in control Per-action policies and human approval gates Plugs into the stack you already use Hugging Face Claude AWS S3 LangGraph Google Drive Hugging Face Claude AWS S3 LangGraph Google Drive ## Features Three guarantees that make autonomous code safe to run on real data: reversibility, isolation, and audit.</p>
+<p>Useful on their own. Decisive together. Versioned Composable Filesystem A real POSIX filesystem.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://tilde.run/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 09">09</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>chevrolet.com</span>
+        <span>Rank 11</span>
+      </div>
+      <h2>Chevrolet Performance eCrate package (400v/200hp)</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Upgrade your project car to electric with Chevrolet&#39;s eCrate system, featuring a 400V motor and 66 kWh battery for superior performance and reliability. You are currently viewing Chevrolet. com (United States). Close this window to stay here or choose another country to see vehicles and services specific to your location. Corvette Grand Sport Lineup Get Updates Back Commercial Commercial View All Commercial Silverado 3500 HD Chassis Cab From: $46,000 * Silverado 4500 HD/5500 HD/6500 HD From: $59,585 * Explore GM Fleet Back Upcoming Upcoming Corvette Grand Sport Lineup Get Updates View All Trucks Corvette Grand Sport Lineup New 2026 Corvette Build &amp; Price Get Updates Learn More View All Commercial Silverado 3500 HD Chassis Cab From: $46,000 * Silverado 4500 HD/5500 HD/6500 HD From: $59,585 * Search Inventory Search Inventory Explore GM Fleet Corvette Grand Sport Lineup Get Updates Trucks Electric SUVs Corvette Commercial Upcoming Find a Dealer Build &amp; Price Request a Test Drive Current Offers View Inventory Certified Used Vehicles Trade-In Value Find a Dealer Apply to Prequalify Request a Quote Products Products OnStar General Motors Insurance EV Chargers Accessories Parts Chevy Performance Parts Protection Plans Chevrolet Merchandise Performance Parts Engines LT Engines LS/LSX Engines Small Block Engines Big.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.chevrolet.com/performance-parts/crate-engines/ecrate">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 10">10</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>cringeout.com</span>
+        <span>Rank 6</span>
+      </div>
+      <h2>Show HN: Social Network for Corporate Cringe</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Your professional cringe, amplified. A social network where Kiss Ass meets Kick Ass. Show HN: Social Network for Corporate Cringe appears on the Hacker News front page from cringeout. com. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly. For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://cringeout.com/">Read story</a>
+    </div>
+  </article>
+  </main>
+</body>
+</html>
