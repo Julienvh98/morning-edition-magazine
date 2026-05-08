@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Morning Edition | 2026-05-08</title>
+  <meta name="description" content="A front-page Hacker News briefing tuned for AI tools, health, finance, weird science, and useful things you can act on today.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..900,80,1&family=IBM+Plex+Serif:wght@400;500&family=Inter:wght@500;650;800;900&display=swap" rel="stylesheet">
+  <style>
+
+:root {
+  color-scheme: light;
+  --ink: #17120c;
+  --paper: #f5ecd8;
+  --muted: rgba(23, 18, 12, 0.72);
+  --rule: rgba(23, 18, 12, 0.2);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(18px, 1.5vw, 24px);
+  line-height: 1.22;
+}
+
+a { color: inherit; text-decoration-thickness: 0.12em; text-underline-offset: 0.18em; }
+
+.cover {
+  min-height: 18vh;
+  display: grid;
+  align-content: center;
+  padding: clamp(16px, 3vw, 36px) clamp(22px, 5vw, 72px);
+  background: #f4ecd8;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.34);
+  overflow: hidden;
+}
+
+.story-topline,
+.official-news-title {
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.story-topline,
+.official-news-title {
+  color: var(--muted);
+}
+
+h1,
+h2,
+.number {
+  font-family: "Fraunces", Georgia, serif;
+  letter-spacing: 0;
+}
+
+h1 {
+  max-width: none;
+  margin: 0;
+  font-size: clamp(42px, 8vw, 96px);
+  line-height: 0.86;
+}
+
+.official-news {
+  display: grid;
+  gap: 16px;
+  padding: clamp(22px, 4vw, 56px) clamp(22px, 5vw, 72px);
+  background: #f7f0df;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.3);
+}
+
+.official-news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.official-news-card {
+  border-top: 1px solid rgba(23, 18, 12, 0.34);
+  padding-top: 12px;
+}
+
+.official-news-card h2,
+.story-main h2 {
+  max-width: 12ch;
+  margin: 0 0 10px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 760;
+  line-height: 0.98;
+}
+
+.summary-body {
+  display: grid;
+  gap: 14px;
+}
+
+.summary-body p,
+.official-news-empty {
+  margin: 0;
+  color: rgba(23, 18, 12, 0.82);
+  font-family: "IBM Plex Serif", Georgia, serif;
+  font-size: clamp(18px, 1.45vw, 22px);
+  font-weight: 400;
+  line-height: 1.36;
+}
+
+.official-news-card a,
+.story-link {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 14px;
+  color: rgba(23, 18, 12, 0.8);
+  font-size: clamp(15px, 1.1vw, 17px);
+  font-weight: 900;
+}
+
+.spread {
+  position: relative;
+  min-height: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  padding: clamp(28px, 5vw, 72px);
+  overflow: hidden;
+  border-top: 2px solid rgba(23, 18, 12, 0.2);
+  background:
+    linear-gradient(90deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    #f4ecd8;
+  background-size: 78px 78px;
+}
+
+.number {
+  position: absolute;
+  line-height: 0.76;
+  pointer-events: none;
+  user-select: none;
+}
+
+.story-main {
+  position: relative;
+  z-index: 1;
+}
+
+.story-topline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.brief {
+  max-width: 850px;
+  margin-top: 22px;
+  border-top: 2px solid rgba(23, 18, 12, 0.28);
+  padding-top: 18px;
+}
+
+@media (max-width: 860px) {
+  .cover,
+  .spread,
+  .official-news {
+    min-height: auto;
+    padding: 24px 22px 42px;
+  }
+
+  .cover {
+    min-height: 16svh;
+    padding: 14px 22px 12px;
+  }
+
+  h1 {
+    font-size: clamp(38px, 12vw, 56px);
+  }
+
+  .official-news {
+    gap: 12px;
+    padding: 20px 22px 24px;
+  }
+
+  .official-news-grid,
+  .spread {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .official-news-card h2,
+  .story-main h2 {
+    font-size: 30px;
+  }
+
+  .summary-body p,
+  .official-news-empty {
+    font-size: 18px;
+    line-height: 1.42;
+  }
+
+  .story-link,
+  .official-news-card a {
+    font-size: 16px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header class="cover">
+    <h1>Morning Edition</h1>
+  </header>
+
+  <section class="official-news">
+    <p class="official-news-title">Official AI Lab News</p>
+    <div class="official-news-grid">
+      <article class="official-news-card">
+    <h2>Testing ads in ChatGPT</h2>
+    <div class="summary-body official-news-summary">
+      <p>OpenAI begins testing ads in ChatGPT to support free access, with clear labeling, answer independence, strong privacy protections, and user control. Ads that support free access and don’t change ChatGPT answers. Loading… Share Update on May 7, 2026 : In the coming weeks, we plan to expand the ads pilot in ChatGPT in the United Kingdom, Mexico, Brazil, Japan, and South Korea. These pilots will help us understand what works well in different regions, so we can continue improving the experience as we expand.</p>
+<p>If you’re a business and interested in advertising in ChatGPT in these new markets, visit openai. com/advertisers/⁠ ⁠ to sign up for more updates. Update on March 26, 2026: Our ads pilot is focused on supporting broader access to ChatGPT while preserving consumer trust, usefulness, and user control. Guided by our ads principles ⁠ , the early results are encouraging. We’re seeing no impact on consumer trust metrics, low dismissal rates of ads, and ongoing improvements in the relevance of ads as we learn from feedback.</p>
+<p>These positive signals support moving into the next phase of our pilot. In the coming weeks, we’ll begin expanding beyond the U. S. , starting with pilots in Canada, Australia, and New Zealand.</p>
+    </div>
+    <a href="https://openai.com/index/testing-ads-in-chatgpt/">Read official article</a>
+  </article>
+<article class="official-news-card">
+    <h2>Testing ads in ChatGPT</h2>
+    <div class="summary-body official-news-summary">
+      <p>OpenAI begins testing ads in ChatGPT to support free access, with clear labeling, answer independence, strong privacy protections, and user control. OpenAI begins testing ads in ChatGPT to support free access, with clear labeling, answer independence, strong privacy protections, and user control. Ads that support free access and don’t change ChatGPT answers. Loading… Share Update on May 7, 2026 : In the coming weeks, we plan to expand the ads pilot in ChatGPT in the United Kingdom, Mexico, Brazil, Japan, and South Korea.</p>
+<p>These pilots will help us understand what works well in different regions, so we can continue improving the experience as we expand. If you’re a business and interested in advertising in ChatGPT in these new markets, visit openai. com/advertisers/⁠ ⁠ to sign up for more updates. Update on March 26, 2026: Our ads pilot is focused on supporting broader access to ChatGPT while preserving consumer trust, usefulness, and user control.</p>
+<p>Guided by our ads principles ⁠ , the early results are encouraging. We’re seeing no impact on consumer trust metrics, low dismissal rates of ads, and ongoing improvements in the relevance of ads as we learn from feedback. These positive signals support moving into the next phase of.</p>
+    </div>
+    <a href="https://openai.com/index/testing-ads-in-chatgpt">Read official article</a>
+  </article>
+    </div>
+  </section>
+
+  <main>
+    <article class="spread">
+    <div class="number" aria-label="Story 01">01</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>bsuh.bearblog.dev</span>
+        <span>Rank 8</span>
+      </div>
+      <h2>Agents need control flow, not more prompts</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Thesis: reliable agents tackling complex tasks need deterministic control flow encoded in software, not increasingly elaborate prompt chains If you’ve eve... Thesis: reliable agents tackling complex tasks need deterministic control flow encoded in software, not increasingly elaborate prompt chains If you’ve ever resorted to MANDATORY or DO NOT SKIP , you’ve hit the ceiling of prompting. Imagine a programming language where statements are suggestions and functions return “Success” while hallucinating .</p>
+<p>Reasoning becomes impossible; reliability collapses as complexity grows. Software scales through recursive composability: systems built from libraries, modules, and functions. It’s code all the way down. Code exposes predictable behavior, enabling local reasoning. Prompt chains lack this property. While useful for narrow tasks, prompts are non-deterministic, weakly specified, and difficult to verify. Reliability requires moving logic out of prose and into runtime. We need deterministic scaffolds: explicit state transitions and validation checkpoints that treat the LLM as a component, not the system.</p>
+<p>But deterministic orchestration is only half the battle. In a system prone to silent failure, an agent without aggressive error detection is just a fast way to reach the wrong conclusion. Without programmatic verification, we are left with three options: Agents need control flow, not more prompts.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://bsuh.bearblog.dev/agents-need-control-flow/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 02">02</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>github.com/graemeg</span>
+        <span>Rank 11</span>
+      </div>
+      <h2>Blaise – A modern self-hosting zero-legacy Object Pascal compiler targeting QBE</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>A modern, self-hosting Object Pascal compiler built for the 2020s. Zero legacy, full ARC, and unified UTF-8. - graemeg/blaise The Pascal you love, reimagined for the modern era. Blaise is a next-generation Object Pascal compiler built from the ground up to eliminate decades of legacy baggage. It prioritizes developer productivity, memory safety, and high-performance execution. The Object Pascal ecosystem has two options: Embarcadero Delphi (proprietary, Windows-first) and Free Pascal (open source but carrying 30 years of accumulated complexity — five language modes, five string types, and thousands of include files).</p>
+<p>One language mode. No {$mode} switches; no legacy dialect support. One string type. UTF-8 reference-counted string. RawBytes for binary data. One memory model. Automatic reference counting applies uniformly to strings, classes, and interfaces. No manual/auto split between TObject and TInterfacedObject ; [Weak] breaks cycles. Free is retained as a synonym for immediate release. Clean interfaces. No COM GUIDs; interface dispatch via compile-time vtable mapping. Reified generics. Monomorphization at compile time — no type erasure.</p>
+<p>Modern build system. PasBuild with project. xml ; no makefiles. First-class debugger. OPDF is the default debug format; DWARF is not required. See docs/design. adoc for the full architecture and implementation plan. The result — A modern, cross-platform.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://github.com/graemeg/blaise">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 03">03</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>openwall.com</span>
+        <span>Rank 4</span>
+      </div>
+      <h2>Dirtyfrag: Universal Linux LPE</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Dirtyfrag: Universal Linux LPE appears on the Hacker News front page from openwall. com. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly. For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it. This additional context is intentionally conservative:.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.openwall.com/lists/oss-security/2026/05/07/8">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 04">04</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>anthropic.com</span>
+        <span>Rank 13</span>
+      </div>
+      <h2>Natural Language Autoencoders: Turning Claude&#39;s Thoughts into Text</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Turning Claude&#39;s thoughts into text When you talk to an AI model like Claude, you talk to it in words. Internally, Claude processes those words as long lists of numbers, before again producing words as its output. These numbers in the middle are called activations— and like neural activity in the human brain, they encode Claude’s thoughts. Also like neural activity, activations are difficult to understand. We can’t easily decode them to read Claude’s thoughts.</p>
+<p>Over the past few years, we’ve developed a range of tools (like sparse autoencoders and attribution graphs ) for better understanding activations. These tools have taught us a great deal, but they don’t speak for themselves—their outputs are still complex objects that trained researchers need to carefully interpret. Today, we’re introducing a method for understanding activations that does speak for itself—literally. Our method, Natural Language Autoencoders (NLAs), converts an activation into natural-language text we can read directly.</p>
+<p>For example: When asked to complete a couplet, NLAs show Claude planning possible rhymes in advance. We’ve already applied NLAs to understand what Claude is thinking and to improve Claude’s safety and reliability. For instance: Below, we explain what NLAs are and how we studied their effectiveness and.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.anthropic.com/research/natural-language-autoencoders">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 05">05</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>ivanpleshkov.dev</span>
+        <span>Rank 10</span>
+      </div>
+      <h2>A polynomial autoencoder beats PCA on transformer embeddings</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>A closed-form autoencoder: PCA encoder + quadratic Ridge decoder. On FiQA it gives 4× compression of mxbai-embed-large-v1 at -0. 85 p. p. NDCG@10, +2. 73 p. p. over PCA. No SGD, no neural networks. The most direct way to compress an embedding (other than quantization) is to fit PCA on the corpus and keep the top-d eigenvectors. It works, but PCA is a linear projection, and neural-network embeddings on the sphere are structurally nonlinear — the well-known cone effect in transformers.</p>
+<p>Some of the variance lives in a nonlinear tail that a linear decoder can’t reach. This post is about a closed-form way to add a quadratic decoder on top of PCA, to capture part of that nonlinear tail. The encoder stays as plain PCA. The decoder is a degree-2 polynomial lift plus Ridge OLS (ordinary linear regression with L2 regularization), also closed-form. No SGD, no epochs, no hyperparameter search.</p>
+<p>One np. linalg. solve over corpus statistics. The construction itself isn’t mine. “PCA encoder + quadratic decoder + least-squares fit” appears in the dynamical-systems literature under the name quadratic manifold (see Jain 2017 , Geelen-Willcox 2022 / 2023 , Schwerdtner-Peherstorfer 2024+ — more in §9 ). I only stumbled onto these papers after running my experiments.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://ivanpleshkov.dev/blog/polynomial-autoencoder/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 06">06</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>github.com/antirez</span>
+        <span>Rank 17</span>
+      </div>
+      <h2>DeepSeek 4 Flash local inference engine for Metal</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>DeepSeek 4 Flash local inference engine for Metal. Contribute to antirez/ds4 development by creating an account on GitHub. ds4. c is a small native inference engine for DeepSeek V4 Flash. It is intentionally narrow: not a generic GGUF runner, not a wrapper around another runtime, and not a framework. The main path is a DeepSeek V4 Flash-specific Metal graph executor with DS4-specific loading, prompt rendering, KV state, and server API glue.</p>
+<p>This project would not exist without llama. cpp and GGML , make sure to read the acknowledgements section, a big thank you to Georgi Gerganov and all the other contributors. Now, back at this project. Why we believe DeepSeek v4 Flash to be a pretty special model deserving a stand alone engine? Because after comparing it with powerful smaller dense models, we can report that: That said, a few important things about this project: ds4.</p>
+<p>c does not link against GGML, but it exists thanks to the path opened by the llama. cpp project and the kernels, quantization formats, GGUF ecosystem, and hard-won engineering knowledge developed there . We are thankful and indebted to llama. cpp and its contributors. Their implementation, kernels, tests, and design choices were an essential reference while building this DeepSeek.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://github.com/antirez/ds4">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 07">07</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>deepmind.google</span>
+        <span>Rank 18</span>
+      </div>
+      <h2>AlphaEvolve: Gemini-powered coding agent scaling impact across fields</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>In genomics, AlphaEvolve was used to improve DeepConsensus —a model developed by Google Research for correcting DNA sequencing errors— achieving a 30% reduction in variant detection errors. These improvements are helping scientists at PacBio analyze genetic data more accurately and at a lower cost. “The solution the Google team discovered using AlphaEvolve unlocks meaningfully higher accuracy rates for our sequencing instruments. For researchers, this higher-quality data might enable the discovery of previously hidden disease causing mutations.”</p>
+<p>— Aaron Wenger, Senior Director at PacBio AlphaEvolve: Gemini-powered coding agent scaling impact across fields appears on the Hacker News front page from deepmind. google. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly. For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://deepmind.google/blog/alphaevolve-impact/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 08">08</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>rmoff.net</span>
+        <span>Rank 23</span>
+      </div>
+      <h2>AI slop is killing online communities</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Like a young child coming home from kindergarten with their latest crayon scrawls, the internet is currently awash with people sharing their AI-generated work. And just like the young child’s drawings, much of that work should be proudly put up on the walls within the artist’s house—and no further. I am not an AI-hater. In fact, I think AI-haters are on the wrong side of history .</p>
+<p>It’s just that I know when to keep my crayon-drawings to myself ;) And I am getting increasingly sad and frustrated seeing communities that I value slowly wilting under the onslaught of shit. Often that shit is perhaps naïvely shared with no deleterious intent, but shit nonetheless it is. Great, enter it at your next science fair. Meanwhile stop begging for stars on your brand new GitHub repo that no-one’s touching with a bargepole.</p>
+<p>Did you though? We can tell that Claude wrote it, and it’s a piece of garbage. Cool story bro. Except AI made it, and it’s only of interest as a curiosity, not a useful learning artefact. &quot;I’m self-publishing an ebook that I wrote about Kafka&quot; What you mean is, you got Claude to scrape the internet and crap out.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://rmoff.net/2026/05/06/ai-slop-is-killing-online-communities/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 09">09</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>news.ycombinator.com</span>
+        <span>Rank 5</span>
+      </div>
+      <h2>Rumors of my death are slightly exaggerated</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Hacker News discussion for &quot;Rumors of my death are slightly exaggerated&quot;. The original linked item is a discussion thread, so use it as context for what readers are debating, what practical details surfaced, and what caveats are worth checking. Rumors of my death are slightly exaggerated appears on the Hacker News front page from news. ycombinator. com. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly.</p>
+<p>For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it. This additional context.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://news.ycombinator.com/item?id=48037336">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 10">10</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>hacks.mozilla.org</span>
+        <span>Rank 25</span>
+      </div>
+      <h2>Hardening Firefox with Claude Mythos Preview</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>New details about what we found, and how agentic harnesses are now able to reproduce real bugs and dismiss false positives. Two weeks ago we announced that we had identified and fixed an unprecedented number of latent security bugs in Firefox with the help of Claude Mythos Preview and other AI models. In this post, we’ll go into more detail about how we approached this work, what we found, and advice for other projects on making good use of emerging capabilities to harden themselves against attack.</p>
+<p>Just a few months ago, AI-generated security bug reports to open source projects were mostly known for being unwanted slop. Dealing with reports that look plausibly correct but are wrong imposes an asymmetric cost on project maintainers: it’s cheap and easy to prompt an LLM to find a “problem” in code, but slow and expensive to respond to it. It is difficult to overstate how much this dynamic changed for us over a few short months.</p>
+<p>This was due to a combination of two main factors. First, the models got a lot more capable. Second, we dramatically improved our techniques for harnessing these models — steering them, scaling them, and stacking them to generate.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://hacks.mozilla.org/2026/05/behind-the-scenes-hardening-firefox/">Read story</a>
+    </div>
+  </article>
+  </main>
+</body>
+</html>

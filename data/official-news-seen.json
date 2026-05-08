@@ -55,7 +55,21 @@
       "category": "Company",
       "publishedDate": "2026-05-06",
       "firstIncluded": "2026-05-06"
+    },
+    "https://openai.com/index/testing-ads-in-chatgpt/": {
+      "source": "OpenAI",
+      "title": "Testing ads in ChatGPT",
+      "category": "Company",
+      "publishedDate": "2026-05-07",
+      "firstIncluded": "2026-05-08"
+    },
+    "https://openai.com/index/testing-ads-in-chatgpt": {
+      "source": "OpenAI",
+      "title": "Testing ads in ChatGPT",
+      "category": "Company",
+      "publishedDate": "2026-05-07",
+      "firstIncluded": "2026-05-08"
     }
   },
-  "lastRun": "2026-05-07"
+  "lastRun": "2026-05-08"
 }
