@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Morning Edition | 2026-05-09</title>
+  <meta name="description" content="A front-page Hacker News briefing tuned for AI tools, health, finance, weird science, and useful things you can act on today.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..900,80,1&family=IBM+Plex+Serif:wght@400;500&family=Inter:wght@500;650;800;900&display=swap" rel="stylesheet">
+  <style>
+
+:root {
+  color-scheme: light;
+  --ink: #17120c;
+  --paper: #f5ecd8;
+  --muted: rgba(23, 18, 12, 0.72);
+  --rule: rgba(23, 18, 12, 0.2);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(18px, 1.5vw, 24px);
+  line-height: 1.22;
+}
+
+a { color: inherit; text-decoration-thickness: 0.12em; text-underline-offset: 0.18em; }
+
+.cover {
+  min-height: 18vh;
+  display: grid;
+  align-content: center;
+  padding: clamp(16px, 3vw, 36px) clamp(22px, 5vw, 72px);
+  background: #f4ecd8;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.34);
+  overflow: hidden;
+}
+
+.story-topline,
+.official-news-title {
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.story-topline,
+.official-news-title {
+  color: var(--muted);
+}
+
+h1,
+h2,
+.number {
+  font-family: "Fraunces", Georgia, serif;
+  letter-spacing: 0;
+}
+
+h1 {
+  max-width: none;
+  margin: 0;
+  font-size: clamp(42px, 8vw, 96px);
+  line-height: 0.86;
+}
+
+.official-news {
+  display: grid;
+  gap: 16px;
+  padding: clamp(22px, 4vw, 56px) clamp(22px, 5vw, 72px);
+  background: #f7f0df;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.3);
+}
+
+.official-news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.official-news-card {
+  border-top: 1px solid rgba(23, 18, 12, 0.34);
+  padding-top: 12px;
+}
+
+.official-news-card h2,
+.story-main h2 {
+  max-width: 12ch;
+  margin: 0 0 10px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 760;
+  line-height: 0.98;
+}
+
+.summary-body {
+  display: grid;
+  gap: 14px;
+}
+
+.summary-body p,
+.official-news-empty {
+  margin: 0;
+  color: rgba(23, 18, 12, 0.82);
+  font-family: "IBM Plex Serif", Georgia, serif;
+  font-size: clamp(18px, 1.45vw, 22px);
+  font-weight: 400;
+  line-height: 1.36;
+}
+
+.official-news-card a,
+.story-link {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 14px;
+  color: rgba(23, 18, 12, 0.8);
+  font-size: clamp(15px, 1.1vw, 17px);
+  font-weight: 900;
+}
+
+.spread {
+  position: relative;
+  min-height: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  padding: clamp(28px, 5vw, 72px);
+  overflow: hidden;
+  border-top: 2px solid rgba(23, 18, 12, 0.2);
+  background:
+    linear-gradient(90deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    #f4ecd8;
+  background-size: 78px 78px;
+}
+
+.number {
+  position: absolute;
+  line-height: 0.76;
+  pointer-events: none;
+  user-select: none;
+}
+
+.story-main {
+  position: relative;
+  z-index: 1;
+}
+
+.story-topline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.brief {
+  max-width: 850px;
+  margin-top: 22px;
+  border-top: 2px solid rgba(23, 18, 12, 0.28);
+  padding-top: 18px;
+}
+
+@media (max-width: 860px) {
+  .cover,
+  .spread,
+  .official-news {
+    min-height: auto;
+    padding: 24px 22px 42px;
+  }
+
+  .cover {
+    min-height: 16svh;
+    padding: 14px 22px 12px;
+  }
+
+  h1 {
+    font-size: clamp(38px, 12vw, 56px);
+  }
+
+  .official-news {
+    gap: 12px;
+    padding: 20px 22px 24px;
+  }
+
+  .official-news-grid,
+  .spread {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .official-news-card h2,
+  .story-main h2 {
+    font-size: 30px;
+  }
+
+  .summary-body p,
+  .official-news-empty {
+    font-size: 18px;
+    line-height: 1.42;
+  }
+
+  .story-link,
+  .official-news-card a {
+    font-size: 16px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header class="cover">
+    <h1>Morning Edition</h1>
+  </header>
+
+  <section class="official-news">
+    <p class="official-news-title">Official AI Lab News</p>
+    <p class="official-news-empty">Checked first-party news sources since 2026-05-07. No new official Anthropic or OpenAI company updates were found for this issue.</p>
+  </section>
+
+  <main>
+    <article class="spread">
+    <div class="number" aria-label="Story 01">01</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>reclaimthenet.org</span>
+        <span>Rank 3</span>
+      </div>
+      <h2>Google broke reCAPTCHA for de-googled Android users</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>The company that decides whether you&#39;re a bot now also requires you run its software to prove otherwise. It’s a surprisingly coherent product, but whether you actually need it depends entirely on which kind of privacy user you are. Google broke reCAPTCHA for de-googled Android users appears on the Hacker News front page from reclaimthenet. org. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly.</p>
+<p>For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it. This additional context.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://reclaimthenet.org/google-broke-recaptcha-for-de-googled-android-users">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 02">02</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>gowers.wordpress.com</span>
+        <span>Rank 1</span>
+      </div>
+      <h2>A recent experience with ChatGPT 5.5 Pro</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>We are all having to keep revising upwards our assessments of the mathematical capabilities of large language models. I have just made a fairly large revision as a result of ChatGPT 5. 5 Pro, to whi… We are all having to keep revising upwards our assessments of the mathematical capabilities of large language models. I have just made a fairly large revision as a result of ChatGPT 5.</p>
+<p>5 Pro, to which I am fortunate to have been given access, producing a piece of PhD-level research in an hour or so, with no serious mathematical input from me. The background is that, as has been widely reported, LLMs are now capable of solving research-level problems, and have managed to solve several of the Erdős problems listed on Thomas Bloom’s wonderful website . Initially it was possible to laugh this off: many of the “solutions” consisted in the LLM noticing that the problem had an answer sitting there in the literature already, or could be very easily deduced from known results.</p>
+<p>But little by little the laughter has become quieter. The message I am getting from what other mathematicians more involved in this enterprise have been saying is that LLMs have got to.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://gowers.wordpress.com/2026/05/08/a-recent-experience-with-chatgpt-5-5-pro/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 03">03</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>moq.dev</span>
+        <span>Rank 5</span>
+      </div>
+      <h2>OpenAI’s WebRTC problem</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Media over QUIC: There are ways to do voice AI without being traumatized by WebRTC. OpenAI posted a technical blog a few days ago. This blog post triggered me more than it should have. I urge to slap my meaty fingers on the keyboard. I don’t think you should use WebRTC for voice AI. WebRTC is the problem. Like 6 years ago I wrote a WebRTC SFU at Twitch.</p>
+<p>Originally we used Pion (Go) just like OpenAI, but forked after benchmarking revealed that it was too slow. I ended up rewriting every protocol, because of course I did! Just a year ago, I was at Discord and I rewrote the WebRTC SFU in Rust. Because of course I did! You’re probably noticing a trend. Fun Fact : WebRTC consists of ~45 RFCs dating back to the early 2000s.</p>
+<p>And some de-facto standards that are technically drafts (ex. TWCC, REMB). Not a fun fact when you have to implement them all. You should consider me a Certified WebRTC Expert . Which is why I never, never want to use WebRTC again. I’m going to cheat a little bit and start with the hot takes before they get cold. Don’t worry, we’ll.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://moq.dev/blog/webrtc-is-the-problem/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 04">04</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>twitter.com/trq212</span>
+        <span>Rank 4</span>
+      </div>
+      <h2>Using Claude Code: The unreasonable effectiveness of HTML</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>JavaScript is not available. We’ve detected that JavaScript is disabled in this browser. Please enable JavaScript or switch to a supported browser to continue using x. com. You can see a list of supported browsers in our Help Center. Terms of Service Privacy Policy Cookie Policy Imprint Ads info © 2026 X Corp. Using Claude Code: The unreasonable effectiveness of HTML appears on the Hacker News front page from twitter.</p>
+<p>com/trq212. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly. For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://twitter.com/trq212/status/2052809885763747935">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 05">05</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>jefftk.com</span>
+        <span>Rank 10</span>
+      </div>
+      <h2>AI is breaking two vulnerability cultures</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>A week ago the Copy Fail vulnerability came out, and Hyunwoo Kim immediately realized that the fixes were insufficient, sharing a patch the same day. In doing this he followed standard procedure for Linux, especially within networking: share the security impact with a closed list of Linux security engineers, while fixing the bug quietly and efficiently in the open. His goal was that with only the Someone else noticed the change, however, realized the security implications, and shared it publicly .</p>
+<p>Since it was now out, the embargo was deemed over, and we can now see the full details . It&#39;s interesting to see the tension here between two different approaches to vulnerabilities, and think about how this is likely to change with AI acceleration. On one side you have &quot;coordinated disclosure&quot; culture. This is probably the most common approach in computer security. When you discover a security bug you tell the maintainers privately and give them some amount of time (often 90d) to fix it.</p>
+<p>The goal is that a fix is out before anyone learns about the hole. On the other side you have &quot;bugs are bugs&quot; culture. This is especially common in Linux, where the argument is.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.jefftk.com/p/ai-is-breaking-two-vulnerability-cultures">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 06">06</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>pages.casa</span>
+        <span>Rank 2</span>
+      </div>
+      <h2>All my clients wanted a carousel, now it&#39;s an AI chatbot</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Posts about SmolWeb, Gemini protocol and LowTech It always starts the same way. The client pulls out their phone mid-meeting, navigates to a competitor&#39;s website, and holds the screen up like evidence. &quot;You see? They have one of those.&quot; A little bubble. Bottom right corner. Blinking... For years, that gesture was about carousels. Every homepage had to have one, big, slow, full of stock photos that nobody asked for.</p>
+<p>I built dozens of them. They spun. They faded. They slid. Visitors ignored them completely, scrolled past in half a second, and went looking for the phone number. Then the trend quietly died, as trends do. Not because anyone decided carousels were bad. Just because something newer came along to copy. Cookie consent banners came next. Every site needed one, even the ones with no cookies whatsoever.</p>
+<p>Then Google Tag Manager, even for clients who never once opened an analytics report. I asked one of them, eighteen months after launch, if he&#39;d ever looked at the traffic stats. He hadn&#39;t. He didn&#39;t even remember the login. I&#39;ve started asking clients a simple question when they bring it up. Not to be difficult, just to understand. &quot;Do you actually use chatbots when.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://adele.pages.casa/md/blog/all-my-clients-wanted-a-carousel-now-it-s-an-ai-chatbot.md">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 07">07</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>anthropic.com</span>
+        <span>Rank 19</span>
+      </div>
+      <h2>Teaching Claude Why</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>New research on how we&#39;ve reduced agentic misalignment Last year, we released a case study on agentic misalignment . In experimental scenarios, we showed that AI models from many different developers sometimes took egregiously misaligned actions when they encountered (fictional) ethical dilemmas. For example, in one heavily discussed example, the models blackmailed engineers to avoid being shut down. When we first published this research, our most capable frontier models were from the Claude 4 family.</p>
+<p>This was also the first model family for which we ran a live alignment assessment during training; 1 agentic misalignment was one of several behavioral issues that surfaced. Thus, after Claude 4, it was clear we needed to improve our safety training and, since then, we have made significant updates to our safety training. We use agentic misalignment as a case study to highlight some of the techniques we found to be surprisingly effective.</p>
+<p>Indeed, since Claude Haiku 4. 5, every Claude model 2 has achieved a perfect score on the agentic misalignment evaluation—that is, the models never engage in blackmail, where previous models would sometimes do so up to 96% of the time (Opus 4). Not only that, but we’ve continued to see improvements to.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.anthropic.com/research/teaching-claude-why">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 08">08</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>sigops.org</span>
+        <span>Rank 20</span>
+      </div>
+      <h2>Can LLMs model real-world systems in TLA+?</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Editors’ note: AI has been actively pushing the frontier of applied formal methods for computing systems. In this article, the Specula team wrote about their experience of evaluating LLMs on modeling system code, the basic capability for agentic model checking, using TLA+, a specification language f Editors’ note: AI has been actively pushing the frontier of applied formal methods for computing systems. In this article, the Specula team wrote about their experience of evaluating LLMs on modeling system code, the basic capability for agentic model checking, using TLA+, a specification language for concurrent and distributed systems.</p>
+<p>The article is the 7th blog in The Next Horizon of System Intelligence series. Several months ago, we asked Claude to write a TLA + specification (spec) for Etcd’s Raft implementation . It passed syntax checks, ran through the TLC model checker, and at first glance looked like a polished formal model. Then we noticed something: this looks like the spec from the Raft paper, and it has very little to do with Etcd-specific details.</p>
+<p>What Claude produced was not a spec for Etcd. It was a spec from the appendix of the Raft paper . Later, we kept coming back to the question:.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.sigops.org/2026/can-llms-model-real-world-systems-in-tla/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 09">09</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>yosefk.com</span>
+        <span>Rank 25</span>
+      </div>
+      <h2>All means are fair except solving the problem</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>An industry veteran in my circles has recently made the rookie mistake 1 of printing a warning from his code upon misuse. Surprisingly to nobody experienced, critical workflows soon came to a screeching halt. It turned out that a program using his code prints something like “yay, done” upon exit, and scripts expect it to be the last thing it says. But now those warnings occasionally got printed from destructors or such, after the “yay, done”, making the scripts think the program failed.</p>
+<p>One might think that this prompted people to fix the reported misuse, and that thought would be another rookie mistake. Instead, they were quick to point out that it’s hard to know where these warnings could come from, and we cannot risk all those critical workflows failing when some case of misuse surfaces in a new context. I mean, you could grep to get an upper bound, and if you did, not that many places would come up.</p>
+<p>But one could then say, as some in fact did , that maybe you haven’t grepped everywhere you should have, and even the cases you did find are owned by many different teams, so we won’t get the fixes.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://yosefk.com/blog/all-means-are-fair-except-solving-the-problem.html">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 10">10</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>worksinprogress.co</span>
+        <span>Rank 22</span>
+      </div>
+      <h2>The Soul of Maintaining a New Machine</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Books in Progress is what we call a “public drafting tool”: Drafts will be made available for comment from the public, allowing for direct collaboration between author and reader. T THEY ATE TOGETHER every chance they could. They had to. The enormous photocopiers they were responsible for maintaining were so complex, temperamental, and variable between models and upgrades that it was difficult to keep the machines functioning without frequent conversations with their peers about the ever-shifting nuances of repair and care.</p>
+<p>The core of their operational knowledge was social. That’s the subject of this chapter. It was the mid-1980s. They were the technician teams charged with servicing the Xerox machines that suddenly were providing all of America’s offices with vast quantities of photocopies and frustration. The machines were so large, noisy, and busy that most offices kept them in a separate room. An inquisitive anthropologist discovered that what the technicians did all day with those machines was grotesquely different from what Xerox corporation thought they did, and the divergence was hampering the company unnecessarily.</p>
+<p>The saga that followed his revelation is worth recounting in detail because of what it shows about the ingenuity of professional maintainers at work in a.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://books.worksinprogress.co/book/maintenance-of-everything/communities-of-practice/the-soul-of-maintaining-a-new-machine/3">Read story</a>
+    </div>
+  </article>
+  </main>
+</body>
+</html>
