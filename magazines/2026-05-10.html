@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Morning Edition | 2026-05-10</title>
+  <meta name="description" content="A front-page Hacker News briefing tuned for AI tools, health, finance, weird science, and useful things you can act on today.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..900,80,1&family=IBM+Plex+Serif:wght@400;500&family=Inter:wght@500;650;800;900&display=swap" rel="stylesheet">
+  <style>
+
+:root {
+  color-scheme: light;
+  --ink: #17120c;
+  --paper: #f5ecd8;
+  --muted: rgba(23, 18, 12, 0.72);
+  --rule: rgba(23, 18, 12, 0.2);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(18px, 1.5vw, 24px);
+  line-height: 1.22;
+}
+
+a { color: inherit; text-decoration-thickness: 0.12em; text-underline-offset: 0.18em; }
+
+.cover {
+  min-height: 18vh;
+  display: grid;
+  align-content: center;
+  padding: clamp(16px, 3vw, 36px) clamp(22px, 5vw, 72px);
+  background: #f4ecd8;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.34);
+  overflow: hidden;
+}
+
+.story-topline,
+.official-news-title {
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.story-topline,
+.official-news-title {
+  color: var(--muted);
+}
+
+h1,
+h2,
+.number {
+  font-family: "Fraunces", Georgia, serif;
+  letter-spacing: 0;
+}
+
+h1 {
+  max-width: none;
+  margin: 0;
+  font-size: clamp(42px, 8vw, 96px);
+  line-height: 0.86;
+}
+
+.official-news {
+  display: grid;
+  gap: 16px;
+  padding: clamp(22px, 4vw, 56px) clamp(22px, 5vw, 72px);
+  background: #f7f0df;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.3);
+}
+
+.official-news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.official-news-card {
+  border-top: 1px solid rgba(23, 18, 12, 0.34);
+  padding-top: 12px;
+}
+
+.official-news-card h2,
+.story-main h2 {
+  max-width: 12ch;
+  margin: 0 0 10px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 760;
+  line-height: 0.98;
+}
+
+.summary-body {
+  display: grid;
+  gap: 14px;
+}
+
+.summary-body p,
+.official-news-empty {
+  margin: 0;
+  color: rgba(23, 18, 12, 0.82);
+  font-family: "IBM Plex Serif", Georgia, serif;
+  font-size: clamp(18px, 1.45vw, 22px);
+  font-weight: 400;
+  line-height: 1.36;
+}
+
+.official-news-card a,
+.story-link {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 14px;
+  color: rgba(23, 18, 12, 0.8);
+  font-size: clamp(15px, 1.1vw, 17px);
+  font-weight: 900;
+}
+
+.spread {
+  position: relative;
+  min-height: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  padding: clamp(28px, 5vw, 72px);
+  overflow: hidden;
+  border-top: 2px solid rgba(23, 18, 12, 0.2);
+  background:
+    linear-gradient(90deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    #f4ecd8;
+  background-size: 78px 78px;
+}
+
+.number {
+  position: absolute;
+  line-height: 0.76;
+  pointer-events: none;
+  user-select: none;
+}
+
+.story-main {
+  position: relative;
+  z-index: 1;
+}
+
+.story-topline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.brief {
+  max-width: 850px;
+  margin-top: 22px;
+  border-top: 2px solid rgba(23, 18, 12, 0.28);
+  padding-top: 18px;
+}
+
+@media (max-width: 860px) {
+  .cover,
+  .spread,
+  .official-news {
+    min-height: auto;
+    padding: 24px 22px 42px;
+  }
+
+  .cover {
+    min-height: 16svh;
+    padding: 14px 22px 12px;
+  }
+
+  h1 {
+    font-size: clamp(38px, 12vw, 56px);
+  }
+
+  .official-news {
+    gap: 12px;
+    padding: 20px 22px 24px;
+  }
+
+  .official-news-grid,
+  .spread {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .official-news-card h2,
+  .story-main h2 {
+    font-size: 30px;
+  }
+
+  .summary-body p,
+  .official-news-empty {
+    font-size: 18px;
+    line-height: 1.42;
+  }
+
+  .story-link,
+  .official-news-card a {
+    font-size: 16px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header class="cover">
+    <h1>Morning Edition</h1>
+  </header>
+
+  <section class="official-news">
+    <p class="official-news-title">Official AI Lab News</p>
+    <p class="official-news-empty">Checked first-party news sources since 2026-05-08. No new official Anthropic or OpenAI company updates were found for this issue.</p>
+  </section>
+
+  <main>
+    <article class="spread">
+    <div class="number" aria-label="Story 01">01</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>twitter.com/jarredsumner</span>
+        <span>Rank 3</span>
+      </div>
+      <h2>Bun&#39;s experimental Rust rewrite hits 99.8% test compatibility on Linux x64 glibc</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Bun&#39;s experimental Rust rewrite hits 99. 8% test compatibility on Linux x64 glibc appears on the Hacker News front page from twitter. com/jarredsumner. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly. For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://twitter.com/jarredsumner/status/2053047748191232310">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 02">02</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>gowers.wordpress.com</span>
+        <span>Rank 17</span>
+      </div>
+      <h2>A recent experience with ChatGPT 5.5 Pro</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>We are all having to keep revising upwards our assessments of the mathematical capabilities of large language models. I have just made a fairly large revision as a result of ChatGPT 5. 5 Pro, to whi… We are all having to keep revising upwards our assessments of the mathematical capabilities of large language models. I have just made a fairly large revision as a result of ChatGPT 5.</p>
+<p>5 Pro, to which I am fortunate to have been given access, producing a piece of PhD-level research in an hour or so, with no serious mathematical input from me. The background is that, as has been widely reported, LLMs are now capable of solving research-level problems, and have managed to solve several of the Erdős problems listed on Thomas Bloom’s wonderful website . Initially it was possible to laugh this off: many of the “solutions” consisted in the LLM noticing that the problem had an answer sitting there in the literature already, or could be very easily deduced from known results.</p>
+<p>But little by little the laughter has become quieter. The message I am getting from what other mathematicians more involved in this enterprise have been saying is that LLMs have got to.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://gowers.wordpress.com/2026/05/08/a-recent-experience-with-chatgpt-5-5-pro/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 03">03</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>github.com/imtomt</span>
+        <span>Rank 1</span>
+      </div>
+      <h2>Show HN: Building a web server in assembly to give my life (a lack of) meaning</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>MacOS Web Server written entirely in ARM64 assembly - imtomt/ymawky This is ymawky (yuh maw kee), a web server written entirely in ARM64 assembly. ymawky is a syscall-only, no libc, fork-per-connection web server written by hand. While it is developed for MacOS, I&#39;ve tried to make it as portable as possible -- however , it&#39;s likely you will still need to make some (hopefully minor) Significant tweaks to get this to run on Linux/other Unix systems.</p>
+<p>See Implementation Notes for more details. Requires Xcode Command Line Tools. Install with xcode-select --install . ymawky only runs on apple silicon (arm64). Ensure there is a www/ directory next to the ymawky executable. That&#39;s the document root where ymawky searches for files. GET with an empty filename ( GET / ) will search for www/index. html , so you might want to make sure there&#39;s an index.</p>
+<p>html as well. ymawky will try to serve static error pages when a client&#39;s request results in error, eg 404. The pages it searches for in err/(code). html , so ensure err/ exists alongisde ymawky and www/ . See Configuration to modify the default file and docroot. . /ymawky to start running the web server on 127. 0. 0. 1:8080 . . /ymawky [port].</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://github.com/imtomt/ymawky">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 04">04</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>arxiv.org</span>
+        <span>Rank 19</span>
+      </div>
+      <h2>LLMs corrupt your documents when you delegate</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Abstract page for arXiv paper 2604. 15597: LLMs Corrupt Your Documents When You Delegate GO quick links Login Help Pages About --&gt; Computer Science &gt; Computation and Language arXiv:2604. 15597 (cs) [Submitted on 17 Apr 2026] Title: LLMs Corrupt Your Documents When You Delegate Authors: Philippe Laban , Tobias Schnabel , Jennifer Neville View a PDF of the paper titled LLMs Corrupt Your Documents When You Delegate, by Philippe Laban and Tobias Schnabel and Jennifer Neville View PDF HTML (experimental) Abstract: Large Language Models (LLMs) are poised to disrupt knowledge work, with the emergence of delegated work as a new interaction paradigm (e.</p>
+<p>g. , vibe coding). Delegation requires trust - the expectation that the LLM will faithfully execute the task without introducing errors into documents. We introduce DELEGATE-52 to study the readiness of AI systems in delegated workflows. DELEGATE-52 simulates long delegated workflows that require in-depth document editing across 52 professional domains, such as coding, crystallography, and music notation. Our large-scale experiment with 19 LLMs reveals that current models degrade documents during delegation: even frontier models (Gemini 3.</p>
+<p>1 Pro, Claude 4. 6 Opus, GPT 5. 4) corrupt an average of 25% of document content by the end of long workflows, with other models failing more.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://arxiv.org/abs/2604.15597">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 05">05</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>twitter.com/trq212</span>
+        <span>Rank 28</span>
+      </div>
+      <h2>Using Claude Code: The unreasonable effectiveness of HTML</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Using Claude Code: The unreasonable effectiveness of HTML appears on the Hacker News front page from twitter. com/trq212. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly. For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it. This additional.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://twitter.com/trq212/status/2052809885763747935">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 06">06</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>zed.dev</span>
+        <span>Rank 13</span>
+      </div>
+      <h2>Zed Editor Theme-Builder</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Build and customize themes for Zed. Product Resources Extensions Docs Business Pricing P Sign up S Download D Theme Builder is Desktop-only To fully utilize Zed&#39;s theme builder, access it from the desktop. In the meantime, browse available theme extensions. View Theme Extensions Zed Industries © 2026 Sign Up · Have an account? Sign In border. focused Border 6 Text 6 Icon 4 Editor 19 Navigation 4 Element 6 Ghost Element 5 Drop Target 2 Tabs 3 Scrollbar 6 Minimap 4 Status 42 Version Control 8 Terminal 28 Players 24 Create New Theme One / One Dark Reset Import Export zed.</p>
+<p>dev main / main Share scheduler. tsx src/components/scheduler. tsx 1 &quot;use client&quot; 2 ​ 3 import * as React from &quot;react&quot; 4 import { format , addMinutes , isAfter } from &quot;date-fns&quot; 5 ​ 6 // Types for our &quot;essential&quot; meeting system 7 interface Meeting { 8 id : string 9 title : string 10 couldHaveBeenAnEmail : boolean &#39;couldHaveBeenAnEmail&#39; is declared but its value is never read.</p>
+<p>11 attendees : string [ ] 12 snacksProvided : boolean 13 actuallyStartsOnTime : number Type &#39;string&#39; is not assignable to type &#39;number&#39;. 14 } 15 ​ 16 type MeetingStatus = &quot;scheduled&quot; | &quot;running-late&quot; | &quot;cancelled&quot; |.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://zed.dev/theme-builder">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 07">07</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>evilgeniuslabs.ca</span>
+        <span>Rank 14</span>
+      </div>
+      <h2>I&#39;m writing a history of Visual Basic, Chapter 1 is up</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Starting a long-form history of Visual Basic on EvilGeniusLabs. ca. Chapter 1 covers the BASIC dynasty Microsoft had been running since 1975, the California developer Microsoft bought to put a face on it, and the launch pitch Bill Gates seeded in BYTE Magazine eighteen months before VB shipped. Six articles, focused on the parts of the story that don&#39;t get covered. Starting a long-form history of Visual Basic on EvilGeniusLabs.</p>
+<p>ca. Chapter 1 covers the BASIC dynasty Microsoft had been running since 1975, the California developer Microsoft bought to put a face on it, and the launch pitch Bill Gates seeded in BYTE Magazine eighteen months before VB shipped. Six articles, focused on the parts of the story that don&#39;t get covered. Visual Basic 1. 0 shipped on May 20, 1991, which makes the project I started this week thirty-five years late.</p>
+<p>That&#39;s part of why I started it. The other part is that the histories of Visual Basic that exist tend to do one of two things. They focus on Bill Gates, Paul Allen, and the Microsoft management story, which has been written a hundred times by people with much better access than me, and which I have nothing new to add.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://evilgeniuslabs.ca/blog/visual-basic-history-chapter-1-launch">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 08">08</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>untendedfire.org</span>
+        <span>Rank 12</span>
+      </div>
+      <h2>Scouting&#39;s Real Crisis Is Not Marketing. It Is Decades of Neglect.</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>When the Boy Scouts of America, recently rebranded as Scouting America, gathers in Dallas May 11-15 for its National Annual Meeting, its leaders will confront a crisis that messaging cannot solve. At the end of 2025, the organization’s market share sank to about 1. 25 percent of American youth, the lowest since about 1923. The organization... Move Forward: Save Scouting BSA national committee transparency scores Order of the Arrow cleanliness audit About Untended Fire Without a bold vision, BSA is doomed within a decade.</p>
+<p>With Move Forward: Save Scouting , we can be relevant to society, improve programming, ditch unsound practices, and streamline the experience. When the Boy Scouts of America, recently rebranded as Scouting America , gathers in Dallas May 11-15 for its National Annual Meeting , its leaders will confront a crisis that messaging cannot solve. At the end of 2025, the organization’s market share sank to about 1.</p>
+<p>25 percent of American youth, the lowest since about 1923. The organization has not strung together a multi-year recovery in 25 years. BSA’s decline is not the generic story of a youth organization losing ground to phones , sports , or overscheduling . Those affect everyone. BSA’s problem is more specific.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.untendedfire.org/2026/05/09/scoutings-real-crisis-is-not-marketing-it-is-decades-of-neglect/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 09">09</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>blog.archive.org</span>
+        <span>Rank 8</span>
+      </div>
+      <h2>Internet Archive Switzerland</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Thirty years ago, Brewster Kahle founded the Internet Archive with an ambitious goal: Universal Access to All Knowledge . Today, that mission continues to grow with an exciting new chapter: the launch of the Internet Archive Switzerland , a non-profit foundation based in St. Gallen. The Internet Archive Switzerland , online at https://internetarchive. ch/ , is a newly-formed Swiss non-profit foundation that will operate independently within its national context.</p>
+<p>Its efforts will initially focus on preserving endangered archives from around the world and collecting the generative AI wave that is currently upon us all. With a UNESCO conference planned for November 2026 in Paris, Internet Archive Switzerland is taking a concrete step to explore how endangered archives can be protected. In parallel, the Swiss foundation is working in partnership with the School of Computer Science at the University of St.</p>
+<p>Gallen, on the Gen AI Archive project led by Prof. Dr. Damian Borth. Together, they aim to begin archiving AI models, which is an emerging frontier for preservation. The choice of St. Gallen is no coincidence. With a thousand-year tradition of archiving and scholarship, the city offers a fitting home for this next phase of digital preservation. Its strong academic environment—including.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://blog.archive.org/2026/05/06/internet-archive-switzerland-expanding-a-global-mission-to-preserve-knowledge/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 10">10</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>chrismorgan.info</span>
+        <span>Rank 9</span>
+      </div>
+      <h2>I’ve banned query strings</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>🗓️ 2026-05-08 • Tagged /web , /opinions , /meta=only I’ve banned query strings appears on the Hacker News front page from chrismorgan. info. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly. For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://chrismorgan.info/no-query-strings">Read story</a>
+    </div>
+  </article>
+  </main>
+</body>
+</html>
