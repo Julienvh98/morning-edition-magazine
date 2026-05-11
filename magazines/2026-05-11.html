@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Morning Edition | 2026-05-11</title>
+  <meta name="description" content="A front-page Hacker News briefing tuned for AI tools, health, finance, weird science, and useful things you can act on today.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..900,80,1&family=IBM+Plex+Serif:wght@400;500&family=Inter:wght@500;650;800;900&display=swap" rel="stylesheet">
+  <style>
+
+:root {
+  color-scheme: light;
+  --ink: #17120c;
+  --paper: #f5ecd8;
+  --muted: rgba(23, 18, 12, 0.72);
+  --rule: rgba(23, 18, 12, 0.2);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(18px, 1.5vw, 24px);
+  line-height: 1.22;
+}
+
+a { color: inherit; text-decoration-thickness: 0.12em; text-underline-offset: 0.18em; }
+
+.cover {
+  min-height: 18vh;
+  display: grid;
+  align-content: center;
+  padding: clamp(16px, 3vw, 36px) clamp(22px, 5vw, 72px);
+  background: #f4ecd8;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.34);
+  overflow: hidden;
+}
+
+.story-topline,
+.official-news-title {
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.story-topline,
+.official-news-title {
+  color: var(--muted);
+}
+
+h1,
+h2,
+.number {
+  font-family: "Fraunces", Georgia, serif;
+  letter-spacing: 0;
+}
+
+h1 {
+  max-width: none;
+  margin: 0;
+  font-size: clamp(42px, 8vw, 96px);
+  line-height: 0.86;
+}
+
+.official-news {
+  display: grid;
+  gap: 16px;
+  padding: clamp(22px, 4vw, 56px) clamp(22px, 5vw, 72px);
+  background: #f7f0df;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.3);
+}
+
+.official-news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.official-news-card {
+  border-top: 1px solid rgba(23, 18, 12, 0.34);
+  padding-top: 12px;
+}
+
+.official-news-card h2,
+.story-main h2 {
+  max-width: 12ch;
+  margin: 0 0 10px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 760;
+  line-height: 0.98;
+}
+
+.summary-body {
+  display: grid;
+  gap: 14px;
+}
+
+.summary-body p,
+.official-news-empty {
+  margin: 0;
+  color: rgba(23, 18, 12, 0.82);
+  font-family: "IBM Plex Serif", Georgia, serif;
+  font-size: clamp(18px, 1.45vw, 22px);
+  font-weight: 400;
+  line-height: 1.36;
+}
+
+.official-news-card a,
+.story-link {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 14px;
+  color: rgba(23, 18, 12, 0.8);
+  font-size: clamp(15px, 1.1vw, 17px);
+  font-weight: 900;
+}
+
+.spread {
+  position: relative;
+  min-height: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  padding: clamp(28px, 5vw, 72px);
+  overflow: hidden;
+  border-top: 2px solid rgba(23, 18, 12, 0.2);
+  background:
+    linear-gradient(90deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    #f4ecd8;
+  background-size: 78px 78px;
+}
+
+.number {
+  position: absolute;
+  line-height: 0.76;
+  pointer-events: none;
+  user-select: none;
+}
+
+.story-main {
+  position: relative;
+  z-index: 1;
+}
+
+.story-topline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.brief {
+  max-width: 850px;
+  margin-top: 22px;
+  border-top: 2px solid rgba(23, 18, 12, 0.28);
+  padding-top: 18px;
+}
+
+@media (max-width: 860px) {
+  .cover,
+  .spread,
+  .official-news {
+    min-height: auto;
+    padding: 24px 22px 42px;
+  }
+
+  .cover {
+    min-height: 16svh;
+    padding: 14px 22px 12px;
+  }
+
+  h1 {
+    font-size: clamp(38px, 12vw, 56px);
+  }
+
+  .official-news {
+    gap: 12px;
+    padding: 20px 22px 24px;
+  }
+
+  .official-news-grid,
+  .spread {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .official-news-card h2,
+  .story-main h2 {
+    font-size: 30px;
+  }
+
+  .summary-body p,
+  .official-news-empty {
+    font-size: 18px;
+    line-height: 1.42;
+  }
+
+  .story-link,
+  .official-news-card a {
+    font-size: 16px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header class="cover">
+    <h1>Morning Edition</h1>
+  </header>
+
+  <section class="official-news">
+    <p class="official-news-title">Official AI Lab News</p>
+    <div class="official-news-grid">
+      <article class="official-news-card">
+    <h2>OpenAI Campus Network: Student club interest form</h2>
+    <div class="summary-body official-news-summary">
+      <p>Join the OpenAI Campus Network—connect student clubs worldwide, access AI tools, host events, and build an AI-powered campus community. Join a global network of student leaders building AI-native campuses. Share We’re partnering with student clubs across universities worldwide to: Whether you&#39;re running events, building projects, or leading a community — we’d love to work with you. Club name * Type of club * Choose a club type...</p>
+<p>AI/ML Computer science/engineering Entrepreneurship/startup Business/consulting Research/academic Design/product General student organization Other How active is your club? * Choose an activity level... Weekly events Monthly events Occasional events Mostly async or online Size of your community (approximate number of active members or reach) * Choose a community size... &lt;50 50-200 200-500 500+ First name * Last name * What is your role in your club (e. g. , president, lead, organizer)?</p>
+<p>* Email * LinkedIn profile or club website * What are your club’s main focus areas today? * Choose focus areas... Workshops/events Hackathons Research projects Career development Startup building Community building Other How is your club currently using AI tools, if at all? * 500 characters max. Would you like to be considered for student ambassador programs * Choose an answer... Yes Maybe No Anything.</p>
+    </div>
+    <a href="https://openai.com/index/openai-campus-network-student-club-interest-form/">Read official article</a>
+  </article>
+<article class="official-news-card">
+    <h2>OpenAI Campus Network: Student club interest form</h2>
+    <div class="summary-body official-news-summary">
+      <p>Join the OpenAI Campus Network—connect student clubs worldwide, access AI tools, host events, and build an AI-powered campus community. Join the OpenAI Campus Network—connect student clubs worldwide, access AI tools, host events, and build an AI-powered campus community. Join a global network of student leaders building AI-native campuses. Share We’re partnering with student clubs across universities worldwide to: Whether you&#39;re running events, building projects, or leading a community — we’d love to work with you.</p>
+<p>Club name * Type of club * Choose a club type... AI/ML Computer science/engineering Entrepreneurship/startup Business/consulting Research/academic Design/product General student organization Other How active is your club? * Choose an activity level... Weekly events Monthly events Occasional events Mostly async or online Size of your community (approximate number of active members or reach) * Choose a community size... &lt;50 50-200 200-500 500+ First name * Last name * What is your role in your club (e.</p>
+<p>g. , president, lead, organizer)? * Email * LinkedIn profile or club website * What are your club’s main focus areas today? * Choose focus areas... Workshops/events Hackathons Research projects Career development Startup building Community building Other How is your club currently using AI tools, if at all? * 500 characters.</p>
+    </div>
+    <a href="https://openai.com/index/openai-campus-network-student-club-interest-form">Read official article</a>
+  </article>
+    </div>
+  </section>
+
+  <main>
+    <article class="spread">
+    <div class="number" aria-label="Story 01">01</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>unix.foo</span>
+        <span>Rank 2</span>
+      </div>
+      <h2>Local AI needs to be the norm</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Local AI models should be the default. One of the current trends in modern software is for developers to slap an API call to OpenAI or Anthropic for features within their app. Reasonable people can quibble with whether those features are actually bringing value to users, but what I want to discuss is the fundamental concept of taking on a dependency to a cloud hosted AI model for applications.</p>
+<p>This laziness is creating a generation of software that is fragile, invades your privacy, and fundamentally broken. We are building applications that stop working the moment the server crashes or a credit card expires. We need to return to a habit of building software where our local devices do the work. The silicon in our pocket is mind bogglingly faster than what was available a decade ago.</p>
+<p>It has a dedicated Neural Engine sitting there, mostly idle, while we wait for a JSON response from a server farm in Virginia. That’s ridiculous. Even if your intentions are pure, the moment you stream user content to a third party AI provider, you’ve changed the nature of your product. You now have data retention questions and all the baggage that comes with that.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://unix.foo/posts/local-ai-needs-to-be-norm/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 02">02</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>dunkels.com</span>
+        <span>Rank 16</span>
+      </div>
+      <h2>How Fast Does Claude, Acting as a User Space IP Stack, Respond to Pings?</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Here is a fun thought: if we ask Claude Code to act as a user space IP stack, how quickly will it be able to respond to a ping? Here is a fun thought: if we ask Claude Code to act as a user space IP stack, how quickly will it be able to respond to a ping? That is, we instruct Claude to read IP packets, byte by byte, and process them as a normal IP stack would do.</p>
+<p>With the end result being that we can ping Claude and have it reply to us with a properly formed ping reply. Ridiculous? Yes. Wasteful of tokens? Sure. Fun? Oh yeah! And interesting to see how far we can push the idea that Markdown is code and an LLM is the processor that executes that code. In this case, pretty low-level code. I asked Claude to develop a command, ping-respond.</p>
+<p>md , that would act as such a native LLM IP stack, and this is what it came up with: # Ping Respond — Process one ICMP echo request from tun0 You are acting as a userspace IP stack. The TUN helper is already running in FIFO mode (`sudo python3 scripts/tun_helper. py.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://dunkels.com/adam/claude-user-space-ip-stack-ping/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 03">03</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>jola.dev</span>
+        <span>Rank 5</span>
+      </div>
+      <h2>Running local models on an M4 with 24GB memory</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Experiments with getting usable outputs out of local models on a standard Macbook I’ve been experimenting with running local models on and off for a bit and I’ve finally found a setup that seems to work reasonably. It’s nothing like the output of a SOTA model, but the excitement of being able to have a local model do basic tasks, research, and planning, more than makes up for it!</p>
+<p>No internet connection required! Not to mention that it’s a way of reducing your dependence on big US tech, even if just a tiny bit. I gotta say though, it’s not easy to get this stuff set up. First you have to choose how you’re running the model: Ollama , llama. cpp or LM Studio . Each one comes with its own quirks and limitations, and they don’t offer all the same models.</p>
+<p>Then of course, you have to pick your model. You want the best model available that fits in memory and still gives you enough headroom to run your regular assortment of Electron apps, not to mention something where you can have at least a 64K context window, but ideally 128K or more. Most recently I’ve tried Qwen 3. 6 Q3,.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://jola.dev/posts/running-local-models-on-m4">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 04">04</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>openculture.com</span>
+        <span>Rank 3</span>
+      </div>
+      <h2>The greatest shot in television: James Burke had one chance to nail this scene (2024)</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>The 80-second clip above captures a rocket launch, something of which we&#39;ve all seen footage at one time or another. What makes its viewers call it &#39;the greatest shot in television&#39; still today, 45 years after it first aired, may take more than one viewing to notice. in Science , Technology , Television | October 4th, 2024 3 Comments The 80-sec­ond clip above cap­tures a rock­et launch, some­thing of which we’ve all seen footage at one time or anoth­er.</p>
+<p>What makes its view­ers call it “the great­est shot in tele­vi­sion” still today, 45 years after it first aired, may take more than one view­ing to notice. In it, sci­ence his­to­ri­an James Burke speaks about how “cer­tain gas­es ignite, and that the ther­mos flask per­mits you to store vast quan­ti­ties of those gas­es safe­ly, in their frozen liq­uid form, until you want to ignite them.” Use a suf­fi­cient­ly large flask filled with hydro­gen and oxy­gen, design it to mix the gas­es and set light to them, and “you get that” — that is, you get the rock­et that launch­es behind Burke just as soon as he points to it.</p>
+<p>One can only admire Burke’s com­po­sure in dis­cussing such tech­ni­cal mat­ters in.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.openculture.com/2024/10/the-greatest-shot-in-television.html">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 05">05</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>jamesshore.com</span>
+        <span>Rank 7</span>
+      </div>
+      <h2>An AI coding agent, used to write code, needs to reduce your maintenance costs</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>I’ll get straight to the point: your AI coding agent, the one you use to write code, needs to reduce your maintenance costs. Not by a little bit, either. You write code twice as quick now? Better hope you’ve halved your maintenance costs. Three times as productive? One third the maintenance costs. Otherwise, you’re screwed. You’re trading a temporary speed boost for permanent indenture. Oh, you want to know why?</p>
+<p>Sure. Let’s go for a drive. On a dark desert highway... Every line of code you write has to be maintained: bug fixes, cleanup, dependency upgrades, and so forth. I’m not talking about new features or enhancements. Just maintenance. For every month you spend writing code, you’ll spend some amount of time in the following year maintaining that code, and some in each year after that, forever, as long as that code exists.</p>
+<p>Let’s say you asked a crowd of, say, 50 developers what those maintenance costs were. Using a technique called Wisdom of the Crowd , you could get a reasonably accurate response. 1 1 You’re welcome to conduct your own wisdom-of-the-crowd survey! But it turns out that the specific numbers don’t matter for the overall point I’m making.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.jamesshore.com/v2/blog/2026/you-need-ai-that-reduces-your-maintenance-costs">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 06">06</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>github.com/adamjgmiller</span>
+        <span>Rank 12</span>
+      </div>
+      <h2>Show HN: adamsreview – better multi-agent PR reviews for Claude Code</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Multi-lens code review pipeline for Claude Code: deep review (Claude or Codex), auto-fix loop, interactive walkthrough, external-finding injection. - adamjgmiller/adamsreview Multi-stage code review for Claude Code — parallel sub-agent detection, validation passes, persistent JSON state, and an automated fix loop that re-reviews and reverts regressions before committing. On my own PRs, it&#39;s been catching dramatically more real bugs than Claude Code&#39;s built-in /review , /ultrareview , CodeRabbit, Greptile, and Codex&#39;s built-in review — while producing fewer false positives.</p>
+<p>(Anecdotal, n=me. ) Modeled after the built-in /review and extended into a six-command pipeline. Runs against your regular Claude Code subscription (Max plan recommended) — unlike /ultrareview , which charges against your Extra Usage pool. /plugin marketplace add adamjgmiller/adamsreview /plugin install adamsreview@adamsreview The six commands: Command files live at bare-stem paths under commands/ ; shared phase fragments and prompt references live under fragments/ ; helper scripts and the artifact schema live under bin/ .</p>
+<p>The plugin runtime auto-adds bin/ to $PATH on load — no symlinks, no install script. On a non-trivial PR, the commands work best in this order: Each command is independent — you can go straight from review to fix if you only care about auto-eligible findings, or skip review.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://github.com/adamjgmiller/adamsreview">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 07">07</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>grapheneos.social</span>
+        <span>Rank 1</span>
+      </div>
+      <h2>Hardware Attestation as Monopoly Enabler</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Apple and Google are gradually expanding their use of hardware-based attestation. They&#39;re convincing a growing number of services to adopt it. Google&#39;s Play Integrity API and Apple&#39;s App Attest API are very similar. Apple brought it to the web via Privacy Pass, which Google intends on doing too. Hardware Attestation as Monopoly Enabler appears on the Hacker News front page from grapheneos. social. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly.</p>
+<p>For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://grapheneos.social/@GrapheneOS/116550899908879585">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 08">08</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>g5t.de</span>
+        <span>Rank 29</span>
+      </div>
+      <h2>Task Paralysis and AI</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>An article about ADHD, Task Paralysis and AI. Straight away: I am not diagnosed yet. So I&#39;m hesitant to say &quot;I have ADHD&quot;, because the truth is: I don&#39;t know it. There are signs: My siblings have been diagnosed as kids, and I&#39;m personally struggling with tasks that others deem to be &quot;easy&quot;. I have a tremendous need for novelty, and I can hardly picture myself doing the same job for the next 30 years.</p>
+<p>I&#39;m not kidding: At the moment, I change roles every 2-3 years. This isn&#39;t really sustainable. Due to circumstances out of my control, I wasn&#39;t able to tackle that earlier. Also, it doesn&#39;t really help if you want to build a career: I can navigate myself around a lot of technical fields, but I have no special knowledge. Often, I struggle with the execution of a strategy that I successfully laid out.</p>
+<p>I will simply refuse to do the first step, because everything now feels overwhelming. So... there are signs. Yes. But that might be another article. I&#39;m aware that there is something called Analysis Paralysis . But that&#39;s different, at least for me and to my understanding. Let me put it this way: When.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://g5t.de/articles/20260510-task-paralysis-and-ai/index.html">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 09">09</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>tomshardware.com</span>
+        <span>Rank 30</span>
+      </div>
+      <h2>Maryland citizens hit with $2B power grid upgrade for out-of-state AI</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Aren Aren&#39;t AI hyperscalers supposed to pay for these upgrades? When you purchase through links on our site, we may earn an affiliate commission. Here&amp;rsquo;s how it works . (Image credit: Shutterstock) Copy link Facebook X Whatsapp Reddit Pinterest Flipboard Email Share this article 7 Join the conversation Follow us Add us as a preferred source on Google Newsletter Subscribe to our newsletter The Maryland Office of People&amp;rsquo;s Counsel (OPC), a state agency that represents its utility consumers, filed a complaint before the Federal Energy Regulatory Commission (FERC) regarding PJM Interconnection, LLC&amp;rsquo;s plans to charge it $2 billion of the $22 billion it spent to upgrade its grid to accommodate increasing demand from data centers.</p>
+<p>According to the OPC&amp;rsquo;s press release , this $2 billion bill will cost the state&amp;rsquo;s consumers an extra $1. 6 billion in the next ten years alone &amp;mdash; that means an extra $823 million for residential (approx. $345 per customer), $146 million for commercial (approx. $673 per customer), and $629 million for industrial customers (approx. $15,074 per customer). &amp;ldquo;Without FERC action, Maryland customers face paying billions for transmission infrastructure that PJM is advancing to benefit data centers,&amp;rdquo; said Maryland People&amp;rsquo;s Counsel David S.</p>
+<p>Lapp. &amp;ldquo;PJM&amp;rsquo;s cost.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.tomshardware.com/tech-industry/artificial-intelligence/maryland-citizens-slapped-with-usd2-billion-grid-upgrade-bill-for-out-of-state-ai-data-centers-state-complains-to-federal-energy-regulators-says-additional-cost-breaks-ratepayer-protection-pledge-promises">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 10">10</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>k10s.dev</span>
+        <span>Rank 4</span>
+      </div>
+      <h2>I&#39;m going back to writing code by hand</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>I vibe-coded a GPU-aware Kubernetes TUI for 7 months, archived it, and started over. Here&#39;s what AI gets wrong when projects grow complex. This dev-log is getting a lot of attention on HN (scary! ): HN Thread . To those who are coming here from HN: This started as an investigation or rather a question: &quot;How far I can get with building a piece of software by keeping myself completely out of the loop&quot;.</p>
+<p>The tl;dr of this dev log is that I still need to be in the loop to make anything meaningful. Take aways: Humans intervention is still needed as of 10/05/2026. You can totally go back now! 234 commits. ~30 weekends. Built entirely on vibe-coded sessions with Claude, whenever my tokens lasted long enough to ship something. I&#39;m archiving my TUI tool and rewriting it from scratch. k10s started as a GPU-aware Kubernetes dashboard (and my first foray into building something serious with AI).</p>
+<p>Think k9s but built for the people running NVIDIA clusters, people who actually care about GPU utilization, DCGM metrics, and which nodes are sitting idle burning $32/hr. I built it in Go with Bubble Tea [1] and it worked. I learned over these 7.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://blog.k10s.dev/im-going-back-to-writing-code-by-hand/">Read story</a>
+    </div>
+  </article>
+  </main>
+</body>
+</html>

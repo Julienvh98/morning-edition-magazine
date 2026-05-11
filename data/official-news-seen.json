@@ -69,7 +69,21 @@
       "category": "Company",
       "publishedDate": "2026-05-07",
       "firstIncluded": "2026-05-08"
+    },
+    "https://openai.com/index/openai-campus-network-student-club-interest-form/": {
+      "source": "OpenAI",
+      "title": "OpenAI Campus Network: Student club interest form",
+      "category": "Company",
+      "publishedDate": "2026-05-11",
+      "firstIncluded": "2026-05-11"
+    },
+    "https://openai.com/index/openai-campus-network-student-club-interest-form": {
+      "source": "OpenAI",
+      "title": "OpenAI Campus Network: Student club interest form",
+      "category": "Company",
+      "publishedDate": "2026-05-11",
+      "firstIncluded": "2026-05-11"
     }
   },
-  "lastRun": "2026-05-10"
+  "lastRun": "2026-05-11"
 }
