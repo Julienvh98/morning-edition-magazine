@@ -83,7 +83,21 @@
       "category": "Company",
       "publishedDate": "2026-05-11",
       "firstIncluded": "2026-05-11"
+    },
+    "https://openai.com/index/openai-launches-the-deployment-company": {
+      "source": "OpenAI",
+      "title": "OpenAI launches DeployCo to help businesses build around intelligence",
+      "category": "Company",
+      "publishedDate": "2026-05-11",
+      "firstIncluded": "2026-05-12"
+    },
+    "https://openai.com/index/openai-launches-the-deployment-company/": {
+      "source": "OpenAI",
+      "title": "OpenAI launches the OpenAI Deployment Company to help businesses build around intelligence",
+      "category": "Company",
+      "publishedDate": "2026-05-11",
+      "firstIncluded": "2026-05-12"
     }
   },
-  "lastRun": "2026-05-11"
+  "lastRun": "2026-05-12"
 }

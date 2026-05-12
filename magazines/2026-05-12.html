@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Morning Edition | 2026-05-12</title>
+  <meta name="description" content="A front-page Hacker News briefing tuned for AI tools, health, finance, weird science, and useful things you can act on today.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..900,80,1&family=IBM+Plex+Serif:wght@400;500&family=Inter:wght@500;650;800;900&display=swap" rel="stylesheet">
+  <style>
+
+:root {
+  color-scheme: light;
+  --ink: #17120c;
+  --paper: #f5ecd8;
+  --muted: rgba(23, 18, 12, 0.72);
+  --rule: rgba(23, 18, 12, 0.2);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(18px, 1.5vw, 24px);
+  line-height: 1.22;
+}
+
+a { color: inherit; text-decoration-thickness: 0.12em; text-underline-offset: 0.18em; }
+
+.cover {
+  min-height: 18vh;
+  display: grid;
+  align-content: center;
+  padding: clamp(16px, 3vw, 36px) clamp(22px, 5vw, 72px);
+  background: #f4ecd8;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.34);
+  overflow: hidden;
+}
+
+.story-topline,
+.official-news-title {
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.story-topline,
+.official-news-title {
+  color: var(--muted);
+}
+
+h1,
+h2,
+.number {
+  font-family: "Fraunces", Georgia, serif;
+  letter-spacing: 0;
+}
+
+h1 {
+  max-width: none;
+  margin: 0;
+  font-size: clamp(42px, 8vw, 96px);
+  line-height: 0.86;
+}
+
+.official-news {
+  display: grid;
+  gap: 16px;
+  padding: clamp(22px, 4vw, 56px) clamp(22px, 5vw, 72px);
+  background: #f7f0df;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.3);
+}
+
+.official-news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.official-news-card {
+  border-top: 1px solid rgba(23, 18, 12, 0.34);
+  padding-top: 12px;
+}
+
+.official-news-card h2,
+.story-main h2 {
+  max-width: 12ch;
+  margin: 0 0 10px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 760;
+  line-height: 0.98;
+}
+
+.summary-body {
+  display: grid;
+  gap: 14px;
+}
+
+.summary-body p,
+.official-news-empty {
+  margin: 0;
+  color: rgba(23, 18, 12, 0.82);
+  font-family: "IBM Plex Serif", Georgia, serif;
+  font-size: clamp(18px, 1.45vw, 22px);
+  font-weight: 400;
+  line-height: 1.36;
+}
+
+.official-news-card a,
+.story-link {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 14px;
+  color: rgba(23, 18, 12, 0.8);
+  font-size: clamp(15px, 1.1vw, 17px);
+  font-weight: 900;
+}
+
+.spread {
+  position: relative;
+  min-height: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  padding: clamp(28px, 5vw, 72px);
+  overflow: hidden;
+  border-top: 2px solid rgba(23, 18, 12, 0.2);
+  background:
+    linear-gradient(90deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    #f4ecd8;
+  background-size: 78px 78px;
+}
+
+.number {
+  position: absolute;
+  line-height: 0.76;
+  pointer-events: none;
+  user-select: none;
+}
+
+.story-main {
+  position: relative;
+  z-index: 1;
+}
+
+.story-topline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.brief {
+  max-width: 850px;
+  margin-top: 22px;
+  border-top: 2px solid rgba(23, 18, 12, 0.28);
+  padding-top: 18px;
+}
+
+@media (max-width: 860px) {
+  .cover,
+  .spread,
+  .official-news {
+    min-height: auto;
+    padding: 24px 22px 42px;
+  }
+
+  .cover {
+    min-height: 16svh;
+    padding: 14px 22px 12px;
+  }
+
+  h1 {
+    font-size: clamp(38px, 12vw, 56px);
+  }
+
+  .official-news {
+    gap: 12px;
+    padding: 20px 22px 24px;
+  }
+
+  .official-news-grid,
+  .spread {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .official-news-card h2,
+  .story-main h2 {
+    font-size: 30px;
+  }
+
+  .summary-body p,
+  .official-news-empty {
+    font-size: 18px;
+    line-height: 1.42;
+  }
+
+  .story-link,
+  .official-news-card a {
+    font-size: 16px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header class="cover">
+    <h1>Morning Edition</h1>
+  </header>
+
+  <section class="official-news">
+    <p class="official-news-title">Official AI Lab News</p>
+    <div class="official-news-grid">
+      <article class="official-news-card">
+    <h2>OpenAI launches DeployCo to help businesses build around intelligence</h2>
+    <div class="summary-body official-news-summary">
+      <p>OpenAI launches DeployCo, a new enterprise deployment company built to help organizations bring frontier AI into production and turn it into measurable business impact. OpenAI launches DeployCo, a new enterprise deployment company built to help organizations bring frontier AI into production and turn it into measurable business impact. OpenAI has agreed to acquire Tomoro, giving the OpenAI Deployment Company experienced Forward Deployed Engineers from day one. Loading… Share OpenAI is launching the OpenAI Deployment Company , a new company designed to help organizations build and deploy AI systems they can rely on every day across their most important work.</p>
+<p>Successful AI deployment is about empowering people and teams to do more. The OpenAI Deployment Company will extend OpenAI’s ability to embed engineers specialized in frontier AI deployment, known as Forward Deployed Engineers, or FDEs, into organizations working on complex problems in demanding environments. These FDEs will work closely with business leaders, operators, and frontline teams to identify where AI can make the biggest impact, redesign organizational infrastructure and critical workflows around it, and turn those gains into durable systems.</p>
+<p>In connection with the OpenAI Deployment Company’s launch, OpenAI has agreed to acquire Tomoro, an applied AI consulting and engineering firm.</p>
+    </div>
+    <a href="https://openai.com/index/openai-launches-the-deployment-company">Read official article</a>
+  </article>
+<article class="official-news-card">
+    <h2>OpenAI launches the OpenAI Deployment Company to help businesses build around intelligence</h2>
+    <div class="summary-body official-news-summary">
+      <p>OpenAI launches DeployCo, a new enterprise deployment company built to help organizations bring frontier AI into production and turn it into measurable business impact. OpenAI has agreed to acquire Tomoro, giving the OpenAI Deployment Company experienced Forward Deployed Engineers from day one. Loading… Share OpenAI is launching the OpenAI Deployment Company , a new company designed to help organizations build and deploy AI systems they can rely on every day across their most important work.</p>
+<p>Successful AI deployment is about empowering people and teams to do more. The OpenAI Deployment Company will extend OpenAI’s ability to embed engineers specialized in frontier AI deployment, known as Forward Deployed Engineers, or FDEs, into organizations working on complex problems in demanding environments. These FDEs will work closely with business leaders, operators, and frontline teams to identify where AI can make the biggest impact, redesign organizational infrastructure and critical workflows around it, and turn those gains into durable systems.</p>
+<p>In connection with the OpenAI Deployment Company’s launch, OpenAI has agreed to acquire Tomoro, an applied AI consulting and engineering firm that helps enterprises turn AI into operational advantage. The acquisition will bring approximately 150 experienced Forward Deployed Engineers and Deployment Specialists to the OpenAI.</p>
+    </div>
+    <a href="https://openai.com/index/openai-launches-the-deployment-company/">Read official article</a>
+  </article>
+    </div>
+  </section>
+
+  <main>
+    <article class="spread">
+    <div class="number" aria-label="Story 01">01</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>ucla.edu</span>
+        <span>Rank 6</span>
+      </div>
+      <h2>UCLA discovers first stroke rehabilitation drug to repair brain damage (2025)</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>A new study by UCLA Health has discovered what researchers say is the first drug to fully reproduce the effects of physical stroke rehabilitation in model mice. UCLA discovers first stroke rehabilitation drug to repair brain damage (2025) appears on the Hacker News front page from ucla. edu. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly.</p>
+<p>For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it. This additional context is intentionally conservative: it does not add outside.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://stemcell.ucla.edu/news/ucla-discovers-first-stroke-rehabilitation-drug-repair-brain-damage">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 02">02</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>martin.sh</span>
+        <span>Rank 13</span>
+      </div>
+      <h2>I let AI build a tool to help me figure out what was waking me up at night</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>I try to pay attention to the small things that affect my quality of life. When something keeps bothering me, I want to investigate, find a likely cause, and act on it. What changed recently is what I&#39;m willing to build to support that. With AI tooling, projects I would I try to pay attention to the small things that affect my quality of life. When something keeps bothering me, I want to investigate, find a likely cause, and act on it.</p>
+<p>What changed recently is what I&#39;m willing to build to support that. With AI tooling, projects I would have dismissed a few years ago as &quot;too much effort for the payoff&quot; now fit into a weekend. So whenever I bump into a problem in my daily life, I catch myself thinking, &quot;actually, I could build something to look into this&quot; . This post is about one of those problems: my sleep.</p>
+<p>I live in a noisy city. Some nights I wake up at 3 am with no idea what woke me up. Other nights I don&#39;t fully wake up, but my watch the next morning shows that something pulled me out of deep sleep at 3:32 am. And.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://martin.sh/i-let-ai-build-a-tool-to-help-me-figure-out-what-was-waking-me-up-at-night/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 03">03</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>tanstack.com</span>
+        <span>Rank 1</span>
+      </div>
+      <h2>Postmortem: TanStack NPM supply-chain compromise</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>On 2026-05-11, an attacker chained a pull_request_target Pwn Request, GitHub Actions cache poisoning across the fork↔base trust boundary, and OIDC token extraction from runner memory to publish 84 malicious versions across 42 @tanstack/* packages on npm. Full postmortem. TanStack Search... K Auto Log In Start RC Start RC Router Router Query Query Table Table DB beta DB beta AI alpha AI alpha Form new Form new Virtual Virtual Pacer beta Pacer beta Hotkeys alpha Hotkeys alpha Store alpha Store alpha Devtools alpha Devtools alpha CLI alpha CLI alpha Intent alpha Intent alpha More Libraries More Libraries Builder Alpha Builder Alpha Blog Blog Maintainers Maintainers Partners Partners Showcase Showcase Learn NEW Learn NEW Stats Stats YouTube YouTube Discord Discord Merch Merch Support Support GitHub GitHub Ethos Ethos Tenets Tenets Brand Guide Brand Guide Blog On this page Postmortem: TanStack npm supply-chain compromise Copy page by Tanner Linsley on May 11, 2026.</p>
+<p>On 2026-05-11 between 19:20 and 19:26 UTC, an attacker published 84 malicious versions across 42 @tanstack/* npm packages by combining: the pull_request_target &quot;Pwn Request&quot; pattern, GitHub Actions cache poisoning across the fork↔base trust boundary, and runtime memory extraction of an OIDC token from the GitHub Actions runner process. No npm.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://tanstack.com/blog/npm-supply-chain-compromise-postmortem">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 04">04</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>medium.com/nmitchem</span>
+        <span>Rank 5</span>
+      </div>
+      <h2>If AI writes your code, why use Python?</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>If AI Writes Your Code, Why Use Python? For the last decade, fast-to-ship beat fast-to-run. Not anymore. Picking a language for a new project was usually an easy answer. You used Python or TypeScript … The modern python stack. For the last decade, fast-to-ship beat fast-to-run. Not anymore. Picking a language for a new project was usually an easy answer. You used Python or TypeScript because the ecosystems were enormous, the hiring pool was deep, and you could make an impressive demo by Friday.</p>
+<p>Rust, Go, C++, and many more would give you 10–100x the performance, but you paid for it: six months of ramp, a smaller talent market, a build system that fought you. So you shipped the Python version, sold it to customers, and promised yourself you’d “make it performant later.” You rarely did, and that was fine, because nobody else did either. That bargain is over, and it’s over because AI got good at the hard languages.</p>
+<p>Two years ago, GPT-4 couldn’t write a Rust function without hallucinating crate names. By April of 2026, Claude Opus 4. 7, GPT-5. 5, Gemini 3. 1, and DeepSeek V4 had all cleared 80% on SWE-bench Verified within weeks of each other. The labs.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://medium.com/@NMitchem/if-ai-writes-your-code-why-use-python-bf8c4ba1a055">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 05">05</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>claude.com</span>
+        <span>Rank 7</span>
+      </div>
+      <h2>Claude Platform on AWS</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>The Claude Platform on AWS is now generally available, offering a new way for AWS customers to access the full set of Claude platform features with AWS authentication, billing, and commitment retirement. Meet Claude Products Claude Claude Code Claude Cowork Claude Security Features Claude for Chrome Claude for Slack Claude for Microsoft 365 Skills Models Opus Sonnet Haiku Platform Overview Developer docs Pricing Console login Solutions Use cases AI agents Coding Departments Security Industries Customer support Education Financial services Government Healthcare Life sciences Nonprofits Pricing Overview API Plans Pro Max Team Enterprise Resources Insights Blog Customer stories Anthropic news Learn Anthropic Academy Courses Tutorials Use cases Tools Connectors Plugins Connect Events Community Login Contact sales Contact sales Contact sales Try Claude Try Claude Try Claude Contact sales Contact sales Contact sales Try Claude Try Claude Try Claude Contact sales Contact sales Contact sales Try Claude Try Claude Try Claude Contact sales Contact sales Contact sales Try Claude Try Claude Try Claude Meet Claude Products Claude Claude Code Claude Cowork Claude Security Features Claude for Chrome Claude for Slack Claude for Microsoft 365 Skills Models Opus Sonnet Haiku Platform Overview Developer docs Pricing Console login Solutions Use cases AI agents Coding.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://claude.com/blog/claude-platform-on-aws">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 06">06</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>nytimes.com</span>
+        <span>Rank 11</span>
+      </div>
+      <h2>Google says criminal hackers used AI to find a major software flaw</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Google says criminal hackers used AI to find a major software flaw appears on the Hacker News front page from nytimes. com. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly. For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.nytimes.com/2026/05/11/us/politics/google-hackers-attack-ai.html">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 07">07</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>thinkingmachines.ai</span>
+        <span>Rank 20</span>
+      </div>
+      <h2>Interaction Models</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Interaction models move beyond turn-based AI interfaces by handling multimodal, real-time collaboration natively across audio, video, and text. Today, we’re announcing a research preview of interaction models: models that handle interaction natively rather than through external scaffolding. We think interactivity should scale alongside intelligence; the way we work with AI should not be treated as an afterthought. Interaction models let people collaborate with AI the way we naturally collaborate with each other—they continuously take in audio, video, and text, and think, respond, and act in real time.</p>
+<p>We train an interaction model from scratch. To ensure real-time responsiveness, we adopt a multi-stream, micro-turn design. Our research preview demonstrates qualitatively new interaction capabilities, as well as state-of-the-art combined performance in intelligence and responsiveness. AI labs often treat the ability for AI to work autonomously as the model’s most important capability. Kwa, T. , West, B. , Becker, J. , et al. Measuring AI Ability to Complete Long Tasks.</p>
+<p>METR , 2025. As a result, today&amp;rsquo;s models and interfaces aren&amp;rsquo;t optimized for humans to remain in the loop. A recent frontier model card states: “Importantly, we find that when used in an interactive, synchronous, “hands-on-keyboard” pattern, the benefits of the model were less clear. When.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://thinkingmachines.ai/blog/interaction-models/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 08">08</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>interfaze.ai</span>
+        <span>Rank 27</span>
+      </div>
+      <h2>Interfaze: A new model architecture built for high accuracy at scale</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>A complete walkthrough of Interfaze: what it is, who we benchmark against (Gemini-3-Flash, Claude-Sonnet-4. 6, GPT-5. 4-Mini, Grok-4. 3, plus task specialists like Reducto, SAM 3, Scribe v2), full results across 9 benchmarks, and code examples for OCR, object detection, and web search. tl;dr : Interfaze is a new model architecture that outperforms models like Gemini-3-Flash, Claude-Sonnet-4. 6, GPT-5. 4-Mini, and Grok-4. 3 across 9 head-to-head benchmarks in OCR, vision, STT, and structured output.</p>
+<p>Humans are inefficient at computer-level tasks. We make mistakes, but we&#39;re great at decision-making and understanding nuance. Imagine telling a human to read a 50-page PDF, map every word to another document with its XY position, and translate the whole thing into Chinese. You&#39;d get tons of mistakes, pay a lot to keep that human on payroll, and wait a long time for the result. Transformer models are similar.</p>
+<p>They&#39;re amazing at nuance and human-level tasks, and they make mistakes like a human, but that&#39;s also what keeps them creative. We&#39;ve been using the wrong models for the wrong tasks. CNNs/DNNs have existed since the early 90s, from LeNet-5 to ResNet, and more recently CRNN-CTC. These are deep neural network architectures that are task-specific for things like OCR, translation, or GUI detection.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://interfaze.ai/blog/interfaze-a-new-model-architecture-built-for-high-accuracy-at-scale">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 09">09</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>cocoawithlove.com</span>
+        <span>Rank 28</span>
+      </div>
+      <h2>Training an LLM in Swift, Part 1: Taking matrix mult from Gflop/s to Tflop/s</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>10 implementations of handwritten matrix multiplication: from plain C and Swift through to Metal In this article, I try to get my own handwritten matrix multiplication code running as fast as possible for training a Large Language Model (LLM) in Swift. The aim is to give some insight into the key steps for optimizing mathematics code in Swift. I also hope that these examples will offer a sense of scale about the capabilities of the different units on Apple Silicon – CPU, SIMD, AMX and GPU.</p>
+<p>This will be the first in a series where I look at training neural networks in Swift on Apple Silicon. Future articles will look at the maybe-too-many frameworks Apple offer for machine learning on the Mac. Those established frameworks are what you should really use for matrix multiplication and machine learning (they&amp;rsquo;ve spent a few more years optimizing matrix kernels than I have). But until then, I&amp;rsquo;m having fun writing everything for myself in a &amp;ldquo;no frameworks, no libraries&amp;rdquo; plain code approach.</p>
+<p>And I&amp;rsquo;m not just writing matrix multiplication kernels. The sample app will use these kernels as part of a full LLM implementation and the numbers I&amp;rsquo;ll quote will be for entire forward.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.cocoawithlove.com/blog/matrix-multiplications-swift.html">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 10">10</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>about.gitlab.com</span>
+        <span>Rank 21</span>
+      </div>
+      <h2>GitLab announces workforce reduction and end of their CREDIT values</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>A letter to our customers and our investors. Stay updated with our latest features and improvements. GitLab announces workforce reduction and end of their CREDIT values appears on the Hacker News front page from about. gitlab. com. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly.</p>
+<p>For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://about.gitlab.com/blog/gitlab-act-2/">Read story</a>
+    </div>
+  </article>
+  </main>
+</body>
+</html>
