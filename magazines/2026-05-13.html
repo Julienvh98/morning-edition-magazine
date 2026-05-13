@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Morning Edition | 2026-05-13</title>
+  <meta name="description" content="A front-page Hacker News briefing tuned for AI tools, health, finance, weird science, and useful things you can act on today.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..900,80,1&family=IBM+Plex+Serif:wght@400;500&family=Inter:wght@500;650;800;900&display=swap" rel="stylesheet">
+  <style>
+
+:root {
+  color-scheme: light;
+  --ink: #17120c;
+  --paper: #f5ecd8;
+  --muted: rgba(23, 18, 12, 0.72);
+  --rule: rgba(23, 18, 12, 0.2);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(18px, 1.5vw, 24px);
+  line-height: 1.22;
+}
+
+a { color: inherit; text-decoration-thickness: 0.12em; text-underline-offset: 0.18em; }
+
+.cover {
+  min-height: 18vh;
+  display: grid;
+  align-content: center;
+  padding: clamp(16px, 3vw, 36px) clamp(22px, 5vw, 72px);
+  background: #f4ecd8;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.34);
+  overflow: hidden;
+}
+
+.story-topline,
+.official-news-title {
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.story-topline,
+.official-news-title {
+  color: var(--muted);
+}
+
+h1,
+h2,
+.number {
+  font-family: "Fraunces", Georgia, serif;
+  letter-spacing: 0;
+}
+
+h1 {
+  max-width: none;
+  margin: 0;
+  font-size: clamp(42px, 8vw, 96px);
+  line-height: 0.86;
+}
+
+.official-news {
+  display: grid;
+  gap: 16px;
+  padding: clamp(22px, 4vw, 56px) clamp(22px, 5vw, 72px);
+  background: #f7f0df;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.3);
+}
+
+.official-news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.official-news-card {
+  border-top: 1px solid rgba(23, 18, 12, 0.34);
+  padding-top: 12px;
+}
+
+.official-news-card h2,
+.story-main h2 {
+  max-width: 12ch;
+  margin: 0 0 10px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 760;
+  line-height: 0.98;
+}
+
+.summary-body {
+  display: grid;
+  gap: 14px;
+}
+
+.summary-body p,
+.official-news-empty {
+  margin: 0;
+  color: rgba(23, 18, 12, 0.82);
+  font-family: "IBM Plex Serif", Georgia, serif;
+  font-size: clamp(18px, 1.45vw, 22px);
+  font-weight: 400;
+  line-height: 1.36;
+}
+
+.official-news-card a,
+.story-link {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 14px;
+  color: rgba(23, 18, 12, 0.8);
+  font-size: clamp(15px, 1.1vw, 17px);
+  font-weight: 900;
+}
+
+.spread {
+  position: relative;
+  min-height: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  padding: clamp(28px, 5vw, 72px);
+  overflow: hidden;
+  border-top: 2px solid rgba(23, 18, 12, 0.2);
+  background:
+    linear-gradient(90deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    #f4ecd8;
+  background-size: 78px 78px;
+}
+
+.number {
+  position: absolute;
+  line-height: 0.76;
+  pointer-events: none;
+  user-select: none;
+}
+
+.story-main {
+  position: relative;
+  z-index: 1;
+}
+
+.story-topline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.brief {
+  max-width: 850px;
+  margin-top: 22px;
+  border-top: 2px solid rgba(23, 18, 12, 0.28);
+  padding-top: 18px;
+}
+
+@media (max-width: 860px) {
+  .cover,
+  .spread,
+  .official-news {
+    min-height: auto;
+    padding: 24px 22px 42px;
+  }
+
+  .cover {
+    min-height: 16svh;
+    padding: 14px 22px 12px;
+  }
+
+  h1 {
+    font-size: clamp(38px, 12vw, 56px);
+  }
+
+  .official-news {
+    gap: 12px;
+    padding: 20px 22px 24px;
+  }
+
+  .official-news-grid,
+  .spread {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .official-news-card h2,
+  .story-main h2 {
+    font-size: 30px;
+  }
+
+  .summary-body p,
+  .official-news-empty {
+    font-size: 18px;
+    line-height: 1.42;
+  }
+
+  .story-link,
+  .official-news-card a {
+    font-size: 16px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header class="cover">
+    <h1>Morning Edition</h1>
+  </header>
+
+  <section class="official-news">
+    <p class="official-news-title">Official AI Lab News</p>
+    <p class="official-news-empty">Checked first-party news sources since 2026-05-11. No new official Anthropic or OpenAI company updates were found for this issue.</p>
+  </section>
+
+  <main>
+    <article class="spread">
+    <div class="number" aria-label="Story 01">01</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>github.com/cactus-compute</span>
+        <span>Rank 5</span>
+      </div>
+      <h2>Show HN: Needle: We Distilled Gemini Tool Calling into a 26M Model</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>26m function call model that runs on incredibly small devices - cactus-compute/needle We distilled Gemini 3. 1 into a 26m parameter &quot; Simple Attention Network &quot; that you can even finetune locally on your Mac/PC. In production, Needle runs on Cactus at 6000 toks/sec prefill and 1200 decode speed. Weights are fully open on Cactus-Compute/needle , as well as the dataset generation. d=512, 8H/4KV, BPE=8192 ┌──────────────┐ │ Tool Call │ └──────┬───────┘ ┌┴──────────┐ │ Softmax │ └─────┬─────┘ ┌─────┴─────┐ │ Linear (T)│ ← tied └─────┬─────┘ ┌─────┴─────┐ │ ZCRMSNorm │ └─────┬─────┘ ┌────────┴────────┐ │ Decoder x 8 │ │┌───────────────┐│ ││ ZCRMSNorm ││ ││ Masked Self ││ ││ Attn + RoPE ││ ││ Gated Residual││ │├───────────────┤│ ┌──────────────┐ ││ ZCRMSNorm ││ │ Encoder x 12 │──────────────────────▶Cross Attn ││ │ │ ││ Gated Residual││ │ ┌──────────┐ │ │└───────────────┘│ │ │ZCRMSNorm │ │ └────────┬────────┘ │ │Self Attn │ │ ┌─────┴─────┐ │ │ GQA+RoPE │ │ │ Embedding │ ← shared │ │Gated Res │ │ └─────┬─────┘ │ │ │ │ ┌───────┴───────-┐ │ │ (no FFN) │ │ │[EOS]&lt;tool_call&gt;│ │ └──────────┘ │ │ + answer │ │ │ └───────────────-┘ └──────┬───────┘ │ ┌────┴──────┐ │ Embedding │ └────┬──────┘ │ ┌────┴──────┐ │ Text │ │ query │ └───────────┘ Pretrained on 16 TPU v6e.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://github.com/cactus-compute/needle">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 02">02</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>sciencedaily.com</span>
+        <span>Rank 6</span>
+      </div>
+      <h2>New stainless steel can survive conditions needed for green hydrogen production</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>A team at the University of Hong Kong has developed a new “super steel” that can survive the harsh conditions needed to make green hydrogen from seawater. The material uses an unexpected double-protection mechanism that resists corrosion far better than conventional stainless steel. Even more impressive, it could replace costly titanium parts used in today’s hydrogen systems. A stainless steel breakthrough from the University of Hong Kong (HKU) could help solve one of the biggest problems facing green hydrogen: how to build electrolyzers that are tough enough for seawater, yet cheap enough for large scale clean energy.</p>
+<p>Led by Professor Mingxin Huang in HKU&#39;s Department of Mechanical Engineering, the team developed a special stainless steel for hydrogen production (SS-H 2 ). The material resists corrosion under conditions that normally push stainless steel past its limits, making it a promising candidate for producing hydrogen from seawater and other harsh electrolyzer environments. The discovery, reported in Materials Today in the study &quot;A sequential dual-passivation strategy for designing stainless steel used above water oxidation,&quot; builds on Huang&#39;s long running &quot;Super Steel&quot; Project.</p>
+<p>The same research program previously produced anti-COVID-19 stainless steel in 2021, along with ultra strong and ultra tough Super Steel in.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.sciencedaily.com/releases/2026/05/260510030950.htm">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 03">03</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>nair.sh</span>
+        <span>Rank 10</span>
+      </div>
+      <h2>Why senior developers fail to communicate their expertise</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Why senior developers talk in terms of complexity while the rest of the business is worried about uncertainty. And what to do about it now that AI is in the picture. What do you feel about the following sentence: “AI agents are the future of software development. We won’t need developers anymore to slow down the progress of a business.” If you’re a senior developer and you think this is true, I’m somewhat suspicious of your expertise (I’ll explain why; I’m not needlessly antagonistic).</p>
+<p>But if you’re not a senior developer and you think this is true, I think you’re probably right. Copywriting is, in its essence, about matching a message to an audience. And so, to me, a copywriter, what’s happening here is that the same message is meaning two different things to two different audiences. If you’re a senior developer, and if you’ve played with the agents and skills and models and all the other things that are blowing people’s minds, and if your intuition is still telling you something is off in how people are proclaiming your job obsolete, then here, in this post, I’m going to try and put words to your intuition (as a good.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.nair.sh/guides-and-opinions/communicating-your-expertise/why-senior-developers-fail-to-communicate-their-expertise">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 04">04</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>github.com/fulu-foundation</span>
+        <span>Rank 2</span>
+      </div>
+      <h2>Restore full BambuNetwork support for Bambu Lab printers</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Contribute to FULU-Foundation/OrcaSlicer-bambulab development by creating an account on GitHub. This version of OrcaSlicer restores full BambuNetwork support for Bambu Lab printers. You are not limited to LAN only. It works over the internet just like before, through BambuNetwork, with full functionality for normal use and printing. Before first launch, open Command Prompt or PowerShell as Administrator and run: dism. exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart dism.</p>
+<p>exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart Restart Windows, then launch Orca Studio. You can find BMCU firmware in my repositories. Restore full BambuNetwork support for Bambu Lab printers appears on the Hacker News front page from github. com/fulu-foundation. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly.</p>
+<p>For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://github.com/FULU-Foundation/OrcaSlicer-bambulab">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 05">05</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>jeffgeerling.com</span>
+        <span>Rank 29</span>
+      </div>
+      <h2>Bambu Lab is abusing the open source social contract</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Last year I said I Last year I said I&#39;d probably never recommend another Bambu Lab printer again . I still use my P1S, but after Bambu Lab started pushing their always-connected cloud solution as the new default: I had to do that to keep it under my control, instead of Bambu&#39;s. But I&#39;m weird—I acknowledge that. I&#39;m one of those crazy ones who likes to own something they purchased , and not have the company watch everything I do with hardware I paid for.</p>
+<p>Bambu Lab could&#39;ve left the status quo at that, and I wouldn&#39;t be writing this blog post. For context: OrcaSlicer is a fork of the open source project Bambu Studio , which is a fork of Prusa Slicer , which is a fork of slic3r . (They are all licensed under the AGPLv3 open source license ). OrcaSlicer already has to dance around Bambu&#39;s weird default setup where every file you print goes through Bambu&#39;s servers , meaning they can see everything you ever print on your printer.</p>
+<p>That is, unless you&#39;re like me and you run it in Developer mode , and completely block it from the Internet on old firmware. Some people are.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.jeffgeerling.com/blog/2026/bambu-lab-abusing-open-source-social-contract/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 06">06</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>typesetinthefuture.com</span>
+        <span>Rank 8</span>
+      </div>
+      <h2>How to make your text look futuristic (2016)</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>We’ve already seen how Eurostile Bold Extended is spectacularly effective at establishing a movie’s timeframe. But if Eurostile isn’t enough, there’s more you can do to clarify yo… We’ve already seen how Eurostile Bold Extended is spectacularly effective at establishing a movie’s timeframe . But if Eurostile isn’t enough, there’s more you can do to clarify your movie’s timeframe. I’d like to introduce you to six easy rules that are pretty much guaranteed to position your text firmly in the FUTURE.</p>
+<p>We’ll start with some simple sans-serif text, such as this randomly chosen word in Eurostile Bold. So far, so 2016: Rule 1: First, let’s add an italic slant. We want it to look like the text is stretching towards 2020: Hmm. It’s still a little boring. Rule 2: What if we make things a bit more curvy in some places, and a bit more angular in others?</p>
+<p>I hear that’s all the typographic rage in 2035: That’s much better! There’s still more we can do, mind. Rule 3: How about adding some consummate Vs to a few of the letters? Yeah! That’d be cool! There’s still something missing, however – we’ve forgotten to take into account the devastating Kern.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://typesetinthefuture.com/2016/02/18/futuristic/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 07">07</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>internetcleanup.foundation</span>
+        <span>Rank 7</span>
+      </div>
+      <h2>SecurityBaseline.eu</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>On May 13, 2026, the website SecurityBaseline. eu was launched. It is a spin-off from the Dutch “Basisbeveiliging”, which has monitored baseline security for over a decade and is part of governmental policy. Three months ago we sent tens of thousands of e-mails to European governments indicating the new site would launch, giving them time to [&amp;hellip;] On May 13, 2026, the website SecurityBaseline. eu was launched.</p>
+<p>It is a spin-off from the Dutch “Basisbeveiliging”, which has monitored baseline security for over a decade and is part of governmental policy . Three months ago we sent tens of thousands of e-mails to European governments indicating the new site would launch, giving them time to review the results and act on them in advance of publication. This article details what SecurityBaseline monitors, how we visualize risks with maps, and dives into three worrisome metrics: This data makes the web transparent and complies with tried-and-tested publication , measurement , and code-of-conduct policy.</p>
+<p>We target our findings at governments so they can protect their citizens. They can impose requirements on themselves and on the rest of the country. Do you value transparency, security, sovereignty, accessibility, and privacy? Then ask us to do research or become.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://internetcleanup.foundation/2026/05/european-governments-3000-tracking-sites-1000-phpmyadmins-and-99pct-poorly-encrypted-email-introducing-securitybaseline-eu/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 08">08</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>thekelleys.org.uk</span>
+        <span>Rank 11</span>
+      </div>
+      <h2>CERT is releasing six CVEs for serious security vulnerabilities in dnsmasq</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>CERT is releasing six CVEs for serious security vulnerabilities in dnsmasq appears on the Hacker News front page from thekelleys. org. uk. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly. For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://lists.thekelleys.org.uk/pipermail/dnsmasq-discuss/2026q2/018471.html">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 09">09</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>deepmind.google</span>
+        <span>Rank 22</span>
+      </div>
+      <h2>Reimagining the mouse pointer for the AI era</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Explore our next generation AI systems Explore models Gemini Gemini Learn, build, and plan anything Nano Banana Create and edit detailed images Gemini Audio Talk, create and control audio Specialized models Veo Generate cinematic video with audio Imagen Generate high-quality images from text Lyria Generate high fidelity music and audio World models &amp; embodied AI Genie 3 Generate and explore interactive worlds Gemini Robotics Perceive, reason, use tools and interact Open models Gemma Build responsible AI applications at scale Our latest AI breakthroughs and updates from the lab Explore research Breakthroughs SIMA 2 An agent that plays, reasons, and learns with you Genie 3 Generate and explore interactive worlds AlphaGo Mastering the game of Go Gemini Robotics Perceive, reason, use tools and interact Learn more Evals Publications Responsibility Unlocking a new era of discovery with AI Explore science Life sciences AlphaFold Predict protein structures with high accuracy AlphaGenome Decode genetics to pinpoint diseases AlphaMissense Find root causes of rare genetic diseases Climate and sustainability AlphaEarth Foundations Map our planet in unprecedented detail WeatherNext Fast and accurate AI weather forecasting Weather Lab Test our experimental weather models Our mission is to build AI responsibly to benefit humanity About Google DeepMind Responsibility.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://deepmind.google/blog/ai-pointer/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 10">10</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>voker.ai</span>
+        <span>Rank 30</span>
+      </div>
+      <h2>Launch HN: Voker (YC S24) – Analytics for AI Agents</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>The Agent Analytics Platform for monitoring and improving your AI agents in the wild. No more digging through logs, fix agents before users complain. Docs Pricing Blog Login or Sign Up Login or Sign Up Make sure your AI agents are helping, not just responding. Voker is analytics for the agentic era, so you can build the best agents possible. Scanning traces doesn&#39;t tell you if agents are helpful, accurate, or hitting walls.</p>
+<p>You only find out when customers complain or attrition skyrockets. Every stakeholder needs data. Every request pulls engineers away from building. Nobody can self-serve insights. Product and business teams need to quantify AI investments. You have usage stats, but struggling to connect agent performance to conversion, retention, or revenue. Voker transforms AI agent interactions into structured analytics that anyone on your team can use. PMs, analysts, and business teams get digestible insights they need without tickets, bottlenecks, or delays.</p>
+<p>Track what AI agents are saying, identify knowledge gaps, detect abnormalities, and measure improvement over time. Connect agent metrics to outcomes that matter by correlating conversational data with user data you&#39;re already collecting. PMs, analysts, and business teams get digestible insights they need without tickets, bottlenecks, or delays.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://voker.ai/">Read story</a>
+    </div>
+  </article>
+  </main>
+</body>
+</html>
