@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Morning Edition | 2026-05-14</title>
+  <meta name="description" content="A front-page Hacker News briefing tuned for AI tools, health, finance, weird science, and useful things you can act on today.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..900,80,1&family=IBM+Plex+Serif:wght@400;500&family=Inter:wght@500;650;800;900&display=swap" rel="stylesheet">
+  <style>
+
+:root {
+  color-scheme: light;
+  --ink: #17120c;
+  --paper: #f5ecd8;
+  --muted: rgba(23, 18, 12, 0.72);
+  --rule: rgba(23, 18, 12, 0.2);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(18px, 1.5vw, 24px);
+  line-height: 1.22;
+}
+
+a { color: inherit; text-decoration-thickness: 0.12em; text-underline-offset: 0.18em; }
+
+.cover {
+  min-height: 18vh;
+  display: grid;
+  align-content: center;
+  padding: clamp(16px, 3vw, 36px) clamp(22px, 5vw, 72px);
+  background: #f4ecd8;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.34);
+  overflow: hidden;
+}
+
+.story-topline,
+.official-news-title {
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.story-topline,
+.official-news-title {
+  color: var(--muted);
+}
+
+h1,
+h2,
+.number {
+  font-family: "Fraunces", Georgia, serif;
+  letter-spacing: 0;
+}
+
+h1 {
+  max-width: none;
+  margin: 0;
+  font-size: clamp(42px, 8vw, 96px);
+  line-height: 0.86;
+}
+
+.official-news {
+  display: grid;
+  gap: 16px;
+  padding: clamp(22px, 4vw, 56px) clamp(22px, 5vw, 72px);
+  background: #f7f0df;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.3);
+}
+
+.official-news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.official-news-card {
+  border-top: 1px solid rgba(23, 18, 12, 0.34);
+  padding-top: 12px;
+}
+
+.official-news-card h2,
+.story-main h2 {
+  max-width: 12ch;
+  margin: 0 0 10px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 760;
+  line-height: 0.98;
+}
+
+.summary-body {
+  display: grid;
+  gap: 14px;
+}
+
+.summary-body p,
+.official-news-empty {
+  margin: 0;
+  color: rgba(23, 18, 12, 0.82);
+  font-family: "IBM Plex Serif", Georgia, serif;
+  font-size: clamp(18px, 1.45vw, 22px);
+  font-weight: 400;
+  line-height: 1.36;
+}
+
+.official-news-card a,
+.story-link {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 14px;
+  color: rgba(23, 18, 12, 0.8);
+  font-size: clamp(15px, 1.1vw, 17px);
+  font-weight: 900;
+}
+
+.spread {
+  position: relative;
+  min-height: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  padding: clamp(28px, 5vw, 72px);
+  overflow: hidden;
+  border-top: 2px solid rgba(23, 18, 12, 0.2);
+  background:
+    linear-gradient(90deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    #f4ecd8;
+  background-size: 78px 78px;
+}
+
+.number {
+  position: absolute;
+  line-height: 0.76;
+  pointer-events: none;
+  user-select: none;
+}
+
+.story-main {
+  position: relative;
+  z-index: 1;
+}
+
+.story-topline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.brief {
+  max-width: 850px;
+  margin-top: 22px;
+  border-top: 2px solid rgba(23, 18, 12, 0.28);
+  padding-top: 18px;
+}
+
+@media (max-width: 860px) {
+  .cover,
+  .spread,
+  .official-news {
+    min-height: auto;
+    padding: 24px 22px 42px;
+  }
+
+  .cover {
+    min-height: 16svh;
+    padding: 14px 22px 12px;
+  }
+
+  h1 {
+    font-size: clamp(38px, 12vw, 56px);
+  }
+
+  .official-news {
+    gap: 12px;
+    padding: 20px 22px 24px;
+  }
+
+  .official-news-grid,
+  .spread {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .official-news-card h2,
+  .story-main h2 {
+    font-size: 30px;
+  }
+
+  .summary-body p,
+  .official-news-empty {
+    font-size: 18px;
+    line-height: 1.42;
+  }
+
+  .story-link,
+  .official-news-card a {
+    font-size: 16px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header class="cover">
+    <h1>Morning Edition</h1>
+  </header>
+
+  <section class="official-news">
+    <p class="official-news-title">Official AI Lab News</p>
+    <div class="official-news-grid">
+      <article class="official-news-card">
+    <h2>Introducing Claude for Small Business</h2>
+    <div class="summary-body official-news-summary">
+      <p>We&#39;re launching Claude for Small Business, a package of connectors and ready-to-run workflows that put Claude inside the tools small businesses use every day. We&#39;re launching Claude for Small Business —a package of connectors and ready-to-run workflows that put Claude inside the tools small businesses depend on—to help small business owners take full advantage of AI and cross off items on the to-do list. Small businesses account for 44% of U.</p>
+<p>S. GDP and employ nearly half the private-sector workforce, but their adoption of AI has lagged behind larger enterprises. Tools and training are rarely tailored to the ways small businesses operate, and as a result their use often stops at the chat window. As part of our public benefit mission, we are committed to helping business owners harness AI more fully and effectively for their most important work.</p>
+<p>Claude for Small Business is a toggle install that puts Claude to work inside the tools small business owners already use: Intuit Quickbooks, PayPal, HubSpot, Canva, Docusign, Google Workspace, and Microsoft 365. From these tools, it can plan payroll, close the month, run a sales campaign, chase invoices, and more. “Small businesses make up nearly half the American economy, but they&#39;ve never.</p>
+    </div>
+    <a href="https://www.anthropic.com/news/claude-for-small-business">Read official article</a>
+  </article>
+<article class="official-news-card">
+    <h2>Our response to the TanStack npm supply chain attack</h2>
+    <div class="summary-body official-news-summary">
+      <p>OpenAI details its response to the TanStack “Mini Shai-Hulud” supply chain attack, outlines protections taken to secure systems and signing certificates, and explains why macOS users must update OpenAI apps by June 12, 2026. Learn what happened, what was affected, and how OpenAI is strengthening defenses against evolving software supply chain threats. Loading… Share We recently identified a security issue involving a common open-source library, TanStack npm, that is part of a broader attack known as Mini Shai-Hulud ⁠ (opens in a new window) .</p>
+<p>We found no evidence that OpenAI user data was accessed, that our production systems or intellectual property were compromised, or that our software was altered. We have taken decisive steps to protect our user data, systems, and intellectual property. As part of our response, we are taking steps to protect the process that certifies our macOS applications are legitimate OpenAI apps. We are updating our security certificates, which will require all macOS users to update their OpenAI apps to the latest versions.</p>
+<p>This helps prevent any risk, however unlikely, of someone attempting to distribute a fake app that appears to be from OpenAI. You can update safely through an in-app update or at the official.</p>
+    </div>
+    <a href="https://openai.com/index/our-response-to-the-tanstack-npm-supply-chain-attack/">Read official article</a>
+  </article>
+    </div>
+  </section>
+
+  <main>
+    <article class="spread">
+    <div class="number" aria-label="Story 01">01</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>github.com/cactus-compute</span>
+        <span>Rank 20</span>
+      </div>
+      <h2>Show HN: Needle: We Distilled Gemini Tool Calling into a 26M Model</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>26m function call model that runs on incredibly small devices - cactus-compute/needle We distilled Gemini 3. 1 into a 26m parameter &quot; Simple Attention Network &quot; that you can even finetune locally on your Mac/PC. In production, Needle runs on Cactus at 6000 toks/sec prefill and 1200 decode speed. Weights are fully open on Cactus-Compute/needle , as well as the dataset generation. d=512, 8H/4KV, BPE=8192 ┌──────────────┐ │ Tool Call │ └──────┬───────┘ ┌┴──────────┐ │ Softmax │ └─────┬─────┘ ┌─────┴─────┐ │ Linear (T)│ ← tied └─────┬─────┘ ┌─────┴─────┐ │ ZCRMSNorm │ └─────┬─────┘ ┌────────┴────────┐ │ Decoder x 8 │ │┌───────────────┐│ ││ ZCRMSNorm ││ ││ Masked Self ││ ││ Attn + RoPE ││ ││ Gated Residual││ │├───────────────┤│ ┌──────────────┐ ││ ZCRMSNorm ││ │ Encoder x 12 │──────────────────────▶Cross Attn ││ │ │ ││ Gated Residual││ │ ┌──────────┐ │ │└───────────────┘│ │ │ZCRMSNorm │ │ └────────┬────────┘ │ │Self Attn │ │ ┌─────┴─────┐ │ │ GQA+RoPE │ │ │ Embedding │ ← shared │ │Gated Res │ │ └─────┬─────┘ │ │ │ │ ┌───────┴───────-┐ │ │ (no FFN) │ │ │[EOS]&lt;tool_call&gt;│ │ └──────────┘ │ │ + answer │ │ │ └───────────────-┘ └──────┬───────┘ │ ┌────┴──────┐ │ Embedding │ └────┬──────┘ │ ┌────┴──────┐ │ Text │ │ query │ └───────────┘ Pretrained on 16 TPU v6e.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://github.com/cactus-compute/needle">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 02">02</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>anthropic.com</span>
+        <span>Rank 1</span>
+      </div>
+      <h2>Claude for Small Business</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>We&#39;re launching Claude for Small Business, a package of connectors and ready-to-run workflows that put Claude inside the tools small businesses use every day. We&#39;re launching Claude for Small Business —a package of connectors and ready-to-run workflows that put Claude inside the tools small businesses depend on—to help small business owners take full advantage of AI and cross off items on the to-do list. Small businesses account for 44% of U.</p>
+<p>S. GDP and employ nearly half the private-sector workforce, but their adoption of AI has lagged behind larger enterprises. Tools and training are rarely tailored to the ways small businesses operate, and as a result their use often stops at the chat window. As part of our public benefit mission, we are committed to helping business owners harness AI more fully and effectively for their most important work.</p>
+<p>Claude for Small Business is a toggle install that puts Claude to work inside the tools small business owners already use: Intuit Quickbooks, PayPal, HubSpot, Canva, Docusign, Google Workspace, and Microsoft 365. From these tools, it can plan payroll, close the month, run a sales campaign, chase invoices, and more. “Small businesses make up nearly half the American economy, but they&#39;ve never.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.anthropic.com/news/claude-for-small-business">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 03">03</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>fredchan.org</span>
+        <span>Rank 6</span>
+      </div>
+      <h2>Setting up a free *.city.state.us locality domain (2025)</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>In the US, you can get a domain name like `somename. city. state. us` for free. If your town has its own domain, you can get nameservers from Amazon Lightsail, send the *Interim . US Domain Template* to the delegated manager for your locality, then point DNS entries at your webhost. In the US, can get a domain name like somename. city. state. us for free. If your town has its own domain, you can get nameservers from Amazon Lightsail, send the Interim .</p>
+<p>US Domain Template to the delegated manager for your locality to register one, then point DNS entries at your webhost. A locality domain is a domain name that’s associated with a location in the United States, such as frederick. seattle. wa. us (which currently redirects to fredchan. org). Locality domains were first created in 1992, and the infrastructure has been maintained under government contract ever since. To register one, you must be a US citizen or permanent resident, an organization incorporated in the US, or an organization with a bona fide presence in the US that regularly engages in lawful activities or has an office in the US.</p>
+<p>(For the full verbiage, see the bottom of this form ). Registration of many locality domains have been delegated to.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://fredchan.org/blog/locality-domains-guide/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 04">04</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>github.com/drcathicks</span>
+        <span>Rank 22</span>
+      </div>
+      <h2>A Claude Code and Codex Skill for Deliberate Skill Development</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>A Claude or Codex skill for deliberate skill development during AI-assisted coding - DrCatHicks/learning-opportunities This skill uses an adaptive &quot;dynamic textbook&quot; approach to help you integrate science-based expertise building exercises while doing agentic coding. When you complete architectural work (new files, schema changes, refactors), Claude offers optional 10-15 minute learning exercises grounded in evidence-based learning science. The exercises use techniques like prediction, generation, retrieval practice, and spaced repetition to provide you with semi-worked examples from across your own project work.</p>
+<p>Pairs well with Learning-Goal , a skill that guides you through semi-structured, interactive learning goal-setting using the technique of Mental Contrasting with Implementation Intentions (MCII), an evidence-based exercise. Codex This repository is also a Codex plugin marketplace. To add it from GitHub: codex plugin marketplace add https://github. com/DrCatHicks/learning-opportunities. git For local development from a checkout: codex plugin marketplace add /path/to/learning-opportunities The Codex marketplace includes: This repository is a Claude Code plugin marketplace .</p>
+<p>To install: /plugin install learning-opportunities@learning-opportunities Restart Claude Code to activate For more on Claude Code plugins, see the plugin documentation . Linux and macOS users can install learning-opportunities-auto alongside learning-opportunities to have Claude automatically consider offering an exercise after each git commit. Windows users can use it too —.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://github.com/DrCatHicks/learning-opportunities">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 05">05</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>avkcode.github.io</span>
+        <span>Rank 19</span>
+      </div>
+      <h2>The US is winning the AI race where it matters most: commercialization</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Energy matters for AI, but the decisive layers are cloud infrastructure, data, and commercialization. On those layers the United States is ahead by a wide margin. Energy matters for AI, but the decisive layers are cloud infrastructure, data, and commercialization. On those layers the United States is ahead by a wide margin. The US is winning the AI race where it matters most: commercialization. Since DeepSeek R1 shocked the market in January 2025, American companies have moved faster.</p>
+<p>OpenAI pushed harder into agents and Codex. Anthropic turned Claude Code into a business. China has contenders, but the US is clearly ahead in revenue, adoption, tools, and reach. Trump fits this moment well. He is a salesman at core, and Larry Ellison is too. That helps explain why AI infrastructure is an easy political product. Selling AI today is easier than selling Oracle databases in the 1980s.</p>
+<p>This time the oracle talks. DeepSeek matters for a different reason. Its strategic value for China is not mainly commercial. It helps China reduce dependence on Nvidia and push inference toward domestic stacks such as Huawei Ascend. That supports supply chain autonomy. It is not the same as profitable AI leadership. Christian Klein of.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://avkcode.github.io/blog/us-winning-ai-race.html">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 06">06</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>mayerwin.github.io</span>
+        <span>Rank 18</span>
+      </div>
+      <h2>Arena AI Model ELO History</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Visualizing AI flagship model degradation and progression over time. Exposing hidden nerfing, censorship, and quantization over time by tracking the true lifecycle of flagship AI models. AI labs frequently update their models post-launch. These updates sometimes introduce &quot;nerfs&quot; such as aggressive censorship, excessive quantization (to save compute costs), or behavioral degradation. This chart exposes these hidden trends. Note on Web UIs vs. API: LMSYS Arena tests model performance via API endpoints (the &quot;raw&quot; model).</p>
+<p>Consumer chat interfaces (like gemini. com or chatgpt. com) often add system prompts, safety filters, and UI-specific wrappers not present in the raw API. Providers may also silently switch to quantized (lower-precision) versions of models to save compute during peak load, leading to perceived &quot;nerfing&quot; the API benchmarks don&#39;t fully capture. PRs are welcome for data sources representing true web-interface evaluations. The data is automatically fetched daily from the official LM Arena Leaderboard Dataset on Hugging Face.</p>
+<p>The Arena relies on thousands of blind, crowdsourced human evaluations, making it the most robust metric of actual model capability. Each major AI lab has exactly ONE curve representing their flagship lineage. At each point in time the curve tracks the lab&#39;s highest-rated flagship-eligible model on the leaderboard — not just.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://mayerwin.github.io/AI-Arena-History/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 07">07</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>dailyprincetonian.com</span>
+        <span>Rank 24</span>
+      </div>
+      <h2>Princeton mandates proctoring for in-person exams, upending 133 year precedent</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>The faculty voted Monday to require universal proctoring for all in-person examinations in response to mounting concerns over AI-assisted cheating and declining student reporting of Honor Code violations. The policy, which takes effect July 1, preserves the student-run Honor Committee system while requiring instructors to serve as witnesses. All in-person examinations at Princeton will be proctored starting July 1, representing the most significant change to the honor system since it was established in 1893.</p>
+<p>The faculty passed a proposal requiring instructor supervision at Monday’s faculty meeting, with one opposing vote. The historic vote was the culmination of months of deliberation within the administration and student governing bodies about how to address increasing concerns over academic integrity violations, including the proliferation of AI usage. The proposal cleared a full faculty vote as the final of three required rounds of approval, having already been passed unanimously by the Committee on Examinations and Standing and the Faculty Advisory Committee on Policy.</p>
+<p>According to the policy proposal , previously sent by Dean of the College Michael Gordin to the Faculty Advisory Committee and included in Monday’s meeting notes, instructors will remain present in exam rooms “as a witness to what happens,” but are instructed.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.dailyprincetonian.com/article/2026/05/princeton-news-adpol-proctoring-in-person-examinations-passed-faculty-133-years-precedent">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 08">08</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>xda-developers.com</span>
+        <span>Rank 4</span>
+      </div>
+      <h2>Linux gaming is faster because Windows APIs are becoming Linux kernel features</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>As time goes on, fewer games than ever are unplayable on Linux By Ty Sherback Published May 10, 2026, 12:30 PM EDT His love of PCs and their components was born out of trying to squeeze every ounce of performance out of the family computer. Tinkering with his own build at age 10 turned into building PCs for friends and family, fostering a passion that would ultimately take shape as a career path.</p>
+<p>Besides being the first call for tech support for those close to him, Ty is a computer science student, with his focus being cloud computing and networking. He also competed in semi-pro Counter-Strike for 8 years, making him intimately familiar with everything to do with peripherals. Sign in to your XDA account Add Us On follow Follow followed Followed Like Like Thread 16 Log in Here is a fact-based summary of the story contents: Try something different: Show me the facts Explain it like I’m 5 Give me a lighthearted recap In March 2026, Linux crossed five percent of Steam&#39;s user base for the first time, an all-time high for an operating system that spent two decades as a novelty when it came to any kind of.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.xda-developers.com/linux-gaming-is-getting-faster-because-windows-apis-are-becoming-linux-kernel-features/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 09">09</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>scorch2000.com</span>
+        <span>Rank 3</span>
+      </div>
+      <h2>Scorched Earth 2000 – Web</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Scorched Earth 2000 – Web appears on the Hacker News front page from scorch2000. com. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly. For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it. This additional context is intentionally.</p>
+        </div>
+      </section>
+      <a class="story-link" href="http://www.scorch2000.com/web/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 10">10</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>python.org</span>
+        <span>Rank 29</span>
+      </div>
+      <h2>Reverting the incremental GC in Python 3.14 and 3.15</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Python 3. 14 shipped with a new incremental garbage collector. However, we’ve had a number of reports of significant memory pressure in production environments. We’ve decided to revert it in both 3. 14 and 3. 15, and go ba&amp;hellip; Python 3. 14 shipped with a new incremental garbage collector . However, we’ve had a number of reports of significant memory pressure in production environments. We’ve decided to revert it in both 3.</p>
+<p>14 and 3. 15, and go back to the generational GC from 3. 13. 3. 15 is still in alpha, so such changes are fine. For 3. 14, it is unusual for a patch release, but the old GC is a known quantity, the new incremental GC didn’t go through the PEP process, and was rolled back just before the final release of 3. 13 . We’ve discussed this in the core team and with the Steering Council.</p>
+<p>If we want to reintroduce the incremental GC for 3. 16, it can go through the regular PEP process and be more thoroughly evaluated. 3. 15 : The first beta is scheduled for 2026-05-05, just under three weeks from now. If the revert is ready to release within the next week or so, we can put out an extra alpha 9. 3. 14.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://discuss.python.org/t/reverting-the-incremental-gc-in-python-3-14-and-3-15/107014">Read story</a>
+    </div>
+  </article>
+  </main>
+</body>
+</html>

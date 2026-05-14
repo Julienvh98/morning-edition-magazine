@@ -97,7 +97,21 @@
       "category": "Company",
       "publishedDate": "2026-05-11",
       "firstIncluded": "2026-05-12"
+    },
+    "https://www.anthropic.com/news/claude-for-small-business": {
+      "source": "Anthropic",
+      "title": "Introducing Claude for Small Business",
+      "category": "Announcements",
+      "publishedDate": "2026-05-13",
+      "firstIncluded": "2026-05-14"
+    },
+    "https://openai.com/index/our-response-to-the-tanstack-npm-supply-chain-attack/": {
+      "source": "OpenAI",
+      "title": "Our response to the TanStack npm supply chain attack",
+      "category": "Company",
+      "publishedDate": "2026-05-13",
+      "firstIncluded": "2026-05-14"
     }
   },
-  "lastRun": "2026-05-13"
+  "lastRun": "2026-05-14"
 }
