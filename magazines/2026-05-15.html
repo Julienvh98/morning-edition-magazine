@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Morning Edition | 2026-05-15</title>
+  <meta name="description" content="A front-page Hacker News briefing tuned for AI tools, health, finance, weird science, and useful things you can act on today.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..900,80,1&family=IBM+Plex+Serif:wght@400;500&family=Inter:wght@500;650;800;900&display=swap" rel="stylesheet">
+  <style>
+
+:root {
+  color-scheme: light;
+  --ink: #17120c;
+  --paper: #f5ecd8;
+  --muted: rgba(23, 18, 12, 0.72);
+  --rule: rgba(23, 18, 12, 0.2);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(18px, 1.5vw, 24px);
+  line-height: 1.22;
+}
+
+a { color: inherit; text-decoration-thickness: 0.12em; text-underline-offset: 0.18em; }
+
+.cover {
+  min-height: 18vh;
+  display: grid;
+  align-content: center;
+  padding: clamp(16px, 3vw, 36px) clamp(22px, 5vw, 72px);
+  background: #f4ecd8;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.34);
+  overflow: hidden;
+}
+
+.story-topline,
+.official-news-title {
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.story-topline,
+.official-news-title {
+  color: var(--muted);
+}
+
+h1,
+h2,
+.number {
+  font-family: "Fraunces", Georgia, serif;
+  letter-spacing: 0;
+}
+
+h1 {
+  max-width: none;
+  margin: 0;
+  font-size: clamp(42px, 8vw, 96px);
+  line-height: 0.86;
+}
+
+.official-news {
+  display: grid;
+  gap: 16px;
+  padding: clamp(22px, 4vw, 56px) clamp(22px, 5vw, 72px);
+  background: #f7f0df;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.3);
+}
+
+.official-news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.official-news-card {
+  border-top: 1px solid rgba(23, 18, 12, 0.34);
+  padding-top: 12px;
+}
+
+.official-news-card h2,
+.story-main h2 {
+  max-width: 12ch;
+  margin: 0 0 10px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 760;
+  line-height: 0.98;
+}
+
+.summary-body {
+  display: grid;
+  gap: 14px;
+}
+
+.summary-body p,
+.official-news-empty {
+  margin: 0;
+  color: rgba(23, 18, 12, 0.82);
+  font-family: "IBM Plex Serif", Georgia, serif;
+  font-size: clamp(18px, 1.45vw, 22px);
+  font-weight: 400;
+  line-height: 1.36;
+}
+
+.official-news-card a,
+.story-link {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 14px;
+  color: rgba(23, 18, 12, 0.8);
+  font-size: clamp(15px, 1.1vw, 17px);
+  font-weight: 900;
+}
+
+.spread {
+  position: relative;
+  min-height: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  padding: clamp(28px, 5vw, 72px);
+  overflow: hidden;
+  border-top: 2px solid rgba(23, 18, 12, 0.2);
+  background:
+    linear-gradient(90deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    #f4ecd8;
+  background-size: 78px 78px;
+}
+
+.number {
+  position: absolute;
+  line-height: 0.76;
+  pointer-events: none;
+  user-select: none;
+}
+
+.story-main {
+  position: relative;
+  z-index: 1;
+}
+
+.story-topline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.brief {
+  max-width: 850px;
+  margin-top: 22px;
+  border-top: 2px solid rgba(23, 18, 12, 0.28);
+  padding-top: 18px;
+}
+
+@media (max-width: 860px) {
+  .cover,
+  .spread,
+  .official-news {
+    min-height: auto;
+    padding: 24px 22px 42px;
+  }
+
+  .cover {
+    min-height: 16svh;
+    padding: 14px 22px 12px;
+  }
+
+  h1 {
+    font-size: clamp(38px, 12vw, 56px);
+  }
+
+  .official-news {
+    gap: 12px;
+    padding: 20px 22px 24px;
+  }
+
+  .official-news-grid,
+  .spread {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .official-news-card h2,
+  .story-main h2 {
+    font-size: 30px;
+  }
+
+  .summary-body p,
+  .official-news-empty {
+    font-size: 18px;
+    line-height: 1.42;
+  }
+
+  .story-link,
+  .official-news-card a {
+    font-size: 16px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header class="cover">
+    <h1>Morning Edition</h1>
+  </header>
+
+  <section class="official-news">
+    <p class="official-news-title">Official AI Lab News</p>
+    <div class="official-news-grid">
+      <article class="official-news-card">
+    <h2>Anthropic forms $200 million partnership with the Gates Foundation</h2>
+    <div class="summary-body official-news-summary">
+      <p>Anthropic is an AI safety and research company that&#39;s working to build reliable, interpretable, and steerable AI systems. We’re partnering with the Gates Foundation to commit $200 million in grant funding, Claude usage credits, and technical support for programs in global health, life sciences, education, and economic mobility over the next four years. These programs will be implemented with partners in the US and around the world.</p>
+<p>This commitment is central to Anthropic’s efforts to extend the benefits of AI in areas where markets alone will not. This work is led by our Beneficial Deployments team, which provides Claude credits and engineering support to our partners in the four priority areas mentioned above. The team also develops AI-related public goods, such as public health datasets and evaluation benchmarks, and offers nonprofits and education institutions discounted access to Claude.</p>
+<p>We’re increasing our investment in beneficial deployments, and plan to share more about our approach to this work, and the impact of the programs we’ve supported. Below, we outline what’s involved in our partnership with the Gates Foundation, including our new initiatives and the work that&#39;s already underway. The largest part of our partnership will focus on improving health outcomes in low-.</p>
+    </div>
+    <a href="https://www.anthropic.com/news/gates-foundation-partnership">Read official article</a>
+  </article>
+    </div>
+  </section>
+
+  <main>
+    <article class="spread">
+    <div class="number" aria-label="Story 01">01</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>antonleicht.me</span>
+        <span>Rank 15</span>
+      </div>
+      <h2>Access to frontier AI will soon be limited by economic and security constraints</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Soon, access to frontier AI will be scarce and selective Anton Leicht May 13, 2026 1 4 Share There’s a common mantra in the outskirts of AI policy thought: driven by market pressures and overheated capital markets, AI tokens will soon be abundant—and the future belongs to those who can use them best. The further you get away from San Francisco, the louder this mantra grows. It reaches a fever pitch in the peripheries, the many middle powers of the world still caught up in a plan to navigate the AI revolution on the basis of merely good-enough models.</p>
+<p>That view requires important AI capabilities to be widely accessible: defenders have access to models before attackers do, firms in all domains compete based on access to the same AI capabilities. Recent events have thrown that view for a loop, and it now seems clear that access to frontier AI will soon be limited by economic and security constraints . In early April, Anthropic announced it had developed Mythos, a leading cybersecurity model, and that it would only make its considerable ability to patch extant vulnerabilities available to a select few companies .</p>
+<p>Cybersecurity start-ups in the Mission District, systems integrators.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://writing.antonleicht.me/p/cut-off">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 02">02</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>openai.com</span>
+        <span>Rank 13</span>
+      </div>
+      <h2>Codex is now in the ChatGPT mobile app</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Use Codex anywhere with the ChatGPT mobile app. Monitor, steer, and approve coding tasks in real time across devices and remote environments. Codex is coming to your phone. Now in preview in the ChatGPT mobile app. (opens in a new window) Loading… Share Codex is now in the ChatGPT mobile app so you can stay in the loop from anywhere while Codex gets work done across your laptops, devboxes, or remote environments.</p>
+<p>As agents take on longer-running work, a new rhythm for collaboration is emerging. To keep work moving, you need to be able to easily answer a question, review what Codex found, change direction, approve what comes next, or add a new idea. More than 4 million people now use Codex every week, and we’re seeing how much those small moments matter. A quick check-in can keep a thread moving, prevent unnecessary rework, or help Codex make progress with the right context.</p>
+<p>Now you can do that from your phone. Codex in the ChatGPT mobile app is a fully-featured mobile experience for getting work done with Codex. When you connect to any of your machines where Codex is running (whether that’s your laptop, a dedicated Mac mini, or a.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://openai.com/index/work-with-codex-from-anywhere/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 03">03</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>scottjg.com</span>
+        <span>Rank 8</span>
+      </div>
+      <h2>RTX 5090 and M4 MacBook Air: Can It Game?</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>What if you could strap a full desktop GPU to your MacBook Air? Turns out, you can. What if you could strap a full desktop GPU to your MacBook Air? Turns out, you can. Just a quick FTC required note: When you buy through my links, I may earn a commission. As much as I hate to admit it, step one in most of my projects now is to ask AI about it.</p>
+<p>Maybe it&amp;rsquo;ll tell me something I don&amp;rsquo;t know. Ok, so the plan is to plug a big PC gaming GPU, an NVIDIA RTX 5090, into my M4 MacBook Air. To do that, we plug it into a Thunderbolt dock which adapts PCIe to Thunderbolt, and we plug that into a USB-C port. Thunderbolt tunnels PCIe over a USB-C cable, so from the computer&amp;rsquo;s perspective a Thunderbolt device really is a PCIe device, not a USB one.</p>
+<p>You get 4 PCIe lanes at up to 40Gbps on Thunderbolt 4, with a small performance penalty for the tunneling. USB4 includes the same PCIe tunneling as an optional feature, so some non-Thunderbolt USB4 ports can do this too. You can use this to plug a GPU into a laptop with.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://scottjg.com/posts/2026-05-05-egpu-mac-gaming/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 04">04</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>github.com/glycemicgpt</span>
+        <span>Rank 2</span>
+      </div>
+      <h2>Show HN: GlycemicGPT – Open-source AI-powered diabetes management</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Because no one should manage diabetes alone 💙. Contribute to GlycemicGPT/GlycemicGPT development by creating an account on GitHub. Open source diabetes platform with AI-powered analysis at its core. Because no one should manage diabetes alone. Overview • Quick Start • Architecture • Roadmap • Development • Contributing • Support • Disclaimer This software is NOT designed to replace your endocrinologist or healthcare provider. GlycemicGPT provides AI-generated suggestions only and should be used as a supplementary tool alongside professional medical care.</p>
+<p>ALPHA SOFTWARE -- This project is under active development. It is functional and in daily use by the developer, but has not been broadly tested. Use at your own risk and always consult your healthcare provider. GlycemicGPT is an open source diabetes platform built around AI-powered analysis. It connects directly to your CGM and insulin pump for a full standalone experience — real-time monitoring, daily AI briefs, pattern detection, conversational AI chat, and caregiver alerting.</p>
+<p>Already running Nightscout? GlycemicGPT can also pull data from your existing instance and add AI analysis on top, no changes required to your current setup. See the Relationship to other tools page for the honest comparison. Tandem Mobi note: The Mobi uses the same BLE.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://github.com/GlycemicGPT/GlycemicGPT">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 05">05</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>tristandc.com</span>
+        <span>Rank 7</span>
+      </div>
+      <h2>Details of the Daring Airdrop at Tristan Da Cunha</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>More details and pictures have come in of the intrepid airdrop of urgent medical support sent to Tristan by the UK Government on the 9th May 2026. Following requests from the respective Administrators and the Governor, the UK Government decided to provide support to the UK Overseas Territories affected by the recent outbreak of hantavirus on the cruise ship MV Hondius . An RAF aircraft flying low over the settlement, photographed by Odile Cesari from the 1961 volcano.</p>
+<p>This is an unprecedented sight, as the rare planes that fly over Tristan do so at high altitude and are often hidden from view by the island&#39;s low clouds. The Hondius visited Tristan and landed visitors in mid-April during the voyage&#39;s three day stop at the island. An islander who disembarked at Tristan subsequently became ill with suspected hantavirus and was isolated in the care of the island&#39;s hospital.</p>
+<p>However, the hospital is small, and medical oxygen and other supplies were soon running low. The Ministry of Defence was therefore asked to fly military personnel and medical supplies to Tristan to relieve the hard-pressed hospital staff on the island. This is not a logistically routine matter. There is no airstrip on Tristan,.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.tristandc.com/government/news-2026-05-11-airdrop.php">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 06">06</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>github.com/anthropics</span>
+        <span>Rank 18</span>
+      </div>
+      <h2>Claude for Legal</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>A suite of plugins for legal workflows. Contribute to anthropics/claude-for-legal development by creating an account on GitHub. Reference agents, skills, and data connectors for the legal workflows we see most — in-house commercial, privacy, product, corporate, employment, litigation, regulatory, AI governance, IP, and the learning side of the practice (law school clinics and students). New here? Start with QUICKSTART. md — install in 60 seconds. This README is the full reference.</p>
+<p>Everything here is available two ways from one source : install it as a Claude Cowork or Claude Code plugin, or deploy it through the Claude Managed Agents API behind your own workflow engine. Same system prompt, same skills — you choose where it runs. Install Claude Desktop Get access to Claude Cowork Follow the instructions in the video below: Installing. Marketplace. mp4 Important Every output from these plugins is a draft for attorney review — not legal advice, not a legal conclusion, not a substitute for a lawyer.</p>
+<p>They are built with guardrails that reflect that: source attribution on every citation, conservative defaults on privilege and subjective legal calls, jurisdiction assumptions surfaced, and explicit gates before anything is filed, sent, or relied on. A lawyer reviews, verifies, and takes professional responsibility.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://github.com/anthropics/claude-for-legal">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 07">07</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>claude.com</span>
+        <span>Rank 23</span>
+      </div>
+      <h2>How Claude Code works in large codebases</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>The most successful Claude Code deployments share a set of recognizable patterns across configurations, tooling, and org structure. This article is part of Claude Code at scale, a new series covering best practices for engineering organizations building with Claude Code at enterprise scale. Meet Claude Products Claude Claude Code Claude Cowork Claude Security Features Claude for Chrome Claude for Slack Claude for Microsoft 365 Skills Models Opus Sonnet Haiku Platform Overview Developer docs Pricing Console login Solutions Use cases AI agents Coding Departments Legal Security Industries Customer support Education Financial services Government Healthcare Life sciences Nonprofits Pricing Overview API Plans Pro Max Team Enterprise Resources Insights Blog Customer stories Anthropic news Learn Anthropic Academy Courses Tutorials Use cases Tools Connectors Plugins Connect Events Community Login Contact sales Contact sales Contact sales Try Claude Try Claude Try Claude Contact sales Contact sales Contact sales Try Claude Try Claude Try Claude Contact sales Contact sales Contact sales Try Claude Try Claude Try Claude Contact sales Contact sales Contact sales Try Claude Try Claude Try Claude Meet Claude Products Claude Claude Code Claude Cowork Claude Security Features Claude for Chrome Claude for Slack Claude for Microsoft 365 Skills Models Opus Sonnet Haiku Platform.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://claude.com/blog/how-claude-code-works-in-large-codebases-best-practices-and-where-to-start">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 08">08</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>dylan.gr</span>
+        <span>Rank 12</span>
+      </div>
+      <h2>Solar-based sleep patterns compared to modern norms</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Disclaimer: These are my personal views and do not represent any organization or professional advice. Solar-based sleep patterns compared to modern norms appears on the Hacker News front page from dylan. gr. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly. For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://dylan.gr/1775146616">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 09">09</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>hghalebi.github.io</span>
+        <span>Rank 4</span>
+      </div>
+      <h2>Building ML framework with Rust and Category Theory</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>A modular, compile-checked tutorial for learning category-theory ideas through a tiny Rust ML pipeline. Press ← or → to navigate between chapters Press S or / to search in the book Auto Light Rust Coal Navy Ayu Category Theory for Tiny ML in Rust Category Theory for Tiny ML in Rust A practical bridge between compositional mathematics, Rust types, and tiny machine-learning systems Category Theory for Tiny ML in Rust is a working draft that develops a small, explicit machine-learning system through the lens of category theory and Rust.</p>
+<p>The book is designed for readers who want to understand machine learning not only as numerical computation, but as a structured pipeline of objects, transformations, composition, and constraints. Rather than treating category theory as decorative abstraction, this book uses it as an engineering tool: This is not a finalized edition. Chapters, examples, terminology, diagrams, code, and references may evolve as the work continues. The current public edition is still worth publishing: readers can use the existing chapters, run the Rust examples, and send evidence-shaped feedback while later completion passes continue.</p>
+<p>The public source repository is available at github. com/hghalebi/category_theory_transformer_rs . The first public workshop for this book and Rust lab is hosted.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://hghalebi.github.io/category_theory_transformer_rs/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 10">10</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>arkadiyt.com</span>
+        <span>Rank 1</span>
+      </div>
+      <h2>Removing the modem and GPS from my 2024 RAV4 hybrid</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Modern cars are computers on wheels that send home nonstop telemetry about you. In this post I remove my 2024 RAV4 Hybrid Modern cars are computers on wheels - they have more sensors than you can count and are constantly phoning home with telemetry data like your location, speed, fuel levels, sudden accelerations/decelerations, video footage, driver attention data from eye monitoring systems, and hundreds of other data points.</p>
+<p>Cars have inward- and outward-facing cameras. They have microphones. They have always-on modems. It’s all enabled by default with difficult or meaningless opt-outs, and your data is monetized through brokers like LexisNexis or Verisk. This all brings a host of security and privacy issues - here are some over the years: Now that we’re sufficiently motivated, what can we do about it? In this blog post, rather than relying on companies’ promises or meaningless opt-outs, we’re going to stop the data at the source by physically removing the modem (the DCM, or Data Communication Module) as well as the built-in GPS on my 2024 RAV4 Hybrid, so the car will no longer have the capability to send any telemetry data back home.</p>
+<p>Let’s dive in: Yes. Depending on how different car manufacturers.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://arkadiyt.com/2026/05/13/removing-the-modem-and-gps-from-my-rav4/">Read story</a>
+    </div>
+  </article>
+  </main>
+</body>
+</html>

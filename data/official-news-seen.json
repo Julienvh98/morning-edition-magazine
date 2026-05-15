@@ -111,7 +111,14 @@
       "category": "Company",
       "publishedDate": "2026-05-13",
       "firstIncluded": "2026-05-14"
+    },
+    "https://www.anthropic.com/news/gates-foundation-partnership": {
+      "source": "Anthropic",
+      "title": "Anthropic forms $200 million partnership with the Gates Foundation",
+      "category": "Announcements",
+      "publishedDate": "2026-05-14",
+      "firstIncluded": "2026-05-15"
     }
   },
-  "lastRun": "2026-05-14"
+  "lastRun": "2026-05-15"
 }
