@@ -118,7 +118,14 @@
       "category": "Announcements",
       "publishedDate": "2026-05-14",
       "firstIncluded": "2026-05-15"
+    },
+    "https://www.anthropic.com/news/pwc-expanded-partnership": {
+      "source": "Anthropic",
+      "title": "PwC is deploying Claude to build technology, execute deals, and reinvent enterprise functions for clients",
+      "category": "Announcements",
+      "publishedDate": "2026-05-14",
+      "firstIncluded": "2026-05-16"
     }
   },
-  "lastRun": "2026-05-15"
+  "lastRun": "2026-05-16"
 }

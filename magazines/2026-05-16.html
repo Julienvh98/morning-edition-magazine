@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Morning Edition | 2026-05-16</title>
+  <meta name="description" content="A front-page Hacker News briefing tuned for AI tools, health, finance, weird science, and useful things you can act on today.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..900,80,1&family=IBM+Plex+Serif:wght@400;500&family=Inter:wght@500;650;800;900&display=swap" rel="stylesheet">
+  <style>
+
+:root {
+  color-scheme: light;
+  --ink: #17120c;
+  --paper: #f5ecd8;
+  --muted: rgba(23, 18, 12, 0.72);
+  --rule: rgba(23, 18, 12, 0.2);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(18px, 1.5vw, 24px);
+  line-height: 1.22;
+}
+
+a { color: inherit; text-decoration-thickness: 0.12em; text-underline-offset: 0.18em; }
+
+.cover {
+  min-height: 18vh;
+  display: grid;
+  align-content: center;
+  padding: clamp(16px, 3vw, 36px) clamp(22px, 5vw, 72px);
+  background: #f4ecd8;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.34);
+  overflow: hidden;
+}
+
+.story-topline,
+.official-news-title {
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.story-topline,
+.official-news-title {
+  color: var(--muted);
+}
+
+h1,
+h2,
+.number {
+  font-family: "Fraunces", Georgia, serif;
+  letter-spacing: 0;
+}
+
+h1 {
+  max-width: none;
+  margin: 0;
+  font-size: clamp(42px, 8vw, 96px);
+  line-height: 0.86;
+}
+
+.official-news {
+  display: grid;
+  gap: 16px;
+  padding: clamp(22px, 4vw, 56px) clamp(22px, 5vw, 72px);
+  background: #f7f0df;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.3);
+}
+
+.official-news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.official-news-card {
+  border-top: 1px solid rgba(23, 18, 12, 0.34);
+  padding-top: 12px;
+}
+
+.official-news-card h2,
+.story-main h2 {
+  max-width: 12ch;
+  margin: 0 0 10px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 760;
+  line-height: 0.98;
+}
+
+.summary-body {
+  display: grid;
+  gap: 14px;
+}
+
+.summary-body p,
+.official-news-empty {
+  margin: 0;
+  color: rgba(23, 18, 12, 0.82);
+  font-family: "IBM Plex Serif", Georgia, serif;
+  font-size: clamp(18px, 1.45vw, 22px);
+  font-weight: 400;
+  line-height: 1.36;
+}
+
+.official-news-card a,
+.story-link {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 14px;
+  color: rgba(23, 18, 12, 0.8);
+  font-size: clamp(15px, 1.1vw, 17px);
+  font-weight: 900;
+}
+
+.spread {
+  position: relative;
+  min-height: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  padding: clamp(28px, 5vw, 72px);
+  overflow: hidden;
+  border-top: 2px solid rgba(23, 18, 12, 0.2);
+  background:
+    linear-gradient(90deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    #f4ecd8;
+  background-size: 78px 78px;
+}
+
+.number {
+  position: absolute;
+  line-height: 0.76;
+  pointer-events: none;
+  user-select: none;
+}
+
+.story-main {
+  position: relative;
+  z-index: 1;
+}
+
+.story-topline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.brief {
+  max-width: 850px;
+  margin-top: 22px;
+  border-top: 2px solid rgba(23, 18, 12, 0.28);
+  padding-top: 18px;
+}
+
+@media (max-width: 860px) {
+  .cover,
+  .spread,
+  .official-news {
+    min-height: auto;
+    padding: 24px 22px 42px;
+  }
+
+  .cover {
+    min-height: 16svh;
+    padding: 14px 22px 12px;
+  }
+
+  h1 {
+    font-size: clamp(38px, 12vw, 56px);
+  }
+
+  .official-news {
+    gap: 12px;
+    padding: 20px 22px 24px;
+  }
+
+  .official-news-grid,
+  .spread {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .official-news-card h2,
+  .story-main h2 {
+    font-size: 30px;
+  }
+
+  .summary-body p,
+  .official-news-empty {
+    font-size: 18px;
+    line-height: 1.42;
+  }
+
+  .story-link,
+  .official-news-card a {
+    font-size: 16px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header class="cover">
+    <h1>Morning Edition</h1>
+  </header>
+
+  <section class="official-news">
+    <p class="official-news-title">Official AI Lab News</p>
+    <div class="official-news-grid">
+      <article class="official-news-card">
+    <h2>PwC is deploying Claude to build technology, execute deals, and reinvent enterprise functions for clients</h2>
+    <div class="summary-body official-news-summary">
+      <p>Anthropic is an AI safety and research company that&#39;s working to build reliable, interpretable, and steerable AI systems. Anthropic and PwC today announced an expansion of their strategic alliance, deepening how PwC uses Claude to build technology, execute deals, and reinvent enterprise functions for clients across every industry it serves. Most enterprises are still running on systems and processes built for a pre-AI world—a drag that is estimated to be more than $2 trillion.</p>
+<p>Together, Anthropic and PwC are helping companies replace that weight and rebuild around AI. &quot;PwC has been leading AI&#39;s expansion into the parts of the economy where accuracy and reliability are non-negotiable—financial services, healthcare, life sciences, cybersecurity—and the results are clear. Insurance underwriting that took 10 weeks now takes 10 days. Security work that took hours now takes minutes. We&#39;re excited to put Claude in the hands of hundreds of thousands of people across PwC&#39;s workforce,&quot; said Dario Amodei, Co-founder and CEO, Anthropic.</p>
+<p>&quot;The conversation around AI has shifted from possibility to execution. Clients are looking for ways to apply AI that are secure, responsible, and capable of delivering measurable outcomes in complex business environments. Our collaboration with Anthropic brings together advanced AI capabilities and PwC&#39;s.</p>
+    </div>
+    <a href="https://www.anthropic.com/news/pwc-expanded-partnership">Read official article</a>
+  </article>
+    </div>
+  </section>
+
+  <main>
+    <article class="spread">
+    <div class="number" aria-label="Story 01">01</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>twitter.com/mitchellh</span>
+        <span>Rank 5</span>
+      </div>
+      <h2>I believe there are entire companies right now under AI psychosis</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>JavaScript is not available. We’ve detected that JavaScript is disabled in this browser. Please enable JavaScript or switch to a supported browser to continue using x. com. You can see a list of supported browsers in our Help Center. Terms of Service Privacy Policy Cookie Policy Imprint Ads info © 2026 X Corp. I believe there are entire companies right now under AI psychosis appears on the Hacker News front page from twitter.</p>
+<p>com/mitchellh. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly. For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://twitter.com/mitchellh/status/2055380239711457578">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 02">02</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>kabir.au</span>
+        <span>Rank 1</span>
+      </div>
+      <h2>Frontier AI has broken the open CTF format</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Why frontier AI has broken the open CTF format, hollowed out the scoreboard, and made competitive CTF performance a weaker signal than it used to be. Frontier AI has broken the open CTF format. The scoreboard does not measure human skill cleanly anymore, and the old game is not coming back. I started playing CTFs in 2021, the same year I started university. My first CTF was HCKSYD, a 48-hour solo CTF.</p>
+<p>I full solved it and won in 2 hours. I was completely hooked. That led me to win DownUnderCTF, Australia&#39;s largest CTF, with Blitzkrieg multiple times. Blitzkrieg was one of Australia&#39;s strongest teams at the time. I later joined TheHackersCrew, an international top-tier team that was consistently ranked highly on CTFTime, the main global ranking and event calendar the scene uses as its scoreboard. With them, I competed in some of the most prestigious CTFs in the world, consistently placing well within the top 10 until the end of 2025.</p>
+<p>I am not saying this because I dislike CTFs. I am saying it because CTFs were the thing that made me fall in love with security. They taught me how to learn, gave me a way to measure.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://kabir.au/blog/the-ctf-scene-is-dead">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 03">03</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>projectzero.google</span>
+        <span>Rank 12</span>
+      </div>
+      <h2>A 0-click exploit chain for the Pixel 10</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>We recently published an exploit chain for the Google Pixel 9 that demonstrated it was possible to go from a zero-click context to root on Android in just tw... We recently published an exploit chain for the Google Pixel 9 that demonstrated it was possible to go from a zero-click context to root on Android in just two exploits. The Dolby 0-click vulnerability existed across all of Android, until it was patched in January 2026.</p>
+<p>While we had an exploit chain for the Pixel 9, we wanted to see if it was possible to write a similar exploit chain for Pixel 10. Altering our exploit for CVE-2025-54957 was fairly straightforward. The majority of needed changes involved updating offsets calculated for the specific version of the library we targeted on the Pixel 9 to similar offsets in the library for Pixel 10. The only challenge (outside of wishing we’d better documented which syncframes contained offsets) was that the Pixel 10 uses RET PAC in the place of -fstack-protector , which meant that __stack_chk_fail wasn’t available to be overwritten by code.</p>
+<p>After a bit of trial and error, we used dap_cpdp_init , initialization code that can be overwritten without causing functional problems,.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://projectzero.google/2026/05/pixel-10-exploit.html">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 04">04</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>dynomight.net</span>
+        <span>Rank 9</span>
+      </div>
+      <h2>The main thing about P2P meth is that there&#39;s so much of it (2021)</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Since around 2009, methamphetamines have been made with phenylacetone (P2P). Is there a chemical different causing schizophrenia? Sam Quinones was recently on Econtalk and in the Atlantic talking about methamphetamines and homelessness . He points out that “old” meth was made from ephedrine and that “new” meth is made from a chemical called Phenylacetone or P2P. He suggests that new meth might be chemically different in a way that caused people to go crazy, starting around 2017: Ephedrine meth was like a party drug.</p>
+<p>[…] You could normally kind of more or less hang onto your life. You had a house, you had a job. […] P2P meth was nothing like that. It was a very sinister drug. It brought you inside. You didn’t want to be around other people. You wanted to just kind of be alone with whatever bizarre thoughts your mind was now cooking up, and conspiracies. I was curious about this.</p>
+<p>What do we know about the difference between old meth and P2P meth? What evidence is there that these have a chemical difference? Meth in the US shifted to P2P synthesis between 2009 and 2012. In the before times, meth was made with ephedrine or.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://dynomight.net/p2p-meth/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 05">05</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>edna.land</span>
+        <span>Rank 8</span>
+      </div>
+      <h2>Gaining control of every projector and camera on campus</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>While starting my first year at the Colorado School of Mines, I came across a rather interesting fact: the local DNS servers will assign a subdomain to each device that connects to the network. This means that a device called &amp;ldquo;meow&amp;rdquo; will be visible as &amp;ldquo;meow. mines. edu&amp;rdquo; on any campus wifi, though the network still blocks any traffic. This got me thinking in the back of my mind about what I could do with this, and especially if I could use this to trace back devices on the network.</p>
+<p>The main problem is accessing the underlying DNS records that point a specific subdomain to a specific IP (it&amp;rsquo;s a bit more complicated than this, but you get the gist), which can be addressed in a few ways: While this would be the simplest option, I doubt IT would simply zone transfer to me (and they really should not zone transfer to just anyone). My list also wouldn&amp;rsquo;t update as new devices are added or removed from the network.</p>
+<p>Plus, where would be the fun in that? Many subdomains register certifications to ensure your data is coming from the right place (TLS, HTTPS certificates). These certificates are added to append only ledgers.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.edna.land/blogs/posts/scanning/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 06">06</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>arstechnica.com</span>
+        <span>Rank 18</span>
+      </div>
+      <h2>California bill would require patches or refunds when online games shut down</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Publishers would have to offer &quot;independent&quot; play patch or refunds after server shutdowns. Slow boring of hard boards Bill to block publishers from killing online games advances in California Publishers would have to offer “independent” play patch or refunds after server shutdowns. 102 Your controller won&#39;t literally disintegrate when an online game&#39;s servers shut down, but it can feel that way sometimes. Credit: Stop Killing Games Your controller won&#39;t literally disintegrate when an online game&#39;s servers shut down, but it can feel that way sometimes.</p>
+<p>Credit: Stop Killing Games Text settings Story text Size Small Standard Large Width * Standard Wide Links Standard Orange * Subscribers only Learn more Minimize to nav A bill focused on maintaining long-term playable access to online games has passed out of the California Assembly’s appropriations committee, setting up a floor vote by the full legislative body. The advancement is a major win for Stop Killing Games ‘ grassroots game preservation movement and comes over the objections of industry lobbyists at the Entertainment Software Association .</p>
+<p>California’s Protect Our Games Act , as currently written, would require digital game publishers who cut off support for an online game to either provide a full refund to.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://arstechnica.com/gaming/2026/05/bill-to-keep-online-games-playable-clears-key-hurdle-in-california/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 07">07</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>github.com/oven-sh</span>
+        <span>Rank 28</span>
+      </div>
+      <h2>Bun Rust rewrite: &quot;codebase fails basic miri checks, allows for UB in safe rust&quot;</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>error: Undefined Behavior: constructing invalid value of type &amp;[u8]: encountered a dangling reference (0x20933[noalloc] has no provenance) --&gt; src/main. rs:97:18 | 97 | unsafe { core::slice::from_raw_parts(ptr as *const u8, self. len()) } ... Sign in Appearance settings Platform AI CODE CREATION GitHub Copilot Write better code with AI GitHub Spark Build and deploy intelligent apps GitHub Models Manage and compare prompts MCP Registry New Integrate external tools DEVELOPER WORKFLOWS Actions Automate any workflow Codespaces Instant dev environments Issues Plan and track work Code Review Manage code changes APPLICATION SECURITY GitHub Advanced Security Find and fix vulnerabilities Code security Secure your code as you build Secret protection Stop leaks before they start EXPLORE Why GitHub Documentation Blog Changelog Marketplace View all features Solutions BY COMPANY SIZE Enterprises Small and medium teams Startups Nonprofits BY USE CASE App Modernization DevSecOps DevOps CI/CD View all use cases BY INDUSTRY Healthcare Financial services Manufacturing Government View all industries View all solutions Resources EXPLORE BY TOPIC AI Software Development DevOps Security View all topics EXPLORE BY TYPE Customer stories Events &amp; webinars Ebooks &amp; reports Business insights GitHub Skills SUPPORT &amp; SERVICES Documentation Customer support Community forum Trust center Partners View all resources Open Source COMMUNITY GitHub.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://github.com/oven-sh/bun/issues/30719">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 08">08</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>macdailynews.com</span>
+        <span>Rank 29</span>
+      </div>
+      <h2>U.S. DOJ demands Apple and Google unmask over 100k users of car-tinkering app</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>The U. S. Department of Justice is seeking personal data on potentially hundreds of thousands of drivers who downloaded EZ Lynk’s Auto Agent… The U. S. Department of Justice is seeking personal data on potentially hundreds of thousands of drivers who downloaded EZ Lynk’s Auto Agent app , escalating a years-long legal battle over vehicle emissions controls. Subpoenas issued to Apple, Google, Amazon, and Walmart request names, addresses, phone numbers, and purchase histories tied to the app and its accompanying hardware.</p>
+<p>The DOJ first sued EZ Lynk in 2021, accusing the Cayman Islands-based company of violating the Clean Air Act by marketing and selling “defeat devices.” These tools allegedly allow users to bypass factory emissions controls on diesel vehicles, primarily through the EZ Lynk Auto Agent app paired with an onboard diagnostic (OBD) hardware dongle. EZ Lynk strongly denies the allegations, emphasizing that its products serve legitimate purposes: monitoring vehicle performance, applying software updates, and enabling legitimate modifications and diagnostics.</p>
+<p>The company argues that any emissions-related use is not its primary purpose and falls under user responsibility. According to a joint court filing earlier this month, the DOJ subpoenaed Apple and Google in March and April 2026 for download and account data.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://macdailynews.com/2026/05/15/u-s-doj-demands-apple-and-google-unmask-over-100000-users-of-popular-car-tinkering-app-in-emissions-crackdown/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 09">09</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>phoboslab.org</span>
+        <span>Rank 7</span>
+      </div>
+      <h2>Additive Blending on the Nintendo 64</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Blog Games Projects Dominic Szablewski, @phoboslab — Monday, May 4th 2026 Additive Blending on the Nintendo 64 Did you ever wonder why explosions and other effects looked so much cooler on the original PlayStation than they did on the Nintendo 64? The reason is additive blending! Or rather, in the N64 case, the lack thereof. While the N64 actually did support additive blending, it was practically unusable.</p>
+<p>The PSX supports 4 different blend modes (in addition to just overwriting pixels) to control how sprites and geometry are mixed into the existing frame buffer: 0: (src + dst) / 2 1: src + dst 2: dst - src 3: dst + src/4 The one you see here in Silent Bomber is conceptually the simplest one: src + dst . That is, colors are just added to the existing ones in the frame buffer.</p>
+<p>| R | G | B | | src (sprite) | 171 | 42 | 226 | | + dst (framebuffer) | 63 | 141 | 170 | | = result | 234 | 183 | 255 | Drawing a sprite over a scene can only ever make it brighter , never darker. Perfect for explosions, plasma beams.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://phoboslab.org/log/2026/05/n64-additive-blending">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 10">10</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>gutenberg.org</span>
+        <span>Rank 2</span>
+      </div>
+      <h2>Project Gutenberg – keeps getting better</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Project Gutenberg is a library of free eBooks. X Go! Donate About ▼ About Project Gutenberg Reading Options &amp; Kindle Contact Us History &amp; Philosophy Help Pages Offline Catalogs Donate Frequently Downloaded Main Categories Reading Lists Search Options Frequently Downloaded Main Categories Project Gutenberg is a library of over 75,000 free eBooks Choose among free epub and Kindle eBooks, download them or read them online. You will find the world&#39;s great literature here, with focus on older works for which U.</p>
+<p>S. copyright has expired. Thousands of volunteers digitized and diligently proofread the eBooks, for you to enjoy. Audio books are a great way to enjoy literature. We recommend the following sources. All of them are digitizations of Project Gutenberg texts. They are freely available and in the public domain in the US. Project Gutenberg – keeps getting better appears on the Hacker News front page from gutenberg.</p>
+<p>org. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly. For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.gutenberg.org/">Read story</a>
+    </div>
+  </article>
+  </main>
+</body>
+</html>
