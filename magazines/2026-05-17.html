@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Morning Edition | 2026-05-17</title>
+  <meta name="description" content="A front-page Hacker News briefing tuned for AI tools, health, finance, weird science, and useful things you can act on today.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..900,80,1&family=IBM+Plex+Serif:wght@400;500&family=Inter:wght@500;650;800;900&display=swap" rel="stylesheet">
+  <style>
+
+:root {
+  color-scheme: light;
+  --ink: #17120c;
+  --paper: #f5ecd8;
+  --muted: rgba(23, 18, 12, 0.72);
+  --rule: rgba(23, 18, 12, 0.2);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(18px, 1.5vw, 24px);
+  line-height: 1.22;
+}
+
+a { color: inherit; text-decoration-thickness: 0.12em; text-underline-offset: 0.18em; }
+
+.cover {
+  min-height: 18vh;
+  display: grid;
+  align-content: center;
+  padding: clamp(16px, 3vw, 36px) clamp(22px, 5vw, 72px);
+  background: #f4ecd8;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.34);
+  overflow: hidden;
+}
+
+.story-topline,
+.official-news-title {
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.story-topline,
+.official-news-title {
+  color: var(--muted);
+}
+
+h1,
+h2,
+.number {
+  font-family: "Fraunces", Georgia, serif;
+  letter-spacing: 0;
+}
+
+h1 {
+  max-width: none;
+  margin: 0;
+  font-size: clamp(42px, 8vw, 96px);
+  line-height: 0.86;
+}
+
+.official-news {
+  display: grid;
+  gap: 16px;
+  padding: clamp(22px, 4vw, 56px) clamp(22px, 5vw, 72px);
+  background: #f7f0df;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.3);
+}
+
+.official-news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.official-news-card {
+  border-top: 1px solid rgba(23, 18, 12, 0.34);
+  padding-top: 12px;
+}
+
+.official-news-card h2,
+.story-main h2 {
+  max-width: 12ch;
+  margin: 0 0 10px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 760;
+  line-height: 0.98;
+}
+
+.summary-body {
+  display: grid;
+  gap: 14px;
+}
+
+.summary-body p,
+.official-news-empty {
+  margin: 0;
+  color: rgba(23, 18, 12, 0.82);
+  font-family: "IBM Plex Serif", Georgia, serif;
+  font-size: clamp(18px, 1.45vw, 22px);
+  font-weight: 400;
+  line-height: 1.36;
+}
+
+.official-news-card a,
+.story-link {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 14px;
+  color: rgba(23, 18, 12, 0.8);
+  font-size: clamp(15px, 1.1vw, 17px);
+  font-weight: 900;
+}
+
+.spread {
+  position: relative;
+  min-height: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  padding: clamp(28px, 5vw, 72px);
+  overflow: hidden;
+  border-top: 2px solid rgba(23, 18, 12, 0.2);
+  background:
+    linear-gradient(90deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    #f4ecd8;
+  background-size: 78px 78px;
+}
+
+.number {
+  position: absolute;
+  line-height: 0.76;
+  pointer-events: none;
+  user-select: none;
+}
+
+.story-main {
+  position: relative;
+  z-index: 1;
+}
+
+.story-topline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.brief {
+  max-width: 850px;
+  margin-top: 22px;
+  border-top: 2px solid rgba(23, 18, 12, 0.28);
+  padding-top: 18px;
+}
+
+@media (max-width: 860px) {
+  .cover,
+  .spread,
+  .official-news {
+    min-height: auto;
+    padding: 24px 22px 42px;
+  }
+
+  .cover {
+    min-height: 16svh;
+    padding: 14px 22px 12px;
+  }
+
+  h1 {
+    font-size: clamp(38px, 12vw, 56px);
+  }
+
+  .official-news {
+    gap: 12px;
+    padding: 20px 22px 24px;
+  }
+
+  .official-news-grid,
+  .spread {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .official-news-card h2,
+  .story-main h2 {
+    font-size: 30px;
+  }
+
+  .summary-body p,
+  .official-news-empty {
+    font-size: 18px;
+    line-height: 1.42;
+  }
+
+  .story-link,
+  .official-news-card a {
+    font-size: 16px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header class="cover">
+    <h1>Morning Edition</h1>
+  </header>
+
+  <section class="official-news">
+    <p class="official-news-title">Official AI Lab News</p>
+    <div class="official-news-grid">
+      <article class="official-news-card">
+    <h2>OpenAI and Malta partner to bring ChatGPT Plus to all citizens</h2>
+    <div class="summary-body official-news-summary">
+      <p>OpenAI and Malta partner to expand AI access, offering ChatGPT Plus and training to help citizens build practical AI skills and use AI responsibly. OpenAI and Malta partner to expand AI access, offering ChatGPT Plus and training to help citizens build practical AI skills and use AI responsibly. Share OpenAI and the Government of Malta are today announcing a world’s first partnership to roll out ChatGPT Plus to all Maltese citizens.</p>
+<p>The initiative will provide access to intelligence and empower citizens through an AI literacy course to build practical AI skills and benefit from the technology in their everyday lives. At OpenAI, we’re turning intelligence into a global utility. We believe that, like electricity, intelligence should be available for people, businesses, and institutions to use as much as they need, where and when they need it. That vision only matters if people can actually use these tools in ways that improve their own lives and communities.</p>
+<p>Malta’s AI for All initiative ⁠ (opens in a new window) will offer people of all backgrounds the opportunity to learn how AI can be used responsibly through a course developed by the University of Malta. The course is designed to help people understand.</p>
+    </div>
+    <a href="https://openai.com/index/malta-chatgpt-plus-partnership">Read official article</a>
+  </article>
+    </div>
+  </section>
+
+  <main>
+    <article class="spread">
+    <div class="number" aria-label="Story 01">01</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>crates.io</span>
+        <span>Rank 2</span>
+      </div>
+      <h2>Zerostack – A Unix-inspired coding agent written in pure Rust</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>crates. io serves as a central registry for sharing crates, which are packages or libraries written in Rust that you can use to enhance your projects Sorry, it looks like we were not able to load the page. Please make sure your network connection works and you are using an up-to-date browser. If the issue persists, please visit our issue tracker to report the problem. Zerostack – A Unix-inspired coding agent written in pure Rust appears on the Hacker News front page from crates.</p>
+<p>io. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly. For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://crates.io/crates/zerostack/1.0.0">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 02">02</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>jvns.ca</span>
+        <span>Rank 9</span>
+      </div>
+      <h2>Moving away from Tailwind, and learning to structure my CSS</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Moving away from Tailwind, and learning to structure my CSS Hello! 8 years ago, I wrote excitedly about discovering Tailwind . At that time I really had no idea how to structure my CSS code and given the choice between a pile of complete chaos and Tailwind, I was really happy to choose Tailwind. It helped me make a lot of tiny sites! I spent the last week or so migrating a couple of sites away from Tailwind and towards more semantic HTML + vanilla CSS, and it was SO fun and SO interesting, so here are some things I learned!</p>
+<p>As usual I&amp;rsquo;m not a full-time frontend developer and so all of my CSS learning has happened in fits and starts over many years. When I started thinking about structuring CSS, I was intimidated at first: I&amp;rsquo;m not very good at structuring my CSS! But then I started reading blog posts talking about how to structure CSS (like A whole cascade of layers or How I write CSS in 2024 ) and I realized a couple of things: I&amp;rsquo;m going to talk about a few aspects of my CSS codebase and my thoughts so far what kind of rules.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://jvns.ca/blog/2026/05/15/moving-away-from-tailwind--and-learning-to-structure-my-css-/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 03">03</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>nvlabs.github.io</span>
+        <span>Rank 10</span>
+      </div>
+      <h2>SANA-WM, a 2.6B open-source world model for 1-minute 720p video</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>SANA-WM is an efficient minute-scale world model for camera-controlled 720p video generation. SANA-WM, a 2. 6B open-source world model for 1-minute 720p video appears on the Hacker News front page from nvlabs. github. io. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly. For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://nvlabs.github.io/Sana/WM/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 04">04</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>openai.com</span>
+        <span>Rank 8</span>
+      </div>
+      <h2>OpenAI and Government of Malta partner to roll out ChatGPT Plus to all citizens</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>OpenAI and Malta partner to expand AI access, offering ChatGPT Plus and training to help citizens build practical AI skills and use AI responsibly. Share OpenAI and the Government of Malta are today announcing a world’s first partnership to roll out ChatGPT Plus to all Maltese citizens. The initiative will provide access to intelligence and empower citizens through an AI literacy course to build practical AI skills and benefit from the technology in their everyday lives.</p>
+<p>At OpenAI, we’re turning intelligence into a global utility. We believe that, like electricity, intelligence should be available for people, businesses, and institutions to use as much as they need, where and when they need it. That vision only matters if people can actually use these tools in ways that improve their own lives and communities. Malta’s AI for All initiative ⁠ (opens in a new window) will offer people of all backgrounds the opportunity to learn how AI can be used responsibly through a course developed by the University of Malta.</p>
+<p>The course is designed to help people understand what AI is, what it can and can’t do, and how to use it responsibly at home and work. After the course is completed,.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://openai.com/index/malta-chatgpt-plus-partnership/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 05">05</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>blog.mozilla.org</span>
+        <span>Rank 3</span>
+      </div>
+      <h2>Mozilla to UK regulators: VPNs are essential privacy and security tools</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>In the context of concerns around young people’s interactions with digital technologies, the UK’s Department for Science, Innovation and Technology is consulting on additional measures to prepare young people for ... In the context of concerns around young people’s interactions with digital technologies, the UK’s Department for Science, Innovation and Technology is consulting on additional measures to prepare young people for growing up in a digital world.</p>
+<p>Before the backdrop of users circumventing age assurance systems mandated under the UK’s Online Safety Act, the consultation considers age-gating virtual private networks (VPNs). Mozilla’s mission is grounded in the belief that the internet must remain open and accessible to all, and that privacy and security online are fundamental human rights. We recognize that the protection of young people online is one of the most pressing and challenging questions of our time, and we are committed to supporting policy proposals that address the root causes of online harms.</p>
+<p>We are concerned , however, that blunt interventions like mandatory age assurance and restricting access to tools like VPNs are not effective in improving the protection afforded to young people online, while undermining the fundamental rights of all users. VPNs serve as critical privacy and.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://blog.mozilla.org/netpolicy/2026/05/15/mozilla-to-uk-regulators-vpns-are-essential-privacy-and-security-tools-and-should-not-be-undermined/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 06">06</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>kabir.au</span>
+        <span>Rank 21</span>
+      </div>
+      <h2>Frontier AI has broken the open CTF format</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Why frontier AI has broken the open CTF format, hollowed out the scoreboard, and made competitive CTF performance a weaker signal than it used to be. Frontier AI has broken the open CTF format. The scoreboard does not measure human skill cleanly anymore, and the old game is not coming back. I started playing CTFs in 2021, the same year I started university. My first CTF was HCKSYD, a 48-hour solo CTF.</p>
+<p>I full solved it and won in 2 hours. I was completely hooked. That led me to win DownUnderCTF, Australia&#39;s largest CTF, with Blitzkrieg multiple times. Blitzkrieg was one of Australia&#39;s strongest teams at the time. I later joined TheHackersCrew, an international top-tier team that was consistently ranked highly on CTFTime, the main global ranking and event calendar the scene uses as its scoreboard. With them, I competed in some of the most prestigious CTFs in the world, consistently placing well within the top 10 until the end of 2025.</p>
+<p>I am not saying this because I dislike CTFs. I am saying it because CTFs were the thing that made me fall in love with security. They taught me how to learn, gave me a way to measure.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://kabir.au/blog/the-ctf-scene-is-dead">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 07">07</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>arxiv.org</span>
+        <span>Rank 23</span>
+      </div>
+      <h2>δ-mem: Efficient Online Memory for Large Language Models</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Abstract page for arXiv paper 2605. 12357: $δ$-mem: Efficient Online Memory for Large Language Models GO quick links Login Help Pages About --&gt; Computer Science &gt; Artificial Intelligence arXiv:2605. 12357 (cs) [Submitted on 12 May 2026] Title: $δ$-mem: Efficient Online Memory for Large Language Models Authors: Jingdi Lei , Di Zhang , Junxian Li , Weida Wang , Kaixuan Fan , Xiang Liu , Qihan Liu , Xiaoteng Ma , Baian Chen , Soujanya Poria View a PDF of the paper titled $\delta$-mem: Efficient Online Memory for Large Language Models, by Jingdi Lei and 9 other authors View PDF Abstract: Large language models increasingly need to accumulate and reuse historical information in long-term assistants and agent systems.</p>
+<p>Simply expanding the context window is costly and often fails to ensure effective context utilization. We propose $\delta$-mem, a lightweight memory mechanism that augments a frozen full-attention backbone with a compact online state of associative memory. $\delta$-mem compresses past information into a fixed-size state matrix updated by delta-rule learning, and uses its readout to generate low-rank corrections to the backbone&#39;s attention computation during generation. With only an $8\times8$ online memory state, $\delta$-mem improves the average score to $1.</p>
+<p>10\times$ that of the frozen backbone and $1. 15\times$.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://arxiv.org/abs/2605.12357">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 08">08</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>publicdomainreview.org</span>
+        <span>Rank 12</span>
+      </div>
+      <h2>Twilight of the Velocipede: Typesetting Races Before the Age of Linotype</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Before Linotype revolutionised typesetting in the 1880s, compositors set texts by hand — and they set them *fast*. Alex Wright rediscovers the thrilling world of typesetting races, which drew crowds in the thousands, offered huge cash prizes, and helped women &quot;Swifts&quot; fight for workplace equity. Home Essays Collections Explore Sources Shop Support PDR About Blog Search Search The Public Domain Review Support PDR Essays Collections Explore Sources Shop About Blog X Bluesky Essays Twilight of the Velocipede Typesetting Races before the Age of Linotype By Alex Wright Before Linotype revolutionised typesetting in the 1880s, compositors set texts by hand — and they set them fast .</p>
+<p>Alex Wright rediscovers the thrilling world of typesetting races, which drew crowds in the thousands, offered huge cash prizes, and helped women &quot;Swifts&quot; fight for workplace equity. Scroll through the whole page to download all images before printing. Frontispiece to William C. Barnes, Joseph McCann, and Alexander Duguid’s A Collation of Facts Related to Fast Typesetting (1887) — Source . On the afternoon of Saturday, February 19, 1870, a young compositor named George Arensberg astonished the printing world when he achieved a feat few thought possible: setting more than two thousand “ems” of solid.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://publicdomainreview.org/essay/twilight-of-the-velocipede/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 09">09</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>springer.com</span>
+        <span>Rank 14</span>
+      </div>
+      <h2>Illusions of Understanding in the Sciences</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Computational Brain &amp; Behavior - Scientists seek to understand the causes of observed phenomena. Beliefs that they have succeeded are based on understanding that is rarely or possibly never... Computational Brain &amp; Behavior Article Illusions of Understanding in the Sciences Research Open access Published: 30 April 2026 ( 2026 ) Cite this article You have full access to this open access article Computational Brain &amp; Behavior Aims and scope Submit manuscript Illusions of Understanding in the Sciences Download PDF Richard Shiffrin 1 , Stephen Stigler 2 &amp; Frank Keil 3 1280 Accesses Scientists seek to understand the causes of observed phenomena.</p>
+<p>Beliefs that they have succeeded are based on understanding that is rarely or possibly never complete, and varies in depth and quality. Most often scientists believe they understand more than they do, making their belief an illusion. This illusion then persists in explanations scientists provide in print, in talks, or in discussions. The illusion that a scientist has a valid and complete explanation tends to be magnified when the data are well described by mathematical and computer simulation models due to the precision of such models and their ability to predict well; prediction does not imply causality, but gives.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://link.springer.com/article/10.1007/s42113-026-00271-1">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 10">10</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>phys.org</span>
+        <span>Rank 16</span>
+      </div>
+      <h2>Why did Clovis toolmakers choose difficult quartz crystal?</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Why did Clovis toolmakers choose difficult quartz crystal? appears on the Hacker News front page from phys. org. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly. For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it. This additional.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://phys.org/news/2026-04-clovis-toolmakers-difficult-quartz-crystal.html">Read story</a>
+    </div>
+  </article>
+  </main>
+</body>
+</html>

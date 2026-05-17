@@ -125,7 +125,14 @@
       "category": "Announcements",
       "publishedDate": "2026-05-14",
       "firstIncluded": "2026-05-16"
+    },
+    "https://openai.com/index/malta-chatgpt-plus-partnership": {
+      "source": "OpenAI",
+      "title": "OpenAI and Malta partner to bring ChatGPT Plus to all citizens",
+      "category": "Global Affairs",
+      "publishedDate": "2026-05-16",
+      "firstIncluded": "2026-05-17"
     }
   },
-  "lastRun": "2026-05-16"
+  "lastRun": "2026-05-17"
 }
