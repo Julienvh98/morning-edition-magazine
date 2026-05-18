@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Morning Edition | 2026-05-18</title>
+  <meta name="description" content="A front-page Hacker News briefing tuned for AI tools, health, finance, weird science, and useful things you can act on today.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..900,80,1&family=IBM+Plex+Serif:wght@400;500&family=Inter:wght@500;650;800;900&display=swap" rel="stylesheet">
+  <style>
+
+:root {
+  color-scheme: light;
+  --ink: #17120c;
+  --paper: #f5ecd8;
+  --muted: rgba(23, 18, 12, 0.72);
+  --rule: rgba(23, 18, 12, 0.2);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(18px, 1.5vw, 24px);
+  line-height: 1.22;
+}
+
+a { color: inherit; text-decoration-thickness: 0.12em; text-underline-offset: 0.18em; }
+
+.cover {
+  min-height: 18vh;
+  display: grid;
+  align-content: center;
+  padding: clamp(16px, 3vw, 36px) clamp(22px, 5vw, 72px);
+  background: #f4ecd8;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.34);
+  overflow: hidden;
+}
+
+.story-topline,
+.official-news-title {
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.story-topline,
+.official-news-title {
+  color: var(--muted);
+}
+
+h1,
+h2,
+.number {
+  font-family: "Fraunces", Georgia, serif;
+  letter-spacing: 0;
+}
+
+h1 {
+  max-width: none;
+  margin: 0;
+  font-size: clamp(42px, 8vw, 96px);
+  line-height: 0.86;
+}
+
+.official-news {
+  display: grid;
+  gap: 16px;
+  padding: clamp(22px, 4vw, 56px) clamp(22px, 5vw, 72px);
+  background: #f7f0df;
+  border-bottom: 2px solid rgba(23, 18, 12, 0.3);
+}
+
+.official-news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.official-news-card {
+  border-top: 1px solid rgba(23, 18, 12, 0.34);
+  padding-top: 12px;
+}
+
+.official-news-card h2,
+.story-main h2 {
+  max-width: 12ch;
+  margin: 0 0 10px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 760;
+  line-height: 0.98;
+}
+
+.summary-body {
+  display: grid;
+  gap: 14px;
+}
+
+.summary-body p,
+.official-news-empty {
+  margin: 0;
+  color: rgba(23, 18, 12, 0.82);
+  font-family: "IBM Plex Serif", Georgia, serif;
+  font-size: clamp(18px, 1.45vw, 22px);
+  font-weight: 400;
+  line-height: 1.36;
+}
+
+.official-news-card a,
+.story-link {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 14px;
+  color: rgba(23, 18, 12, 0.8);
+  font-size: clamp(15px, 1.1vw, 17px);
+  font-weight: 900;
+}
+
+.spread {
+  position: relative;
+  min-height: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  padding: clamp(28px, 5vw, 72px);
+  overflow: hidden;
+  border-top: 2px solid rgba(23, 18, 12, 0.2);
+  background:
+    linear-gradient(90deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(23, 18, 12, 0.055) 1px, transparent 1px),
+    #f4ecd8;
+  background-size: 78px 78px;
+}
+
+.number {
+  position: absolute;
+  line-height: 0.76;
+  pointer-events: none;
+  user-select: none;
+}
+
+.story-main {
+  position: relative;
+  z-index: 1;
+}
+
+.story-topline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.brief {
+  max-width: 850px;
+  margin-top: 22px;
+  border-top: 2px solid rgba(23, 18, 12, 0.28);
+  padding-top: 18px;
+}
+
+@media (max-width: 860px) {
+  .cover,
+  .spread,
+  .official-news {
+    min-height: auto;
+    padding: 24px 22px 42px;
+  }
+
+  .cover {
+    min-height: 16svh;
+    padding: 14px 22px 12px;
+  }
+
+  h1 {
+    font-size: clamp(38px, 12vw, 56px);
+  }
+
+  .official-news {
+    gap: 12px;
+    padding: 20px 22px 24px;
+  }
+
+  .official-news-grid,
+  .spread {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .official-news-card h2,
+  .story-main h2 {
+    font-size: 30px;
+  }
+
+  .summary-body p,
+  .official-news-empty {
+    font-size: 18px;
+    line-height: 1.42;
+  }
+
+  .story-link,
+  .official-news-card a {
+    font-size: 16px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header class="cover">
+    <h1>Morning Edition</h1>
+  </header>
+
+  <section class="official-news">
+    <p class="official-news-title">Official AI Lab News</p>
+    <p class="official-news-empty">Checked first-party news sources since 2026-05-16. No new official Anthropic or OpenAI company updates were found for this issue.</p>
+  </section>
+
+  <main>
+    <article class="spread">
+    <div class="number" aria-label="Story 01">01</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>github.com/minishlab</span>
+        <span>Rank 11</span>
+      </div>
+      <h2>Show HN: Semble – Code search for agents that uses 98% fewer tokens than grep</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Fast and Accurate Code Search for Agents. Uses ~98% fewer tokens than grep+read - MinishLab/semble Quickstart • MCP Server • Bash / AGENTS. md • CLI • Benchmarks Semble is a code search library built for agents. It returns the exact code snippets they need instantly, using ~98% fewer tokens than grep+read. Indexing and searching a full codebase end-to-end takes under a second, with ~200x faster indexing and ~10x faster queries than a code-specialized transformer, at 99% of its retrieval quality (see benchmarks ).</p>
+<p>Everything runs on CPU with no API keys, GPU, or external services. Run it as an MCP server or call it from the shell via AGENTS. md and any agent (Claude Code, Cursor, Codex, OpenCode, etc. ) gets instant access to any repo. Your agent queries Semble in natural language (e. g. &quot;How is authentication handled?&quot; ) and gets back only the relevant code snippets, without grepping or reading full files.</p>
+<p>Set it up as an MCP server or via AGENTS. md: Add Semble to Claude Code (requires uv ): claude mcp add semble -s user -- uvx --from &quot; semble[mcp] &quot; semble Using Codex, OpenCode, or Cursor? See MCP Server for setup instructions. Install Semble, then add the snippet below.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://github.com/MinishLab/semble">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 02">02</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>nbcnews.com</span>
+        <span>Rank 4</span>
+      </div>
+      <h2>Multiple commencement speakers booed for AI comments during graduation speeches</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Former Google CEO Eric Schmidt was booed multiple times Sunday while discussing artificial intelligence during a commencement speech at the University of Arizona. Other commencement speakers faced similar backlash for their AI comments, as new graduates face a daunting job market. NBC News’ Valerie Castro reports. Multiple commencement speakers booed for AI comments during graduation speeches appears on the Hacker News front page from nbcnews. com. The available article text may be limited if the source is a dynamic page, repository, PDF, or short announcement, so this brief stays conservative and focuses on what can be read directly.</p>
+<p>For the morning scan, treat it as a pointer to inspect the original source, then use the discussion thread separately to test the idea against objections, implementation details, and practical edge cases. This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what to check next before acting on it.</p>
+<p>This additional context is intentionally conservative: it does not add outside claims, but it keeps the brief useful by stating why the item matters, what is known from the source, and what.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.nbcnews.com/video/multiple-commencement-speakers-booed-for-ai-comments-during-graduation-speeches-263486021518">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 03">03</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>111mb.de</span>
+        <span>Rank 14</span>
+      </div>
+      <h2>WriteUp: 16 Bytes of x86 that turn Matrix rain into sound</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Released at the Outline Demoparty in May 2026, Ommen, NL An exploration of algorithmic density in 16 bytes of x86 assembly. Watch Video Demozoo Entry In the demoscene, exploring what can be achieved within extreme constraints is a rewarding technical challenge. The following 16 bytes of x86 real-mode DOS assembly code represent a careful exercise in algorithmic density. When executed, it utilizes the computer&#39;s video memory as a calculation space to draw an infinite Sierpinski fractal, while simultaneously interpreting that geometry as audio data.</p>
+<p>int 10h ; 2 bytes mov bh, 0xb8 ; 2 bytes mov ds, bx ; 2 bytes L: lodsb ; 1 byte sub si, byte 57 ; 3 bytes xor [si], al ; 2 bytes out 61h, al ; 2 bytes jmp short L ; 2 bytes 1. The Canvas: A Primed Void The code begins with a standard BIOS interrupt: int 10h . This initializes Video Mode 0, establishing a 40x25 text mode grid.</p>
+<p>The subsequent instructions point the Data Segment ( DS ) to 0xB800 , the physical memory address of the VGA/CGA text buffer. When the BIOS clears the screen during this interrupt, it does not fill the memory with absolute zeroes. In.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://hellmood.111mb.de//wake_up_16b_writeup.html">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 04">04</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>idahonews.com</span>
+        <span>Rank 20</span>
+      </div>
+      <h2>Two EA-18 fighter jets collide at Mountain Home airshow, pilots ejected safely</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>All four crew members ejected safely after two Navy jets collided and crashed on Sunday during an air show at the Mountain Home Air Force Base, officials said. Watch Search News Down Arrow Local Nation &amp; World Entertainment Offbeat Election Election Results Videos Most Wanted Traffic Amazing America Newsletter Sign Up Livestream Newslinks Question of the Day Armstrong Army Strong Comings and Goings Inside Your World Crisis in the Classroom Beyond The Podium Idaho Photo Galleries Spotlight on America Politics Election Results Connect to Congress Helping Our Heroes Opioid Project Healthy Home Full Measure with Sharyl Attkisson Unemployed in Idaho Did You Know?</p>
+<p>Addicted America Soar Criminally Obsessed Newsletter Sign Up Weather Down Arrow Weather Home Adventure Weather Radar Maps Cameras Hurricane Tracker Ski Report Tamarack Resort Sports Down Arrow Sports Home Local Sports Professional Boise State TICKETS City Guide Features Down Arrow Features Home Pay It Forward Lifestyle Matters Million Dollar Homes Sinclair Cares STEM in IDAHO Partner Spotlight Leaders in Learning Solutions for Seniors For Pet&#39;s Sake Wildfire Education Cash Coach Jobs in Idaho Health Matters Seed and Garden Idaho Your Place Inside and Out Hello Idaho Treasure Valley Silver Awards Souper Bowl of Caring Idaho Dish Road.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://idahonews.com/news/local/two-f-18-fighter-jets-have-crashed-during-an-airshow-at-mountain-home-air-force-base">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 05">05</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>frederickvanbrabant.com</span>
+        <span>Rank 25</span>
+      </div>
+      <h2>I don&#39;t think AI will make your processes go faster</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Explore the delirious rantings of Frederick Vanbrabant. A blog focused on the intersection of Enterprise Architecture, product, and business strategy. I have the feeling that every organization out there is, at least partially, focusing on process optimization, something that often happens when the market is down. These days there is also the AI angle to the entire thing, and the unrealistic expectations that follow it. To come fully prepared for this, I&amp;rsquo;ve decided to re-read two absolute classics in this space: The Toyota way &amp; The Goal 1 .</p>
+<p>I&amp;rsquo;ve read both of these books in college, but re-reading them made me realize that a lot of these process optimization exercises are too simplistic in nature, and often misunderstand what to focus on. gantt title Project Timeline dateFormat YYYY-MM-DD section Scoping Feature exploration :s1, 2024-01-01, 10d Budget scoping :s2, after s1, 3d Legal :s3, after s1, 10d Documenting :s4, after s3, 5d section Development Exploration :d1, after s4, 25d Software Development :d2, after d1, 70d Documentation :d3, after d2, 5d section Deployment Deployment :dp1, after d2, 5d Hyper-care :dp2, after dp1, 10d This is a Gantt chart for demonstration purposes, normally you would look at BPMN.</p>
+<p>Showing a Gantt makes.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://frederickvanbrabant.com/blog/2026-05-15-i-dont-think-ai-will-make-your-processes-go-faster/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 06">06</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>airships.net</span>
+        <span>Rank 23</span>
+      </div>
+      <h2>Hindenburg’s Smoking Room</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Yes, there really was a smoking room on the Hindenburg… even though the zeppelin was inflated with 7 million cubic feet of highly flammable hydrogen... Yes, there really was a smoking room on the Hindenburg … even though the zeppelin was inflated with 7 million cubic feet of highly flammable hydrogen gas. Pressurized Smoking Room aboard the Hindenburg, showing the airlock doors. The smoking room was kept at a higher pressure than the rest of the ship so that no leaking hydrogen could enter the room, and the smoking room was separated from the rest of the passenger section by a double-door airlock.</p>
+<p>The smoking room was closely monitored at all times by a member of the zeppelin’s staff, and only one electric lighter was provided; no matches, lighters, or other open flames were allowed anywhere on the airship. In reality, the pressurization of the smoking room may have been as much for public relations as for safety. The smoking room was located on B Deck, at the bottom of the ship, and since hydrogen is lighter than air any leaking gas would have escaped upward.</p>
+<p>(It would have been very unlikely that free hydrogen could have settled downward to.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.airships.net/hindenburg-smoking-room/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 07">07</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>unplannedobsolescence.com</span>
+        <span>Rank 24</span>
+      </div>
+      <h2>Prolog Basics Explained with Pokémon</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Demonstrating the basics of logic programming with data from the Pokémon games. tag. * I can either break open my Zola syntax highlighting implementation or I can suck it up * and use the ! important tag. I do still feel the need to acknowledge it though. * Call it a point of professional pride. */ background-color: var(--aside-color) ! important; } figure img { margin: 0 auto; } The project that inspired this post is a little silly—I am about to describe the mechanics of a children’s video game in great detail—but this particular problem is what finally made Prolog click for me, an epiphany I’ve been hunting for ever since reading Bruce Tate’s “Seven Languages in Seven Weeks.”</p>
+<p>This exercise has taught me a lot about the kinds of interfaces I’m trying to build in somewhat more practical domains . For certain kinds of relationships, logic programming is by far the most concise and expressive programming system I’ve ever used. Pokémon is a video game series/multimedia franchise/lifestyle brand set in a world where humans live alongside a menagerie of colorful animal characters. “Pokémon” is both the name of the franchise and the generic term for the animal characters themselves, which all.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://unplannedobsolescence.com/blog/prolog-basics-pokemon/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 08">08</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>bbc.com</span>
+        <span>Rank 28</span>
+      </div>
+      <h2>Trials on veterans suggest ibogaine could provide a new treatment for PTSD</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Trials on veterans suggest the potent hallucinogen could provide a new treatment for PTSD, but scientists still don&#39;t know how it works. Share Save Add as preferred on Google Chris Marshall Getty Images (Credit: Getty Images) Trials on veterans suggest the potent hallucinogen could provide a new treatment for PTSD, but scientists still don&#39;t know how it works. Elias Kfoury was making what he considered to be a last-ditch attempt to remedy years of deep psychological pain.</p>
+<p>Lying on his back in a clinic in Tijuana, Mexico, the former US Navy special operations medic was deep under the influence of ibogaine, a potent psychedelic taking him on an immersive journey through old memories. &quot;I started seeing people that I recognised from pictures, old family or friends that had passed a long time ago,&quot; says Kfoury, who was medically retired in 2016. &quot;I watched so many events from my life and felt like &#39;this is happening right now&#39;.&quot;</p>
+<p>Such vivid experiences are common with ibogaine. A compound found in the roots of the African shrub iboga and traditionally used in central western African spiritual and healing ceremonies , it has been increasingly tested as a treatment for conditions ranging from post-traumatic.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://www.bbc.com/future/article/20260514-how-hallucinogenic-ibogaine-helps-veterans-overcome-ptsd">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 09">09</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>gencad.github.io</span>
+        <span>Rank 3</span>
+      </div>
+      <h2>GenCAD</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>GenCAD We present GenCAD, an image-conditional CAD generation model. Our model not only generates the 3D CAD but also the entire parameterized CAD command history, CAD program, as output. The complexity of CAD data structures such as boundary representation (B-rep) makes it difficult to train efficient AI models. Due to the ease of data availability, common approaches often resort to representations like meshes, voxels, or point clouds, which sacrifice the accuracy and modifiability of true CAD models that are critical for engineering tasks, manufacturing and design space exploration.</p>
+<p>Here we propose GenCAD, an image conditional generative model that generates parametric CAD command sequences, also known as CAD programs, that can be converted to a 3D solid model using a geometry kernel. At the core of GenCAD, we develop a strong representation learning framework for multiple modalities of computational engineering designs. Our proposed GenCAD architecture is a combination of four critical steps; 1) an autoregressive transformer encoder is used for learning the latent representation of the CAD command sequences, 2) a contrastive learning-based model is used to learn the joint representations of the latent spaces between CAD command sequences and CAD-images, 3) a latent diffusion model that can generate the latent.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://gencad.github.io/">Read story</a>
+    </div>
+  </article>
+<article class="spread">
+    <div class="number" aria-label="Story 10">10</div>
+    <div class="story-main">
+      <div class="story-topline">
+        <span>github.com/tech4bot</span>
+        <span>Rank 7</span>
+      </div>
+      <h2>I turned a $80 RK3562 Android tablet into a Debian Linux workstation</h2>
+      <section class="brief">
+        <div class="summary-body">
+          <p>Contribute to tech4bot/rk3562deb development by creating an account on GitHub. Download Pre-release Image Current public build (pre-release, May 14, 2026): Run full Debian 12 Bookworm on your Doogee U10 tablet — no bootloader unlock required. Boot from SD card, remove it to return to stock Android. No changes to internal storage. Reverse engineered from scratch — no BSP, no vendor documentation, no official support. Built with the help of Claude , Codex , and Antigravity (Google Gemini), using Firefly RK3562 open-source repositories as a starting point.</p>
+<p>rkdebian is a build system that produces a complete, bootable Debian 12 Bookworm image for the Doogee U10 Android tablet, powered by the Rockchip RK3562 SoC. The resulting image is written to an SD card. Insert it and power on — the tablet boots Debian. Remove the SD card and it boots Android from internal eMMC as normal. Component Details SoC Rockchip RK3562 (4× Cortex-A53 @ 2.</p>
+<p>0 GHz) NPU 1× Rockchip NPU core (active for RKLLM inference) RAM 4 GB LPDDR4 Storage 128 GB eMMC (Android) + SD card (Debian) Display 10. 1&quot; DSI panel, 1280×800 PMIC RK817 What Works Feature Status Display / Panel ✅ Full Touchscreen ✅ Full (gsl3673, 10-point multitouch) Wi-Fi ✅.</p>
+        </div>
+      </section>
+      <a class="story-link" href="https://github.com/tech4bot/rk3562deb">Read story</a>
+    </div>
+  </article>
+  </main>
+</body>
+</html>
